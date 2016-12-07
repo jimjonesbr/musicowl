@@ -1,0 +1,28 @@
+PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/mso#>
+PREFIX key: <http://purl.org/NET/c4dm/keys.owl#>
+
+SELECT ?score ?measure WHERE {
+	?score mso:hasScorePart ?part .
+	?part mso:hasMeasure ?measure . 
+	?measure mso:hasNoteSet ?noteset1 .
+	?noteset1 mso:hasDuration ?duration1.
+	?duration1 a mso:Eighth .
+	?noteset1 mso:nextNoteSet ?noteset2 .
+	?noteset2 mso:hasDuration ?duration2 .
+	?duration2 a mso:16th .
+	?noteset2 mso:nextNoteSet ?noteset3 .
+	?noteset3 mso:hasDuration ?duration3 .
+	?duration3 a mso:Eighth .
+	?noteset3 mso:nextNoteSet ?noteset4 .
+	?noteset4 mso:hasDuration ?duration4 .
+	?duration4 a mso:16th .
+	?noteset4 mso:nextNoteSet ?noteset5 .
+	?noteset5 mso:hasDuration ?duration5 .
+	?duration5 a mso:Eighth .
+	?noteset5 mso:nextNoteSet ?noteset6 .
+	?noteset6 mso:hasDuration ?duration6 .
+	?duration6 a mso:16th .
+	?noteset6 mso:nextNoteSet ?noteset7 .
+	?noteset7 mso:hasDuration ?duration7 .
+	?duration7 a mso:Eighth .
+} 

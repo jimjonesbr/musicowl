@@ -1,0 +1,24 @@
+PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/mso#>
+PREFIX chord: <http://purl.org/ontology/chord/>
+PREFIX note: <http://purl.org/ontology/chord/note/>
+
+SELECT ?score ?measure WHERE {
+	?score mso:hasScorePart ?part .
+	?part mso:hasMeasure ?measure . 
+	?measure mso:hasNoteSet ?noteset1 .
+	?noteset1 mso:hasNote ?note1 .
+	?note1 chord:natural note:A .
+	?noteset1 mso:nextNoteSet ?noteset2 .
+	?noteset2 mso:hasNote ?note2.
+	?note2 chord:natural note:D .
+	?noteset2 mso:nextNoteSet ?noteset3 .
+	?noteset3 mso:hasNote ?note3.
+	?note3 chord:natural note:C .
+	?noteset3 mso:nextNoteSet ?noteset4 .
+	?noteset4 mso:hasNote ?note4 .
+	?note4 chord:natural note:A .
+	?noteset4 mso:nextNoteSet ?noteset5 .
+	?noteset5 mso:hasNote ?note5 .
+	?note5 chord:natural note:G .
+	?note5 chord:modifier chord:sharp .
+} 
