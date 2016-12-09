@@ -1314,21 +1314,6 @@ public class MusicXML2RDF {
 	private void setCurrentNoteSet(Note note){
 
 		boolean exists = false;
-
-/*
-		for (int i = 0; i < currentNotes.size(); i++) {
-
-			if(currentNotes.get(i).getStaff().equals(note.getStaff())){
-
-				currentNotes.get(i).setSignature(note.getSignature());
-				System.out.println(">>>>>>>>>>>>>" + note.getVoice().getId());
-				System.out.println(">>>>>>>>>>>>>" + note.getVoice().getMeasure());
-				System.out.println(">>>>>>>>>>>>>" + note.getVoice().getPart());
-				exists = true;
-			}
-		}
-
-		*/
 		
 		for (int i = 0; i < currentNotes.size(); i++) {
 			
