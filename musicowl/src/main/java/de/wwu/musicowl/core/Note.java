@@ -6,7 +6,7 @@ public class Note {
 
 	private String octave;
 	private String pitch;
-	private String voice;
+	private Voice voice;
 	private String type;
 	private String staff;
 	private String accidental;
@@ -25,6 +25,7 @@ public class Note {
 		this.dynamics = new ArrayList<String>();
 		this.articulations = new ArrayList<String>();
 		this.clef = new Clef();
+		this.voice = new Voice();
 		this.accidental = "";
 		isChord = false;
 		isDot = false;
@@ -47,11 +48,11 @@ public class Note {
 		this.pitch = pitch;
 	}
 
-	public String getVoice() {
+	public Voice getVoice() {
 		return voice;
 	}
 
-	public void setVoice(String voice) {
+	public void setVoice(Voice voice) {
 		this.voice = voice;
 	}
 

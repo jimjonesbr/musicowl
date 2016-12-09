@@ -4,6 +4,7 @@ public class Key {
 
 	private String fifths;
 	private String mode;
+	private String tonic;
 	
 	public Key() {
 		super();
@@ -21,6 +22,14 @@ public class Key {
 	}
 	public void setMode(String mode) {
 		this.mode = mode;
+	}
+
+	public String getTonic() {
+		return tonic;
+	}
+
+	public void setTonic(String tonic) {
+		this.tonic = tonic;
 	}
 	
 	
