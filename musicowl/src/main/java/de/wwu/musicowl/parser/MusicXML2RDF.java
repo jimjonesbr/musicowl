@@ -323,8 +323,12 @@ public class MusicXML2RDF {
 
 					if(this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature()!=null){
 
-						ttl.append(this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature() + musicOWL.replace("OBJECT", "nextNoteSet") + notesetObject + " .\n");
-						this.setCurrentNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k));
+						if(!this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature().equals(notesetObject)){
+							
+							ttl.append(this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature() + musicOWL.replace("OBJECT", "nextNoteSet") + notesetObject + " .\n");
+							this.setCurrentNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k));
+							
+						} 
 
 					} else {
 
@@ -601,7 +605,8 @@ public class MusicXML2RDF {
 
 					}
 
-					String durationObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_DURATION");
+					//String durationObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_DURATION");
+					String durationObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS" + notesetCounter + "_DURATION");
 					ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasDuration") + durationObject + ".\n");
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isDot()){
@@ -1082,7 +1087,6 @@ public class MusicXML2RDF {
 												}	
 
 												if(listNotationElements.item(m).getAttributes().getNamedItem("type").getNodeValue().equals("stop")){
-
 
 													slurFlag = false;
 												}
