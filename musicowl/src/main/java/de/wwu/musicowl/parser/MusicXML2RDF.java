@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,6 +15,11 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -37,22 +43,24 @@ public class MusicXML2RDF {
 	private static ArrayList<Note> currentNotes;
 	
 	private static boolean verbose = false;
-
+	private static String outputFolder = "";
+	private static String inputFolder = "";
+	
 	public static void main(String[] args) {
 
-		//loadMusicXML(new File("scores/xmlsamples/Dichterliebe01.xml"));		
-		//loadMusicXML(new File("scores/paper/bach_fuge.xml"));
-		//loadMusicXML(new File("scores/xmlsamples/Elgar_cello_Concerto_Op.85.xml"));
 		MusicXML2RDF m = new MusicXML2RDF();
-
-		//m.createRDF(m.loadMusicXML(new File("scores/xmlsamples/ActorPreludeSample.xml")));
-
-		File[] files = new File("scores/sammlung/").listFiles();
+		m.setOutputFolder("ntriples/");
+		File[] files = new File(inputFolder).listFiles();
 
 		for (File file : files) {
 
 			if(file.getName().endsWith(".xml")){
-				m.createRDF(m.loadMusicXML(file));				
+				MusicScore score = new MusicScore();
+				score = m.parseMusicXML(file);
+				score.setFileName(file.getName());
+				
+				m.createRDF(score);
+				
 			}
 
 		}
@@ -71,7 +79,13 @@ public class MusicXML2RDF {
 				
 	}
 
+	public static boolean isVerbose() {
+		return verbose;
+	}
 
+	public static void setVerbose(boolean verbose) {
+		MusicXML2RDF.verbose = verbose;
+	}
 
 	public void createRDF(MusicScore score){
 
@@ -87,10 +101,11 @@ public class MusicXML2RDF {
 		String chordOWL = " <http://purl.org/ontology/chord/OBJECT> ";
 		String nodeURI = " <http://linkeddata.uni-muenster.de/node/"+uid+"/OBJECT> ";
 		String musicOntology = " <http://purl.org/ontology/mo/OBJECT> "; 
-
+		String dcOntology = " <http://purl.org/dc/elements/1.1/OBJECT> ";
 		String scoreObject = nodeURI.replace("OBJECT",uid);
 
 		ttl.append(scoreObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
+		ttl.append(scoreObject + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle() + "\" .\n");
 		
 		for (int i = 0; i < score.getParts().size(); i++) {
 
@@ -107,9 +122,6 @@ public class MusicXML2RDF {
 				String measureID = score.getParts().get(i).getMeasures().get(j).getId();
 				String measureObject = nodeURI.replace("OBJECT", partID + "_M" + measureID);
 				String keyObject = "";
-//				String keyType = "";
-//				String keyMode = "";
-//				String keyTonic = "";
 				
 				Key key = new Key();
 
@@ -778,7 +790,7 @@ public class MusicXML2RDF {
 
 		try {
 
-			FileOutputStream fileStream = new FileOutputStream(new File("ntriples/" + score.getFileName() + ".nt"),false);
+			FileOutputStream fileStream = new FileOutputStream(new File(outputFolder + score.getFileName() + ".nt"),false);
 			OutputStreamWriter writer = new OutputStreamWriter(fileStream, "UTF8");
 
 			writer.append(ttl.toString());
@@ -798,13 +810,60 @@ public class MusicXML2RDF {
 
 	}
 
-
-	public MusicScore loadMusicXML(File file){
+	public MusicScore parseMusicXML(File file){
+			
+		String result ="";
+		
 
 		System.out.println("Processing " + file.getName() + ", please wait ...");
+		
+		try {
+
+			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			documentBuilderFactory.setValidating(false);
+			DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
+
+			builder.setEntityResolver(new EntityResolver() {
+
+				public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
+
+					return new InputSource(new StringReader(""));
+
+				}
+			});
+
+			Document document = builder.parse(file);
+			
+			TransformerFactory tf = TransformerFactory.newInstance();
+			Transformer transformer = tf.newTransformer();
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			StringWriter writer = new StringWriter();
+			transformer.transform(new DOMSource(document), new StreamResult(writer));
+			result = writer.getBuffer().toString().replaceAll("\n|\r", "");
+			
+		}catch (Exception e) {
+
+		}
+
+		
+		
+		
+		return createMusicScoreFile(result);
+		
+	}
+	
+	public MusicScore parseMusicXML(String musicXML){
+		
+		return createMusicScoreFile(musicXML);
+		
+	}
+	
+	private MusicScore createMusicScoreFile(String musicXML){
+
+		//System.out.println("Processing " + file.getName() + ", please wait ...");
 		MusicScore score = new MusicScore();
 
-		score.setFileName(file.getName().replaceAll(".xml", ""));
+		//score.setFileName(file.getName().replaceAll(".xml", ""));
 
 		String currentMode = "";
 		String currentFifth = ""; 
@@ -812,10 +871,6 @@ public class MusicXML2RDF {
 		String currentBeat = "";
 		int slurCount = 0;
 		boolean slurFlag = false;
-		//Clef currentClef = new Clef();
-
-		//String scoreOntologySequence = " <" + scoreOntologyURI + "#hasSequence> ";
-		//String scoreOntologyNextNoteNet = " <" + scoreOntologyURI + "#nextNoteSet> ";
 
 		try {
 
@@ -833,16 +888,22 @@ public class MusicXML2RDF {
 			});
 
 
-			Document document = builder.parse(file);
+			
+			
+			InputSource is = new InputSource(new StringReader(musicXML));
+			
+			Document document = builder.parse(is);
 
 			XPathFactory xpathFactory = XPathFactory.newInstance();
 			XPath xpath = xpathFactory.newXPath();
 
-			NodeList subfields = (NodeList) xpath.evaluate("//score-partwise/movement-title", document,XPathConstants.NODESET);
-
-			String scoreSubject = "_:debussy";
-
-			score.setId(scoreSubject);
+			NodeList subfields = (NodeList) xpath.evaluate("//work/work-title", document,XPathConstants.NODESET);
+			
+			if (subfields.getLength() != 0) {
+				
+				score.setTitle(subfields.item(0).getTextContent());
+				
+			}
 
 			subfields = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part/@id", document,XPathConstants.NODESET);
 
@@ -868,11 +929,6 @@ public class MusicXML2RDF {
 					for (int j = 0; j < nodeMeasures.getLength(); j++) {
 
 						Measure measure = new Measure();
-
-
-
-
-
 
 
 						//NodeList nodeMeasureNumbers = (NodeList) xpath.evaluate("//score-partwise/part[@id='"+score.getParts().get(i).getId()+"']/measure/@number", document,XPathConstants.NODESET);
@@ -1272,7 +1328,6 @@ public class MusicXML2RDF {
 
 	}
 
-
 	private void addClef(Clef clef){
 
 		boolean exists = false;
@@ -1313,7 +1368,6 @@ public class MusicXML2RDF {
 		return result;
 
 	}
-
 
 	private void setCurrentNoteSet(Note note){
 
@@ -1375,4 +1429,35 @@ public class MusicXML2RDF {
 		return string;
 
 	}
+
+
+
+
+	
+	public static String getOutputFolder() {
+		return outputFolder;
+	}
+
+
+
+
+	public static void setOutputFolder(String outputFolder) {
+		MusicXML2RDF.outputFolder = outputFolder;
+	}
+
+
+
+
+	public static String getInputFolder() {
+		return inputFolder;
+	}
+
+
+
+
+	public static void setInputFolder(String inputFolder) {
+		MusicXML2RDF.inputFolder = inputFolder;
+	}
+
+
 }
