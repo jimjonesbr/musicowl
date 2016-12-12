@@ -99,13 +99,18 @@ public class MusicXML2RDF {
 		String chordNoteOWL = " <http://purl.org/ontology/chord/note/OBJECT> ";
 		String keyModeOWL = " <http://purl.org/ontology/tonality/mode/OBJECT> ";
 		String chordOWL = " <http://purl.org/ontology/chord/OBJECT> ";
+		String scoreURI = " <"+score.getURI()+"> ";
+		//String nodeURI = " <http://linkeddata.uni-muenster.de/node/"+uid+"/OBJECT> ";
 		String nodeURI = " <http://linkeddata.uni-muenster.de/node/"+uid+"/OBJECT> ";
 		String musicOntology = " <http://purl.org/ontology/mo/OBJECT> "; 
 		String dcOntology = " <http://purl.org/dc/elements/1.1/OBJECT> ";
-		String scoreObject = nodeURI.replace("OBJECT",uid);
-
-		ttl.append(scoreObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
-		ttl.append(scoreObject + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle() + "\" .\n");
+		String movementObject = nodeURI.replace("OBJECT",uid);
+		
+		//String scoreObject = " <"+score.getURI()+"> ";
+		
+		ttl.append(scoreURI + musicOntology.replace("OBJECT", "movement") + movementObject + " .\n");
+		ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
+		ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle() + "\" .\n");
 		
 		for (int i = 0; i < score.getParts().size(); i++) {
 
@@ -114,7 +119,7 @@ public class MusicXML2RDF {
 			int notesetCounter = 0;
 
 
-			ttl.append(scoreObject + musicOWL.replace("OBJECT", "hasScorePart") + partObject + " . \n");		
+			ttl.append(movementObject + musicOWL.replace("OBJECT", "hasScorePart") + partObject + " . \n");		
 			ttl.append(partObject + rdfTypeURI + musicOWL.replace("OBJECT", "ScorePart") + " .\n");
 
 			for (int j = 0; j < score.getParts().get(i).getMeasures().size(); j++) {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class MusicScore {
 
 	private ArrayList<ScorePart> parts;
-	private String id;
+	private String uri;
 	private String fileName;
 	private String title;
 	
@@ -21,12 +21,12 @@ public class MusicScore {
 	}
 
 
-	public String getId() {
-		return id;
+	public String getURI() {
+		return uri;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setURI(String id) {
+		this.uri = id;
 	}
 
 	public String getFileName() {
