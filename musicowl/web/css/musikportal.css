@@ -1,0 +1,16 @@
+#result img {
+	float: left;
+	margin-right: 10px;
+}
+#result li {
+	font-size: 12px;
+	
+	border-bottom: 15px solid #fefefe;
+	line-height: 1.4em;
+	cursor: pointer;
+}
+#result li:after {
+	content: " ";
+	clear: both;
+	display: block;
+}
