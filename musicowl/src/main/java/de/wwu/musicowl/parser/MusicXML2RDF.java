@@ -100,13 +100,10 @@ public class MusicXML2RDF {
 		String keyModeOWL = " <http://purl.org/ontology/tonality/mode/OBJECT> ";
 		String chordOWL = " <http://purl.org/ontology/chord/OBJECT> ";
 		String scoreURI = " <"+score.getURI()+"> ";
-		//String nodeURI = " <http://linkeddata.uni-muenster.de/node/"+uid+"/OBJECT> ";
 		String nodeURI = " <http://linkeddata.uni-muenster.de/node/"+uid+"/OBJECT> ";
 		String musicOntology = " <http://purl.org/ontology/mo/OBJECT> "; 
 		String dcOntology = " <http://purl.org/dc/elements/1.1/OBJECT> ";
 		String movementObject = nodeURI.replace("OBJECT",uid);
-		
-		//String scoreObject = " <"+score.getURI()+"> ";
 		
 		ttl.append(scoreURI + musicOntology.replace("OBJECT", "movement") + movementObject + " .\n");
 		ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
@@ -808,10 +805,6 @@ public class MusicXML2RDF {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
-
-
 
 	}
 
