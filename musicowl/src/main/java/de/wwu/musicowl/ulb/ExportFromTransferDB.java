@@ -26,7 +26,7 @@ public class ExportFromTransferDB {
 			MusicXML2RDF.setOutputFolder(outputFolder);
 			MusicXML2RDF.setVerbose(false);
 			
-			Connection con = DriverManager.getConnection("jdbc:postgresql://postgis.uni-muenster.de/disco2", "disco2", "Feierabend");
+			Connection con = DriverManager.getConnection("jdbc:postgresql://postgis.uni-muenster.de/disco2", "", "");
 			Statement st = con.createStatement();
 
 			
