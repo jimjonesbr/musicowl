@@ -17,7 +17,7 @@ var spinner;
 
 function executeQuery(offset) {
 
-	//showSpin();
+	showSpin();
 
  	queryOffset = offset
 
@@ -29,7 +29,7 @@ function executeQuery(offset) {
 	.prefix("rdfs","http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 	.prefix("mo","http://purl.org/ontology/mo/")
 	.prefix("foaf","http://xmlns.com/foaf/0.1/")
-			  .select(["?scoreNode","?scoreTitle", "?creator","?creatorNode", "?movemenTitle", "?measure", "?thumbnail","?partID"])
+			  .select(["?scoreNode","?scoreTitle", "?creator","?creatorNode", "?movemenTitle", "?measure", "?thumbnail","?partID","?partName","?voiceID","?staffID"])
 			  	//.graph("?graph")
 						.where("?scoreNode","foaf:thumbnail","?thumbnail")
 						.where("?scoreNode","dc:title","?scoreTitle")
@@ -41,22 +41,33 @@ function executeQuery(offset) {
 				  	.where("?movementNode","dc:title","?movement")
 				  	.where("?part","mso:hasMeasure","?measureNode")
 						.where("?part","rdfs:ID","?partID")
+            .where("?part","dc:description","?partName")
 						.where("?measureNode","rdfs:ID","?measure")
-			  		.orderby("?score")
+            .where("?voice","a","mso:Voice")
+            .where("?voice","rdfs:ID","?voiceID")
+            .where("?measureNode","mso:hasNoteSet","?noteset0")
+            .where("?staff","mso:hasNoteSet","?noteset0")
+            .where("?staff","a","mso:Staff")
+            .where("?staff","rdfs:ID","?staffID")
+			  	.orderby("?score")
 			  .limit(queryLimit)
 			  .offset(queryOffset);
 
 	for(var i = 0; i<  notestack.length; i++) {
 
-
 		if(notestack[i].pitch != null){
-			sparqlQuery.where("?measureNode","mso:hasNoteSet","?noteset"+i)
-								 .where("?noteset"+i,"mso:hasNote","?note"+i)
-								 .where("?note"+i,"chord:natural","note:"+notestack[i].pitch);
+
+			sparqlQuery.where("?noteset"+i,"mso:hasNote","?note"+i)
+								 .where("?note"+i,"chord:natural","note:"+notestack[i].pitch)
+                 .where("?voice","mso:hasNoteSet","?noteset"+i);
 
 			if(notestack[i].accidental != null){
 					sparqlQuery.where("?note"+i,"chord:modifier","chord:"+notestack[i].accidental);
-			}
+			} else {
+          //sparqlQuery.where("?note"+i,"a","chord:Natural");
+        sparqlQuery.filter("NOT EXISTS {?note"+i+" chord:modifier ?modifier}");
+      }
+
 			if(notestack[i].duration != null){
 
 				var duration = "";
@@ -196,6 +207,9 @@ function myCallback(str) {
 			var creator = '';
 			var creatorURL = '';
 			var partID = '';
+      var staffID = '';
+      var partName = '';
+      var voice = '';
 
 			if (typeof jsonObj.results.bindings[i].measure !== 'undefined') {
 				measure = jsonObj.results.bindings[i].measure.value;
@@ -226,32 +240,30 @@ function myCallback(str) {
 			if (typeof jsonObj.results.bindings[i].partID !== 'undefined') {
 				partID = jsonObj.results.bindings[i].partID.value;
 			}
+
+      if (typeof jsonObj.results.bindings[i].voiceID !== 'undefined') {
+        voiceID = jsonObj.results.bindings[i].voiceID.value;
+      }
+
+      if (typeof jsonObj.results.bindings[i].partName !== 'undefined') {
+        partName = jsonObj.results.bindings[i].partName.value;
+      }
+
+      if (typeof jsonObj.results.bindings[i].staffID !== 'undefined') {
+        staffID = jsonObj.results.bindings[i].staffID.value;
+      }
 			//$("#result").append('<ul id="itemsContainer" style="list-style-type:none"></ul>');
 
-			$("#result ul").append('<li><a target="_blank" href=' + scoreURL +'><img style="float:left;" src="' +
-			thumbnail + '" alt="Kein Bild vorhanden" width="90" height="90" ></a><a target="_blank" href=' + scoreURL +'>' + scoreTitle + '</a><br>Movement: '+movemenTitle+'<br>Composer: <a target="_blank" href=' + creatorNode +'>'+creator+'</a><br>Starting measure: '+measure+'<br>Score Part: '+partID+'<br></p></li>');
+			$("#result ul").append('<li><a target="_blank" href=' + scoreURL +'><img style="float:left; width: 20%; height: auto;" src="' +
+			thumbnail + '" alt="Kein Bild vorhanden" width="90" height="90" ></a><a target="_blank" href=' + scoreURL
+      +'>' + scoreTitle + '</a><br><b>Movement:</b> '+movemenTitle+'<br><b>Composer:</b> <a target="_blank" href=' + creatorNode
+      +'>'+creator+'</a><br><b>Starting measure:</b> '+measure+'<br><b>Part / Instrument:</b> '+partName+'<br><b>Voice:</b> '+
+      voiceID +'<br><b>Staff:</b> '+staffID+'</p></li>');
+
 
 	}
 
-
 	}
 
-	//hideSpin();
-
-	// loadedMaps = $("#itemsContainer li").size();
-	//
-	// $('#status').text('Karten ' + '('+parseInt(minVal)+'-'+parseInt(maxVal)+')' + ': '+ loadedMaps + ' von ' + totalMaps);
-	//
-	// console.log('#DEBUG query.js -> Loaded Maps (Update): '+ loadedMaps + ' from ' + totalMaps);
-	//
-	// if(loadedMaps != totalMaps && loadedMaps < totalMaps ){
-	//
-	// 	if(loadedMaps != 0){
-	//
-	// 		$("#status").append(' <a onclick="executeQuery('+$("#itemsContainer li").size()+')" href="#">[weiter]</a>');
-	//
-	// 	}
-	//
-	// }
-
+	hideSpin();
 }

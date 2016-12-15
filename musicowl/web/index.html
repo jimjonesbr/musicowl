@@ -2,7 +2,7 @@
 <html lang="en" xml:lang="en" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>WWU Music Score Search</title>
-        <link rel="icon" type="image/x-icon" href="http://www.verovio.org/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="img/note.ico" />
         <link rel="apple-touch-icon" href="http://www.verovio.org/images/verovio-logo-big.png"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" /><!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="http://www.verovio.org/css/bootstrap/css/bootstrap.min.css" type="text/css" /><!-- Optional theme -->
@@ -82,9 +82,9 @@
                 <tr>
                     <td class="keyboard">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onduration(9)">
+                            <!--<button type="button" class="btn btn-default btn-sm" onclick="javascript:onduration(9)">
                               <span class="glyphicon keyboard-00"></span>
-                            </button>
+                            </button>-->
                             <button type="button" class="btn btn-default btn-sm" onclick="javascript:onduration(1)">
                               <span class="glyphicon keyboard-01"></span>
                             </button>
@@ -118,9 +118,9 @@
                             </button>
                         </div>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onbarline()">
+                            <!--<button type="button" class="btn btn-default btn-sm" onclick="javascript:onbarline()">
                               <span class="glyphicon keyboard-barline"></span>
-                            </button>
+                            </button>-->
                         </div>
                     </td>
                 </tr>
@@ -264,15 +264,15 @@
                 <tr>
                     <td class="keyboard">
                         <select id="clef_01" name="clef_01" class="form-control">
-                            <option value="G-1">G-1</option>
-                            <option value="G-2" selected="true">G-2 (treble)</option>
-                            <option value="C-1">C-1</option>
-                            <option value="C-2">C-2</option>
-                            <option value="C-3">C-3</option>
-                            <option value="C-4">C-4</option>
-                            <option value="C-5">C-5</option>
-                            <option value="F-4">F-4 (bass)</option>
-                            <option value="F-3">F-3</option>
+                            <option value="G-1">French Violin (G-1)</option>
+                            <option value="G-2" selected="true">Treble (G-2)</option>
+                            <option value="C-1">Soprano (C-1)</option>
+                            <option value="C-2">Mezzo Soprano (C-2)</option>
+                            <option value="C-3">Alto (C-3)</option>
+                            <option value="C-4">Tenor (C-4)</option>
+                            <option value="C-5">Baritone (C-5)</option>
+                            <option value="F-4">Bass (F-4)</option>
+                            <option value="F-3">Baritone (F-3)</option>
                         </select>
                     </td>
                 </tr>
@@ -315,8 +315,12 @@
             </table>
             </div>
 
-            <button type="button" class="btn btn-default btn-sm" onclick="executeQuery(0)">
+            <button type="button" align="right" class="btn btn-default btn-sm" onclick="executeQuery(0)">
               <span>Search</span>
+            </button>
+
+            <button type="button" align="right" class="btn btn-default btn-sm" onclick="">
+              <span>Clear</span>
             </button>
 
             <div class="panel-body" style="display: none;">
@@ -642,6 +646,22 @@
             update_incipit();
         }
     });
+
+
+    function showSpin(){
+
+    	target = document.getElementById('result');
+    	spinner = new Spinner(opts).spin(target);
+
+    	target.appendChild(spinner.el);
+
+    }
+
+    function hideSpin(){
+
+    	spinner.stop();
+
+    }
 
 
 //]]>

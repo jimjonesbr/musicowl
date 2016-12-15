@@ -4,6 +4,7 @@
 }
 #result li {
 	font-size: 12px;
+	white-space: nowrap;
 	border-bottom: 15px solid #fefefe;
 	line-height: 1.4em;
 	cursor: pointer;

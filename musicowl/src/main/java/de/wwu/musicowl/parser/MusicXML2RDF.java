@@ -118,6 +118,7 @@ public class MusicXML2RDF {
 
 			ttl.append(movementObject + musicOWL.replace("OBJECT", "hasScorePart") + partObject + " . \n");		
 			ttl.append(partObject + rdfTypeURI + musicOWL.replace("OBJECT", "ScorePart") + " .\n");
+			ttl.append(partObject + dcOntology.replace("OBJECT", "description") + "\"" + score.getParts().get(i).getName() + "\" .\n");
 
 			for (int j = 0; j < score.getParts().get(i).getMeasures().size(); j++) {
 
@@ -358,17 +359,15 @@ public class MusicXML2RDF {
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice()==null){
 
 						voiceObject = nodeURI.replace("OBJECT",partID + "_VOICE_1");
-
+						ttl.append(voiceObject + rdfIdURI + "\"1\" . \n");
 					} else {
 
 						voiceObject = nodeURI.replace("OBJECT",partID + "_VOICE_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId());
-
+						ttl.append(voiceObject + rdfIdURI + "\""+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId() + "\" . \n");
 					}
 
-					ttl.append(voiceObject + rdfTypeURI + musicOWL.replace("OBJECT", "Voice") + " . \n");					
-					//ttl.append(measureObject + musicOWL.replace("OBJECT", "hasVoice") + voiceObject + ". \n");
+					ttl.append(voiceObject + rdfTypeURI + musicOWL.replace("OBJECT", "Voice") + " . \n");										
 					ttl.append(voiceObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
-					//ttl.append(voiceObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
 
 					String staffObject = "";
 
@@ -377,6 +376,7 @@ public class MusicXML2RDF {
 
 					ttl.append(staffObject + rdfTypeURI + musicOWL.replace("OBJECT", "Staff") + " . \n");
 					ttl.append(staffObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
+					ttl.append(staffObject + rdfIdURI + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() + "\" . \n");
 
 					String noteObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS_" + notesetCounter + "_NOTE_" + k);
 
@@ -399,10 +399,11 @@ public class MusicXML2RDF {
 					   !score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("natural")){
 						
 						ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental()) + ".\n");
-					}
+						
+					} 
 					
 
-					/*
+					/**
 					 * Add sharps and flats to notes depending on the key. MuaicXML relies on the reader to identify the accidentals depending on the keys. 
 					 */
 
@@ -446,7 +447,7 @@ public class MusicXML2RDF {
 								
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
 								
-							}
+							} 
 							
 						}
 
@@ -912,14 +913,34 @@ public class MusicXML2RDF {
 				score.getParts().add(part);					
 
 			}
-
+						
 
 			for (int i = 0; i < score.getParts().size(); i++) {
 
 				this.clefList = new ArrayList<Clef>();
 
+				NodeList nodePartName = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part[@id='"+score.getParts().get(i).getId()+"']/part-name", document,XPathConstants.NODESET);
+								
+				if(nodePartName.getLength()!=0){
+					
+					if(nodePartName.item(0).getTextContent().trim().equals("")){
+						
+						score.getParts().get(i).setName(score.getParts().get(i).getId());
+						
+					} else {
+						
+						score.getParts().get(i).setName(nodePartName.item(0).getTextContent());
+						
+					}
+					
+				} else {
+					
+					score.getParts().get(i).setName(score.getParts().get(i).getId());
+					
+				}
+			
 				NodeList nodeMeasures = (NodeList) xpath.evaluate("//score-partwise/part[@id='"+score.getParts().get(i).getId()+"']/measure", document,XPathConstants.NODESET);
-
+								
 
 				if (nodeMeasures.getLength() != 0) {
 
@@ -927,10 +948,6 @@ public class MusicXML2RDF {
 					for (int j = 0; j < nodeMeasures.getLength(); j++) {
 
 						Measure measure = new Measure();
-
-
-						//NodeList nodeMeasureNumbers = (NodeList) xpath.evaluate("//score-partwise/part[@id='"+score.getParts().get(i).getId()+"']/measure/@number", document,XPathConstants.NODESET);
-
 						measure.setId(nodeMeasures.item(j).getAttributes().getNamedItem("number").getNodeValue());					
 
 						score.getParts().get(i).getMeasures().add(measure);
@@ -1205,10 +1222,8 @@ public class MusicXML2RDF {
 								
 								if(elementNotes.getElementsByTagName("accidental").item(0)!=null){
 
-//									if(elementNotes.getElementsByTagName("accidental").item(0).equals("flat")) note.setAccidental("b");
-//									if(elementNotes.getElementsByTagName("accidental").item(0).equals("sharp")) note.setAccidental("s");
-//									if(elementNotes.getElementsByTagName("accidental").item(0).equals("natural")) note.setAccidental("n");
 									note.setAccidental(elementNotes.getElementsByTagName("accidental").item(0).getTextContent());
+									
 								}
 
 
