@@ -1,6 +1,7 @@
 
 
-var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wwu";
+//var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wwu";
+var endpoint = "http://localhost:7200/repositories/wwu";
 
 namedGraph = "http://www.uni-muenster.de/musik";
 
@@ -13,74 +14,87 @@ var wktBBOX="";
 var target;
 var spinner;
 
-//** Main Query
-
 function executeQuery(offset) {
 
-	showSpin();
+	if(notestack.length!=0){
 
- 	queryOffset = offset
+		showSpin();
 
-	var sparqlQuery = $.sparql(endpoint)
-	.prefix("mso","http://linkeddata.uni-muenster.de/ontology/musicscore#")
-	.prefix("chord","http://purl.org/ontology/chord/")
-	.prefix("note","http://purl.org/ontology/chord/note/")
-	.prefix("dc","http://purl.org/dc/elements/1.1/")
-	.prefix("rdfs","http://www.w3.org/1999/02/22-rdf-syntax-ns#")
-	.prefix("mo","http://purl.org/ontology/mo/")
-	.prefix("foaf","http://xmlns.com/foaf/0.1/")
-			  .select(["?scoreNode","?scoreTitle", "?creator","?creatorNode", "?movemenTitle", "?measure", "?thumbnail","?partID","?partName","?voiceID","?staffID"])
-			  	//.graph("?graph")
-						.where("?scoreNode","foaf:thumbnail","?thumbnail")
-						.where("?scoreNode","dc:title","?scoreTitle")
-						.where("?scoreNode","mo:movement","?movementNode")
-				  	.where("?movementNode","dc:title","?movemenTitle")
-				  	.where("?scoreNode","dc:creator","?creatorNode")
-				  	.where("?creatorNode","foaf:name","?creator")
-				  	.where("?movementNode","mso:hasScorePart","?part")
-				  	.where("?movementNode","dc:title","?movement")
-				  	.where("?part","mso:hasMeasure","?measureNode")
-						.where("?part","rdfs:ID","?partID")
-            .where("?part","dc:description","?partName")
-						.where("?measureNode","rdfs:ID","?measure")
-            .where("?voice","a","mso:Voice")
-            .where("?voice","rdfs:ID","?voiceID")
-            .where("?measureNode","mso:hasNoteSet","?noteset0")
-            .where("?staff","mso:hasNoteSet","?noteset0")
-            .where("?staff","a","mso:Staff")
-            .where("?staff","rdfs:ID","?staffID")
-			  	.orderby("?score")
-			  .limit(queryLimit)
-			  .offset(queryOffset);
+	 	queryOffset = offset
 
-	for(var i = 0; i<  notestack.length; i++) {
+		var sparqlQuery = $.sparql(endpoint)
+		.prefix("mso","http://linkeddata.uni-muenster.de/ontology/musicscore#")
+		.prefix("chord","http://purl.org/ontology/chord/")
+		.prefix("note","http://purl.org/ontology/chord/note/")
+		.prefix("dc","http://purl.org/dc/elements/1.1/")
+		.prefix("rdfs","http://www.w3.org/1999/02/22-rdf-syntax-ns#")
+		.prefix("mo","http://purl.org/ontology/mo/")
+		.prefix("foaf","http://xmlns.com/foaf/0.1/")
+				  .select(["?scoreNode","?scoreTitle", "?creator","?creatorNode", "?movemenTitle", "?measure", "?thumbnail","?partID","?partName","?voiceID","?staffID"])
+				  	//.graph("?graph")
+							.where("?scoreNode","foaf:thumbnail","?thumbnail")
+							.where("?scoreNode","dc:title","?scoreTitle")
+							.where("?scoreNode","mo:movement","?movementNode")
+					  	.where("?movementNode","dc:title","?movemenTitle")
+					  	.where("?scoreNode","dc:creator","?creatorNode")
+					  	.where("?creatorNode","foaf:name","?creator")
+					  	.where("?movementNode","mso:hasScorePart","?part")
+					  	.where("?movementNode","dc:title","?movement")
+					  	.where("?part","mso:hasMeasure","?measureNode")
+							.where("?part","rdfs:ID","?partID")
+	            .where("?part","dc:description","?partName")
+							.where("?measureNode","rdfs:ID","?measure")
+	            .where("?voice","a","mso:Voice")
+	            .where("?voice","rdfs:ID","?voiceID")
+	            .where("?measureNode","mso:hasNoteSet","?noteset0")
+	            .where("?staff","mso:hasNoteSet","?noteset0")
+	            .where("?staff","a","mso:Staff")
+	            .where("?staff","rdfs:ID","?staffID")
+				  	.orderby("?score")
+				  .limit(queryLimit)
+				  .offset(queryOffset);
 
-		if(notestack[i].pitch != null){
+		for(var i = 0; i<  notestack.length; i++) {
 
-			sparqlQuery.where("?noteset"+i,"mso:hasNote","?note"+i)
-								 .where("?note"+i,"chord:natural","note:"+notestack[i].pitch)
-                 .where("?voice","mso:hasNoteSet","?noteset"+i);
+			if(notestack[i].pitch != null){
 
-			if(notestack[i].accidental != null){
-					sparqlQuery.where("?note"+i,"chord:modifier","chord:"+notestack[i].accidental);
-			} else {
-          //sparqlQuery.where("?note"+i,"a","chord:Natural");
-        sparqlQuery.filter("NOT EXISTS {?note"+i+" chord:modifier ?modifier}");
-      }
+				sparqlQuery.where("?noteset"+i,"mso:hasNote","?note"+i)
+	                 .where("?voice","mso:hasNoteSet","?noteset"+i);
 
-			if(notestack[i].duration != null){
+				if(notestack[i].accidental != null){
+						sparqlQuery.where("?note"+i,"chord:modifier","chord:"+notestack[i].accidental);
+				} else {
+	          //sparqlQuery.where("?note"+i,"a","chord:Natural");
+	        sparqlQuery.filter("NOT EXISTS {?note"+i+" chord:modifier ?modifier}");
+	      }
 
-				var duration = "";
-				if(notestack[i].duration=="1"){ duration = "Whole"}
-				if(notestack[i].duration=="2"){ duration = "Half"}
-				if(notestack[i].duration=="4"){ duration = "Quarter"}
-				if(notestack[i].duration=="8"){ duration = "Eighth"}
-				if(notestack[i].duration=="6"){ duration = "16th"}
-				if(notestack[i].duration=="3"){ duration = "32nd"}
-				if(notestack[i].duration=="5"){ duration = "64th"}
+				//if(notestack[i].duration != null){
 
-				sparqlQuery.where("?noteset"+i,"mso:hasDuration","?duration"+i)
-									 .where("?duration"+i,"a","mso:"+duration);
+				if(!$("#chkPitch").is(':checked')){
+
+					sparqlQuery.where("?note"+i,"chord:natural","note:"+notestack[i].pitch);
+
+				}
+
+				if(!$("#chkLength").is(':checked')){
+
+					var duration = "";
+					if(notestack[i].duration=="1"){ duration = "Whole"}
+					if(notestack[i].duration=="2"){ duration = "Half"}
+					if(notestack[i].duration=="4"){ duration = "Quarter"}
+					if(notestack[i].duration=="8"){ duration = "Eighth"}
+					if(notestack[i].duration=="6"){ duration = "16th"}
+					if(notestack[i].duration=="3"){ duration = "32nd"}
+					if(notestack[i].duration=="5"){ duration = "64th"}
+
+					sparqlQuery.where("?noteset"+i,"mso:hasDuration","?duration"+i)
+										 .where("?duration"+i,"a","mso:"+duration);
+
+				}
+
+
+
+				//}
 
 				if(notestack.length > (i+1)){
 					sparqlQuery.where("?noteset"+i,"mso:nextNoteSet","?noteset"+(i+1));
@@ -88,20 +102,17 @@ function executeQuery(offset) {
 
 			}
 
-
 		}
 
+		console.log("SPARQL Encoded -> "+ sparqlQuery.serialiseQuery());
+
+
+		console.log("Sending SPARQL...");
+		sparqlQueryJson(encode_utf8(sparqlQuery.serialiseQuery()), endpoint, myCallback, false);
+
+	console.log("SPARQL executed");
+		//target.removeChild(spinner.el);
 	}
-
-	console.log("SPARQL Encoded -> "+ sparqlQuery.serialiseQuery());
-
-
-	console.log("Sending SPARQL...");
-	sparqlQueryJson(encode_utf8(sparqlQuery.serialiseQuery()), endpoint, myCallback, false);
-
-console.log("SPARQL executed");
-	//target.removeChild(spinner.el);
-
 }
 
 

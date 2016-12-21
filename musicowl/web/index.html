@@ -111,12 +111,12 @@
                             </button>
                         </div>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onrest()">
+                            <button style="display: none;" type="button" class="btn btn-default btn-sm" onclick="javascript:onrest()">
                               <span class="glyphicon keyboard-rest"></span>
                             </button>
                         </div>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:ondot()">
+                            <button style="display: none;" type="button" class="btn btn-default btn-sm" onclick="javascript:ondot()">
                               <span class="glyphicon keyboard-dot"></span>
                             </button>
                         </div>
@@ -195,74 +195,7 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <td class="keyboard">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('C', 1, 0, 61)">
-                              <span>C</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('C', 1, 1, 61)">
-                              <span>C#</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('C', 1, -1, 61)">
-                              <span>Cb</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('D', 1, 0, 61)">
-                              <span>D</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('D', 1, 1, 61)">
-                              <span>D#</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('D', 1, -1, 61)">
-                              <span>Db</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('E', 1, 0, 61)">
-                              <span>E</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('E', 1, 1, 61)">
-                              <span>E#</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('E', 1, -1, 61)">
-                              <span>Eb</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('F', 1, 0, 61)">
-                              <span>F</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('F', 1, 1, 61)">
-                              <span>F#</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('F', 1, -1, 61)">
-                              <span>Fb</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('G', 1, 0, 61)">
-                              <span>G</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('G', 1, 1, 61)">
-                              <span>G#</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('G', 1, -1, 61)">
-                              <span>Gb</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('A', 1, 0, 61)">
-                              <span>A</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('A', 1, 1, 61)">
-                              <span>A#</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('A', 1, -1, 61)">
-                              <span>Ab</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('B', 1, 0, 61)">
-                              <span>B</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('B', 1, 1, 61)">
-                              <span>B#</span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('B', 1, -1, 61)">
-                              <span>Bb</span>
-                            </button>
 
-                    </td>
 
                 <tr>
                     <td class="keyboard">
@@ -332,10 +265,81 @@
             </div>
 
             <br>
-            <a id="displayText" href="javascript:toggle();">Expert Search</a>
+            <a id="displayText" href="javascript:toggle();">More Options</a>
             <div id="toggleText" style="display: none"><p></p>
-                <input type="checkbox" name="vehicle" value="length">Ignore pitch<br>
-                <input type="checkbox" name="vehicle" value="pitch">Ignore length<br>
+                <input id="chkLength" type="checkbox" value="length">Ignore length<br>
+                <input id="chkPitch" type="checkbox" value="pitch">Ignore pitch<br>
+
+
+                <tr>
+                    <td class="keyboard">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('C', 1, 0, 61)">
+                              <span>C</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('C', 1, 1, 61)">
+                              <span>C#</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('C', 1, -1, 61)">
+                              <span>Cb</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('D', 1, 0, 61)">
+                              <span>D</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('D', 1, 1, 61)">
+                              <span>D#</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('D', 1, -1, 61)">
+                              <span>Db</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('E', 1, 0, 61)">
+                              <span>E</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('E', 1, 1, 61)">
+                              <span>E#</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('E', 1, -1, 61)">
+                              <span>Eb</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('F', 1, 0, 61)">
+                              <span>F</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('F', 1, 1, 61)">
+                              <span>F#</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('F', 1, -1, 61)">
+                              <span>Fb</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('G', 1, 0, 61)">
+                              <span>G</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('G', 1, 1, 61)">
+                              <span>G#</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('G', 1, -1, 61)">
+                              <span>Gb</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('A', 1, 0, 61)">
+                              <span>A</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('A', 1, 1, 61)">
+                              <span>A#</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('A', 1, -1, 61)">
+                              <span>Ab</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('B', 1, 0, 61)">
+                              <span>B</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('B', 1, 1, 61)">
+                              <span>B#</span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('B', 1, -1, 61)">
+                              <span>Bb</span>
+                            </button>
+
+                    </td>
+
             </div>
 
         </div>

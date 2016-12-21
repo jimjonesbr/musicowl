@@ -36,17 +36,13 @@ function toggle() {
 	var text = document.getElementById("displayText");
 	if(ele.style.display == "block") {
     		ele.style.display = "none";
-		text.innerHTML = "Expert Search";
+		text.innerHTML = "More Options";
   	}
 	else {
 		ele.style.display = "block";
-		text.innerHTML = "Hide Expert Search";
+		text.innerHTML = "Hide More Options";
 	}
 }
-
-
-
-
 
 function removeLastNote(rohtext) {
 
@@ -61,3 +57,20 @@ function removeLastNote(rohtext) {
   update_incipit();
 
 }
+
+
+$(function(){
+  $( "#chkLength" ).click(function(){
+    if($("#chkPitch").is(':checked')){
+      $('#chkPitch').prop('checked', false);
+    }
+  });
+});
+
+$(function(){
+  $( "#chkPitch" ).click(function(){
+    if($("#chkLength").is(':checked')){
+      $('#chkLength').prop('checked', false);
+    }
+  });
+});
