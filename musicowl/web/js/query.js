@@ -1,8 +1,8 @@
 
 
-var endpoint = "http://localhost:7200//repositories/wwu";
+var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wwu";
 
-namedGraph = "http://www.uni-muenster.de/musik>";
+namedGraph = "http://www.uni-muenster.de/musik";
 
 var arrayCheckboxes = [];
 var maxVal=0;
@@ -217,6 +217,7 @@ function myCallback(str) {
 			if (typeof jsonObj.results.bindings[i].scoreTitle !== 'undefined') {
 				scoreTitle = jsonObj.results.bindings[i].scoreTitle.value;
 			}
+
 			if (typeof jsonObj.results.bindings[i].scoreNode !== 'undefined') {
 				scoreURL = jsonObj.results.bindings[i].scoreNode.value;
 			}

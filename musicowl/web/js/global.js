@@ -19,3 +19,45 @@ var opts = {
   top: '50%', // Top position relative to parent
   left: '50%' // Left position relative to parent
 };
+
+
+$(document).keyup(function(e) {
+  if(e.which == 46) {
+
+    removeLastNote();
+
+  }
+});
+
+
+
+function toggle() {
+	var ele = document.getElementById("toggleText");
+	var text = document.getElementById("displayText");
+	if(ele.style.display == "block") {
+    		ele.style.display = "none";
+		text.innerHTML = "Expert Search";
+  	}
+	else {
+		ele.style.display = "block";
+		text.innerHTML = "Hide Expert Search";
+	}
+}
+
+
+
+
+
+function removeLastNote(rohtext) {
+
+  notestack.splice(-1,1);
+
+  $('#incipit_01').val('');
+
+  for (var i = 0; i < notestack.length; i++) {
+    $('#incipit_01').val($('#incipit_01').val() + notestack[i].pea);
+  }
+
+  update_incipit();
+
+}

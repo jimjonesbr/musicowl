@@ -37,6 +37,9 @@
         <link href="css/musikportal.css" rel="stylesheet">
 
 
+
+
+
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
      <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -319,8 +322,8 @@
               <span>Search</span>
             </button>
 
-            <button type="button" align="right" class="btn btn-default btn-sm" onclick="">
-              <span>Clear</span>
+            <button id="btnRemove" type="button" align="right" class="btn btn-default btn-sm" onclick="removeLastNote()">
+              <span>Remove</span>
             </button>
 
             <div class="panel-body" style="display: none;">
@@ -328,7 +331,12 @@
                  </pre>
             </div>
 
-
+            <br>
+            <a id="displayText" href="javascript:toggle();">Expert Search</a>
+            <div id="toggleText" style="display: none"><p></p>
+                <input type="checkbox" name="vehicle" value="length">Ignore pitch<br>
+                <input type="checkbox" name="vehicle" value="pitch">Ignore length<br>
+            </div>
 
         </div>
 
@@ -401,6 +409,7 @@
         note.duration = current_duration;
         note.pitch = pitch;
 
+
         pitch_str = '';
         if (oct != current_oct) {
           switch (oct) {
@@ -437,11 +446,13 @@
         pitch_str += pitch;
         undos.push( $('#incipit_01').val() );
         $('#incipit_01').val($('#incipit_01').val() + pitch_str );
+        note.pea = pitch_str;
         update_incipit();
         activate_buttons();
 
         //console.log(note.pitch + " - " + note.duration + " - " + note.accidental);
         notestack.push(note);
+
         //console.log(notestack.length);
 
     }
@@ -692,6 +703,8 @@
 
             });
         //]]>
+
+
         </script>
     </body>
 </html>
