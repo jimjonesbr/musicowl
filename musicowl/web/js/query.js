@@ -1,7 +1,7 @@
 
 
-var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wwu";
-//var endpoint = "http://localhost:7200/repositories/wwu";
+//var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wwu";
+var endpoint = "http://localhost:7200/repositories/wwu";
 
 namedGraph = "http://www.uni-muenster.de/musik";
 
@@ -31,7 +31,6 @@ function executeQuery(offset) {
 		.prefix("mo","http://purl.org/ontology/mo/")
 		.prefix("foaf","http://xmlns.com/foaf/0.1/")
 				  .select(["?scoreNode","?scoreTitle", "?creator","?creatorNode", "?movemenTitle", "?measure", "?thumbnail","?partID","?partName","?voiceID","?staffID"])
-				  	//.graph("?graph")
 							.where("?scoreNode","foaf:thumbnail","?thumbnail")
 							.where("?scoreNode","dc:title","?scoreTitle")
 							.where("?scoreNode","mo:movement","?movementNode")
@@ -50,9 +49,9 @@ function executeQuery(offset) {
 	            .where("?staff","mso:hasNoteSet","?noteset0")
 	            .where("?staff","a","mso:Staff")
 	            .where("?staff","rdfs:ID","?staffID")
-				  	.orderby("?score")
+				  	.orderby("?scoreTitle").orderby("?movemenTitle").orderby("?measure")
 				  .limit(queryLimit)
-				  .offset(queryOffset);
+				  .offset(queryOffset).distinct();
 
 		for(var i = 0; i<  notestack.length; i++) {
 
@@ -64,11 +63,9 @@ function executeQuery(offset) {
 				if(notestack[i].accidental != null){
 						sparqlQuery.where("?note"+i,"chord:modifier","chord:"+notestack[i].accidental);
 				} else {
-	          //sparqlQuery.where("?note"+i,"a","chord:Natural");
+
 	        sparqlQuery.filter("NOT EXISTS {?note"+i+" chord:modifier ?modifier}");
 	      }
-
-				//if(notestack[i].duration != null){
 
 				if(!$("#chkPitch").is(':checked')){
 
@@ -91,10 +88,6 @@ function executeQuery(offset) {
 										 .where("?duration"+i,"a","mso:"+duration);
 
 				}
-
-
-
-				//}
 
 				if(notestack.length > (i+1)){
 					sparqlQuery.where("?noteset"+i,"mso:nextNoteSet","?noteset"+(i+1));
@@ -201,7 +194,14 @@ function myCallback(str) {
 
 	}
 
+	if(jsonObj.results.bindings.length == 0){
+		$("#result").html("No score found for the given melody.");
+		$("#result").append('<ul id="itemsContainer" style="list-style-type:none"></ul>');
+	}
 
+
+  var list = [];
+	var record = new Object();
 
 	for(var i = 0; i<  jsonObj.results.bindings.length; i++) {
 
@@ -224,58 +224,86 @@ function myCallback(str) {
 
 			if (typeof jsonObj.results.bindings[i].measure !== 'undefined') {
 				measure = jsonObj.results.bindings[i].measure.value;
+//				record.measure = jsonObj.results.bindings[i].measure.value;
+
 			}
 			if (typeof jsonObj.results.bindings[i].scoreTitle !== 'undefined') {
 				scoreTitle = jsonObj.results.bindings[i].scoreTitle.value;
+//				record.scoreTitle = jsonObj.results.bindings[i].scoreTitle.value;
 			}
 
 			if (typeof jsonObj.results.bindings[i].scoreNode !== 'undefined') {
 				scoreURL = jsonObj.results.bindings[i].scoreNode.value;
+//				record.scoreNode = jsonObj.results.bindings[i].scoreNode.value;
 			}
 
 			if (typeof jsonObj.results.bindings[i].creator !== 'undefined') {
 				creator = jsonObj.results.bindings[i].creator.value;
+//				record.creator = jsonObj.results.bindings[i].creator.value;
 			}
 
 			if (typeof jsonObj.results.bindings[i].movemenTitle !== 'undefined') {
 				movemenTitle = jsonObj.results.bindings[i].movemenTitle.value;
+//				record.movemenTitle = jsonObj.results.bindings[i].movemenTitle.value;
 			}
 
 			if (typeof jsonObj.results.bindings[i].thumbnail !== 'undefined') {
 				thumbnail = jsonObj.results.bindings[i].thumbnail.value;
+//				record.thumbnail = jsonObj.results.bindings[i].thumbnail.value;
 			}
 
 			if (typeof jsonObj.results.bindings[i].creatorNode !== 'undefined') {
 				creatorNode = jsonObj.results.bindings[i].creatorNode.value;
+//				record.creatorNode = jsonObj.results.bindings[i].creatorNode.value;
 			}
 
 			if (typeof jsonObj.results.bindings[i].partID !== 'undefined') {
 				partID = jsonObj.results.bindings[i].partID.value;
+//				record.partID = jsonObj.results.bindings[i].partID.value;
 			}
 
       if (typeof jsonObj.results.bindings[i].voiceID !== 'undefined') {
         voiceID = jsonObj.results.bindings[i].voiceID.value;
+//				record.voiceID = jsonObj.results.bindings[i].voiceID.value;
       }
 
       if (typeof jsonObj.results.bindings[i].partName !== 'undefined') {
         partName = jsonObj.results.bindings[i].partName.value;
+//				record.partName = jsonObj.results.bindings[i].partName.value;
       }
 
       if (typeof jsonObj.results.bindings[i].staffID !== 'undefined') {
         staffID = jsonObj.results.bindings[i].staffID.value;
+//				record.staffID = jsonObj.results.bindings[i].staffID.value;
       }
-			//$("#result").append('<ul id="itemsContainer" style="list-style-type:none"></ul>');
+
+
+//			list.push(record);
+
 
 			$("#result ul").append('<li><a target="_blank" href=' + scoreURL +'><img style="float:left; width: 15%; height: auto;" src="' +
-			thumbnail + '" alt="Kein Bild vorhanden" width="90" height="90" ></a><a target="_blank" href=' + scoreURL
-      +'>' + scoreTitle + '</a><br><b>Movement:</b> '+movemenTitle+'<br><b>Composer:</b> <a target="_blank" href=' + creatorNode
-      +'>'+creator+'</a><br><b>Starting measure:</b> '+measure+'<br><b>Part / Instrument:</b> '+partName+'<br><b>Voice:</b> '+
-      voiceID +'<br><b>Staff:</b> '+staffID+'</p></li>');
+											thumbnail + '" alt="Kein Bild vorhanden" width="90" height="90" ></a><a target="_blank" href=' + scoreURL
+								      +'>' + scoreTitle + '</a><br><b>Movement:</b> '+movemenTitle+'<br><b>Composer:</b> <span class="composer"'+i+'><a target="_blank" href=' + creatorNode
+								      +'>'+creator+'</a></span><br><b>Starting measure:</b> '+measure+'<br><b>Part / Instrument:</b> '+partName+'<br><b>Voice:</b> '+
+								      voiceID +'<br><b>Staff:</b> '+staffID+'</p></li>');
+
+
+
+
+
+
+
+
 
 
 	}
 
 	}
+
+
+
+
+
 
 	hideSpin();
 }
