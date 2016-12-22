@@ -9,20 +9,20 @@ $ivory: white;
 body {
   @include background(linear-gradient( top, white, gainsboro 100%));
   background-size: cover;
-}  
-audio { display: block; margin-bottom: 1rem; } 
-h1,h2  { 
+}
+audio { display: block; margin-bottom: 1rem; }
+h1,h2  {
 
   color: rgb(100,100,100);
-  line-height: 1.2; 
-  margin: 0 0 1rem; 
+  line-height: 1.2;
+  margin: 0 0 1rem;
   text-shadow : 0 2px 4px rgba(black, 0.25);
    b {
    color: rgb(100,0,0);
     text-shadow: 0px 1px 5px #CCC;
   }
 }
-h1 { 
+h1 {
     font-family: 'Pirata One', cursive;
 
   font-size: 3rem;
@@ -33,10 +33,10 @@ h1 {
   width: 75%;
   overflow: hidden;
 }
-ol { 
-  position: relative; 
-  padding: 0; 
-  margin: 0 0 10px; 
+ol {
+  position: relative;
+  padding: 0;
+  margin: 0 0 10px;
   display: inline-block;
   //float: left;
   font-size: 0; // to get rid of spaces between keys. ugly, I know.
@@ -44,10 +44,10 @@ ol {
 li{
   font-size: 16px;
   font-size: 1rem;
-  @include background(linear-gradient( top, #C0C1BD, #F0F0F0 10%, linen));  
+  @include background(linear-gradient( top, #C0C1BD, #F0F0F0 10%, linen));
   transition: all 0.1s ease-in-out; //  just a little animation
 
-  padding: 0; 
+  padding: 0;
   margin: 0;
   display: inline-block;
   border: 1px solid #ccc;
@@ -62,7 +62,7 @@ li{
   color: transparent;
   &:hover {
     color: #C0C1BD;
-    
+
   }
   &:active{
     box-shadow: none;
@@ -82,8 +82,8 @@ li{
     text-align: center;
     font-size: 0.66667rem;
     color: transparent;
-   
-    
+
+
     border-radius: 0 0 2px 2px;
     border-width: 0 6px 12px;
     border-color: #000;
@@ -91,17 +91,16 @@ li{
     background: $ebony;
     @include background( linear-gradient(#5F6265, #151B19 25%, $ebony));
     box-shadow: 0 3px 5px #ccc, inset 0px 0px 0px 1px rgba(gainsboro,0.2);
-    
+
     &:hover {
         color: gainsboro;
     }
-    
+
     &:active {
-      @include background( linear-gradient(#5F6265, #151B19 50%, $ebony)); 
+      @include background( linear-gradient(#5F6265, #151B19 50%, $ebony));
       border-bottom-width: 8px;
       padding-top: 135px;
       color: $ivory;
     }
   }
 }
-

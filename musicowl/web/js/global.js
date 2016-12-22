@@ -74,3 +74,18 @@ $(function(){
     }
   });
 });
+
+function showSpin(){
+
+  target = document.getElementById('itemsContainer');
+  spinner = new Spinner(opts).spin(target);
+
+  target.appendChild(spinner.el);
+
+}
+
+function hideSpin(){
+
+  spinner.stop();
+
+}

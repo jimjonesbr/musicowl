@@ -1,7 +1,7 @@
 
 
-//var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wwu";
-var endpoint = "http://localhost:7200/repositories/wwu";
+var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wwu";
+//var endpoint = "http://localhost:7200/repositories/wwu";
 
 namedGraph = "http://www.uni-muenster.de/musik";
 
@@ -266,7 +266,7 @@ function myCallback(str) {
       }
 			//$("#result").append('<ul id="itemsContainer" style="list-style-type:none"></ul>');
 
-			$("#result ul").append('<li><a target="_blank" href=' + scoreURL +'><img style="float:left; width: 20%; height: auto;" src="' +
+			$("#result ul").append('<li><a target="_blank" href=' + scoreURL +'><img style="float:left; width: 15%; height: auto;" src="' +
 			thumbnail + '" alt="Kein Bild vorhanden" width="90" height="90" ></a><a target="_blank" href=' + scoreURL
       +'>' + scoreTitle + '</a><br><b>Movement:</b> '+movemenTitle+'<br><b>Composer:</b> <a target="_blank" href=' + creatorNode
       +'>'+creator+'</a><br><b>Starting measure:</b> '+measure+'<br><b>Part / Instrument:</b> '+partName+'<br><b>Voice:</b> '+

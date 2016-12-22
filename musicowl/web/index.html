@@ -3,7 +3,7 @@
     <head>
         <title>WWU Music Score Search</title>
         <link rel="icon" type="image/x-icon" href="img/note.ico" />
-        <link rel="apple-touch-icon" href="http://www.verovio.org/images/verovio-logo-big.png"/>
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0" /><!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="http://www.verovio.org/css/bootstrap/css/bootstrap.min.css" type="text/css" /><!-- Optional theme -->
         <link rel="stylesheet" href="http://www.verovio.org/css/bootstrap/css/bootstrap-theme.min.css" type="text/css" />
@@ -38,56 +38,18 @@
 
 
 
+    <div id="main">
+        <div id="search">
+            <table id="tableSearch" >
 
-
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-     <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                </button>
-            <a class="navbar-brand logo-nav" href="http://uni-muenster.de"><img src="http://sammlungen.ulb.uni-muenster.de/domainimage/wwu_logo.gif" /></a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
-
-
-
-        <div class="top-header">
-    <div class="container" style="color: #eee; height: 140px; padding-top: 5px;">
-        <h1 class="hidden-xs">WWU Music Score Portal</h1>
-        <h3 class="visible-xs">WWU Music Score Search</h3>
-        <!--<p>Designed for the Music Encoding Initiative - Fast - Light - Flexible - No dependencies</p>-->
-    </div>
-</div>
-
-
-
-        <div class="container with-footer">
-
-            <div class="row">
-
-
-
-    <div class="col-md-9">
-        <div class="panel-body">
-            <div style="overflow-x: hidden; overflow-y: hidden;">
-            <table class="keyboard">
+              <tr><td><img src="img/wwu_logo.jpg" height="auto" width="60%"><br>
+              <h1>Music Score Portal</h1></td></tr>
+              <tr><td> </tr></td>
+              <tr><td> </tr></td>
+              <tr><td> </tr></td>
                 <tr>
-                    <td class="keyboard">
-                        <div class="btn-group">
-                            <!--<button type="button" class="btn btn-default btn-sm" onclick="javascript:onduration(9)">
-                              <span class="glyphicon keyboard-00"></span>
-                            </button>-->
+                    <td >
+                        <div id="notelength" class="btn-group">
                             <button type="button" class="btn btn-default btn-sm" onclick="javascript:onduration(1)">
                               <span class="glyphicon keyboard-01"></span>
                             </button>
@@ -110,7 +72,14 @@
                               <span class="glyphicon keyboard-64"></span>
                             </button>
                         </div>
+
                         <div class="btn-group">
+                            <button id="neutral" style="display: none;" type="button" class="btn btn-default btn-sm" onclick="javascript:onrest()">
+                              <span><b>N</b></span>
+                            </button>
+                        </div>
+
+                        <div id="rest" class="btn-group">
                             <button style="display: none;" type="button" class="btn btn-default btn-sm" onclick="javascript:onrest()">
                               <span class="glyphicon keyboard-rest"></span>
                             </button>
@@ -120,15 +89,12 @@
                               <span class="glyphicon keyboard-dot"></span>
                             </button>
                         </div>
-                        <div class="btn-group">
-                            <!--<button type="button" class="btn btn-default btn-sm" onclick="javascript:onbarline()">
-                              <span class="glyphicon keyboard-barline"></span>
-                            </button>-->
-                        </div>
                     </td>
+
+                  </td>
                 </tr>
                 <tr>
-                    <td class="keyboard">
+                    <td>
                           <map id="piano_map" name="piano_map">
                             <area shape="rect" coords="17,3,32,52" href="javascript:onpitch('C', 1, 1, 61)" />
                             <area shape="rect" coords="42,3,57,52" href="javascript:onpitch('D', 1, 1, 63)" />
@@ -193,27 +159,12 @@
                         </map>
                         <img id="piano_img" src="http://www.verovio.org/images/piano.png" usemap="#piano_map"/>
                     </td>
+
+
                 </tr>
 
-
-
-                <tr>
-                    <td class="keyboard">
-                        <select id="clef_01" name="clef_01" class="form-control">
-                            <option value="G-1">French Violin (G-1)</option>
-                            <option value="G-2" selected="true">Treble (G-2)</option>
-                            <option value="C-1">Soprano (C-1)</option>
-                            <option value="C-2">Mezzo Soprano (C-2)</option>
-                            <option value="C-3">Alto (C-3)</option>
-                            <option value="C-4">Tenor (C-4)</option>
-                            <option value="C-5">Baritone (C-5)</option>
-                            <option value="F-4">Bass (F-4)</option>
-                            <option value="F-3">Baritone (F-3)</option>
-                        </select>
-                    </td>
-                </tr>
                 <tr style="display: none;">
-                    <td class="keyboard">
+                    <td >
                         <select id="key_01" name="key_01" class="form-control">
                             <option value="">Key signature ...</option>
                             <option value="xF">1 ♯</option>
@@ -234,49 +185,78 @@
                     </td>
                 </tr>
                 <tr style="display: none;">
-                    <td class="keyboard">
+                    <td >
                         <input type="input" id="timesig_01" name="timesig_01" class="form-control" placeholder="Time signature (e.g. c c/ 3/4) ..."/>
                     </td>
                 </tr>
                 <tr style="display: none;">
-                    <td class="keyboard">
+                    <td >
                         <input type="input" id="incipit_01" name="incipit_01" class="form-control" placeholder="Plain and Easy code ..." />
                     </td>
                 </tr>
                 <tr>
-                    <td class="keyboard">
+                    <td >
                         <div style="display:inline;" id="render_01"></div>
                     </td>
                 </tr>
+
+
+                <tr>
+                    <td >
+                      <button id="btnSearch" class="btn" type="button" onclick="executeQuery(0)">
+                        <span>Search</span>
+                      </button>
+
+                      <button id="btnRemove" class ="btn" type="button" onclick="removeLastNote()">
+                        <span>Remove</span>
+                      </button>
+                    </td>
+                </tr>
+
             </table>
-            </div>
+            <a id="displayText" href="javascript:toggle();">More Options</a>
 
-            <button type="button" align="right" class="btn btn-default btn-sm" onclick="executeQuery(0)">
-              <span>Search</span>
-            </button>
+          </div>
 
-            <button id="btnRemove" type="button" align="right" class="btn btn-default btn-sm" onclick="removeLastNote()">
-              <span>Remove</span>
-            </button>
 
             <div class="panel-body" style="display: none;">
                  <pre class="prettyprint" id="mei_output"  style="overflow: auto; width: auto; word-wrap: normal; display: none;">
                  </pre>
             </div>
 
-            <br>
-            <a id="displayText" href="javascript:toggle();">More Options</a>
             <div id="toggleText" style="display: none"><p></p>
-                <input id="chkLength" type="checkbox" value="length">Ignore length<br>
-                <input id="chkPitch" type="checkbox" value="pitch">Ignore pitch<br>
-
+                <label><input id="chkLength" type="checkbox" value="length">Ignore length</label>
+                <label><input id="chkPitch" type="checkbox" value="pitch">Ignore pitch</label><br>
+                <br>
+                <table id="tableExpert">
+                <tr>
+                <td>Clef</td>
+                <td>
+                  <div class="btn-group">
+                    <select id="clef_01" name="clef_01" class="form-control">
+                        <option value="G-1">French Violin (G-1)</option>
+                        <option value="G-2" selected="true">Treble (G-2)</option>
+                        <option value="C-1">Soprano (C-1)</option>
+                        <option value="C-2">Mezzo Soprano (C-2)</option>
+                        <option value="C-3">Alto (C-3)</option>
+                        <option value="C-4">Tenor (C-4)</option>
+                        <option value="C-5">Baritone (C-5)</option>
+                        <option value="F-4">Bass (F-4)</option>
+                        <option value="F-3">Baritone (F-3)</option>
+                    </select>
+                  </div>
+                  </td>
+                </tr>
 
                 <tr>
-                    <td class="keyboard">
+                    <td>Notes </td>
+
+                    <td >
                         <div class="btn-group">
                             <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('C', 1, 0, 61)">
                               <span>C</span>
                             </button>
+
                             <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('C', 1, 1, 61)">
                               <span>C#</span>
                             </button>
@@ -334,16 +314,20 @@
                             <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('B', 1, 1, 61)">
                               <span>B#</span>
                             </button>
+
                             <button type="button" class="btn btn-default btn-sm" onclick="javascript:onpitch('B', 1, -1, 61)">
                               <span>Bb</span>
                             </button>
 
-                    </td>
 
+
+                    </td>
+                  </tr>
+                </table>
             </div>
 
         </div>
-
+        <br>
         <div id="listContainer" >
 
                 <div id="result" ></div>
@@ -358,33 +342,6 @@
     var soundPosition = 0;
 
 	$("#result").append('<ul id="itemsContainer" style="list-style-type:none"></ul>');
-    /*
-    soundManager.url = '/swf/';
-    //soundManager.flashVersion = 9; // optional: shiny features (default = 8)
-
-    soundManager.onready(function() {
-      if (soundManager.supported()) {
-        // SM2 is ready to go!
-        soundManager.createSound({
-          id: 'scale',
-          url: '/sound/scale_2-4.5.mp3',
-          autoLoad: true,
-          autoPlay: false,
-          onload: function() {
-            //alert('The sound '+this.sID+' loaded!');
-          },
-          whileplaying: function() {
-            //console.log(this.position);
-            if (this.position >= (soundPosition + 750)) {
-                soundManager.stopAll();
-            }
-          }
-        });
-      } else {
-        // unsupported/error case
-      }
-    });*/
-
     // global variables for the music notation
     var current_oct = -1;
     var current_duration = 4;
@@ -663,20 +620,6 @@
     });
 
 
-    function showSpin(){
-
-    	target = document.getElementById('result');
-    	spinner = new Spinner(opts).spin(target);
-
-    	target.appendChild(spinner.el);
-
-    }
-
-    function hideSpin(){
-
-    	spinner.stop();
-
-    }
 
 
 //]]>

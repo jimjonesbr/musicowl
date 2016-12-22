@@ -13,3 +13,62 @@
 	clear: both;
 	display: block;
 }
+.wrapper {
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+#main{
+    width: 50%;
+		display: table;
+    margin: 0 auto;
+}
+
+
+#toggleText{
+    width: 90%;
+		display: table;
+    margin: 0 auto;
+}
+
+#search{
+    width: 50%;
+		display: table;
+    margin: 0 auto;
+}
+
+#listContainer{
+    width: 50%;
+		display: table;
+    margin: 0 auto;
+}
+
+
+#tableSearch td
+{
+    text-align:center;
+    vertical-align:middle;
+		padding-bottom: 1em;
+}
+#tableExpert td
+{
+
+		padding-bottom: 5px;
+		padding-right: 10px;
+}
+
+
+#result li:hover {
+  background: -webkit-linear-gradient(#eeeeee, #cecece); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#eeeeee, #cecece); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#eeeeee, #cecece); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#eeeeee, #cecece); /* Standard syntax */
+}
+
+#toggleText label input {
+   margin-right:3px;
+	 margin-left:10px;
+}
