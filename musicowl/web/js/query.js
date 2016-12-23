@@ -1,7 +1,7 @@
 
 
-//var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wwu";
-var endpoint = "http://localhost:7200/repositories/wwu";
+var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wwu";
+//var endpoint = "http://localhost:7200/repositories/wwu";
 
 namedGraph = "http://www.uni-muenster.de/musik";
 
