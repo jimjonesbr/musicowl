@@ -20,7 +20,7 @@ public class ExportFromTransferDB {
 
 		try {
 
-			String outputFolder = "/home/jones/mm/";
+			String outputFolder = "ntriples/";
 			
 			MusicXML2RDF music = new MusicXML2RDF();
 			MusicXML2RDF.setOutputFolder(outputFolder);
