@@ -619,8 +619,7 @@ public class MusicXML2RDF {
 						ttl.append(noteObject + musicOWL.replace("OBJECT", "hasOctave") + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");	
 
 					}
-
-					//String durationObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_DURATION");
+					
 					String durationObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS" + notesetCounter + "_DURATION");
 					ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasDuration") + durationObject + ".\n");
 
@@ -630,16 +629,14 @@ public class MusicXML2RDF {
 						ttl.append(dotObject + rdfTypeURI + musicOWL.replace("OBJECT", "Dot") + ".\n");
 					}
 
-					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()!=null){
 
-						ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()))+ ".\n");
+					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()==null){
 
-					} else {
-
-						ttl.append(durationObject + rdfIdURI + musicOWL.replace("OBJECT", "Rest")+ ".\n");
+						ttl.append(durationObject + rdfIdURI + musicOWL.replace("OBJECT", "rest")+ ".\n");
 
 					}
 
+					ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()))+ ".\n");
 
 					for (int l = 0; l < score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().size(); l++) {
 
@@ -985,7 +982,7 @@ public class MusicXML2RDF {
 
 
 						/**
-						 * one xpath 4 all
+						 * one xpath element 4 all
 						 */
 
 						NodeList nodeMeasureElementsList = (NodeList) xpath.evaluate("//score-partwise/part[@id='"+score.getParts().get(i).getId()+"']/measure[@number='"+measure.getId()+"']", document,XPathConstants.NODESET);
@@ -1206,9 +1203,7 @@ public class MusicXML2RDF {
 								
 								if(elementNotes.getElementsByTagName("voice").item(0)!=null) {
 									
-									//Voice voice = new Voice();
 									note.getVoice().setId(elementNotes.getElementsByTagName("voice").item(0).getTextContent());
-									//note.setVoice(elementNotes.getElementsByTagName("voice").item(0).getTextContent());
 									
 								} else {
 									

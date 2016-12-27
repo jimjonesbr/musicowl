@@ -69,7 +69,12 @@ function executeQuery(offset) {
 
 				if(!$("#chkPitch").is(':checked')){
 
-					sparqlQuery.where("?note"+i,"chord:natural","note:"+notestack[i].pitch);
+					if(notestack[i].pitch=="rest"){
+							sparqlQuery.where("?note"+i,"chord:natural","note:rest");
+					} else {
+							sparqlQuery.where("?note"+i,"chord:natural","note:"+notestack[i].pitch);
+					}
+
 
 				}
 
@@ -97,14 +102,11 @@ function executeQuery(offset) {
 
 		}
 
-		console.log("SPARQL Encoded -> "+ sparqlQuery.serialiseQuery());
-
-
+		console.log("SPARQL Encoded fired to [" + endpoint + "] \n"+  sparqlQuery.serialiseQuery());
 		console.log("Sending SPARQL...");
 		sparqlQueryJson(encode_utf8(sparqlQuery.serialiseQuery()), endpoint, myCallback, false);
+		console.log("SPARQL executed");
 
-	console.log("SPARQL executed");
-		//target.removeChild(spinner.el);
 	}
 }
 
@@ -181,7 +183,7 @@ xmlhttp.send(querypart);
 function myCallback(str) {
 
 	console.log("#DEBUG query.js -> main query executed.");
-
+  $('#displayTotal').text('');
 	//** Convert result to JSON
 	var jsonObj = eval('(' + str + ')');
 
@@ -203,12 +205,15 @@ function myCallback(str) {
   var list = [];
 	var record = new Object();
 
+	if(jsonObj.results.bindings.length>0){
+			$('#displayTotal').text("Total records found: "+jsonObj.results.bindings.length);
+	}
+
+
 	for(var i = 0; i<  jsonObj.results.bindings.length; i++) {
 
 		if (typeof jsonObj.results.bindings[i].scoreNode !== 'undefined') {
 
-			// var index = jsonObj.results.bindings[i].wkt.value.indexOf(">");
-			// var wkt = jsonObj.results.bindings[i].wkt.value.substring(index+1);
 			var measure = '';
 			var scoreTitle = '';
 			var movemenTitle = '';

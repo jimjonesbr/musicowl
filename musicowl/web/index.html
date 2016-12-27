@@ -80,7 +80,7 @@
                         </div>
 
                         <div id="rest" class="btn-group">
-                            <button style="display: none;" type="button" class="btn btn-default btn-sm" onclick="javascript:onrest()">
+                            <button type="button" class="btn btn-default btn-sm" onclick="javascript:onrest()">
                               <span class="glyphicon keyboard-rest"></span>
                             </button>
                         </div>
@@ -189,8 +189,8 @@
                         <input type="input" id="timesig_01" name="timesig_01" class="form-control" placeholder="Time signature (e.g. c c/ 3/4) ..."/>
                     </td>
                 </tr>
-                <tr style="display: none;">
-                    <td >
+                <tr >
+                    <td style="display: none;">
                         <input type="input" id="incipit_01" name="incipit_01" class="form-control" placeholder="Plain and Easy code ..." />
                     </td>
                 </tr>
@@ -214,8 +214,8 @@
                 </tr>
 
             </table>
-            <a id="displayText" href="javascript:toggle();">More Options</a>
-
+            <a id="displayText" href="javascript:toggle();">More Options</a><br>
+            <span id="displayTotal"></span>
           </div>
 
 
@@ -444,12 +444,22 @@
 
     function onrest( )
     {
+
         rest_str = current_duration;
         rest_str += '-';
         undos.push( $('#incipit_01').val() );
         $('#incipit_01').val($('#incipit_01').val() + rest_str );
         update_incipit();
         activate_buttons();
+
+        var note = new Object();
+
+        note.duration = current_duration;
+        note.pitch = "Rest";
+        note.pea = rest_str;
+        notestack.push(note);
+
+
     }
 
     function onbarline( )

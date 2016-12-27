@@ -1389,6 +1389,10 @@ _:genid95 a owl:Restriction ;
 	<http://purl.org/ontology/chord/modifier> <http://purl.org/ontology/chord/sharp> ;
 	<http://purl.org/ontology/chord/natural> <http://purl.org/ontology/chord/note/G> .
 # 
+# http://purl.org/ontology/chord/note/rest
+
+<http://purl.org/ontology/chord/note/rest> a owl:NamedIndividual , <http://purl.org/ontology/chord/Note> .
+# 
 # http://purl.org/ontology/tonality/key/Abmajor
 
 <http://purl.org/ontology/tonality/key/Abmajor> a owl:NamedIndividual , <http://purl.org/ontology/tonality/Key> ;
