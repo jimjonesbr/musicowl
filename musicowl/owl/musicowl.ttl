@@ -61,7 +61,7 @@
 # http://linkeddata.uni-muenster.de/ontology/musicscore#hasInstant
 
 <http://linkeddata.uni-muenster.de/ontology/musicscore#hasInstant> a owl:ObjectProperty ;
-	rdfs:domain <http://purl.org/ontology/mo/MusicalWork> ;
+	rdfs:domain <http://purl.org/ontology/mo/Score> ;
 	rdfs:range <http://linkeddata.uni-muenster.de/ontology/musicscore#Instant> .
 # 
 # http://linkeddata.uni-muenster.de/ontology/musicscore#hasKey
@@ -86,7 +86,7 @@
 
 <http://linkeddata.uni-muenster.de/ontology/musicscore#hasMusicScore> a owl:ObjectProperty ;
 	rdfs:domain owl:Thing ;
-	rdfs:range <http://purl.org/ontology/mo/MusicalWork> .
+	rdfs:range <http://purl.org/ontology/mo/Score> .
 # 
 # http://linkeddata.uni-muenster.de/ontology/musicscore#hasNotation
 
@@ -183,7 +183,7 @@
 # http://purl.org/ontology/mo/movement
 
 <http://purl.org/ontology/mo/movement> a owl:ObjectProperty ;
-	rdfs:domain <http://purl.org/ontology/mo/MusicalWork> ;
+	rdfs:domain <http://purl.org/ontology/mo/Score> ;
 	rdfs:range <http://purl.org/ontology/mo/Movement> .
 # 
 # http://purl.org/ontology/tonality/mode
@@ -195,7 +195,8 @@
 # http://purl.org/ontology/tonality/tonic
 
 <http://purl.org/ontology/tonality/tonic> a owl:ObjectProperty ;
-	rdfs:range <http://purl.org/ontology/tonality/Key> .
+	rdfs:domain <http://purl.org/ontology/tonality/Key> ;
+	rdfs:range <http://purl.org/ontology/chord/Note> .
 # 
 # 
 # 
@@ -267,7 +268,7 @@ _:genid2 rdf:rest rdf:nil .
 # http://linkeddata.uni-muenster.de/ontology/musicscore#presentation
 
 <http://linkeddata.uni-muenster.de/ontology/musicscore#presentation> a owl:DatatypeProperty ;
-	rdfs:domain <http://purl.org/ontology/mo/MusicalWork> ;
+	rdfs:domain <http://purl.org/ontology/mo/Score> ;
 	rdfs:range xsd:anyURI .
 # 
 # http://purl.org/NET/c4dm/keys.owl#mode
@@ -756,7 +757,7 @@ _:genid59 a rdf:List ;
 # http://linkeddata.uni-muenster.de/ontology/musicscore#Score
 
 <http://linkeddata.uni-muenster.de/ontology/musicscore#Score> a owl:Class ;
-	owl:equivalentClass <http://purl.org/ontology/mo/MusicalWork> .
+	owl:equivalentClass <http://purl.org/ontology/mo/Score> .
 # 
 # http://linkeddata.uni-muenster.de/ontology/musicscore#ScorePart
 
@@ -941,16 +942,16 @@ _:genid80 rdf:rest rdf:nil .
 
 <http://purl.org/ontology/mo/Movement> a owl:Class .
 # 
-# http://purl.org/ontology/mo/MusicalWork
+# http://purl.org/ontology/mo/Score
 
-<http://purl.org/ontology/mo/MusicalWork> a owl:Class ;
+<http://purl.org/ontology/mo/Score> a owl:Class ;
 	owl:equivalentClass _:genid84 .
 
 _:genid84 a owl:Restriction ;
 	owl:onProperty <http://linkeddata.uni-muenster.de/ontology/musicscore#hasScorePart> ;
 	owl:someValuesFrom <http://linkeddata.uni-muenster.de/ontology/musicscore#ScorePart> .
 
-<http://purl.org/ontology/mo/MusicalWork> rdfs:comment "A handwritten or printed form of music notation that uses modern musical symbols to indicate the pitches (melodies) and rhythms of a song or musical piece."@en ;
+<http://purl.org/ontology/mo/Score> rdfs:comment "A handwritten or printed form of music notation that uses modern musical symbols to indicate the pitches (melodies) and rhythms of a song or musical piece."@en ;
 	rdfs:seeAlso "https://en.wikipedia.org/wiki/Sheet_music"^^xsd:anyURI .
 # 
 # http://purl.org/ontology/tonality/Key
