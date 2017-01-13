@@ -1254,6 +1254,14 @@ _:genid95 a owl:Restriction ;
 <http://linkeddata.uni-muenster.de/ontology/musicscore#sfzpp> a owl:NamedIndividual , <http://linkeddata.uni-muenster.de/ontology/musicscore#Loudness> ;
 	rdfs:label "sforzando-pianissimo" .
 # 
+# http://purl.org/ontology/chord/doubleflat
+
+<http://purl.org/ontology/chord/doubleflat> a owl:NamedIndividual , <http://purl.org/ontology/chord/Modifier> .
+# 
+# http://purl.org/ontology/chord/doublesharp
+
+<http://purl.org/ontology/chord/doublesharp> a owl:NamedIndividual , <http://purl.org/ontology/chord/Modifier> .
+# 
 # http://purl.org/ontology/chord/flat
 
 <http://purl.org/ontology/chord/flat> a owl:NamedIndividual , <http://purl.org/ontology/chord/Modifier> .

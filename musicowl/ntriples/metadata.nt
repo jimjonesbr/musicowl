@@ -304,11 +304,93 @@
 <https://sammlungen.ulb.uni-muenster.de/id/3079686> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/3079690> .
 <https://sammlungen.ulb.uni-muenster.de/id/3079686> <http://purl.org/dc/elements/1.1/creator> <http://d-nb.info/gnd/118548018> .
 <http://d-nb.info/gnd/118548018> <http://xmlns.com/foaf/0.1/name> "Steinhauer, C." .
+<https://sammlungen.ulb.uni-muenster.de/id/4280660> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/4280660> <http://purl.org/dc/elements/1.1/title> "Sehnsucht" .
+<https://sammlungen.ulb.uni-muenster.de/id/4280660> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/4280667> .
+<https://sammlungen.ulb.uni-muenster.de/id/4280660> <http://purl.org/dc/elements/1.1/creator> <http://d-nb.info/gnd/100763871> .
+<http://d-nb.info/gnd/100763871> <http://xmlns.com/foaf/0.1/name> "Romberg, Andreas" .
+<https://sammlungen.ulb.uni-muenster.de/id/4280660> <http://purl.org/dc/elements/1.1/creator> <http://d-nb.info/gnd/118607626> .
+<http://d-nb.info/gnd/118607626> <http://xmlns.com/foaf/0.1/name> "Schiller, Friedrich" .
 <https://sammlungen.ulb.uni-muenster.de/id/3530337> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
 <https://sammlungen.ulb.uni-muenster.de/id/3530337> <http://purl.org/dc/elements/1.1/title> "Auf der Alm" .
 <https://sammlungen.ulb.uni-muenster.de/id/3530337> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/3530341> .
 <https://sammlungen.ulb.uni-muenster.de/id/3530337> <http://purl.org/dc/elements/1.1/creator> <http://d-nb.info/gnd/106544322> .
 <http://d-nb.info/gnd/106544322> <http://xmlns.com/foaf/0.1/name> "Marquardt, Paul" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://purl.org/dc/elements/1.1/title> "Kleiner Feierabend" .
+<https://sammlungen.ulb.uni-muenster.de/id/1009591> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1009594> .
 <https://sammlungen.ulb.uni-muenster.de/id/1118465> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
 <https://sammlungen.ulb.uni-muenster.de/id/1118465> <http://purl.org/dc/elements/1.1/title> "Acht harmlose Lieder für Ungelehrte" .
 <https://sammlungen.ulb.uni-muenster.de/id/1118465> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/1118474> .
@@ -454,3 +536,18 @@
 <https://sammlungen.ulb.uni-muenster.de/id/825151> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/825153> .
 <https://sammlungen.ulb.uni-muenster.de/id/825151> <http://purl.org/dc/elements/1.1/creator> <http://d-nb.info/gnd/103797653> .
 <http://d-nb.info/gnd/103797653> <http://xmlns.com/foaf/0.1/name> "Doisy, Charles" .
+<https://sammlungen.ulb.uni-muenster.de/id/825151> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/825151> <http://purl.org/dc/elements/1.1/title> "Trois duos concertans (E; G; A)" .
+<https://sammlungen.ulb.uni-muenster.de/id/825151> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/825153> .
+<https://sammlungen.ulb.uni-muenster.de/id/825151> <http://purl.org/dc/elements/1.1/creator> <http://d-nb.info/gnd/103797653> .
+<http://d-nb.info/gnd/103797653> <http://xmlns.com/foaf/0.1/name> "Doisy, Charles" .
+<https://sammlungen.ulb.uni-muenster.de/id/825151> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/825151> <http://purl.org/dc/elements/1.1/title> "Trois duos concertans (E; G; A)" .
+<https://sammlungen.ulb.uni-muenster.de/id/825151> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/825153> .
+<https://sammlungen.ulb.uni-muenster.de/id/825151> <http://purl.org/dc/elements/1.1/creator> <http://d-nb.info/gnd/103797653> .
+<http://d-nb.info/gnd/103797653> <http://xmlns.com/foaf/0.1/name> "Doisy, Charles" .
+<https://sammlungen.ulb.uni-muenster.de/id/948617> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<https://sammlungen.ulb.uni-muenster.de/id/948617> <http://purl.org/dc/elements/1.1/title> "Nouvelle polonaise pour le pianoforte" .
+<https://sammlungen.ulb.uni-muenster.de/id/948617> <http://xmlns.com/foaf/0.1/thumbnail> <http://sammlungen.ulb.uni-muenster.de/download/webcache/304/948620> .
+<https://sammlungen.ulb.uni-muenster.de/id/948617> <http://purl.org/dc/elements/1.1/creator> <http://d-nb.info/gnd/118749595> .
+<http://d-nb.info/gnd/118749595> <http://xmlns.com/foaf/0.1/name> "Romberg, Bernhard" .

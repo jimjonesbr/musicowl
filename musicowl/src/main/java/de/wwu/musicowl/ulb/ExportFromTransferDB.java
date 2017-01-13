@@ -95,18 +95,9 @@ public class ExportFromTransferDB {
 				score.setFileName(rs.getInt("vlid") + "_" + rs.getString("title") + "-" + i);
 				score.setURI("https://sammlungen.ulb.uni-muenster.de/id/"+rs.getInt("vlid"));
 				music.createRDF(score);
+				
 			}
-
-			
-		
-			
-			 
-			
-			
-			
-
-
-			
+					
 			
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
@@ -118,9 +109,4 @@ public class ExportFromTransferDB {
 
 	}
 	
-	private void GenerateScoreMetadata(ResultSet rs){
-		
-		
-		
-	}
 }

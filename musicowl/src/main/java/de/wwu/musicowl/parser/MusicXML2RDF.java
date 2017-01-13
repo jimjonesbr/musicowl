@@ -741,47 +741,6 @@ public class MusicXML2RDF {
 
 					}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-					//if score.getParts().get(i).getMeasures().get(j).getNotes()
-
-					//					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getSlur() != null)
-					//						System.out.println("		|-- Slur  		: " + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getSlur());
-					//
-					//					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().size()!=0){
-					//
-					//						for (int l = 0; l < score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().size(); l++) {
-					//
-					//							System.out.println("		|-- Dynamic  		: " + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().get(l));
-					//
-					//						}
-					//
-					//					}
-					//
-					//					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getArticulations().size()!=0){
-					//
-					//						for (int l = 0; l < score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getArticulations().size(); l++) {
-					//
-					//							System.out.println("		|-- Articulations  	: " + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getArticulations().get(l));
-					//
-					//						}
-					//
-					//					}
-					//
-					//					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental()!=null) {
-					//						System.out.println("		|-- Accidental  	: " + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental());}
-					//					System.out.println("		|-----------------------|");
 				}
 
 			}

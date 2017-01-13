@@ -210,6 +210,13 @@ function myCallback(str) {
 	}
 
 
+
+
+
+
+
+
+
 	for(var i = 0; i<  jsonObj.results.bindings.length; i++) {
 
 		if (typeof jsonObj.results.bindings[i].scoreNode !== 'undefined') {
@@ -285,19 +292,14 @@ function myCallback(str) {
 
 //			list.push(record);
 
+			var id = scoreURL.replace('https://sammlungen.ulb.uni-muenster.de/id/','');
 
 			$("#result ul").append('<li><a target="_blank" href=' + scoreURL +'><img style="float:left; width: 15%; height: auto;" src="' +
 											thumbnail + '" alt="Kein Bild vorhanden" width="90" height="90" ></a><a target="_blank" href=' + scoreURL
 								      +'>' + scoreTitle + '</a><br><b>Movement:</b> '+movemenTitle+'<br><b>Composer:</b> <span class="composer"'+i+'><a target="_blank" href=' + creatorNode
 								      +'>'+creator+'</a></span><br><b>Starting measure:</b> '+measure+'<br><b>Part / Instrument:</b> '+partName+'<br><b>Voice:</b> '+
-								      voiceID +'<br><b>Staff:</b> '+staffID+'</p></li>');
-
-
-
-
-
-
-
+								      voiceID +'<br><b>Staff:</b> '+staffID+'</p>'+
+											'<a target="_blank" href="http://www.verovio.org/mei-viewer.xhtml?file=http://linkeddata.uni-muenster.de/musicportal/web/xml/'+ id +'.xml&amp;musicxml=true"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Play</button></a>');
 
 
 
