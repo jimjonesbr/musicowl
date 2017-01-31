@@ -36,8 +36,8 @@ public class ExportFromTransferDB {
 					"	(XPATH('//mods:title/text()', vlxml.rawxml, ARRAY[ARRAY['mods', 'http://www.loc.gov/mods/v3']]))[1]::TEXT AS title, " +
 					"	'https://sammlungen.ulb.uni-muenster.de/urn/' || (XPATH('//mods:identifier[@type=\"urn\"]/text()', vlxml.rawxml, ARRAY[ARRAY['mods', 'http://www.loc.gov/mods/v3']]))[1]::TEXT    AS identifier, " +
 					"	(XPATH('//mets:fileGrp[@USE=\"FRONTIMAGE\"]/mets:file/mets:FLocat/@xlink:href', vlxml.rawxml, ARRAY[ARRAY['mets', 'http://www.loc.gov/METS/'],ARRAY['xlink', 'http://www.w3.org/1999/xlink']]))[1]::TEXT AS thumbnail, " +
-					"	(XPATH('//mods:name/@valueURI', vlxml.rawxml, ARRAY[ARRAY['mods', 'http://www.loc.gov/mods/v3']]))::TEXT[] AS composerURI," +
-					"	(XPATH('//mods:name/mods:namePart/text()', vlxml.rawxml, ARRAY[ARRAY['mods', 'http://www.loc.gov/mods/v3']]))::TEXT[] AS composerName " +
+					"	(XPATH('//mods:mods/mods:name/@valueURI', vlxml.rawxml, ARRAY[ARRAY['mods', 'http://www.loc.gov/mods/v3']]))::TEXT[] AS composerURI," +
+					"	(XPATH('//mods:mods/mods:name/mods:namePart/text()', vlxml.rawxml, ARRAY[ARRAY['mods', 'http://www.loc.gov/mods/v3']]))::TEXT[] AS composerName " +
 					" FROM musik, vlxml " +
 					" WHERE musik.vlid = vlxml.vlid");
 						
