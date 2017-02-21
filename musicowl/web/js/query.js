@@ -292,7 +292,7 @@ function myCallback(str) {
 
 //			list.push(record);
 
-			var id = scoreURL.replace('https://sammlungen.ulb.uni-muenster.de/id/','');
+			var id = scoreURL.replace('https://sammlungen.ulb.uni-muenster.de/id/','').replace('https://miami.uni-muenster.de/Record/','');
 
 			$("#result ul").append('<li><a target="_blank" href=' + scoreURL +'><img style="float:left; width: 15%; height: auto;" src="' +
 											thumbnail + '" alt="Kein Bild vorhanden" width="90" height="90" ></a><a target="_blank" href=' + scoreURL

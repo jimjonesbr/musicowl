@@ -857,7 +857,7 @@ public class MusicXML2RDF {
 			if (subfields.getLength() != 0) {
 				
 				score.setTitle(subfields.item(0).getTextContent());
-				
+				//System.out.println(">>>> "+ score.getTitle());
 			}
 
 			subfields = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part/@id", document,XPathConstants.NODESET);
