@@ -30,8 +30,9 @@ function executeQuery(offset) {
 		.prefix("rdfs","http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 		.prefix("mo","http://purl.org/ontology/mo/")
 		.prefix("foaf","http://xmlns.com/foaf/0.1/")
-				  .select(["?scoreNode","?scoreTitle", "?creator","?creatorNode", "?movemenTitle", "?measure", "?thumbnail","?partID","?partName","?voiceID","?staffID"])
+				  .select(["?scoreNode","?scoreTitle", "?creator","?creatorNode", "?movemenTitle", "?measure", "?thumbnail","?partID","?partName","?voiceID","?staffID", "?identifier"])
 							.where("?scoreNode","foaf:thumbnail","?thumbnail")
+							.where("?scoreNode","dc:identifier","?identifier")
 							.where("?scoreNode","dc:title","?scoreTitle")
 							.where("?scoreNode","mo:movement","?movementNode")
 					  	.where("?movementNode","dc:title","?movemenTitle")
@@ -233,6 +234,13 @@ function myCallback(str) {
       var staffID = '';
       var partName = '';
       var voice = '';
+			var identifier = '';
+
+			if (typeof jsonObj.results.bindings[i].identifier !== 'undefined') {
+				identifier = jsonObj.results.bindings[i].identifier.value;
+//				record.measure = jsonObj.results.bindings[i].measure.value;
+
+			}
 
 			if (typeof jsonObj.results.bindings[i].measure !== 'undefined') {
 				measure = jsonObj.results.bindings[i].measure.value;
@@ -292,14 +300,14 @@ function myCallback(str) {
 
 //			list.push(record);
 
-			var id = scoreURL.replace('https://sammlungen.ulb.uni-muenster.de/id/','').replace('https://miami.uni-muenster.de/Record/','');
+		//	var id = scoreURL.replace('https://sammlungen.ulb.uni-muenster.de/id/','').replace('https://miami.uni-muenster.de/Record/','');
 
 			$("#result ul").append('<li><a target="_blank" href=' + scoreURL +'><img style="float:left; width: 15%; height: auto;" src="' +
 											thumbnail + '" alt="Kein Bild vorhanden" width="90" height="90" ></a><a target="_blank" href=' + scoreURL
 								      +'>' + scoreTitle + '</a><br><b>Movement:</b> '+movemenTitle+'<br><b>Composer:</b> <span class="composer"'+i+'><a target="_blank" href=' + creatorNode
 								      +'>'+creator+'</a></span><br><b>Starting measure:</b> '+measure+'<br><b>Part / Instrument:</b> '+partName+'<br><b>Voice:</b> '+
 								      voiceID +'<br><b>Staff:</b> '+staffID+'</p>'+
-											'<a target="_blank" href="http://www.verovio.org/mei-viewer.xhtml?file=http://linkeddata.uni-muenster.de/musicportal/web/xml/'+ id +'.xml&amp;musicxml=true"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Play</button></a>');
+											'<a target="_blank" href="http://www.verovio.org/mei-viewer.xhtml?file=http://linkeddata.uni-muenster.de/musicportal/web/xml/'+ identifier +'.xml&amp;musicxml=true"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Play</button></a>');
 
 
 

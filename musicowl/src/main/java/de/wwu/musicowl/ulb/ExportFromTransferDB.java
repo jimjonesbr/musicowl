@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.UUID;
 
 import de.wwu.musicowl.core.MusicScore;
 import de.wwu.musicowl.parser.MusicXML2RDF;
@@ -34,13 +33,12 @@ public class ExportFromTransferDB {
 			FileOutputStream fileStream;
 			OutputStreamWriter writer;
 			
-
-			
 			/**
 			 * Data from Digitale Sammlung (Visual Library)
 			 */
 			
 			rs = st.executeQuery("	SELECT " + 
+					"	musik.docid AS identifier, " +
 					"	'https://sammlungen.ulb.uni-muenster.de/id/' || musik.docid AS score, " +
 					"	(XPATH('//mods:title/text()', vlxml.rawxml, ARRAY[ARRAY['mods', 'http://www.loc.gov/mods/v3']]))[1]::TEXT AS title, " +
 					"	'https://sammlungen.ulb.uni-muenster.de/urn/' || (XPATH('//mods:identifier[@type=\"urn\"]/text()', vlxml.rawxml, ARRAY[ARRAY['mods', 'http://www.loc.gov/mods/v3']]))[1]::TEXT    AS identifier, " +
@@ -58,6 +56,7 @@ public class ExportFromTransferDB {
 				metadata.append("<" + rs.getString("score") + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .\n");
 				metadata.append("<" + rs.getString("score") + "> <http://purl.org/dc/elements/1.1/title> \"" + rs.getString("title") + "\" .\n");
 				metadata.append("<" + rs.getString("score") + "> <http://xmlns.com/foaf/0.1/thumbnail> <" + rs.getString("thumbnail")+ "> .\n");
+				metadata.append("<" + rs.getString("score") + "> <http://purl.org/dc/elements/1.1/identifier> \"" + rs.getString("identifier")+ "\" . \n");
 				
 				Array arrComposersURI = rs.getArray("composerURI");
 				String[] composersURI = (String[])arrComposersURI.getArray();
@@ -123,6 +122,7 @@ public class ExportFromTransferDB {
 			 * Metadata from MIAMI
 			 */
 			rs = st.executeQuery("	SELECT " + 
+								"	musik.docid AS identifier,  " +
 								"	'https://miami.uni-muenster.de/Record/' || musik.docid AS score,  " +
 								"	'https://www.ulb.uni-muenster.de/imperia/md/images/ulb2/_v/logo.svg' AS thumbnail,  " +
 								"	miami.title AS title,  " +
@@ -135,14 +135,13 @@ public class ExportFromTransferDB {
 			
 			
 			System.out.println("3. [MIAMI] Generating scores metadata ...");
-			
-			String uuid = UUID.randomUUID().toString();
-			
+						
 			while (rs.next()){
 					
 				
 				metadata.append("<" + rs.getString("score") + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .\n");
 				metadata.append("<" + rs.getString("score") + "> <http://purl.org/dc/elements/1.1/title> \"" + rs.getString("title") + "\" .\n");
+				metadata.append("<" + rs.getString("score") + "> <http://purl.org/dc/elements/1.1/identifier> \"" + rs.getString("identifier") + "\" .\n");
 				metadata.append("<" + rs.getString("score") + "> <http://xmlns.com/foaf/0.1/thumbnail> <https://www.ulb.uni-muenster.de/imperia/md/images/ulb2/bilder/medien/telemann-noten_730x365.jpg> .\n");
 								
 				
@@ -177,12 +176,12 @@ public class ExportFromTransferDB {
 			
 			
 			rs = st.executeQuery(" SELECT " +
-								" 	musik.docid		AS docid,  " +
-								" 	musik.rawxml	AS rawxml, " +
-								" 	miami.title 	AS title " +
-								" FROM musik " +
-								" INNER JOIN metsdaten ON musik.docid = metsdaten.uuid " + 
-								" INNER JOIN miami ON metsdaten.urn = miami.urn");
+								 " 	musik.docid		AS docid,  " +
+								 " 	musik.rawxml	AS rawxml, " +
+								 " 	miami.title 	AS title " +
+								 " FROM musik " +
+								 " INNER JOIN metsdaten ON musik.docid = metsdaten.uuid " + 
+								 " INNER JOIN miami ON metsdaten.urn = miami.urn");
 
 			int j = 0;
 			
