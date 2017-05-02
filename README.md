@@ -16,6 +16,7 @@ This converter parses MusicXML files and converts them to RDF based on the [Musi
  * Tonalities 
  * Voices
 
+
 ## Using the Java API
 
 ```java
@@ -30,13 +31,17 @@ public class Example {
 	}
 }
 ```
+## API Download
+
+Click [here](http://linkeddata.uni-muenster.de/api/) to download the latest release.
 
 ## Using the Java API via Terminal
+
 Converting a single MusicXML file:
 
 ```shell
 
-$ java -jar file=/home/user/musicxml/file.xml output=/home/user/rdf/
+$ java -jar musicxml2rdf-VERSION.jar file=/home/user/musicxml/file.xml output=/home/user/rdf/
 
 ```
 
@@ -44,7 +49,7 @@ Converting all MusicXML files in a directory:
 
 ```shell
 
-$ java -jar folder=/home/user/musicxml/ output=/home/user/rdf/
+$ java -jar musicxml2rdf-VERSION.jar folder=/home/user/musicxml/ output=/home/user/rdf/
 
 ```
 
@@ -52,7 +57,7 @@ Activating verbose processing:
 
 ```shell
 
-$ java -jar folder=/home/user/musicxml/ output=/home/user/rdf/ mode=verbose
+$ java -jar musicxml2rdf-VERSION.jar folder=/home/user/musicxml/ output=/home/user/rdf/ mode=verbose
 
 ```
 
