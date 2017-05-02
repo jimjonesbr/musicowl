@@ -24,9 +24,9 @@ import de.wwu.music2rdf.converter.MusicXML2RDF;
 
 public class Example {
 	public static void main(String[] args) {
-		MusicXML2RDF music2rdf = new MusicXML2RDF();		
+		MusicXML2RDF music2rdf = new MusicXML2RDF();
 		music2rdf.setOutputFile("/home/user/elgar_cello_concerto.nt");
-		music2rdf.parseMusicXML(new File("/home/user/elgar_cello_concerto.xml"));			
+		music2rdf.parseMusicXML(new File("/home/user/elgar_cello_concerto.xml"));
 	}
 }
 ```
