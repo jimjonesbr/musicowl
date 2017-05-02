@@ -1,4 +1,4 @@
-[![N|Solid](https://www.nebenbei-studieren.de/wp-content/uploads/2015/11/uni_muenster_logo.jpg ) ](https://www.uni-muenster.de/de/)
+[![N|Solid](https://www.nebenbei-studieren.de/wp-content/uploads/2015/11/uni_muenster_logo.jpg ) ](https://www.uni-muenster.de/de/)[![N|Solid](https://www.uni-muenster.de/imperia/md/images/geoinformatics/_v/logo-ifgi-text-de.png) ](https://www.uni-muenster.de/Geoinformatics/)
 
 # MusicXML to RDF Converter (BETA)
 
@@ -16,8 +16,8 @@ This converter parses MusicXML files and converts them to RDF based on the [Musi
  * Tonalities 
  * Voices
 
-## Usage
-Converting a single file:
+## Usage via Terminal
+Converting a single MusicXML file:
 
 ```shell
 
@@ -25,7 +25,7 @@ $ java -jar file=/home/user/musicxml/file.xml output=/home/user/rdf/
 
 ```
 
-Converting all files in a specific directory:
+Converting all MusicXML files in a directory:
 
 ```shell
 
@@ -40,5 +40,4 @@ Activating verbose processing:
 $ java -jar folder=/home/user/musicxml/ output=/home/user/rdf/ mode=verbose
 
 ```
-
 
