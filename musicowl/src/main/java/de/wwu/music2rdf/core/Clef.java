@@ -1,4 +1,4 @@
-package de.wwu.musicowl.core;
+package de.wwu.music2rdf.core;
 
 public class Clef {
 

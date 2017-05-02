@@ -1,4 +1,4 @@
-package de.wwu.musicowl.parser;
+package de.wwu.music2rdf.converter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,64 +30,33 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import de.wwu.musicowl.core.Clef;
-import de.wwu.musicowl.core.Key;
-import de.wwu.musicowl.core.Measure;
-import de.wwu.musicowl.core.MusicScore;
-import de.wwu.musicowl.core.Note;
-import de.wwu.musicowl.core.ScorePart;
+
+import de.wwu.music2rdf.core.Clef;
+import de.wwu.music2rdf.core.Key;
+import de.wwu.music2rdf.core.Measure;
+import de.wwu.music2rdf.core.MusicScore;
+import de.wwu.music2rdf.core.Note;
+import de.wwu.music2rdf.core.ScorePart;
 
 public class MusicXML2RDF {
 
-	private static ArrayList<Clef> clefList;
-	private static ArrayList<Note> currentNotes;
+	private ArrayList<Clef> clefList;
+	private ArrayList<Note> currentNotes;
+
+	private boolean verbose = false;
+	private String outputFile = "";
 	
-	private static boolean verbose = false;
-	private static String outputFolder = "";
-	private static String inputFolder = "";
-	
-	public static void main(String[] args) {
-
-		MusicXML2RDF m = new MusicXML2RDF();
-		m.setOutputFolder("ntriples/");
-		File[] files = new File(inputFolder).listFiles();
-
-		for (File file : files) {
-
-			if(file.getName().endsWith(".xml")){
-				MusicScore score = new MusicScore();
-				score = m.parseMusicXML(file);
-				score.setFileName(file.getName());
-				
-				m.createRDF(score);
-				
-			}
-
-		}
-
-
-	}
-
-
-
-
-	@SuppressWarnings("static-access")
+	//@SuppressWarnings("static-access")
 	public MusicXML2RDF() {
 		super();
 		this.clefList = new ArrayList<Clef>();
 		this.currentNotes = new ArrayList<Note>();
-				
+
 	}
 
-	public static boolean isVerbose() {
-		return verbose;
-	}
 
-	public static void setVerbose(boolean verbose) {
-		MusicXML2RDF.verbose = verbose;
-	}
 
-	public void createRDF(MusicScore score){
+	private void createRDF(MusicScore score){
 
 
 		StringBuffer ttl = new StringBuffer();
@@ -104,11 +73,11 @@ public class MusicXML2RDF {
 		String musicOntology = " <http://purl.org/ontology/mo/OBJECT> "; 
 		String dcOntology = " <http://purl.org/dc/elements/1.1/OBJECT> ";
 		String movementObject = nodeURI.replace("OBJECT",uid);
-		
+
 		ttl.append(scoreURI + musicOntology.replace("OBJECT", "movement") + movementObject + " .\n");
 		ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
 		ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle() + "\" .\n");
-		
+
 		for (int i = 0; i < score.getParts().size(); i++) {
 
 			String partID = score.getParts().get(i).getId();
@@ -125,7 +94,7 @@ public class MusicXML2RDF {
 				String measureID = score.getParts().get(i).getMeasures().get(j).getId();
 				String measureObject = nodeURI.replace("OBJECT", partID + "_M" + measureID);
 				String keyObject = "";
-				
+
 				Key key = new Key();
 
 				String instantObject = nodeURI.replace("OBJECT", "INSTANT_" + measureID); 
@@ -146,18 +115,18 @@ public class MusicXML2RDF {
 
 
 				keyObject = nodeURI.replace("OBJECT",partID + "_M" + measureID + "_KEY");
-				
+
 				if(score.getParts().get(i).getMeasures().get(j).getKey().getMode()!=null){
 
 					ttl.append(measureObject + musicOWL.replace("OBJECT", "hasKey") + keyObject + ". \n");
 					ttl.append(keyObject + rdfTypeURI + " <http://purl.org/ontology/tonality/Key> . \n");
-					
+
 					if(score.getParts().get(i).getMeasures().get(j).getKey().getMode().equals("major")){
 
 						key.setMode("major");
 
 						if (score.getParts().get(i).getMeasures().get(j).getKey().getFifths().equals("0")) {
-						//	keyType = "<http://purl.org/NET/c4dm/keys.owl#CMajor>";
+							//	keyType = "<http://purl.org/NET/c4dm/keys.owl#CMajor>";
 							key.setTonic("C");
 						}						
 						if (score.getParts().get(i).getMeasures().get(j).getKey().getFifths().equals("1")) {
@@ -223,7 +192,7 @@ public class MusicXML2RDF {
 					if(score.getParts().get(i).getMeasures().get(j).getKey().getMode().equals("minor")){
 
 						key.setMode("minor");
-						
+
 						if (score.getParts().get(i).getMeasures().get(j).getKey().getFifths().equals("0")) {
 							//keyType = "<http://purl.org/NET/c4dm/keys.owl#AMinor>";
 							key.setTonic("A");
@@ -287,7 +256,7 @@ public class MusicXML2RDF {
 						}
 
 					}
-			
+
 					ttl.append(keyObject + " <http://purl.org/ontology/tonality/tonic> " + chordNoteOWL.replace("OBJECT", key.getTonic()) + " . \n");
 					ttl.append(keyObject + " <http://purl.org/ontology/tonality/mode> " + keyModeOWL.replace("OBJECT", key.getMode()) + " . \n");
 
@@ -339,10 +308,10 @@ public class MusicXML2RDF {
 					if(this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature()!=null){
 
 						if(!this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature().equals(notesetObject)){
-							
+
 							ttl.append(this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature() + musicOWL.replace("OBJECT", "nextNoteSet") + notesetObject + " .\n");
 							this.setCurrentNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k));
-							
+
 						} 
 
 					} else {
@@ -382,224 +351,224 @@ public class MusicXML2RDF {
 
 					ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasNote") + noteObject + ".\n");
 					ttl.append(noteObject + rdfTypeURI + chordOWL.replace("OBJECT", "Note") + ".\n");
-					
+
 					if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()==null) {
 
 						ttl.append(noteObject + chordOWL.replace("OBJECT", "natural") + chordOWL.replace("OBJECT", "note/Rest") + ".\n");
 
 					} else { 
-					
+
 						ttl.append(noteObject + chordOWL.replace("OBJECT", "natural") + chordOWL.replace("OBJECT", "note/" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()) + ".\n");
-					
+
 					}
-					
-					
-										
+
+
+
 					if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("") &&
-					   !score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("natural")){
-						
+							!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("natural")){
+
 						ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental()) + ".\n");
-						
+
 					} 
-					
+
 
 					/**
 					 * Add sharps and flats to notes depending on the key. MuaicXML relies on the reader to identify the accidentals depending on the keys. 
 					 */
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("") &&
-					   score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch() != null){						
-						
+							score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch() != null){						
+
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#AMinor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#CMajor>")){
 						if((key.getTonic().equals("A") && key.getMode().equals("minor")) || (key.getTonic().equals("C") && key.getMode().equals("major"))){
 							ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental()) + ".\n");
-							
+
 						}
-						
+
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#GMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#EMinor>")){
 						if((key.getTonic().equals("G") && key.getMode().equals("major")) || (key.getTonic().equals("E") && key.getMode().equals("minor"))){
-							
+
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F")){
-								
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								
+
 							}
-							
+
 						}
-						
+
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#DMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#BMinor>")){
 						if((key.getTonic().equals("D") && key.getMode().equals("major")) || (key.getTonic().equals("B") && key.getMode().equals("minor"))){
-							
+
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C")){
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C")){
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								
+
 							}
-							
+
 						}
 
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#AMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#FMinor>")){
 						if((key.getTonic().equals("A") && key.getMode().equals("major")) || (key.getTonic().equals("F") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-							   score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
-							   score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G")){
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G")){
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								
+
 							} 
-							
+
 						}
 
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#EMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#CMinor>")){
 						if((key.getTonic().equals("E") && key.getMode().equals("major")) || (key.getTonic().equals("C") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D")){
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D")){
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								
+
 							}
-							
+
 						}
-						
+
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#BMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#GMinor>")){
 						if((key.getTonic().equals("B") && key.getMode().equals("major")) || (key.getTonic().equals("G") && key.getMode().equals("minor"))){							
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A")){
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A")){
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								
+
 							}
-							
+
 						}
 
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#FSharpMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#DSharpMinor>")){
 						if((key.getTonic().equals("Fs") && key.getMode().equals("major")) || (key.getTonic().equals("Ds") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E")){
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E")){
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								
+
 							}
-							
+
 						}
-						
+
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#CSharpMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#ASharpMinor>")){
 						if((key.getTonic().equals("Cs") && key.getMode().equals("major")) || (key.getTonic().equals("As") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-							   score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
-							   score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-							   score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-							   score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-							   score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-							   score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B")){
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B")){
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								
+
 							}
-							
+
 						}
-						
-						
+
+
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#FMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#DMinor>")){
 						if((key.getTonic().equals("F") && key.getMode().equals("major")) || (key.getTonic().equals("D") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B")){
-								
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								
+
 							}
-							
+
 						}
-						
-						
+
+
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#BFlatMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#GMinor>")){
 						if((key.getTonic().equals("Bb") && key.getMode().equals("major")) || (key.getTonic().equals("G") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E")){
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E")){
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								
+
 							}
-							
+
 						}
-						
+
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#EFlatMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#CMinor>")){
 						if((key.getTonic().equals("Eb") && key.getMode().equals("major")) || (key.getTonic().equals("C") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A")) {
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A")) {
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								
+
 							}
-							
+
 						}
 
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#AFlatMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#FMinor>")){
 						if((key.getTonic().equals("Ab") && key.getMode().equals("major")) || (key.getTonic().equals("F") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D")) {
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D")) {
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								
+
 							}
-							
+
 						}
 
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#DFlatMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#BFlatMinor>")){
 						if((key.getTonic().equals("Db") && key.getMode().equals("major")) || (key.getTonic().equals("Bb") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G")) {
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G")) {
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								
+
 							}
-							
+
 						}
 
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#GFlatMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#EFlatMinor>")){
 						if((key.getTonic().equals("Gb") && key.getMode().equals("major")) || (key.getTonic().equals("Eb") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C")) {
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C")) {
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								
+
 							}
-							
+
 						}
-						
+
 						//if(keyType.equals("<http://purl.org/NET/c4dm/keys.owl#CFlatMajor>") || keyType.equals("<http://purl.org/NET/c4dm/keys.owl#AFlatMinor>")){
 						if((key.getTonic().equals("Cb") && key.getMode().equals("major")) || (key.getTonic().equals("Ab") && key.getMode().equals("minor"))){
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") ||
-								score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F")) {
-								
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") ||
+									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F")) {
+
 								ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								
+
 							}
-							
+
 						}
 						//System.out.println(keyType);
 					}
@@ -619,7 +588,7 @@ public class MusicXML2RDF {
 						ttl.append(noteObject + musicOWL.replace("OBJECT", "hasOctave") + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");	
 
 					}
-					
+
 					String durationObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS" + notesetCounter + "_DURATION");
 					ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasDuration") + durationObject + ".\n");
 
@@ -749,7 +718,7 @@ public class MusicXML2RDF {
 
 		try {
 
-			FileOutputStream fileStream = new FileOutputStream(new File(outputFolder + score.getFileName() + ".nt"),false);
+			FileOutputStream fileStream = new FileOutputStream(new File(this.getOutputFile()),false);
 			OutputStreamWriter writer = new OutputStreamWriter(fileStream, "UTF8");
 
 			writer.append(ttl.toString());
@@ -765,14 +734,17 @@ public class MusicXML2RDF {
 
 	}
 
-	public MusicScore parseMusicXML(File file){
-			
-		String result ="";
-		
 
-		System.out.println("Processing " + file.getName() + ", please wait ...");
-		
+	public void parseMusicXML(File file){
+
+		String musicXMLString ="";
+
+
 		try {
+
+			//File file = new File(filePath);
+			System.out.println("Processing " + file.getName() + ", please wait ...");
+
 
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			documentBuilderFactory.setValidating(false);
@@ -788,37 +760,34 @@ public class MusicXML2RDF {
 			});
 
 			Document document = builder.parse(file);
-			
+
 			TransformerFactory tf = TransformerFactory.newInstance();
 			Transformer transformer = tf.newTransformer();
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 			StringWriter writer = new StringWriter();
 			transformer.transform(new DOMSource(document), new StreamResult(writer));
-			result = writer.getBuffer().toString().replaceAll("\n|\r", "");
-			
+			musicXMLString = writer.getBuffer().toString().replaceAll("\n|\r", "");
+
 		}catch (Exception e) {
 
-		}
+		}	
 
-		
-		
-		
-		return createMusicScoreFile(result);
-		
+		MusicScore score = createMusicScoreFile(musicXMLString); 
+		score.setOutputFileName(file.getName());
+
+
+		this.createRDF(score);
+		//return score;
+
 	}
-	
-	public MusicScore parseMusicXML(String musicXML){
-		
-		return createMusicScoreFile(musicXML);
-		
-	}
-	
+
+
+
 	private MusicScore createMusicScoreFile(String musicXML){
 
-		//System.out.println("Processing " + file.getName() + ", please wait ...");
 		MusicScore score = new MusicScore();
 
-		//score.setFileName(file.getName().replaceAll(".xml", ""));
+
 
 		String currentMode = "";
 		String currentFifth = ""; 
@@ -843,21 +812,18 @@ public class MusicXML2RDF {
 			});
 
 
-			
-			
 			InputSource is = new InputSource(new StringReader(musicXML));
-			
 			Document document = builder.parse(is);
 
 			XPathFactory xpathFactory = XPathFactory.newInstance();
 			XPath xpath = xpathFactory.newXPath();
 
 			NodeList subfields = (NodeList) xpath.evaluate("//work/work-title", document,XPathConstants.NODESET);
-			
+
 			if (subfields.getLength() != 0) {
-				
+
 				score.setTitle(subfields.item(0).getTextContent());
-				//System.out.println(">>>> "+ score.getTitle());
+
 			}
 
 			subfields = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part/@id", document,XPathConstants.NODESET);
@@ -869,34 +835,34 @@ public class MusicXML2RDF {
 				score.getParts().add(part);					
 
 			}
-						
+
 
 			for (int i = 0; i < score.getParts().size(); i++) {
 
 				this.clefList = new ArrayList<Clef>();
 
 				NodeList nodePartName = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part[@id='"+score.getParts().get(i).getId()+"']/part-name", document,XPathConstants.NODESET);
-								
+
 				if(nodePartName.getLength()!=0){
-					
+
 					if(nodePartName.item(0).getTextContent().trim().equals("")){
-						
+
 						score.getParts().get(i).setName(score.getParts().get(i).getId());
-						
+
 					} else {
-						
+
 						score.getParts().get(i).setName(nodePartName.item(0).getTextContent());
-						
+
 					}
-					
+
 				} else {
-					
+
 					score.getParts().get(i).setName(score.getParts().get(i).getId());
-					
+
 				}
-			
+
 				NodeList nodeMeasures = (NodeList) xpath.evaluate("//score-partwise/part[@id='"+score.getParts().get(i).getId()+"']/measure", document,XPathConstants.NODESET);
-								
+
 
 				if (nodeMeasures.getLength() != 0) {
 
@@ -1159,25 +1125,25 @@ public class MusicXML2RDF {
 								if(elementNotes.getElementsByTagName("octave").item(0)!=null) note.setOctave(elementNotes.getElementsByTagName("octave").item(0).getTextContent());
 								if(elementNotes.getElementsByTagName("step").item(0)!=null) note.setPitch(elementNotes.getElementsByTagName("step").item(0).getTextContent());								
 								if(elementNotes.getElementsByTagName("type").item(0)!=null) note.setType(elementNotes.getElementsByTagName("type").item(0).getTextContent());
-								
+
 								if(elementNotes.getElementsByTagName("voice").item(0)!=null) {
-									
+
 									note.getVoice().setId(elementNotes.getElementsByTagName("voice").item(0).getTextContent());
-									
+
 								} else {
-									
+
 									note.getVoice().setId("1");
-									
+
 								}
-								
+
 								note.getVoice().setPart(score.getParts().get(i).getId());
 								note.getVoice().setMeasure(measure.getId());
 
-								
+
 								if(elementNotes.getElementsByTagName("accidental").item(0)!=null){
 
 									note.setAccidental(elementNotes.getElementsByTagName("accidental").item(0).getTextContent());
-									
+
 								}
 
 
@@ -1295,6 +1261,8 @@ public class MusicXML2RDF {
 
 	}
 
+
+
 	private void addClef(Clef clef){
 
 		boolean exists = false;
@@ -1339,22 +1307,22 @@ public class MusicXML2RDF {
 	private void setCurrentNoteSet(Note note){
 
 		boolean exists = false;
-		
+
 		for (int i = 0; i < currentNotes.size(); i++) {
-			
+
 			if(currentNotes.get(i).getVoice().getId().equals(note.getVoice().getId())){
-				
+
 				if(currentNotes.get(i).getStaff().equals(note.getStaff())){
-					
+
 					currentNotes.get(i).setSignature(note.getSignature());
 					exists = true;
-					
+
 				}
-				
+
 			}
-			
+
 		}
-		
+
 
 		if(!exists)	{
 			currentNotes.add(note);
@@ -1374,11 +1342,11 @@ public class MusicXML2RDF {
 				if(currentNotes.get(i).getStaff().equals(note.getStaff()) ){
 
 					if(currentNotes.get(i).getVoice().getId().equals(note.getVoice().getId()) ){
-					
+
 						result = currentNotes.get(i);
-						
+
 					}
-					
+
 
 				}
 			}
@@ -1397,34 +1365,15 @@ public class MusicXML2RDF {
 
 	}
 
+	public String getOutputFile(){
+		
+		return this.outputFile;
+		
+	}
 
-
-
+	public void setOutputFile(String outputfile){
+		
+		this.outputFile = outputfile;
+	}
 	
-	public static String getOutputFolder() {
-		return outputFolder;
 	}
-
-
-
-
-	public static void setOutputFolder(String outputFolder) {
-		MusicXML2RDF.outputFolder = outputFolder;
-	}
-
-
-
-
-	public static String getInputFolder() {
-		return inputFolder;
-	}
-
-
-
-
-	public static void setInputFolder(String inputFolder) {
-		MusicXML2RDF.inputFolder = inputFolder;
-	}
-
-
-}

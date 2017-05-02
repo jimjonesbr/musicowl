@@ -1,4 +1,4 @@
-package de.wwu.musicowl.core;
+package de.wwu.music2rdf.core;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class MusicScore {
 		return fileName;
 	}
 
-	public void setFileName(String fileName) {
+	public void setOutputFileName(String fileName) {
 		this.fileName = fileName;
 	}
 
