@@ -1,4 +1,4 @@
-[![](https://www.nebenbei-studieren.de/wp-content/uploads/2015/11/uni_muenster_logo.jpg ) ](https://www.uni-muenster.de/de/)
+[![](http://linkeddata.uni-muenster.de/musicportal/web/img/partners.png)](https://www.uni-muenster.de/de/)
 
 # MusicXML to RDF Converter (BETA)
 
@@ -31,7 +31,7 @@ public class Example {
 	}
 }
 ```
-## API Download
+## Download
 
 Click [here](http://linkeddata.uni-muenster.de/api/) to download the latest release.
 
@@ -40,24 +40,18 @@ Click [here](http://linkeddata.uni-muenster.de/api/) to download the latest rele
 Converting a single MusicXML file:
 
 ```shell
-
 $ java -jar musicxml2rdf-VERSION.jar file=/home/user/musicxml/file.xml output=/home/user/rdf/
-
 ```
 
 Converting all MusicXML files in a directory:
 
 ```shell
-
 $ java -jar musicxml2rdf-VERSION.jar folder=/home/user/musicxml/ output=/home/user/rdf/
-
 ```
 
 Activating verbose processing:
 
 ```shell
-
 $ java -jar musicxml2rdf-VERSION.jar folder=/home/user/musicxml/ output=/home/user/rdf/ mode=verbose
-
 ```
 
