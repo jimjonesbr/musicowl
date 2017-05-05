@@ -16,6 +16,9 @@ This converter parses MusicXML files and converts them to RDF, based on the [Mus
  * Tonalities 
  * Voices
 
+## Download
+
+Click [here](http://linkeddata.uni-muenster.de/api/) to download the latest release.
 
 ## Using the Java API
 
@@ -31,9 +34,6 @@ public class Example {
 	}
 }
 ```
-## Download
-
-Click [here](http://linkeddata.uni-muenster.de/api/) to download the latest release.
 
 ## Using the Java API via Terminal
 
