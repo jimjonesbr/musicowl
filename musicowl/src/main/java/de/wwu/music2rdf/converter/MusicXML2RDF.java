@@ -47,6 +47,7 @@ public class MusicXML2RDF {
 	private String outputFile = "";
 	private File inputFile = null;
 	private String documentURI = "";
+	private String documentTitle = "";
 	
 	public MusicXML2RDF() {
 		super();
@@ -82,6 +83,9 @@ public class MusicXML2RDF {
 		ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
 		ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle() + "\" .\n");
 
+		//TITLE MOVEMENT MISSING!
+		
+		
 		for (int i = 0; i < score.getParts().size(); i++) {
 
 			String partID = score.getParts().get(i).getId();
@@ -626,7 +630,7 @@ public class MusicXML2RDF {
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()==null){
 
-						ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", "Duration .\n"));
+						ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", "Duration") + ".\n");
 
 					} else {
 
@@ -1429,5 +1433,17 @@ public class MusicXML2RDF {
 	public void setDocumentURI(String uri){
 		
 		this.documentURI = uri;
+	}
+	
+	public void setDocumentTitle(String title){
+		
+		this.documentTitle = title;
+		
+	}
+	
+	public String getDocumentTitle(String title){
+		
+		return this.documentTitle;
+		
 	}
 }
