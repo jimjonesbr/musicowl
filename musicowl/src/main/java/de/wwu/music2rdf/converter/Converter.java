@@ -82,7 +82,8 @@ public class Converter {
 		} else if (!converter.getInputFile().equals("")){
 
 			music2rdf.setOutputFile(converter.getOutputFilename());
-			music2rdf.parseMusicXML(new File(converter.getInputFile()));
+			music2rdf.setInputFile(new File(converter.getInputFile()));
+			music2rdf.parseMusicXML();
 
 
 		} else if (!converter.getInputFolder().equals("")){
@@ -95,7 +96,8 @@ public class Converter {
 
 					System.out.println(file.getAbsolutePath()+".nt");
 					music2rdf.setOutputFile(file.getAbsolutePath()+".nt");
-					music2rdf.parseMusicXML(file);					
+					music2rdf.setInputFile(file);
+					music2rdf.parseMusicXML();					
 
 				}
 

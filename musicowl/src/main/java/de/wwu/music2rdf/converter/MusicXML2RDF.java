@@ -45,8 +45,9 @@ public class MusicXML2RDF {
 
 	private boolean verbose = false;
 	private String outputFile = "";
+	private File inputFile = null;
+	private String documentURI = "";
 	
-	//@SuppressWarnings("static-access")
 	public MusicXML2RDF() {
 		super();
 		this.clefList = new ArrayList<Clef>();
@@ -60,7 +61,7 @@ public class MusicXML2RDF {
 
 
 		//TODO: Check score.getURI(), currently null. 
-		
+
 		//
 		StringBuffer ttl = new StringBuffer();
 		String uid = UUID.randomUUID().toString();
@@ -326,8 +327,8 @@ public class MusicXML2RDF {
 					ttl.append(notesetObject + rdfTypeURI + musicOWL.replace("OBJECT", "NoteSet") + ". \n");
 					ttl.append(measureObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
 
-				
-					
+
+
 
 					String staffObject = "";
 
@@ -335,14 +336,14 @@ public class MusicXML2RDF {
 					staffObject = nodeURI.replace("OBJECT", partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
 
 					ttl.append(staffObject + rdfTypeURI + musicOWL.replace("OBJECT", "Staff") + " . \n");
-					
+
 					//TODO: Remove staff hasNoteSet noteset
 					//ttl.append(staffObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
 					//
-					
+
 					ttl.append(staffObject + rdfIdURI + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() + "\" . \n");
 
-										
+
 					String voiceObject = "";
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice()==null){
@@ -357,13 +358,13 @@ public class MusicXML2RDF {
 
 					ttl.append(voiceObject + rdfTypeURI + musicOWL.replace("OBJECT", "Voice") + " . \n");										
 					ttl.append(voiceObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
-					
-					
-					
+
+
+
 					//TODO: ADD staff hasVoice voice
 					ttl.append(staffObject + musicOWL.replace("OBJECT", "hasVoice") + voiceObject + " . \n");
 					//
-					
+
 					String noteObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS_" + notesetCounter + "_NOTE_" + k);
 
 					ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasNote") + noteObject + ".\n");
@@ -622,7 +623,18 @@ public class MusicXML2RDF {
 
 					}
 
-					ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()))+ ".\n");
+
+					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()==null){
+
+						ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", "Duration .\n"));
+
+					} else {
+
+						ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()))+ ".\n");
+
+					}
+
+
 
 					for (int l = 0; l < score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().size(); l++) {
 
@@ -752,11 +764,12 @@ public class MusicXML2RDF {
 	}
 
 
-	public void parseMusicXML(File file){
+	public void parseMusicXML(){
 
 		String musicXMLString ="";
 
-
+		File file = this.getInputFile();
+		
 		try {
 
 			//File file = new File(filePath);
@@ -785,13 +798,16 @@ public class MusicXML2RDF {
 			transformer.transform(new DOMSource(document), new StreamResult(writer));
 			musicXMLString = writer.getBuffer().toString().replaceAll("\n|\r", "");
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 
+			System.err.println("[Error processing MusicXML File]: " + e.getMessage());
+			
 		}	
-
+		
+		
 		MusicScore score = createMusicScoreFile(musicXMLString); 
 		score.setOutputFileName(file.getName());
-
+		score.setURI(this.getDocumentURI());
 
 		this.createRDF(score);
 		//return score;
@@ -1383,14 +1399,35 @@ public class MusicXML2RDF {
 	}
 
 	public String getOutputFile(){
-		
+
 		return this.outputFile;
-		
+
 	}
 
 	public void setOutputFile(String outputfile){
-		
+
 		this.outputFile = outputfile;
 	}
-	
+
+	public void setInputFile(File musicxml){
+		
+		this.inputFile = musicxml;
+		
 	}
+	
+	public File getInputFile(){
+		
+		return this.inputFile;
+		
+	}
+	
+	public String getDocumentURI(){
+		
+		return this.documentURI;
+	}
+
+	public void setDocumentURI(String uri){
+		
+		this.documentURI = uri;
+	}
+}

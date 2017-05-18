@@ -13,8 +13,11 @@ public class Example {
 		 */
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
 		
-		music2rdf.setOutputFile("ntriples/1118465.nt");
-		music2rdf.parseMusicXML(new File("web/xml/1118465.xml"));
+		music2rdf.setInputFile(new File("musicxml/web-samples/elgar_cello_concerto_op.85.xml"));
+		music2rdf.setDocumentURI("http://elgar.co.uk/cello-concerto");
+		music2rdf.setOutputFile("ntriples/elgar_cello_concerto_op.85.nt");
+		
+		music2rdf.parseMusicXML();
 			
 	}
 
