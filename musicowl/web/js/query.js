@@ -41,14 +41,28 @@ function executeQuery(offset) {
 					  	.where("?movementNode","mso:hasScorePart","?part")
 					  	.where("?movementNode","dc:title","?movement")
 					  	.where("?part","mso:hasMeasure","?measureNode")
-							.where("?part","rdfs:ID","?partID")
-	            .where("?part","dc:description","?partName")
-							.where("?measureNode","rdfs:ID","?measure")
+						.where("?part","rdfs:ID","?partID")
+				                .where("?part","dc:description","?partName")
+						.where("?measureNode","rdfs:ID","?measure")
 	            .where("?voice","a","mso:Voice")
 	            .where("?voice","rdfs:ID","?voiceID")
-	            .where("?measureNode","mso:hasNoteSet","?noteset0")
-	            .where("?staff","mso:hasNoteSet","?noteset0")
+
+
+			//remove? begin
+	           // .where("?measureNode","mso:hasNoteSet","?noteset0")
+	           // .where("?staff","mso:hasNoteSet","?noteset0")
+			//remove? end
+
+
 	            .where("?staff","a","mso:Staff")
+
+
+			//add begin	
+		    .where("?staff","mso:hasVoice","?voice")
+			//add end
+
+
+		    .where("?voice","mso:hasNoteSet","?voice")
 	            .where("?staff","rdfs:ID","?staffID")
 				  	.orderby("?scoreTitle").orderby("?movemenTitle").orderby("?measure")
 				  .limit(queryLimit)

@@ -59,6 +59,9 @@ public class MusicXML2RDF {
 	private void createRDF(MusicScore score){
 
 
+		//TODO: Check score.getURI(), currently null. 
+		
+		//
 		StringBuffer ttl = new StringBuffer();
 		String uid = UUID.randomUUID().toString();
 
@@ -323,6 +326,23 @@ public class MusicXML2RDF {
 					ttl.append(notesetObject + rdfTypeURI + musicOWL.replace("OBJECT", "NoteSet") + ". \n");
 					ttl.append(measureObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
 
+				
+					
+
+					String staffObject = "";
+
+
+					staffObject = nodeURI.replace("OBJECT", partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
+
+					ttl.append(staffObject + rdfTypeURI + musicOWL.replace("OBJECT", "Staff") + " . \n");
+					
+					//TODO: Remove staff hasNoteSet noteset
+					//ttl.append(staffObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
+					//
+					
+					ttl.append(staffObject + rdfIdURI + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() + "\" . \n");
+
+										
 					String voiceObject = "";
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice()==null){
@@ -337,16 +357,13 @@ public class MusicXML2RDF {
 
 					ttl.append(voiceObject + rdfTypeURI + musicOWL.replace("OBJECT", "Voice") + " . \n");										
 					ttl.append(voiceObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
-
-					String staffObject = "";
-
-
-					staffObject = nodeURI.replace("OBJECT", partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
-
-					ttl.append(staffObject + rdfTypeURI + musicOWL.replace("OBJECT", "Staff") + " . \n");
-					ttl.append(staffObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
-					ttl.append(staffObject + rdfIdURI + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() + "\" . \n");
-
+					
+					
+					
+					//TODO: ADD staff hasVoice voice
+					ttl.append(staffObject + musicOWL.replace("OBJECT", "hasVoice") + voiceObject + " . \n");
+					//
+					
 					String noteObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS_" + notesetCounter + "_NOTE_" + k);
 
 					ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasNote") + noteObject + ".\n");
