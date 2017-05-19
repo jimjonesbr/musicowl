@@ -338,9 +338,9 @@ public class MusicXML2RDF {
 
 
 					staffObject = nodeURI.replace("OBJECT", partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
-
+					
 					ttl.append(staffObject + rdfTypeURI + musicOWL.replace("OBJECT", "Staff") + " . \n");
-
+					ttl.append(partObject + musicOWL.replace("OBJECT", "hasStaff") + staffObject +" . \n");
 					//TODO: Remove staff hasNoteSet noteset
 					//ttl.append(staffObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
 					//

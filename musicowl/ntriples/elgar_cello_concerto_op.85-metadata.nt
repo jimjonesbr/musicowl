@@ -1,7 +1,7 @@
-<http://elgar.co.uk/cello-concerto> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
-<http://elgar.co.uk/cello-concerto> <http://purl.org/dc/elements/1.1/title> "Cello Concerto Op. 85" .
-<http://elgar.co.uk/cello-concerto> <http://xmlns.com/foaf/0.1/thumbnail> <https://upload.wikimedia.org/wikipedia/commons/3/37/Elgar-cello-concerto-manuscript.jpg> .
-<http://elgar.co.uk/cello-concerto> <http://purl.org/dc/elements/1.1/identifier> "20178282" . 
-<http://elgar.co.uk/cello-concerto> <http://purl.org/dc/elements/1.1/creator> <http://d-nb.info/gnd/16240999-0> .
-<http://d-nb.info/gnd/16240999-0> <http://xmlns.com/foaf/0.1/name> "Sir Edward Elgar" .
-<http://elgar.co.uk/cello-concerto> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .
+<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> <http://purl.org/dc/elements/1.1/title> "Cello Concerto Op. 85" .
+<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> <http://xmlns.com/foaf/0.1/thumbnail> <https://upload.wikimedia.org/wikipedia/commons/3/37/Elgar-cello-concerto-manuscript.jpg> .
+<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> <http://purl.org/dc/elements/1.1/identifier> "20178282" . 
+<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> <http://purl.org/dc/elements/1.1/creator> <http://dbpedia.org/resource/Edward_Elgar> .
+<http://dbpedia.org/resource/Edward_Elgar> <http://xmlns.com/foaf/0.1/name> "Sir Edward William Elgar" .
+<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .

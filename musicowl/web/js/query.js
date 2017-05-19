@@ -1,7 +1,6 @@
 
 
-var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wwu";
-//var endpoint = "http://localhost:7200/repositories/wwu";
+var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/development";
 
 namedGraph = "http://www.uni-muenster.de/musik";
 
@@ -35,35 +34,21 @@ function executeQuery(offset) {
 							.where("?scoreNode","dc:identifier","?identifier")
 							.where("?scoreNode","dc:title","?scoreTitle")
 							.where("?scoreNode","mo:movement","?movementNode")
-					  	.where("?movementNode","dc:title","?movemenTitle")
-					  	.where("?scoreNode","dc:creator","?creatorNode")
-					  	.where("?creatorNode","foaf:name","?creator")
-					  	.where("?movementNode","mso:hasScorePart","?part")
-					  	.where("?movementNode","dc:title","?movement")
-					  	.where("?part","mso:hasMeasure","?measureNode")
-						.where("?part","rdfs:ID","?partID")
-				                .where("?part","dc:description","?partName")
-						.where("?measureNode","rdfs:ID","?measure")
-	            .where("?voice","a","mso:Voice")
-	            .where("?voice","rdfs:ID","?voiceID")
-
-
-			//remove? begin
-	           // .where("?measureNode","mso:hasNoteSet","?noteset0")
-	           // .where("?staff","mso:hasNoteSet","?noteset0")
-			//remove? end
-
-
-	            .where("?staff","a","mso:Staff")
-
-
-			//add begin	
-		    .where("?staff","mso:hasVoice","?voice")
-			//add end
-
-
-		    .where("?voice","mso:hasNoteSet","?voice")
-	            .where("?staff","rdfs:ID","?staffID")
+							.where("?movementNode","dc:title","?movemenTitle")
+							.where("?scoreNode","dc:creator","?creatorNode")
+							.where("?creatorNode","foaf:name","?creator")
+							.where("?movementNode","mso:hasScorePart","?part")							
+							.where("?movementNode","dc:title","?movement")
+							.where("?part","mso:hasMeasure","?measureNode")
+							.where("?part","rdfs:ID","?partID")
+							.where("?part","dc:description","?partName")
+							.where("?part","mso:hasStaff","?staff")
+							.where("?measureNode","rdfs:ID","?measure")
+							.where("?voice","a","mso:Voice")
+							.where("?voice","rdfs:ID","?voiceID")
+							.where("?measureNode","mso:hasNoteSet","?noteset0")
+							.where("?staff","mso:hasVoice","?voice")
+							.where("?staff","rdfs:ID","?staffID")							
 				  	.orderby("?scoreTitle").orderby("?movemenTitle").orderby("?measure")
 				  .limit(queryLimit)
 				  .offset(queryOffset).distinct();
