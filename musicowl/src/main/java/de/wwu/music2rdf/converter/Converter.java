@@ -1,6 +1,7 @@
 package de.wwu.music2rdf.converter;
 
 import java.io.File;
+import java.util.UUID;
 
 public class Converter {
 
@@ -9,7 +10,7 @@ public class Converter {
 	private String inputFolder = "";
 	private String inputFile = "";
 	private String mode = "";
-
+	private String uri = "";
 
 	public static void main(String[] args) {
 
@@ -56,10 +57,31 @@ public class Converter {
 
 			}
 
+
+			if(parameter[0].toLowerCase().equals("uri")){
+
+				System.out.println("URI: " + parameter[1]);				
+				converter.setURI(parameter[1]);
+
+			}
+
 		}
 
-		System.out.println("\n");
+		
+		if(converter.getURI().equals("")){
 
+			converter.setURI("http://uni-muenster.de/musicscore/uri/" + UUID.randomUUID().toString());
+			System.out.println("[WAR001]: No URI provided for the given file. A random URI will be generated: " + converter.getURI() + "");
+
+		}
+
+		if (!converter.getInputFolder().equals("") && !converter.getURI().equals("")){
+
+			System.out.println("[WAR002] The URI [" + converter.getURI() + "] will be used as an identifier for all MusicXML documents from [" + converter.getInputFolder() + "] " );
+
+		}
+
+		music2rdf.setDocumentURI(converter.getURI());
 
 
 
@@ -94,8 +116,7 @@ public class Converter {
 
 				if(file.getName().endsWith(".xml")){
 
-					System.out.println(file.getAbsolutePath()+".nt");
-					music2rdf.setOutputFile(file.getAbsolutePath()+".nt");
+					music2rdf.setOutputFile(converter.getOutputFolder() + File.separator +  file.getName() +".nt");
 					music2rdf.setInputFile(file);
 					music2rdf.parseMusicXML();					
 
@@ -145,9 +166,9 @@ public class Converter {
 			this.inputFolder = inputFolder + File.separator;
 
 		} else {
-			
+
 			this.inputFolder = inputFolder;
-			
+
 		}
 	}
 
@@ -173,4 +194,12 @@ public class Converter {
 		return this.getOutputFolder() + file.getName() + ".nt";
 	}
 
+	private String getURI(){
+		return this.uri;
+	}
+
+	private void setURI(String uri){
+		this.uri = uri;
+	}
+	
 }

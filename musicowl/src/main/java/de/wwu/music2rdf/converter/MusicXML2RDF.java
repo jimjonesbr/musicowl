@@ -777,7 +777,7 @@ public class MusicXML2RDF {
 		try {
 
 			//File file = new File(filePath);
-			System.out.println("Processing " + file.getName() + ", please wait ...");
+			System.out.println("\nProcessing " + file.getName() + ", please wait ...");
 
 
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
