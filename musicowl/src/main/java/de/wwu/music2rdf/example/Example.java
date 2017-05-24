@@ -8,9 +8,6 @@ public class Example {
 
 	public static void main(String[] args) {
 
-		/**
-		 * Converting the file 'web/xml/1118465.xml' into RDF
-		 */
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
 		
 		music2rdf.setInputFile(new File("musicxml/web-samples/elgar_cello_concerto_op.85.xml"));
