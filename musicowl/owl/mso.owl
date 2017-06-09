@@ -7,6 +7,7 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      ontologyIRI="http://linkeddata.uni-muenster.de/ontology/musicscore#"
      versionIRI="http://linkeddata.uni-muenster.de/ontology/musicscore#1.0.0">
+    <Prefix name="" IRI="http://linkeddata.uni-muenster.de/ontology/musicscore#"/>
     <Prefix name="mso" IRI="http://linkeddata.uni-muenster.de/ontology/musicscore#"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
@@ -22,10 +23,16 @@
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">MusicOWL - Music Score Ontology</Literal>
     </Annotation>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="affettuoso"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Bsmajor"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="hasMode"/>
@@ -40,13 +47,13 @@
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Gsminor"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="presto"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Esminor"/>
     </Declaration>
     <Declaration>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="presto"/>
     </Declaration>
     <Declaration>
         <Class IRI="Staff"/>
@@ -103,6 +110,9 @@
         <DataProperty IRI="fifth"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="spiccato"/>
     </Declaration>
     <Declaration>
@@ -116,6 +126,9 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Aminor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="OctupleWhole"/>
     </Declaration>
     <Declaration>
         <Class IRI="Fallof"/>
@@ -253,7 +266,13 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Es"/>
     </Declaration>
     <Declaration>
+        <Class IRI="ConLegno"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="GClef"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="LeftHandPizzicato"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="hasArticulation"/>
@@ -364,6 +383,9 @@
         <Class IRI="128th"/>
     </Declaration>
     <Declaration>
+        <Class IRI="QuadrupleWhole"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="patetico"/>
     </Declaration>
     <Declaration>
@@ -460,6 +482,9 @@
         <NamedIndividual IRI="Percussion"/>
     </Declaration>
     <Declaration>
+        <Class IRI="DoubleWhole"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="doppio_piu_lento"/>
     </Declaration>
     <Declaration>
@@ -488,6 +513,9 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="sfpp"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Asmajor"/>
@@ -571,9 +599,6 @@
         <Class IRI="Half"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/rest"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="16th"/>
     </Declaration>
     <Declaration>
@@ -646,6 +671,9 @@
         <NamedIndividual IRI="SubBass"/>
     </Declaration>
     <Declaration>
+        <Class IRI="Rest"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="precipitando"/>
     </Declaration>
     <Declaration>
@@ -659,6 +687,9 @@
     </Declaration>
     <Declaration>
         <Class IRI="http://purl.org/ontology/mo/Score"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Accidental"/>
     </Declaration>
     <Declaration>
         <Class IRI="Septuplet"/>
@@ -703,16 +734,19 @@
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Bmajor"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Quadruplet"/>
+        <Class IRI="Eighth"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Eighth"/>
+        <Class IRI="Quadruplet"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="http://purl.org/ontology/tonality/mode"/>
     </Declaration>
     <Declaration>
         <Class IRI="Quintuplet"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/ghost"/>
     </Declaration>
     <Declaration>
         <Class IRI="http://purl.org/ontology/mo/Movement"/>
@@ -799,6 +833,9 @@
         <NamedIndividual IRI="saltando"/>
     </Declaration>
     <Declaration>
+        <Class IRI="Ponticello"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="sfz"/>
     </Declaration>
     <Declaration>
@@ -809,6 +846,9 @@
     </Declaration>
     <Declaration>
         <Class IRI="CClef"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Flautando"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="lamentoso"/>
@@ -925,6 +965,9 @@
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Eminor"/>
     </Declaration>
     <Declaration>
+        <Class IRI="BartokPizzicato"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="adagietto"/>
     </Declaration>
     <Declaration>
@@ -939,6 +982,13 @@
     <Declaration>
         <NamedIndividual IRI="smorzando"/>
     </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="adlibitum"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="Accidental"/>
+        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+    </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="CClef"/>
         <ObjectOneOf>
@@ -1069,10 +1119,10 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="NoteSet"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="hasNote"/>
-            <Class IRI="http://purl.org/ontology/chord/Note"/>
-        </ObjectSomeValuesFrom>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="hasDuration"/>
+            <Class IRI="Duration"/>
+        </ObjectExactCardinality>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Octad"/>
@@ -1108,6 +1158,15 @@
             <ObjectProperty IRI="hasNoteSet"/>
             <Class IRI="NoteSet"/>
         </ObjectExactCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="Rest"/>
+        <ObjectComplementOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="hasNote"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectSomeValuesFrom>
+        </ObjectComplementOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Score"/>
@@ -1193,8 +1252,12 @@
         <Class IRI="http://purl.org/ontology/chord/Modifier"/>
         <ObjectOneOf>
             <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
             <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
             <NamedIndividual IRI="http://purl.org/ontology/chord/doubleflat"/>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
             <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
         </ObjectOneOf>
     </EquivalentClasses>
@@ -1274,6 +1337,10 @@
         <Class IRI="Articulation"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="BartokPizzicato"/>
+        <Class IRI="Articulation"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="BeginRepeat"/>
         <Class IRI="Repeat"/>
     </SubClassOf>
@@ -1294,6 +1361,10 @@
         <Class IRI="NoteSet"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="ConLegno"/>
+        <Class IRI="Articulation"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="DetachedLegato"/>
         <Class IRI="Articulation"/>
     </SubClassOf>
@@ -1312,6 +1383,10 @@
     <SubClassOf>
         <Class IRI="DoubleDot"/>
         <Class IRI="DurationAttribute"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="DoubleWhole"/>
+        <Class IRI="Duration"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="Duplet"/>
@@ -1342,6 +1417,10 @@
         <Class IRI="Repeat"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="Flautando"/>
+        <Class IRI="Articulation"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="GClef"/>
         <Class IRI="Clef"/>
     </SubClassOf>
@@ -1356,6 +1435,10 @@
     <SubClassOf>
         <Class IRI="Hexad"/>
         <Class IRI="NoteSet"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="LeftHandPizzicato"/>
+        <Class IRI="Articulation"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="Loudness"/>
@@ -1382,6 +1465,10 @@
         <Class IRI="NoteSet"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="OctupleWhole"/>
+        <Class IRI="Duration"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="Octuplet"/>
         <Class IRI="Tuplet"/>
     </SubClassOf>
@@ -1402,6 +1489,14 @@
         <Class IRI="Articulation"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="Ponticello"/>
+        <Class IRI="Articulation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="QuadrupleWhole"/>
+        <Class IRI="Duration"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="Quadruplet"/>
         <Class IRI="Tuplet"/>
     </SubClassOf>
@@ -1412,6 +1507,10 @@
     <SubClassOf>
         <Class IRI="Quintuplet"/>
         <Class IRI="Tuplet"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Rest"/>
+        <Class IRI="NoteSet"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="Rinforzando"/>
@@ -1794,6 +1893,10 @@
             </DataSomeValuesFrom>
         </ObjectIntersectionOf>
         <NamedIndividual IRI="adagio"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="TempoChange"/>
+        <NamedIndividual IRI="adlibitum"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="MoodChange"/>
@@ -2497,6 +2600,14 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/doubleflat"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -2506,6 +2617,14 @@
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Modifier"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Modifier"/>
@@ -2596,8 +2715,25 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gs"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="http://purl.org/ontology/chord/Natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/rest"/>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/ghost"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectComplementOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                    <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+                </ObjectSomeValuesFrom>
+            </ObjectComplementOf>
+            <ObjectComplementOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                    <Class IRI="http://purl.org/ontology/chord/Natural"/>
+                </ObjectSomeValuesFrom>
+            </ObjectComplementOf>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/ghost"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/tonality/Key"/>
@@ -4158,6 +4294,11 @@
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Note prolongation.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>DoubleWhole</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Double Whole Note</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>Duration</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Unity used to represent the relative duration of a sound.</Literal>
@@ -4179,6 +4320,11 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>Eighth</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Eighth Note</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>FrenchViolin</IRI>
         <Literal xml:lang="de" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Französische Violinschlüssel</Literal>
     </AnnotationAssertion>
@@ -4186,6 +4332,11 @@
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>FrenchViolin</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">French Violin Clef</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>Half</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Half Note</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -4210,17 +4361,7 @@
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>Measure</IRI>
-        <Literal xml:lang="pt" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Compasso</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>Measure</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Measure</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>Measure</IRI>
-        <Literal xml:lang="de" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Takt</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
@@ -4254,6 +4395,11 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>OctupleWhole</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Octuple Whole Note</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>Percussion</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Percurssion Clef</Literal>
     </AnnotationAssertion>
@@ -4261,6 +4407,16 @@
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>Percussion</IRI>
         <Literal xml:lang="de" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Schlagzeugschlüssel</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>QuadrupleWhole</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Quadruple Whole Note</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>Quarter</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Quarter Note</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -4343,14 +4499,19 @@
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">A voice is used to group and identify the sequence of notes of an individual part and staff played by multiple voices.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>Whole</IRI>
-        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">https://en.wikipedia.org/wiki/Sixteenth_note</Literal>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Whole Note</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>a_tempo</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Returns to the base tempo after an adjustment (e.g. ritardando ... a tempo undoes the effect of the ritardando).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>a_tempo</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">A tempo</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -4383,6 +4544,11 @@
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Adagio</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>adlibitum</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Ad libitum</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>affettuoso</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">With feeling/emotion.</Literal>
@@ -4406,6 +4572,11 @@
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>allargando</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Growing broader; decreasing tempo</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>allargando</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Allargando</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -4601,6 +4772,11 @@
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>doppio_movimento</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Double speed.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>doppio_movimento</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Doppio Movimento</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -5213,6 +5389,26 @@
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Vivacissimo</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>128th</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Hundred-twenty-eigth Note</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>16th</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Sixteenth Note</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>32nd</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Thirty-second Note</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>64th</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Sixty-fourth Note</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>http://purl.org/ontology/chord/Note</IRI>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Pitch of a sound.</Literal>
@@ -5223,19 +5419,29 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">https://en.wikipedia.org/wiki/Pitch_%28music%29</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>http://purl.org/ontology/chord/doubleflat</IRI>
-        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">double flat</Literal>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>http://purl.org/ontology/chord/demiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Lowers the pitch of a note by one quarter tone.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>http://purl.org/ontology/chord/doublesharp</IRI>
-        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">double sharp</Literal>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>http://purl.org/ontology/chord/demisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Raises the pitch of a note by one quarter tone.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>http://purl.org/ontology/chord/flat</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">flat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>http://purl.org/ontology/chord/sesquiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Lowers the pitch of a note by three quarter tones.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>http://purl.org/ontology/chord/sesquisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Raises the pitch of a note by three quarter tones.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
@@ -5314,8 +5520,8 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>http://purl.org/ontology/chord/note/rest</IRI>
-        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Rest</Literal>
+        <IRI>http://purl.org/ontology/chord/note/ghost</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Ghost Note</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -5530,22 +5736,12 @@
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>http://purl.org/ontology/tonality/mode/major</IRI>
-        <Literal xml:lang="de" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Dur</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>http://purl.org/ontology/tonality/mode/major</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Major</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>http://purl.org/ontology/tonality/mode/minor</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Minor</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>http://purl.org/ontology/tonality/mode/minor</IRI>
-        <Literal xml:lang="de" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Moll</Literal>
     </AnnotationAssertion>
 </Ontology>
 

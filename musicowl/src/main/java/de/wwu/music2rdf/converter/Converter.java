@@ -48,10 +48,11 @@ public class Converter {
 				if(parameter[1].equals("verbose")){
 
 					converter.setVerbose(true);
-					System.out.println("Mode: Verbose");
+					System.out.println("Mode: verbose");
 
 				} else {
 
+					converter.setVerbose(false);
 					System.out.println("Mode: silent");
 				}
 

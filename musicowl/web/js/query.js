@@ -1,6 +1,6 @@
 
 
-var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/development";
+var endpoint = "http://linkeddata.uni-muenster.de:7200/repositories/wi2017";
 
 namedGraph = "http://www.uni-muenster.de/musik";
 
