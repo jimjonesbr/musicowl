@@ -38,22 +38,25 @@
         <ObjectProperty IRI="hasMode"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdemisharp"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Dsmajor"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="nextMeasure"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Gsminor"/>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="presto"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="nextMeasure"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Esminor"/>
     </Declaration>
     <Declaration>
-        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Gsminor"/>
     </Declaration>
     <Declaration>
         <Class IRI="Staff"/>
@@ -119,6 +122,9 @@
         <ObjectProperty IRI="hasDynamic"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdoubleflat"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="Whole"/>
     </Declaration>
     <Declaration>
@@ -131,10 +137,10 @@
         <Class IRI="OctupleWhole"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Fallof"/>
+        <NamedIndividual IRI="sospirando"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="sospirando"/>
+        <Class IRI="Fallof"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ds"/>
@@ -149,10 +155,16 @@
         <Class IRI="Piziccato"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Asminor"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bsesquiflat"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdoubleflat"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="andante_moderado"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Asminor"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Csminor"/>
@@ -161,19 +173,19 @@
         <Class IRI="Repeat"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="mf"/>
+        <Class IRI="NoteSet"/>
     </Declaration>
     <Declaration>
         <Class IRI="TripleDot"/>
     </Declaration>
     <Declaration>
-        <Class IRI="NoteSet"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="stretto"/>
+        <NamedIndividual IRI="mf"/>
     </Declaration>
     <Declaration>
         <Class IRI="Measure"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="stretto"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="animato"/>
@@ -185,10 +197,10 @@
         <NamedIndividual IRI="Trebble"/>
     </Declaration>
     <Declaration>
-        <Class IRI="EndRepeat"/>
+        <Class IRI="TempoMarking"/>
     </Declaration>
     <Declaration>
-        <Class IRI="TempoMarking"/>
+        <Class IRI="EndRepeat"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="brillante"/>
@@ -197,16 +209,19 @@
         <NamedIndividual IRI="p"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Gminor"/>
-    </Declaration>
-    <Declaration>
         <NamedIndividual IRI="tardando"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
+        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Gminor"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddemiflat"/>
     </Declaration>
     <Declaration>
         <Class IRI="Triad"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
     </Declaration>
     <Declaration>
         <Class IRI="Loudness"/>
@@ -242,10 +257,10 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Eb"/>
     </Declaration>
     <Declaration>
-        <Class IRI="ScorePart"/>
+        <Class IRI="TempoChange"/>
     </Declaration>
     <Declaration>
-        <Class IRI="TempoChange"/>
+        <Class IRI="ScorePart"/>
     </Declaration>
     <Declaration>
         <Class IRI="Staccato"/>
@@ -272,6 +287,9 @@
         <Class IRI="GClef"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdemisharp"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="LeftHandPizzicato"/>
     </Declaration>
     <Declaration>
@@ -293,13 +311,19 @@
         <Class IRI="Instant"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gsesquiflat"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdemiflat"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="Quarter"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="mosso"/>
+        <NamedIndividual IRI="adagio"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="adagio"/>
+        <NamedIndividual IRI="mosso"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Dbmajor"/>
@@ -317,16 +341,22 @@
         <Class IRI="Dyad"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Accent"/>
+        <Class IRI="Articulation"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Articulation"/>
+        <Class IRI="Accent"/>
     </Declaration>
     <Declaration>
         <Class IRI="BreathMark"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="tranquillamente"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddoubleflat"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdoubleflat"/>
     </Declaration>
     <Declaration>
         <Class IRI="Score"/>
@@ -338,16 +368,28 @@
         <ObjectProperty IRI="sign"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edoublesharp"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Adoublesharp"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="leggiero"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://purl.org/ontology/chord/SemitonalModifier"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="allegro_modeato"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="ff"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="hasTimeSignature"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="ff"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdoublesharp"/>
     </Declaration>
     <Declaration>
         <Class IRI="Duplet"/>
@@ -407,6 +449,15 @@
         <ObjectProperty IRI="hasTempoMarking"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdoublesharp"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edemisharp"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddemisharp"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="hasBeatsPerMinute"/>
     </Declaration>
     <Declaration>
@@ -425,16 +476,19 @@
         <Class IRI="Direction"/>
     </Declaration>
     <Declaration>
+        <Class IRI="http://purl.org/ontology/tonality/Key"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="doppio_movimento"/>
     </Declaration>
     <Declaration>
-        <Class IRI="http://purl.org/ontology/tonality/Key"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gb"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="accelerando"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gb"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdemiflat"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="marcato"/>
@@ -447,6 +501,9 @@
     </Declaration>
     <Declaration>
         <Class IRI="DurationAttribute"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edemiflat"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="line"/>
@@ -500,16 +557,16 @@
         <Class IRI="Octuplet"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Final"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="Caesura"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="nobilmente"/>
+        <Class IRI="Final"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="nobilmente"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="sfpp"/>
@@ -518,10 +575,10 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Asmajor"/>
+        <Class IRI="Plop"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Plop"/>
+        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Asmajor"/>
     </Declaration>
     <Declaration>
         <Class IRI="http://purl.org/ontology/chord/Natural"/>
@@ -539,16 +596,13 @@
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Bbminor"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="mp"/>
-    </Declaration>
-    <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Esmajor"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="hasMusicScore"/>
+        <NamedIndividual IRI="mp"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Fsminor"/>
+        <ObjectProperty IRI="hasMusicScore"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Dminor"/>
@@ -557,7 +611,13 @@
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Dsminor"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Fsminor"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Dbminor"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Esesquiflat"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="MezzoSoprano"/>
@@ -575,28 +635,31 @@
         <Class IRI="Voice"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Duration"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="Tuplet"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="dolcissimo"/>
+        <Class IRI="Duration"/>
     </Declaration>
     <Declaration>
         <Class IRI="Spiccato"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Sextuplet"/>
+        <NamedIndividual IRI="dolcissimo"/>
     </Declaration>
     <Declaration>
-        <Class IRI="32nd"/>
+        <Class IRI="Sextuplet"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="hasMeasure"/>
     </Declaration>
     <Declaration>
         <Class IRI="Half"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="32nd"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdemiflat"/>
     </Declaration>
     <Declaration>
         <Class IRI="16th"/>
@@ -611,34 +674,34 @@
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Ebmajor"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Gmajor"/>
-    </Declaration>
-    <Declaration>
         <NamedIndividual IRI="energico"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Gbmajor"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Rinforzando"/>
+        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Gmajor"/>
     </Declaration>
     <Declaration>
         <Class IRI="Dot"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="eroico"/>
+        <Class IRI="Rinforzando"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="lentando"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="hasNoteSet"/>
+        <NamedIndividual IRI="eroico"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="grandioso"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="grandioso"/>
+        <ObjectProperty IRI="hasNoteSet"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Abmajor"/>
@@ -665,43 +728,67 @@
         <ObjectProperty IRI="hasDirection"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fsesquisharp"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="previousInstant"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Esesquisharp"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="SubBass"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gsesquisharp"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="Rest"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="precipitando"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="allegrissimo"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="allegro"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="allegrissimo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="precipitando"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="pomposo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Asesquisharp"/>
     </Declaration>
     <Declaration>
         <Class IRI="http://purl.org/ontology/mo/Score"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edoubleflat"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="Accidental"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Dsesquisharp"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bsesquisharp"/>
     </Declaration>
     <Declaration>
         <Class IRI="Septuplet"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ab"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Dsesquiflat"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="hasVoice"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Amajor"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ab"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Csesquisharp"/>
     </Declaration>
     <Declaration>
         <Class IRI="DetachedLegato"/>
@@ -710,10 +797,16 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Amajor"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="http://purl.org/ontology/mo/movement"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="Diminuendo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdoubleflat"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="lento"/>
@@ -734,19 +827,19 @@
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Bmajor"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="http://purl.org/ontology/tonality/mode"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="Eighth"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ademiflat"/>
     </Declaration>
     <Declaration>
         <Class IRI="Quadruplet"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="http://purl.org/ontology/tonality/mode"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="Quintuplet"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/ghost"/>
     </Declaration>
     <Declaration>
         <Class IRI="http://purl.org/ontology/mo/Movement"/>
@@ -755,19 +848,28 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="hasNote"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fsesquiflat"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="BassClef"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="hasNote"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddoublesharp"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="caloroso"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdoublesharp"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="espressivo"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdemiflat"/>
     </Declaration>
     <Declaration>
         <Class IRI="Tetrad"/>
@@ -776,7 +878,13 @@
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Cmajor"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="espressivo"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="http://purl.org/NET/c4dm/keys.owl#wikipedia"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdoublesharp"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="lacrimoso"/>
@@ -797,6 +905,9 @@
         <Class IRI="Clef"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdemisharp"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Cminor"/>
     </Declaration>
     <Declaration>
@@ -806,6 +917,9 @@
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Fmajor"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Adoubleflat"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bb"/>
     </Declaration>
     <Declaration>
@@ -813,6 +927,12 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="FrenchViolin"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://purl.org/ontology/chord/MicrotonalModifier"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Csesquiflat"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="ritenuto"/>
@@ -833,13 +953,13 @@
         <NamedIndividual IRI="saltando"/>
     </Declaration>
     <Declaration>
-        <Class IRI="Ponticello"/>
-    </Declaration>
-    <Declaration>
         <NamedIndividual IRI="sfz"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="http://purl.org/ontology/tonality/tonic"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Ponticello"/>
     </Declaration>
     <Declaration>
         <Class IRI="Doit"/>
@@ -851,10 +971,10 @@
         <Class IRI="Flautando"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="lamentoso"/>
+        <NamedIndividual IRI="sf"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="sf"/>
+        <NamedIndividual IRI="lamentoso"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="bravura"/>
@@ -872,10 +992,10 @@
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Emajor"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="Soprano"/>
+        <NamedIndividual IRI="appassionato"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="appassionato"/>
+        <NamedIndividual IRI="Soprano"/>
     </Declaration>
     <Declaration>
         <Class IRI="Octad"/>
@@ -888,6 +1008,9 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="allargando"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Asesquiflat"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="meno_mosso"/>
@@ -908,10 +1031,13 @@
         <Class IRI="Hexad"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="vivace"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ademisharp"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="cantabile"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="vivace"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Fminor"/>
@@ -932,16 +1058,16 @@
         <NamedIndividual IRI="cataclismico"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="stringendo"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="Tenuto"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="f"/>
+        <NamedIndividual IRI="stringendo"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="f"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/mode/major"/>
@@ -950,16 +1076,22 @@
         <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
     </Declaration>
     <Declaration>
+        <Class IRI="GhostNote"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="hasSequence"/>
     </Declaration>
     <Declaration>
         <Class IRI="BeginRepeat"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="pppp"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdemisharp"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cs"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="pppp"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Eminor"/>
@@ -1001,10 +1133,13 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Chord"/>
-        <ObjectMinCardinality cardinality="3">
-            <ObjectProperty IRI="hasNote"/>
-            <Class IRI="http://purl.org/ontology/chord/Note"/>
-        </ObjectMinCardinality>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteSet"/>
+            <ObjectMinCardinality cardinality="3">
+                <ObjectProperty IRI="hasNote"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectMinCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Direction"/>
@@ -1022,10 +1157,13 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Dyad"/>
-        <ObjectExactCardinality cardinality="2">
-            <ObjectProperty IRI="hasNote"/>
-            <Class IRI="http://purl.org/ontology/chord/Note"/>
-        </ObjectExactCardinality>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteSet"/>
+            <ObjectExactCardinality cardinality="2">
+                <ObjectProperty IRI="hasNote"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="FClef"/>
@@ -1044,17 +1182,23 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Heptad"/>
-        <ObjectExactCardinality cardinality="7">
-            <ObjectProperty IRI="hasNote"/>
-            <Class IRI="http://purl.org/ontology/chord/Note"/>
-        </ObjectExactCardinality>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteSet"/>
+            <ObjectExactCardinality cardinality="7">
+                <ObjectProperty IRI="hasNote"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Hexad"/>
-        <ObjectExactCardinality cardinality="6">
-            <ObjectProperty IRI="hasNote"/>
-            <Class IRI="http://purl.org/ontology/chord/Note"/>
-        </ObjectExactCardinality>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteSet"/>
+            <ObjectExactCardinality cardinality="6">
+                <ObjectProperty IRI="hasNote"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Instant"/>
@@ -1092,10 +1236,13 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Monad"/>
-        <ObjectExactCardinality cardinality="1">
-            <ObjectProperty IRI="hasNote"/>
-            <Class IRI="http://purl.org/ontology/chord/Note"/>
-        </ObjectExactCardinality>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteSet"/>
+            <ObjectExactCardinality cardinality="1">
+                <ObjectProperty IRI="hasNote"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="NeutralClef"/>
@@ -1112,10 +1259,13 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="NoteLink"/>
-        <ObjectMinCardinality cardinality="2">
-            <ObjectProperty IRI="hasNoteSet"/>
-            <Class IRI="NoteSet"/>
-        </ObjectMinCardinality>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteLink"/>
+            <ObjectMinCardinality cardinality="2">
+                <ObjectProperty IRI="hasNoteSet"/>
+                <Class IRI="NoteSet"/>
+            </ObjectMinCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="NoteSet"/>
@@ -1126,10 +1276,13 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Octad"/>
-        <ObjectExactCardinality cardinality="8">
-            <ObjectProperty IRI="hasNote"/>
-            <Class IRI="http://purl.org/ontology/chord/Note"/>
-        </ObjectExactCardinality>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteSet"/>
+            <ObjectExactCardinality cardinality="8">
+                <ObjectProperty IRI="hasNote"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Octuplet"/>
@@ -1140,10 +1293,13 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Pentad"/>
-        <ObjectExactCardinality cardinality="5">
-            <ObjectProperty IRI="hasNote"/>
-            <Class IRI="http://purl.org/ontology/chord/Note"/>
-        </ObjectExactCardinality>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteSet"/>
+            <ObjectExactCardinality cardinality="5">
+                <ObjectProperty IRI="hasNote"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Quadruplet"/>
@@ -1161,12 +1317,15 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Rest"/>
-        <ObjectComplementOf>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="hasNote"/>
-                <Class IRI="http://purl.org/ontology/chord/Note"/>
-            </ObjectSomeValuesFrom>
-        </ObjectComplementOf>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteSet"/>
+            <ObjectComplementOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="hasNote"/>
+                    <Class IRI="http://purl.org/ontology/chord/Note"/>
+                </ObjectSomeValuesFrom>
+            </ObjectComplementOf>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Score"/>
@@ -1202,10 +1361,13 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Tetrad"/>
-        <ObjectExactCardinality cardinality="4">
-            <ObjectProperty IRI="hasNote"/>
-            <Class IRI="http://purl.org/ontology/chord/Note"/>
-        </ObjectExactCardinality>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteSet"/>
+            <ObjectExactCardinality cardinality="4">
+                <ObjectProperty IRI="hasNote"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="TimeSignature"/>
@@ -1222,10 +1384,13 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Triad"/>
-        <ObjectExactCardinality cardinality="3">
-            <ObjectProperty IRI="hasNote"/>
-            <Class IRI="http://purl.org/ontology/chord/Note"/>
-        </ObjectExactCardinality>
+        <ObjectIntersectionOf>
+            <Class IRI="NoteSet"/>
+            <ObjectExactCardinality cardinality="3">
+                <ObjectProperty IRI="hasNote"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Triplet"/>
@@ -1262,6 +1427,18 @@
         </ObjectOneOf>
     </EquivalentClasses>
     <EquivalentClasses>
+        <Class IRI="http://purl.org/ontology/chord/Natural"/>
+        <ObjectOneOf>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
+            <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
         <DataExactCardinality cardinality="1">
             <DataProperty IRI="hasOctave"/>
@@ -1278,10 +1455,26 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="http://purl.org/ontology/mo/Score"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="hasScorePart"/>
-            <Class IRI="ScorePart"/>
-        </ObjectSomeValuesFrom>
+        <ObjectIntersectionOf>
+            <Class IRI="Score"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="hasScorePart"/>
+                <Class IRI="ScorePart"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="http://purl.org/ontology/tonality/Key"/>
+        <ObjectIntersectionOf>
+            <ObjectExactCardinality cardinality="1">
+                <ObjectProperty IRI="http://purl.org/ontology/tonality/mode"/>
+                <Class IRI="http://purl.org/ontology/tonality/Mode"/>
+            </ObjectExactCardinality>
+            <ObjectExactCardinality cardinality="1">
+                <ObjectProperty IRI="http://purl.org/ontology/tonality/tonic"/>
+                <Class IRI="http://purl.org/ontology/chord/Note"/>
+            </ObjectExactCardinality>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="http://purl.org/ontology/tonality/Key"/>
@@ -1425,6 +1618,10 @@
         <Class IRI="Clef"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="GhostNote"/>
+        <Class IRI="Articulation"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="Half"/>
         <Class IRI="Duration"/>
     </SubClassOf>
@@ -1605,8 +1802,16 @@
         <Class IRI="Duration"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="http://purl.org/ontology/chord/MicrotonalModifier"/>
+        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="http://purl.org/ontology/chord/Natural"/>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://purl.org/ontology/chord/SemitonalModifier"/>
+        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
     </SubClassOf>
     <DisjointClasses>
         <Class IRI="BeginRepeat"/>
@@ -1634,7 +1839,19 @@
     </DisjointClasses>
     <DisjointClasses>
         <Class IRI="Measure"/>
+        <Class IRI="NoteLink"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="Measure"/>
         <Class IRI="Staff"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="Measure"/>
+        <Class IRI="Tuplet"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="Measure"/>
+        <Class IRI="Voice"/>
     </DisjointClasses>
     <DisjointClasses>
         <Class IRI="NoteLink"/>
@@ -1643,6 +1860,10 @@
     <DisjointClasses>
         <Class IRI="NoteLink"/>
         <Class IRI="Tuplet"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="NoteLink"/>
+        <Class IRI="Voice"/>
     </DisjointClasses>
     <DisjointClasses>
         <Class IRI="Slur"/>
@@ -1659,6 +1880,10 @@
     <DisjointClasses>
         <Class IRI="Tuplet"/>
         <Class IRI="Voice"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="http://purl.org/ontology/chord/MicrotonalModifier"/>
+        <Class IRI="http://purl.org/ontology/chord/SemitonalModifier"/>
     </DisjointClasses>
     <ClassAssertion>
         <Class IRI="CClef"/>
@@ -2599,35 +2824,35 @@
         <NamedIndividual IRI="vivacissimo"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <Class IRI="http://purl.org/ontology/chord/MicrotonalModifier"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <Class IRI="http://purl.org/ontology/chord/MicrotonalModifier"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <Class IRI="http://purl.org/ontology/chord/SemitonalModifier"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/doubleflat"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <Class IRI="http://purl.org/ontology/chord/SemitonalModifier"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <Class IRI="http://purl.org/ontology/chord/SemitonalModifier"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <Class IRI="http://purl.org/ontology/chord/MicrotonalModifier"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <Class IRI="http://purl.org/ontology/chord/MicrotonalModifier"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="http://purl.org/ontology/chord/Modifier"/>
+        <Class IRI="http://purl.org/ontology/chord/SemitonalModifier"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -2639,8 +2864,136 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ab"/>
     </ClassAssertion>
     <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ab"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ademiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ademiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ademisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ademisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Adoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doubleflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Adoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Adoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Adoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/As"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/As"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Asesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Asesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Asesquisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Asesquisharp"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Natural"/>
@@ -2651,8 +3004,136 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bb"/>
     </ClassAssertion>
     <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bb"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doubleflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bdoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bs"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bs"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bsesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bsesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bsesquisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bsesquisharp"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Natural"/>
@@ -2663,8 +3144,136 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cb"/>
     </ClassAssertion>
     <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cb"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doubleflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cs"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cs"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Csesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Csesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Csesquisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Csesquisharp"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Natural"/>
@@ -2675,8 +3284,136 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Db"/>
     </ClassAssertion>
     <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Db"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doubleflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ddoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ds"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ds"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Dsesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Dsesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Dsesquisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Dsesquisharp"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Natural"/>
@@ -2687,8 +3424,136 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Eb"/>
     </ClassAssertion>
     <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Eb"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doubleflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Edoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Es"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Es"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Esesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Esesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Esesquisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Esesquisharp"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Natural"/>
@@ -2699,8 +3564,136 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fb"/>
     </ClassAssertion>
     <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fb"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doubleflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fdoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fs"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fs"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fsesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fsesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fsesquisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fsesquisharp"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Natural"/>
@@ -2711,29 +3704,136 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gb"/>
     </ClassAssertion>
     <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gb"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdemiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdemisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doubleflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdoubleflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/doublesharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gdoublesharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gs"/>
     </ClassAssertion>
     <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gs"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/ghost"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gsesquiflat"/>
     </ClassAssertion>
     <ClassAssertion>
         <ObjectIntersectionOf>
-            <ObjectComplementOf>
-                <ObjectSomeValuesFrom>
-                    <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-                    <Class IRI="http://purl.org/ontology/chord/Modifier"/>
-                </ObjectSomeValuesFrom>
-            </ObjectComplementOf>
-            <ObjectComplementOf>
-                <ObjectSomeValuesFrom>
-                    <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-                    <Class IRI="http://purl.org/ontology/chord/Natural"/>
-                </ObjectSomeValuesFrom>
-            </ObjectComplementOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquiflat"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
+            </ObjectHasValue>
         </ObjectIntersectionOf>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/ghost"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gsesquiflat"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gsesquisharp"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <ObjectIntersectionOf>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
+            </ObjectHasValue>
+            <ObjectHasValue>
+                <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
+                <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gsesquisharp"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="http://purl.org/ontology/tonality/Key"/>
@@ -3524,22 +4624,12 @@
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ab"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Asesquisharp"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/sesquisharp"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ab"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/As"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/As"/>
+        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Asesquisharp"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/A"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
@@ -3548,148 +4638,28 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bb"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bb"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bs"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Bs"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/B"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
         <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cb"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cb"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cs"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cs"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/C"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Db"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Db"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ds"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Ds"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/D"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Eb"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Eb"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Es"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Es"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fb"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fb"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fs"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fs"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/F"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gb"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/flat"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gb"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/modifier"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gs"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/sharp"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="http://purl.org/ontology/chord/natural"/>
-        <NamedIndividual IRI="http://purl.org/ontology/chord/note/Gs"/>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/G"/>
     </ObjectPropertyAssertion>
     <SubObjectPropertyOf>
@@ -5455,8 +6425,38 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Ademiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">A demiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Ademisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">A demisharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Adoubleflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">A double flat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Adoublesharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">A double sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>http://purl.org/ontology/chord/note/As</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">A sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Asesquiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">A sesquiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Asesquisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">A sesquisharp</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
@@ -5465,8 +6465,38 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Bdemiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">B demiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Bdemisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">B demisharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Bdoubleflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">B double flat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Bdoublesharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">B double sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>http://purl.org/ontology/chord/note/Bs</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">B sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Bsesquiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">B sesquiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Bsesquisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">B sesquisharp</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
@@ -5475,8 +6505,38 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Cdemiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">C demiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Cdemisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">C demisharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Cdoubleflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">C double flat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Cdoublesharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">C double sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>http://purl.org/ontology/chord/note/Cs</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">C sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Csesquiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">C sesquiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Csesquisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">C sesquisharp</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
@@ -5485,8 +6545,38 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Ddemiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">D demiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Ddemisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">D demisharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Ddoubleflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">D double flat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Ddoublesharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">D double sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>http://purl.org/ontology/chord/note/Ds</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">D sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Dsesquiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">D sesquiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Dsesquisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">D sesquisharp</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
@@ -5495,8 +6585,38 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Edemiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">E demiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Edemisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">E demisharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Edoubleflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">E double flat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Edoublesharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">E double sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>http://purl.org/ontology/chord/note/Es</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">E sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Esesquiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">E sesquiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Esesquisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">E sesquisharp</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
@@ -5505,8 +6625,38 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Fdemiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">F demiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Fdemisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">F demisharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Fdoubleflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">F double flat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Fdoublesharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">F double sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>http://purl.org/ontology/chord/note/Fs</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">F sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Fsesquiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">F sesquiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Fsesquisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">F sesquisharp</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
@@ -5515,13 +6665,38 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Gdemiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">G demiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Gdemisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">G demisharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Gdoubleflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">G double flat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Gdoublesharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">G double sharp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>http://purl.org/ontology/chord/note/Gs</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">G sharp</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>http://purl.org/ontology/chord/note/ghost</IRI>
-        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Ghost Note</Literal>
+        <IRI>http://purl.org/ontology/chord/note/Gsesquiflat</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">G sesquiflat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://purl.org/ontology/chord/note/Gsesquisharp</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">G sesquisharp</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
