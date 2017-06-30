@@ -1221,10 +1221,6 @@
                 <Class IRI="NoteSet"/>
             </ObjectSomeValuesFrom>
             <ObjectExactCardinality cardinality="1">
-                <ObjectProperty IRI="hasKey"/>
-                <Class IRI="http://purl.org/ontology/tonality/Key"/>
-            </ObjectExactCardinality>
-            <ObjectExactCardinality cardinality="1">
                 <ObjectProperty IRI="hasTimeSignature"/>
                 <Class IRI="TimeSignature"/>
             </ObjectExactCardinality>

@@ -278,7 +278,7 @@ public class MusicXML2RDF {
 				String timeObject = nodeURI.replace("OBJECT",partID + "_M" +measureID + "_TIME");
 
 				ttl.append(measureObject + musicOWL.replace("OBJECT", "hasTime") + timeObject + ". \n");
-				ttl.append(timeObject + rdfTypeURI + musicOWL.replace("OBJECT", "TimeSignatur") + " . \n");
+				ttl.append(timeObject + rdfTypeURI + musicOWL.replace("OBJECT", "TimeSignature") + " . \n");
 				ttl.append(timeObject + musicOWL.replace("OBJECT", "hasBeats") + "\"" + score.getParts().get(i).getMeasures().get(j).getTime().getBeats()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");
 				ttl.append(timeObject + musicOWL.replace("OBJECT", "hasBeatType") + "\"" + score.getParts().get(i).getMeasures().get(j).getTime().getBeatType()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");
 
