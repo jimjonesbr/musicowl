@@ -23,14 +23,17 @@ Click [here](http://linkeddata.uni-muenster.de/api/) to download the latest rele
 ## Using the Java API
 
 ```java
+package de.wwu.music2rdf.example;
 import java.io.File;
 import de.wwu.music2rdf.converter.MusicXML2RDF;
 
 public class Example {
 	public static void main(String[] args) {
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
-		music2rdf.setOutputFile("/home/user/elgar_cello_concerto.nt");
-		music2rdf.parseMusicXML(new File("/home/user/elgar_cello_concerto.xml"));
+		music2rdf.setInputFile(new File("musicxml/web-samples/elgar_cello_concerto_op.85.xml"));
+		music2rdf.setDocumentURI("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
+		music2rdf.setOutputFile("ntriples/elgar_cello_concerto_op.85.nt");
+		music2rdf.parseMusicXML();
 	}
 }
 ```
@@ -40,7 +43,7 @@ public class Example {
 Converting a single MusicXML file:
 
 ```shell
-$ java -jar musicxml2rdf-VERSION.jar file=/home/user/musicxml/file.xml output=/home/user/rdf/
+$ java -jar musicxml2rdf-VERSION.jar file=/home/user/musicxml/file.xml output=/home/user/rdf/ uri=http://document.uri/
 ```
 
 Converting all MusicXML files in a directory:
@@ -54,4 +57,3 @@ Activating verbose processing:
 ```shell
 $ java -jar musicxml2rdf-VERSION.jar folder=/home/user/musicxml/ output=/home/user/rdf/ mode=verbose
 ```
-
