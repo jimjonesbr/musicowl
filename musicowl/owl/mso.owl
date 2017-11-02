@@ -233,6 +233,9 @@
         <NamedIndividual IRI="trionfante"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="hasStaff"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="Heptad"/>
     </Declaration>
     <Declaration>
@@ -1329,10 +1332,16 @@
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="ScorePart"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="hasMeasure"/>
-            <Class IRI="Measure"/>
-        </ObjectSomeValuesFrom>
+        <ObjectIntersectionOf>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="hasMeasure"/>
+                <Class IRI="Measure"/>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="hasStaff"/>
+                <Class IRI="Staff"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
     </EquivalentClasses>
     <EquivalentClasses>
         <Class IRI="Septuplet"/>
@@ -4663,6 +4672,10 @@
         <ObjectProperty IRI="hasNote"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasStaff"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
         <ObjectProperty IRI="hasTempoMarking"/>
         <ObjectProperty IRI="hasInterpretation"/>
     </SubObjectPropertyOf>
@@ -4893,6 +4906,10 @@
         <Class IRI="http://purl.org/ontology/mo/Movement"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasStaff"/>
+        <Class IRI="ScorePart"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="hasTempoMarking"/>
         <Class IRI="http://purl.org/ontology/mo/Movement"/>
     </ObjectPropertyDomain>
@@ -5007,6 +5024,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="hasScorePart"/>
         <Class IRI="ScorePart"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasStaff"/>
+        <Class IRI="Staff"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="hasTempoMarking"/>

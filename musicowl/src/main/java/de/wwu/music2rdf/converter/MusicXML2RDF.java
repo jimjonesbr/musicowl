@@ -30,13 +30,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
 import de.wwu.music2rdf.core.Clef;
 import de.wwu.music2rdf.core.Key;
 import de.wwu.music2rdf.core.Measure;
 import de.wwu.music2rdf.core.MusicScore;
 import de.wwu.music2rdf.core.Note;
 import de.wwu.music2rdf.core.ScorePart;
+
 
 public class MusicXML2RDF {
 
@@ -1292,7 +1292,13 @@ public class MusicXML2RDF {
 			System.out.println("Finished at: "+ts + "\n");
 
 
-		} catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException e) {
+		} catch (SAXException  e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XPathExpressionException e) {
 			e.printStackTrace();
 		}
 		return score; 
