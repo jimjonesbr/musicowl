@@ -749,9 +749,14 @@ public class MusicXML2RDF {
 			}
 		}
 
+		//
+		
 
 		try {
 
+			String tmp = new String(score.getFileContent().getBytes("UTF-8"), "ISO-8859-1");
+			ttl.append(scoreURI + musicOntology.replace("OBJECT", "asMusicXML")+ "\"" + tmp.replace("\"", "\\u0022") + "\" ." );
+			
 			FileOutputStream fileStream = new FileOutputStream(new File(this.getOutputFile()),false);
 			OutputStreamWriter writer = new OutputStreamWriter(fileStream, "UTF8");
 
@@ -811,6 +816,7 @@ public class MusicXML2RDF {
 		
 		
 		MusicScore score = createMusicScoreFile(musicXMLString); 
+		score.setFileContent(musicXMLString);
 		score.setOutputFileName(file.getName());
 		score.setURI(this.getDocumentURI());
 

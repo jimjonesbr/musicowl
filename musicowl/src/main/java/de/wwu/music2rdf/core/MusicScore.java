@@ -7,6 +7,7 @@ public class MusicScore {
 	private ArrayList<ScorePart> parts;
 	private String uri;
 	private String fileName;
+	private String fileContent;
 	private String title;
 	
 	public MusicScore() {
@@ -43,6 +44,14 @@ public class MusicScore {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getFileContent() {
+		return fileContent;
+	}
+
+	public void setFileContent(String fileContent) {
+		this.fileContent = fileContent;
 	}
 
 
