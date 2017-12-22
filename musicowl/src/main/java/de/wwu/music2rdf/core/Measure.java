@@ -9,6 +9,7 @@ public class Measure {
 	private TimeSignature time;
 	private ArrayList<Note> notes;
 	private String barline;
+	private String title;
 	
 	public Measure() {
 		super();
@@ -43,6 +44,14 @@ public class Measure {
 
 	public void setBarline(String barline) {
 		this.barline = barline;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	
