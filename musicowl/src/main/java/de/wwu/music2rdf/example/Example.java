@@ -17,11 +17,11 @@ public class Example {
 		music2rdf.parseMusicXML();
 		
 		
-//		music2rdf.setInputFile(new File("/home/jones/git/wmss/wmss/data/musicxml/wwu/1964013@TroisQuintettipourflute,violon,deuxaltosetvioloncelle.xml"));
-//		music2rdf.setDocumentURI("https://sammlungen.ulb.uni-muenster.de/id/1964013");
-//		music2rdf.setOutputFile("ntriples/TroisQuintettipourflute,violon,deuxaltosetvioloncelle.xml.nt");
-//		
-//		music2rdf.parseMusicXML();
+		music2rdf.setInputFile(new File("/home/jones/git/wmss/wmss/data/musicxml/wwu/3098742@25stuckefürorgel.xml"));
+		music2rdf.setDocumentURI("https://sammlungen.ulb.uni-muenster.de/id/3098742");
+		music2rdf.setOutputFile("ntriples/3098742@25stuckefürorgel.nt");
+		
+		music2rdf.parseMusicXML();
 		
 			
 	}

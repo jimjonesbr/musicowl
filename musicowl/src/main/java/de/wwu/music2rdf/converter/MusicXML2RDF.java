@@ -9,7 +9,6 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -39,6 +38,7 @@ import de.wwu.music2rdf.core.Note;
 import de.wwu.music2rdf.core.ScorePart;
 import de.wwu.music2rdf.core.Staff;
 import de.wwu.music2rdf.core.Voice;
+import de.wwu.music2rdf.util.Util;
 
 
 public class MusicXML2RDF {
@@ -91,21 +91,24 @@ public class MusicXML2RDF {
 
 			
 			
-			String partID = "";
+			String partID = score.getParts().get(i).getId();
 			String partObject = "";
 			int notesetCounter = 0;
 			int movementCounter = 0;
-
-			partID = score.getParts().get(i).getId();
-			partObject = nodeURI.replace("OBJECT","PART_" + partID);
-
-			ttl.append(partObject + rdfIdURI + "\"" +score.getParts().get(i).getId()  + "\" . \n");
+			//partID = score.getParts().get(i).getId();
+			
+//			partObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + "PART_" + partID);
+//			ttl.append(partObject + rdfIdURI + "\"" +score.getParts().get(i).getId()  + "\" . \n");
 			
 			for (int j = 0; j < score.getParts().get(i).getMeasures().size(); j++) {
 
 				if(score.getParts().get(i).getMeasures().get(j).getId().equals("1")) {
 				
 					movementCounter++;
+					
+					partObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + "PART_" + partID);
+					ttl.append(partObject + rdfIdURI + "\"" + partID  + "\" . \n");
+
 					
 					String movementObject = nodeURI.replace("OBJECT", "MOV" + movementCounter);
 					ttl.append(scoreURI + musicOntology.replace("OBJECT", "movement") + movementObject + " .\n");
@@ -134,7 +137,7 @@ public class MusicXML2RDF {
 
 
 				if(j>0){
-					ttl.append(nodeURI.replace("OBJECT", partID + "_M" + score.getParts().get(i).getMeasures().get(j-1).getId()) + musicOWL.replace("OBJECT", "nextMeasure") + measureObject + ".\n");
+					ttl.append(nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + score.getParts().get(i).getMeasures().get(j-1).getId()) + musicOWL.replace("OBJECT", "nextMeasure") + measureObject + ".\n");
 					ttl.append(nodeURI.replace("OBJECT", "INSTANT_"+ score.getParts().get(i).getMeasures().get(j-1).getId()) + musicOWL.replace("OBJECT", "nextInstant") + instantObject + ".\n");
 				}
 
@@ -144,7 +147,7 @@ public class MusicXML2RDF {
 				ttl.append(measureObject + rdfIdURI + "\""+ score.getParts().get(i).getMeasures().get(j).getId() +"\" . \n");
 
 
-				keyObject = nodeURI.replace("OBJECT",partID + "_M" + measureID + "_KEY");
+				keyObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_KEY");
 
 				if(score.getParts().get(i).getMeasures().get(j).getKey().getMode()!=null){
 
@@ -296,7 +299,7 @@ public class MusicXML2RDF {
 				}
 
 
-				String timeObject = nodeURI.replace("OBJECT",partID + "_M" +measureID + "_TIME");
+				String timeObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_M" +measureID + "_TIME");
 
 				ttl.append(measureObject + musicOWL.replace("OBJECT", "hasTime") + timeObject + ". \n");
 				ttl.append(timeObject + rdfTypeURI + musicOWL.replace("OBJECT", "TimeSignature") + " . \n");
@@ -305,7 +308,7 @@ public class MusicXML2RDF {
 
 				if(score.getParts().get(i).getMeasures().get(j).getBarline()!=null){
 
-					String barlineObject = nodeURI.replace("OBJECT",partID + "_M" +measureID + "_REPEAT");
+					String barlineObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_M" +measureID + "_REPEAT");
 					ttl.append(measureObject + musicOWL.replace("OBJECT", "hasBarline") + barlineObject + ". \n" );
 
 					if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("backward")) ttl.append(barlineObject + rdfTypeURI + musicOWL.replace("OBJECT", "EndRepeat") + " . \n" );
@@ -374,13 +377,14 @@ public class MusicXML2RDF {
 						
 					}
 					
-					String staffObject = "";
+					//String staffObject = "";
+					String staffObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
 					
 					if(addStaff) {
 						
 						staves.add(staff);
 						
-						staffObject = nodeURI.replace("OBJECT", partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
+						//staffObject = nodeURI.replace("OBJECT", partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
 						
 						ttl.append(staffObject + rdfTypeURI + musicOWL.replace("OBJECT", "Staff") + " . \n");
 						ttl.append(partObject + musicOWL.replace("OBJECT", "hasStaff") + staffObject +" . \n");
@@ -400,13 +404,14 @@ public class MusicXML2RDF {
 					
 					String clefObject ="";
 					String voiceObject = "";
-					String durationObject = "";
+					//String durationObject = "";
+					String durationObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_DURATION");
 					Voice voice = new Voice();
 					voice.setPart(partID);
 					
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice()==null){
 
-						voiceObject = nodeURI.replace("OBJECT",partID + "_VOICE_1");
+						voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_1");
 						
 						//ttl.append(voiceObject + rdfIdURI + "\"1\" . \n");
 						
@@ -417,7 +422,7 @@ public class MusicXML2RDF {
 						
 					} else {
 
-						voiceObject = nodeURI.replace("OBJECT",partID + "_VOICE_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId());
+						voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId());
 						voice.setId(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId());
 						//ttl.append(voiceObject + rdfIdURI + "\""+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId() + "\" . \n");
 					}
@@ -475,7 +480,7 @@ public class MusicXML2RDF {
 
 							for (int l = 0; l < score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getArticulations().size(); l++) {
 
-								String articulationObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS" + notesetCounter + "_ARTICULATION_" + l);
+								String articulationObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_ARTICULATION_" + l);
 
 								ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasArticulation") + articulationObject + ".\n");
 								ttl.append(articulationObject + rdfTypeURI + musicOWL.replace("OBJECT", this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getArticulations().get(l))) + ".\n");													
@@ -560,7 +565,7 @@ public class MusicXML2RDF {
 						}
 						
 						
-						durationObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_DURATION");
+						//durationObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_DURATION");
 						ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasDuration") + durationObject + ".\n");
 
 						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()==null){
@@ -823,9 +828,9 @@ public class MusicXML2RDF {
 
 					}
 
-//					String durationObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_DURATION");
-//					ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasDuration") + durationObject + ".\n");
 
+
+					
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isDot()){
 						String dotObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" +partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_D_DOT");
 						ttl.append(durationObject + musicOWL.replace("OBJECT", "hasDurationAttribute") + dotObject + ".\n" );
@@ -833,28 +838,21 @@ public class MusicXML2RDF {
 					}
 
 
-					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()==null){
-
-						ttl.append(durationObject + rdfIdURI + musicOWL.replace("OBJECT", "rest")+ ".\n");
-
-					}
-
-
 //					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()==null){
 //
-//						ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", "Duration") + ".\n");
-//
-//					} else {
-//
-//						ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()))+ ".\n");
+//						ttl.append(durationObject + rdfIdURI + musicOWL.replace("OBJECT", "rest")+ ".\n");
 //
 //					}
 
 
 
+					
+					
+
+
 					for (int l = 0; l < score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().size(); l++) {
 
-						String dynamicObject = nodeURI.replace("OBJECT", partID + "_M" + measureID + "_NS" + notesetCounter + "_DYNAMIC_" + l);
+						String dynamicObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_DYNAMIC_" + l);
 						ttl.append(dynamicObject + rdfTypeURI + musicOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().get(l)) + ".\n");
 						ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasDynamic") + dynamicObject + ".\n");
 
@@ -993,8 +991,8 @@ public class MusicXML2RDF {
 		
 		try {
 
-			System.out.println("\nLoading " + file.getName() + ", please wait ...");
-
+			System.out.println("\nProcessing " + file.getName() + " ... \n");
+			Date start = new Date();
 
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			documentBuilderFactory.setValidating(false);
@@ -1018,6 +1016,8 @@ public class MusicXML2RDF {
 			transformer.transform(new DOMSource(document), new StreamResult(writer));
 			musicXMLString = writer.getBuffer().toString().replaceAll("\n|\r", "");
 
+			System.out.println("Loading XML file: " + Util.timeElapsed(start, new Date()));
+			
 		} catch (Exception e) {
 
 			System.err.println("[Error processing MusicXML File]: " + e.getMessage());
@@ -1025,13 +1025,18 @@ public class MusicXML2RDF {
 		}	
 		
 		
+		Date start = new Date();
 		MusicScore score = createMusicScoreFile(musicXMLString); 
 		score.setFileContent(musicXMLString);
 		score.setOutputFileName(file.getName());
 		score.setURI(this.getDocumentURI());
 
-		System.out.println("\nCreating RDF file for " + file.getName() + ", please wait ...");
+//		System.out.println("\nCreating RDF file for " + file.getName() + ", please wait ...");
+		System.out.println("Creating MusicScore object: "+Util.timeElapsed(start, new Date()));
+		
+		start = new Date();
 		this.createRDF(score);
+		System.out.println("Score serialization: "+Util.timeElapsed(start, new Date()));
 		//return score;
 
 	}
@@ -1530,10 +1535,10 @@ public class MusicXML2RDF {
 
 			}
 
-			Date date= new Date();
-			long time = date.getTime();
-			Timestamp ts = new Timestamp(time);
-			System.out.println("Finished at: "+ts + "\n");
+//			Date date= new Date();
+//			long time = date.getTime();
+//			Timestamp ts = new Timestamp(time);
+//			System.out.println("Finished at: "+ts + "\n");
 
 
 		} catch (SAXException  e) {
