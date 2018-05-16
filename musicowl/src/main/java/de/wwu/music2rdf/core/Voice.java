@@ -4,10 +4,11 @@ public class Voice {
 
 	private String measure;
 	private String id;
-	private String part;
+	private ScorePart part;
 	
 	public Voice() {
 		super();
+		this.part = new ScorePart();
 	}
 
 	public String getMeasure() {
@@ -26,13 +27,8 @@ public class Voice {
 		this.id = id;
 	}
 
-	public String getPart() {
+	public ScorePart getPart() {
 		return part;
 	}
-
-	public void setPart(String part) {
-		this.part = part;
-	}
-	
 	
 }

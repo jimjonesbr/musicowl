@@ -3,10 +3,11 @@ package de.wwu.music2rdf.core;
 public class Staff {
 
 	private String id;
-	private String part;
+	private ScorePart part;
 	
-	public Staff() {
+	public Staff() {		
 		super();
+		this.part = new ScorePart();
 	}
 	
 	public String getId() {
@@ -15,13 +16,10 @@ public class Staff {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPart() {
+	public ScorePart getPart() {
 		return part;
 	}
-	public void setPart(String part) {
-		this.part = part;
-	} 
-	
+
 	
 	
 }

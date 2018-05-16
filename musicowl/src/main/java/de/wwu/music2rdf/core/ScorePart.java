@@ -6,6 +6,8 @@ public class ScorePart {
 
 	private String id;
 	private String name;
+	private int movement;
+	
 	private ArrayList<Measure> measures;
 	
 	public ScorePart() {
@@ -31,6 +33,14 @@ public class ScorePart {
 
 	public ArrayList<Measure> getMeasures() {
 		return measures;
+	}
+
+	public int getMovement() {
+		return movement;
+	}
+
+	public void setMovement(int movement) {
+		this.movement = movement;
 	}
 	
 	

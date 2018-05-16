@@ -33,6 +33,7 @@ import org.xml.sax.SAXException;
 import de.wwu.music2rdf.core.Clef;
 import de.wwu.music2rdf.core.Key;
 import de.wwu.music2rdf.core.Measure;
+import de.wwu.music2rdf.core.Movement;
 import de.wwu.music2rdf.core.MusicScore;
 import de.wwu.music2rdf.core.Note;
 import de.wwu.music2rdf.core.ScorePart;
@@ -51,9 +52,9 @@ public class MusicXML2RDF {
 	private File inputFile = null;
 	private String documentURI = "";
 	private String documentTitle = "";
-	private ArrayList<Staff> staves = new ArrayList<Staff>();
-	private ArrayList<Voice> voices = new ArrayList<Voice>();
-	private ArrayList<String> notesets = new ArrayList<String>();
+//	private ArrayList<Staff> staves = new ArrayList<Staff>();
+//	private ArrayList<Voice> voices = new ArrayList<Voice>();
+//	private ArrayList<String> notesets = new ArrayList<String>();
 
 	public MusicXML2RDF() {
 		super();
@@ -65,9 +66,6 @@ public class MusicXML2RDF {
 
 
 	private void createRDF(MusicScore score){
-
-
-		//TODO: Check score.getURI(), currently null. 
 
 		StringBuffer ttl = new StringBuffer();
 		String uid = UUID.randomUUID().toString();
@@ -83,6 +81,11 @@ public class MusicXML2RDF {
 		String musicOntology = " <http://purl.org/ontology/mo/OBJECT> "; 
 		String dcOntology = " <http://purl.org/dc/elements/1.1/OBJECT> ";
 
+		
+		ArrayList<Staff> staves = new ArrayList<Staff>();
+		ArrayList<Voice> voices = new ArrayList<Voice>();
+		ArrayList<String> notesets = new ArrayList<String>();
+		ArrayList<Movement> movements = new ArrayList<Movement>();
 		
 		if(!score.getTitle().equals("") && (score.getTitle()!=null)) {
 			
@@ -110,9 +113,33 @@ public class MusicXML2RDF {
 					ttl.append(scoreURI + musicOntology.replace("OBJECT", "movement") + movementObject + " .\n");
 					ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
 
-					if(score.getParts().get(i).getMeasures().get(j).getTitle() != null) {
-						ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + score.getParts().get(i).getMeasures().get(j).getTitle() + "\" .\n");
+					boolean addMovement = true;
+					Movement movement = new Movement();
+					movement.setId(movementCounter);
+					movement.setTitle(score.getParts().get(i).getMeasures().get(j).getTitle());
+					
+					for (int k = 0; k < movements.size(); k++) {
+						
+						if(movements.get(k).getId()==movementCounter) {
+							addMovement=false;							
+						}
+						
 					}
+					
+					if(addMovement) {
+						if(movement.getTitle()==null || movement.getTitle().equals("")) {
+							ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movementCounter + " (no title)\" .\n");
+						} else {
+							ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movement.getTitle() + "\" .\n");		
+						}
+						movements.add(movement);
+					}
+					
+//					if(score.getParts().get(i).getMeasures().get(j).getTitle() != null) {
+//						ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + score.getParts().get(i).getMeasures().get(j).getTitle() + "\" .\n");
+//					}else {
+//						ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movementCounter + " (no title)\" .\n");
+//					}
 
 					ttl.append(movementObject + musicOWL.replace("OBJECT", "hasScorePart") + partObject + " . \n");		
 					ttl.append(partObject + rdfTypeURI + musicOWL.replace("OBJECT", "ScorePart") + " .\n");
@@ -321,13 +348,16 @@ public class MusicXML2RDF {
 
 					Staff staff = new Staff();
 					staff.setId(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
-					staff.setPart(score.getParts().get(i).getId());
+					staff.getPart().setId(score.getParts().get(i).getId());					
+					staff.getPart().setMovement(movementCounter);
+					
 					boolean addStaff = true;
 
 					for (int l = 0; l < staves.size(); l++) {
 
 						if(staves.get(l).getId().equals(staff.getId()) && 
-								staves.get(l).getPart().equals(staff.getPart())) {
+						   staves.get(l).getPart().getId().equals(staff.getPart().getId()) &&
+						   staves.get(l).getPart().getMovement() == staff.getPart().getMovement()) {
 							addStaff = false;
 
 						}
@@ -337,13 +367,15 @@ public class MusicXML2RDF {
 
 					String staffObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
 
+					
+					
 					if(addStaff) {
-
+//						System.out.println("Movement: " + staff.getPart().getMovement()+ " Part:" + staff.getPart().getId() +" Staff: "+staff.getId() );
 						staves.add(staff);
 						ttl.append(staffObject + rdfTypeURI + musicOWL.replace("OBJECT", "Staff") + " . \n");
 						ttl.append(partObject + musicOWL.replace("OBJECT", "hasStaff") + staffObject +" . \n");
 						ttl.append(staffObject + rdfIdURI + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() + "\" . \n");
-
+						
 					}
 
 
@@ -355,7 +387,8 @@ public class MusicXML2RDF {
 					String voiceObject = "";
 					String durationObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_DURATION");
 					Voice voice = new Voice();
-					voice.setPart(partID);
+					voice.getPart().setId(partID);
+					voice.getPart().setMovement(movementCounter);
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice()==null){
 
@@ -378,7 +411,8 @@ public class MusicXML2RDF {
 					for (int l = 0; l < voices.size(); l++) {
 
 						if(voices.get(l).getId().equals(voice.getId()) && 
-								voices.get(l).getPart().equals(voice.getPart())) {
+						   voices.get(l).getPart().getId().equals(voice.getPart().getId()) &&
+						   voices.get(l).getPart().getMovement()==voice.getPart().getMovement()) {
 							addVoice = false;
 
 						}
@@ -787,6 +821,11 @@ public class MusicXML2RDF {
 			writer.append(ttl.toString());
 			writer.close();		
 
+			
+			staves = null;
+			voices = null;
+			notesets = null;
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -865,6 +904,8 @@ public class MusicXML2RDF {
 		String currentBeatType = "";
 		String currentBeat = "";
 		int slurCount = 0;
+		
+		
 		boolean slurFlag = false;
 
 		try {
@@ -910,6 +951,7 @@ public class MusicXML2RDF {
 			for (int i = 0; i < score.getParts().size(); i++) {
 
 				this.clefList = new ArrayList<Clef>();
+				int movementCount = 0;
 
 				NodeList nodePartName = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part[@id='"+score.getParts().get(i).getId()+"']/part-name", document,XPathConstants.NODESET);
 
@@ -942,14 +984,20 @@ public class MusicXML2RDF {
 						measure.setId(nodeMeasures.item(j).getAttributes().getNamedItem("number").getNodeValue());	
 
 						if(measure.getId().equals("1")) {
-
+							
+							movementCount = movementCount +1;
+							
 							Element eElement = (Element) nodeMeasures.item(j);
 
 							if(eElement.getElementsByTagName("words").getLength() != 0) {
 								measure.setTitle(eElement.getElementsByTagName("words").item(0).getTextContent());
-								System.out.println("["+ score.getParts().get(i).getName() + "] Processing movement > " + measure.getTitle() +" ... ");
+								
+							//} else {								
+								//measure.setTitle(movementCount+". (no title)");
 							}
 
+							System.out.println("["+ score.getParts().get(i).getName() + "] Parsing movement > " + movementCount + " ("+measure.getTitle() +") ... ");
+							
 						}
 
 
@@ -1226,7 +1274,7 @@ public class MusicXML2RDF {
 
 								}
 
-								note.getVoice().setPart(score.getParts().get(i).getId());
+								note.getVoice().getPart().setId(score.getParts().get(i).getId());
 								note.getVoice().setMeasure(measure.getId());
 
 
