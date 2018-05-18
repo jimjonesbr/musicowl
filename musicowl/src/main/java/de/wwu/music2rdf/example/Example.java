@@ -15,15 +15,7 @@ public class Example {
 		music2rdf.setOutputFile("ntriples/elgar_cello_concerto_op.85.nt");
 		
 		music2rdf.parseMusicXML();
-		
-		
-		music2rdf.setInputFile(new File("/home/jones/git/wmss/wmss/data/musicxml/wwu/3098742@25stuckefürorgel.xml"));
-		music2rdf.setDocumentURI("https://sammlungen.ulb.uni-muenster.de/id/3098742");
-		music2rdf.setOutputFile("ntriples/3098742@25stuckefürorgel.nt");
-		
-		music2rdf.parseMusicXML();
-		
-			
+				
 	}
 
 }
