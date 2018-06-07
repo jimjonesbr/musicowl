@@ -9,8 +9,10 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -80,6 +82,7 @@ public class MusicXML2RDF {
 		String nodeURI = " <http://linkeddata.uni-muenster.de/node/"+uid+"/OBJECT> ";
 		String musicOntology = " <http://purl.org/ontology/mo/OBJECT> "; 
 		String dcOntology = " <http://purl.org/dc/elements/1.1/OBJECT> ";
+		String provOntology = " <http://www.w3.org/ns/prov#OBJECT> ";
 
 		
 		ArrayList<Staff> staves = new ArrayList<Staff>();
@@ -91,7 +94,17 @@ public class MusicXML2RDF {
 			
 			ttl.append(scoreURI + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle() + "\" .\n");
 			
-		}				
+		}	
+		
+		String activity = "<"+score.getURI()+"_musicxml2rdf>";
+		
+		ttl.append("<https://github.com/jimjonesbr/musicowl>" + rdfTypeURI + provOntology.replace("OBJECT", "SoftwareAgent") + " .\n");
+		ttl.append("<https://github.com/jimjonesbr/musicowl> <http://xmlns.com/foaf/0.1/name> \"MusicXML2RDF Converter\" .\n");
+		ttl.append(activity + rdfTypeURI + provOntology.replace("OBJECT", "Activity") + " .\n");
+		ttl.append(activity + " <http://www.w3.org/2000/01/rdf-schema#comment> \"File convertion from MusicXML to RDF based on the MusicOWL Ontology. \" .\n"); 
+		ttl.append(activity + provOntology.replace("OBJECT", "startedAtTime") + "\"" + score.getEncodingStartTime() + "\" .\n");
+		ttl.append(activity + provOntology.replace("OBJECT", "wasAssociatedWith") + " <https://github.com/jimjonesbr/musicowl> .\n");
+		ttl.append(scoreURI + provOntology.replace("OBJECT", "wasGeneratedBy") + activity + " . \n");
 		
 		for (int i = 0; i < score.getParts().size(); i++) {		
 			
@@ -814,7 +827,11 @@ public class MusicXML2RDF {
 			String xml = new String(score.getFileContent().getBytes(StandardCharsets.UTF_8));
 			xml = xml.replace("\\", "\\\\");
 			ttl.append(scoreURI + musicOWL.replace("OBJECT", "asMusicXML")+ "\"" + xml.replace("\"", "'") + "\" ." );
-
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+			sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+			ttl.append("_:musicxml2rdf"+uid + provOntology.replace("OBJECT", "endedAtTime") + "\"" + sdf.format(new Date()) + "\" .\n");
+			
 			FileOutputStream fileStream = new FileOutputStream(new File(this.getOutputFile()),false);
 			OutputStreamWriter writer = new OutputStreamWriter(fileStream, StandardCharsets.UTF_8);
 
@@ -937,6 +954,18 @@ public class MusicXML2RDF {
 
 			}
 
+			subfields = (NodeList) xpath.evaluate("//identification/encoding/encoder", document,XPathConstants.NODESET);
+
+			if (subfields.getLength() != 0) {
+				
+				score.setEncoder(subfields.item(0).getTextContent());
+
+			}
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+			sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+			score.setEncodingStartTime(sdf.format(new Date()));
+			
 			subfields = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part/@id", document,XPathConstants.NODESET);
 
 			for (int i = 0; i < subfields.getLength(); i++) {

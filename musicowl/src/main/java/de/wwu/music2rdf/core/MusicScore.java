@@ -9,6 +9,8 @@ public class MusicScore {
 	private String fileName;
 	private String fileContent;
 	private String title;
+	private String encoder;
+	private String encodedAt;
 	
 	public MusicScore() {
 	
@@ -52,6 +54,22 @@ public class MusicScore {
 
 	public void setFileContent(String fileContent) {
 		this.fileContent = fileContent;
+	}
+
+	public String getEncoder() {
+		return encoder;
+	}
+
+	public void setEncoder(String encoder) {
+		this.encoder = encoder;
+	}
+
+	public String getEncodingStartTime() {
+		return encodedAt;
+	}
+
+	public void setEncodingStartTime(String encodedAt) {
+		this.encodedAt = encodedAt;
 	}
 
 
