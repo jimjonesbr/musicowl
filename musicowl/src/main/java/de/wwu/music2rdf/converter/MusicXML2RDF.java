@@ -12,8 +12,9 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.TimeZone;
 import java.util.UUID;
+import java.util.regex.Pattern;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -83,6 +84,8 @@ public class MusicXML2RDF {
 		String musicOntology = " <http://purl.org/ontology/mo/OBJECT> "; 
 		String dcOntology = " <http://purl.org/dc/elements/1.1/OBJECT> ";
 		String provOntology = " <http://www.w3.org/ns/prov#OBJECT> ";
+		String skosOntology = " <http://www.w3.org/2004/02/skos/core#OBJECT> ";
+		String instrumentTaxonomy = " <http://purl.org/ontology/mo/mit#OBJECT> ";
 
 		
 		ArrayList<Staff> staves = new ArrayList<Staff>();
@@ -146,20 +149,47 @@ public class MusicXML2RDF {
 							ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movement.getTitle() + "\" .\n");		
 						}
 						movements.add(movement);
-					}
-					
-//					if(score.getParts().get(i).getMeasures().get(j).getTitle() != null) {
-//						ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + score.getParts().get(i).getMeasures().get(j).getTitle() + "\" .\n");
-//					}else {
-//						ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movementCounter + " (no title)\" .\n");
-//					}
+					}			
 
 					ttl.append(movementObject + musicOWL.replace("OBJECT", "hasScorePart") + partObject + " . \n");		
 					ttl.append(partObject + rdfTypeURI + musicOWL.replace("OBJECT", "ScorePart") + " .\n");
+					ttl.append(partObject + rdfTypeURI + musicOntology.replace("OBJECT", "Instrument") + " .\n");
+					ttl.append(partObject + rdfTypeURI + skosOntology.replace("OBJECT", "Concept") + " .\n");
 					ttl.append(partObject + dcOntology.replace("OBJECT", "description") + "\"" + score.getParts().get(i).getName() + "\" .\n");
+					
+					/**
+					 * @see https://github.com/w3c/musicxml/blob/v3.1/schema/sounds.xml
+					 */
+					if(!score.getParts().get(i).getInstrument().toLowerCase().equals("unknown")) {
+
+						String[] arrayInstrument = score.getParts().get(i).getInstrument().split(Pattern.quote("."));
+						String instrumentLabel = arrayInstrument[arrayInstrument.length-1];
+						instrumentLabel = instrumentLabel.substring(0, 1).toUpperCase() + instrumentLabel.substring(1);
+						
+						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"" +instrumentLabel+ "\" .\n");
+						
+						String broaderConcept = "";
+						String broaderConceptText = "";
+						
+						for (int k = 0; k < arrayInstrument.length-1; k++) {
+							//System.out.println("###> " + arrayInstrument[k].substring(0, 1).toUpperCase() + arrayInstrument[k].substring(1));
+							broaderConcept = broaderConcept + arrayInstrument[k].substring(0, 1).toUpperCase() + arrayInstrument[k].substring(1);
+							broaderConceptText = broaderConceptText + " " + arrayInstrument[k].substring(0, 1).toUpperCase() + arrayInstrument[k].substring(1);
+						}
+						
+						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\""+instrumentLabel+"\" .\n");
+						ttl.append(partObject + skosOntology.replace("OBJECT", "broader") + instrumentTaxonomy.replace("OBJECT", broaderConcept) + " .\n");
+						ttl.append(instrumentTaxonomy.replace("OBJECT", broaderConcept) + instrumentTaxonomy.replace("OBJECT", "inScheme") +  " <http://purl.org/ontology/mo/instruments#Musical_instruments> .\n");
+						ttl.append(instrumentTaxonomy.replace("OBJECT", broaderConcept) + skosOntology.replace("OBJECT", "prefLabel") +  "\""+broaderConceptText+"\" .\n");
+						
+						//System.out.println("broaderConcept > " + broaderConcept);
+					} else {
+						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"Unknown\" .\n");
+					}
 
 				}
 
+				
 				String measureID = score.getParts().get(i).getMeasures().get(j).getId();
 				String measureObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID);
 				String keyObject = "";
@@ -826,10 +856,10 @@ public class MusicXML2RDF {
 
 			String xml = new String(score.getFileContent().getBytes(StandardCharsets.UTF_8));
 			xml = xml.replace("\\", "\\\\");
-			ttl.append(scoreURI + musicOWL.replace("OBJECT", "asMusicXML")+ "\"" + xml.replace("\"", "'") + "\" ." );
+			ttl.append(scoreURI + musicOWL.replace("OBJECT", "asMusicXML")+ "\"" + xml.replace("\"", "'") + "\" . \n" );
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-			sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+			//sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 			ttl.append("_:musicxml2rdf"+uid + provOntology.replace("OBJECT", "endedAtTime") + "\"" + sdf.format(new Date()) + "\" .\n");
 			
 			FileOutputStream fileStream = new FileOutputStream(new File(this.getOutputFile()),false);
@@ -963,7 +993,6 @@ public class MusicXML2RDF {
 			}
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-			sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 			score.setEncodingStartTime(sdf.format(new Date()));
 			
 			subfields = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part/@id", document,XPathConstants.NODESET);
@@ -1001,7 +1030,29 @@ public class MusicXML2RDF {
 					score.getParts().get(i).setName(score.getParts().get(i).getId());
 
 				}
+				
+				
+				NodeList nodeInstrumentName = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part[@id='"+score.getParts().get(i).getId()+"']/score-instrument/instrument-sound", document,XPathConstants.NODESET);
+				
+				if(nodeInstrumentName.getLength()!=0){
 
+					if(nodeInstrumentName.item(0).getTextContent().trim().equals("")){
+
+						score.getParts().get(i).setInstrument("unknown");
+
+					} else {
+
+						score.getParts().get(i).setInstrument(nodeInstrumentName.item(0).getTextContent());
+
+					}
+
+				} else {
+
+					score.getParts().get(i).setInstrument("unknown");
+
+				}
+				
+				
 				NodeList nodeMeasures = (NodeList) xpath.evaluate("//score-partwise/part[@id='"+score.getParts().get(i).getId()+"']/measure", document,XPathConstants.NODESET);
 								
 				if (nodeMeasures.getLength() != 0) {
@@ -1019,8 +1070,7 @@ public class MusicXML2RDF {
 							Element eElement = (Element) nodeMeasures.item(j);
 
 							if(eElement.getElementsByTagName("words").getLength() != 0) {
-								measure.setTitle(eElement.getElementsByTagName("words").item(0).getTextContent());
-								
+								measure.setTitle(eElement.getElementsByTagName("words").item(0).getTextContent());								
 							//} else {								
 								//measure.setTitle(movementCount+". (no title)");
 							}
