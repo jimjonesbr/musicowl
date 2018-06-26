@@ -95,7 +95,7 @@ public class MusicXML2RDF {
 		
 		if(!score.getTitle().equals("") && (score.getTitle()!=null)) {
 			
-			ttl.append(scoreURI + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle() + "\" .\n");
+			ttl.append(scoreURI + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle().trim() + "\" .\n");
 			
 		}	
 		
@@ -105,7 +105,7 @@ public class MusicXML2RDF {
 		ttl.append("<https://github.com/jimjonesbr/musicowl> <http://xmlns.com/foaf/0.1/name> \"MusicXML2RDF Converter\" .\n");
 		ttl.append(activity + rdfTypeURI + provOntology.replace("OBJECT", "Activity") + " .\n");
 		ttl.append(activity + " <http://www.w3.org/2000/01/rdf-schema#comment> \"File convertion from MusicXML to RDF based on the MusicOWL Ontology. \" .\n"); 
-		ttl.append(activity + provOntology.replace("OBJECT", "startedAtTime") + "\"" + score.getEncodingStartTime() + "\" .\n");
+		ttl.append(activity + provOntology.replace("OBJECT", "startedAtTime") + "\"" + score.getEncodingStartTime().trim() + "\" .\n");
 		ttl.append(activity + provOntology.replace("OBJECT", "wasAssociatedWith") + " <https://github.com/jimjonesbr/musicowl> .\n");
 		ttl.append(scoreURI + provOntology.replace("OBJECT", "wasGeneratedBy") + activity + " . \n");
 		
@@ -146,7 +146,7 @@ public class MusicXML2RDF {
 						if(movement.getTitle()==null || movement.getTitle().equals("")) {
 							ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movementCounter + " (no title)\" .\n");
 						} else {
-							ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movement.getTitle() + "\" .\n");		
+							ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movement.getTitle().trim() + "\" .\n");		
 						}
 						movements.add(movement);
 					}			
@@ -155,8 +155,17 @@ public class MusicXML2RDF {
 					ttl.append(partObject + rdfTypeURI + musicOWL.replace("OBJECT", "ScorePart") + " .\n");
 					ttl.append(partObject + rdfTypeURI + musicOntology.replace("OBJECT", "Instrument") + " .\n");
 					ttl.append(partObject + rdfTypeURI + skosOntology.replace("OBJECT", "Concept") + " .\n");
-					ttl.append(partObject + dcOntology.replace("OBJECT", "description") + "\"" + score.getParts().get(i).getName() + "\" .\n");
+					ttl.append(partObject + dcOntology.replace("OBJECT", "description") + "\"" + score.getParts().get(i).getName().trim() + "\" .\n");
 					
+					if(score.getParts().get(i).isSolo()) {
+						ttl.append(partObject + musicOWL.replace("OBJECT", "isSolo") + "\"true\" .\n");
+						//System.out.println(">> Medium: " +score.getParts().get(i) + "["+score.getParts().get(i).isSolo()+"]");
+					} else {
+						ttl.append(partObject + musicOWL.replace("OBJECT", "isSolo") + "\"false\" .\n");
+						
+					}
+					
+					//System.out.println(">> Medium: " +score.getParts().get(i).getName() + " ["+score.getParts().get(i).isSolo()+"]");
 					/**
 					 * @see https://github.com/w3c/musicxml/blob/v3.1/schema/sounds.xml
 					 */
@@ -166,7 +175,7 @@ public class MusicXML2RDF {
 						String instrumentLabel = arrayInstrument[arrayInstrument.length-1];
 						instrumentLabel = instrumentLabel.substring(0, 1).toUpperCase() + instrumentLabel.substring(1);
 						
-						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"" +instrumentLabel+ "\" .\n");
+						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"" +instrumentLabel.trim()+ "\" .\n");
 						
 						String broaderConcept = "";
 						String broaderConceptText = "";
@@ -1030,7 +1039,7 @@ public class MusicXML2RDF {
 					score.getParts().get(i).setName(score.getParts().get(i).getId());
 
 				}
-				
+							
 				
 				NodeList nodeInstrumentName = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part[@id='"+score.getParts().get(i).getId()+"']/score-instrument/instrument-sound", document,XPathConstants.NODESET);
 				
@@ -1051,6 +1060,18 @@ public class MusicXML2RDF {
 					score.getParts().get(i).setInstrument("unknown");
 
 				}
+				
+				
+				NodeList nodeInstrumentSolo = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part[@id='"+score.getParts().get(i).getId()+"']/score-instrument/solo", document,XPathConstants.NODESET);
+				
+				if(nodeInstrumentSolo.getLength()!=0)
+				{					
+					score.getParts().get(i).setSolo(true);
+				}else {
+					score.getParts().get(i).setSolo(false);
+				}
+				
+
 				
 				
 				NodeList nodeMeasures = (NodeList) xpath.evaluate("//score-partwise/part[@id='"+score.getParts().get(i).getId()+"']/measure", document,XPathConstants.NODESET);

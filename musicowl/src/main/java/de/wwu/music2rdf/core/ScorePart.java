@@ -6,7 +6,9 @@ public class ScorePart {
 
 	private String id;
 	private String name;
+	private String instrument;
 	private int movement;
+	private boolean solo;
 	
 	private ArrayList<Measure> measures;
 	
@@ -41,6 +43,22 @@ public class ScorePart {
 
 	public void setMovement(int movement) {
 		this.movement = movement;
+	}
+
+	public String getInstrument() {
+		return instrument;
+	}
+
+	public void setInstrument(String instrument) {
+		this.instrument = instrument;
+	}
+
+	public boolean isSolo() {
+		return solo;
+	}
+
+	public void setSolo(boolean solo) {
+		this.solo = solo;
 	}
 	
 	
