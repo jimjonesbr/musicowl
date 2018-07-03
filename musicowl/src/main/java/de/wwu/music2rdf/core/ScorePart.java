@@ -9,6 +9,7 @@ public class ScorePart {
 	private String instrument;
 	private int movement;
 	private boolean solo;
+	private boolean ensemble;
 	
 	private ArrayList<Measure> measures;
 	
@@ -59,6 +60,14 @@ public class ScorePart {
 
 	public void setSolo(boolean solo) {
 		this.solo = solo;
+	}
+
+	public boolean isEnsemble() {
+		return ensemble;
+	}
+
+	public void setEnsemble(boolean ensemble) {
+		this.ensemble = ensemble;
 	}
 	
 	

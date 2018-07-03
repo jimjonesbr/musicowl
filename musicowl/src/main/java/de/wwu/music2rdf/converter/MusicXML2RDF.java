@@ -161,11 +161,16 @@ public class MusicXML2RDF {
 						ttl.append(partObject + musicOWL.replace("OBJECT", "isSolo") + "\"true\" .\n");
 						//System.out.println(">> Medium: " +score.getParts().get(i) + "["+score.getParts().get(i).isSolo()+"]");
 					} else {
-						ttl.append(partObject + musicOWL.replace("OBJECT", "isSolo") + "\"false\" .\n");
-						
+						ttl.append(partObject + musicOWL.replace("OBJECT", "isSolo") + "\"false\" .\n");						
 					}
 					
-					//System.out.println(">> Medium: " +score.getParts().get(i).getName() + " ["+score.getParts().get(i).isSolo()+"]");
+					if(score.getParts().get(i).isEnsemble()) {
+						ttl.append(partObject + musicOWL.replace("OBJECT", "isEnsemble") + "\"true\" .\n");
+					} else {
+						ttl.append(partObject + musicOWL.replace("OBJECT", "isEnsemble") + "\"false\" .\n");						
+					}
+
+
 					/**
 					 * @see https://github.com/w3c/musicxml/blob/v3.1/schema/sounds.xml
 					 */
@@ -624,6 +629,7 @@ public class MusicXML2RDF {
 					} else { 
 
 						ttl.append(noteObject + chordOWL.replace("OBJECT", "natural") + chordOWL.replace("OBJECT", "note/" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()) + ".\n");
+						ttl.append(chordOWL.replace("OBJECT", "note/" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()) + rdfTypeURI + chordOWL.replace("OBJECT", "Natural")+ ".\n");
 
 					}
 
@@ -1072,6 +1078,15 @@ public class MusicXML2RDF {
 				}
 				
 
+				NodeList nodeInstrumentEnsemble = (NodeList) xpath.evaluate("//score-partwise/part-list/score-part[@id='"+score.getParts().get(i).getId()+"']/score-instrument/ensemble", document,XPathConstants.NODESET);
+				
+				if(nodeInstrumentEnsemble.getLength()!=0)
+				{					
+					score.getParts().get(i).setEnsemble(true);
+				}else {
+					score.getParts().get(i).setEnsemble(false);
+				}
+
 				
 				
 				NodeList nodeMeasures = (NodeList) xpath.evaluate("//score-partwise/part[@id='"+score.getParts().get(i).getId()+"']/measure", document,XPathConstants.NODESET);
@@ -1356,7 +1371,6 @@ public class MusicXML2RDF {
 
 
 								Element elementNotes = (Element) nodeMeasureElementsList.item(l).getChildNodes();
-
 
 								if(elementNotes.getElementsByTagName("chord").item(0)!=null) note.setChord(true);
 								if(elementNotes.getElementsByTagName("dot").item(0)!=null) note.setDot(true);
