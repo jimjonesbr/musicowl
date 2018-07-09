@@ -34,6 +34,7 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import de.wwu.music2rdf.core.Clef;
+import de.wwu.music2rdf.core.Instrument;
 import de.wwu.music2rdf.core.Key;
 import de.wwu.music2rdf.core.Measure;
 import de.wwu.music2rdf.core.Movement;
@@ -58,7 +59,8 @@ public class MusicXML2RDF {
 //	private ArrayList<Staff> staves = new ArrayList<Staff>();
 //	private ArrayList<Voice> voices = new ArrayList<Voice>();
 //	private ArrayList<String> notesets = new ArrayList<String>();
-
+	private ArrayList<Instrument> instruments = Util.getInstruments();
+	
 	public MusicXML2RDF() {
 		super();
 		this.clefList = new ArrayList<Clef>();
@@ -74,7 +76,7 @@ public class MusicXML2RDF {
 		String uid = UUID.randomUUID().toString();
 
 		String rdfTypeURI = " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ";
-		String rdfIdURI = " <http://www.w3.org/1999/02/22-rdf-syntax-ns#ID> ";
+		String rdfIdURI = " <http://www.w3.org/1999/02/22-rdf-syntax-ns#ID> ";		
 		String musicOWL = " <http://linkeddata.uni-muenster.de/ontology/musicscore#OBJECT> ";		
 		String chordNoteOWL = " <http://purl.org/ontology/chord/note/OBJECT> ";
 		String keyModeOWL = " <http://purl.org/ontology/tonality/mode/OBJECT> ";
@@ -156,10 +158,9 @@ public class MusicXML2RDF {
 					ttl.append(partObject + rdfTypeURI + musicOntology.replace("OBJECT", "Instrument") + " .\n");
 					ttl.append(partObject + rdfTypeURI + skosOntology.replace("OBJECT", "Concept") + " .\n");
 					ttl.append(partObject + dcOntology.replace("OBJECT", "description") + "\"" + score.getParts().get(i).getName().trim() + "\" .\n");
-					
+										
 					if(score.getParts().get(i).isSolo()) {
 						ttl.append(partObject + musicOWL.replace("OBJECT", "isSolo") + "\"true\" .\n");
-						//System.out.println(">> Medium: " +score.getParts().get(i) + "["+score.getParts().get(i).isSolo()+"]");
 					} else {
 						ttl.append(partObject + musicOWL.replace("OBJECT", "isSolo") + "\"false\" .\n");						
 					}
@@ -174,31 +175,48 @@ public class MusicXML2RDF {
 					/**
 					 * @see https://github.com/w3c/musicxml/blob/v3.1/schema/sounds.xml
 					 */
+					
 					if(!score.getParts().get(i).getInstrument().toLowerCase().equals("unknown")) {
 
 						String[] arrayInstrument = score.getParts().get(i).getInstrument().split(Pattern.quote("."));
 						String instrumentLabel = arrayInstrument[arrayInstrument.length-1];
 						instrumentLabel = instrumentLabel.substring(0, 1).toUpperCase() + instrumentLabel.substring(1);
+						Instrument instrument = getInstrument(score.getParts().get(i).getInstrument());
 						
-						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"" +instrumentLabel.trim()+ "\" .\n");
+						//System.out.println(">>>> instrumentLabel: " + instrumentLabel);
+						//System.out.println(">>>> score.getParts().get(i).getInstrument(): " + score.getParts().get(i).getInstrument());
 						
-						String broaderConcept = "";
-						String broaderConceptText = "";
+						//ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"" +instrumentLabel.trim()+ "\" .\n");
+						//ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"" +instrument.getPerformanceMediumTypeDescription()+ "\" .\n");
 						
-						for (int k = 0; k < arrayInstrument.length-1; k++) {
-							//System.out.println("###> " + arrayInstrument[k].substring(0, 1).toUpperCase() + arrayInstrument[k].substring(1));
-							broaderConcept = broaderConcept + arrayInstrument[k].substring(0, 1).toUpperCase() + arrayInstrument[k].substring(1);
-							broaderConceptText = broaderConceptText + " " + arrayInstrument[k].substring(0, 1).toUpperCase() + arrayInstrument[k].substring(1);
-						}
+						//String broaderConcept = "";
+						//String broaderConceptText = "";
 						
-						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\""+instrumentLabel+"\" .\n");
-						ttl.append(partObject + skosOntology.replace("OBJECT", "broader") + instrumentTaxonomy.replace("OBJECT", broaderConcept) + " .\n");
-						ttl.append(instrumentTaxonomy.replace("OBJECT", broaderConcept) + instrumentTaxonomy.replace("OBJECT", "inScheme") +  " <http://purl.org/ontology/mo/instruments#Musical_instruments> .\n");
-						ttl.append(instrumentTaxonomy.replace("OBJECT", broaderConcept) + skosOntology.replace("OBJECT", "prefLabel") +  "\""+broaderConceptText+"\" .\n");
+						//for (int k = 0; k < arrayInstrument.length-1; k++) {
 						
-						//System.out.println("broaderConcept > " + broaderConcept);
+							//broaderConcept = broaderConcept + arrayInstrument[k].substring(0, 1).toUpperCase() + arrayInstrument[k].substring(1);
+							//broaderConceptText = broaderConceptText + " " + arrayInstrument[k].substring(0, 1).toUpperCase() + arrayInstrument[k].substring(1);
+						//}
+						
+//						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\""+instrumentLabel+"\" .\n");
+//						ttl.append(partObject + skosOntology.replace("OBJECT", "broader") + instrumentTaxonomy.replace("OBJECT", broaderConcept) + " .\n");
+//						ttl.append(instrumentTaxonomy.replace("OBJECT", broaderConcept) + instrumentTaxonomy.replace("OBJECT", "inScheme") +  " <http://purl.org/ontology/mo/instruments#Musical_instruments> .\n");
+//						ttl.append(instrumentTaxonomy.replace("OBJECT", broaderConcept) + skosOntology.replace("OBJECT", "prefLabel") +  "\""+broaderConceptText+"\" .\n");
+
+						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\""+instrument.getPerformanceMediumDescription()+"\" .\n");					
+						ttl.append(partObject + " <http://www.w3.org/2000/01/rdf-schema#label> \""+instrument.getPerformanceMediumId()+"\" .\n");						
+						ttl.append(partObject + skosOntology.replace("OBJECT", "broader") + instrumentTaxonomy.replace("OBJECT", instrument.getPerformanceMediumTypeId()) + " .\n");
+						ttl.append(instrumentTaxonomy.replace("OBJECT", instrument.getPerformanceMediumTypeId()) + instrumentTaxonomy.replace("OBJECT", "inScheme") +  " <http://purl.org/ontology/mo/instruments#Musical_instruments> .\n");
+						ttl.append(instrumentTaxonomy.replace("OBJECT", instrument.getPerformanceMediumTypeId()) + skosOntology.replace("OBJECT", "prefLabel") +  "\""+instrument.getPerformanceMediumTypeId()+" instrument\" .\n");
+
+						
 					} else {
-						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"Unknown\" .\n");
+						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"Unspecified\" .\n");
+						ttl.append(partObject + " <http://www.w3.org/2000/01/rdf-schema#label> \"unspecidied.unspecified\" .\n");
+						ttl.append(partObject + skosOntology.replace("OBJECT", "broader") + instrumentTaxonomy.replace("OBJECT", "unspecified") + " .\n");
+						ttl.append(instrumentTaxonomy.replace("OBJECT", "unspecified") + instrumentTaxonomy.replace("OBJECT", "inScheme") +  " <http://purl.org/ontology/mo/instruments#Musical_instruments> .\n");
+						ttl.append(instrumentTaxonomy.replace("OBJECT", "unspecified") + skosOntology.replace("OBJECT", "prefLabel") +  "\"Unspecified\" .\n");
+
 					}
 
 				}
@@ -896,6 +914,23 @@ public class MusicXML2RDF {
 			e.printStackTrace();
 		}
 
+	}
+	
+	
+	private Instrument getInstrument(String musicxmlInstrument) {
+		
+		Instrument result = new Instrument();
+		
+		for (int i = 0; i < instruments.size(); i++) {
+			if(instruments.get(i).getPerformanceMediumId().equals(musicxmlInstrument)) {
+				result.setPerformanceMediumDescription(instruments.get(i).getPerformanceMediumDescription());
+				result.setPerformanceMediumId(instruments.get(i).getPerformanceMediumId());
+				result.setPerformanceMediumTypeId(instruments.get(i).getPerformanceMediumTypeId());
+			}
+		}
+		
+		return result;
+		
 	}
 
 

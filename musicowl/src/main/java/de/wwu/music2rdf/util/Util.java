@@ -1,6 +1,13 @@
 package de.wwu.music2rdf.util;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+
+import de.wwu.music2rdf.core.Instrument;
 
 public class Util {
 
@@ -33,4 +40,48 @@ public class Util {
 		return result; 
 
 	}
+	
+	public static ArrayList<Instrument> getInstruments(){
+		
+		ArrayList<Instrument> result = new ArrayList<Instrument>();
+		String csvFile = "config/mediums_musicxml.csv";
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ",";
+        
+        try {
+
+            br = new BufferedReader(new FileReader(csvFile));
+
+            while ((line = br.readLine()) != null) {
+
+            	Instrument instrument = new Instrument();
+                String[] medium = line.split(cvsSplitBy);
+
+                instrument.setPerformanceMediumId(medium[0]);
+                instrument.setPerformanceMediumTypeId(medium[1]);
+                instrument.setPerformanceMediumDescription(medium[2]);
+                
+                result.add(instrument);
+                
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+		
+		return result;
+		
+	}
+
 }
