@@ -183,31 +183,11 @@ public class MusicXML2RDF {
 						instrumentLabel = instrumentLabel.substring(0, 1).toUpperCase() + instrumentLabel.substring(1);
 						Instrument instrument = getInstrument(score.getParts().get(i).getInstrument());
 						
-						//System.out.println(">>>> instrumentLabel: " + instrumentLabel);
-						//System.out.println(">>>> score.getParts().get(i).getInstrument(): " + score.getParts().get(i).getInstrument());
-						
-						//ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"" +instrumentLabel.trim()+ "\" .\n");
-						//ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"" +instrument.getPerformanceMediumTypeDescription()+ "\" .\n");
-						
-						//String broaderConcept = "";
-						//String broaderConceptText = "";
-						
-						//for (int k = 0; k < arrayInstrument.length-1; k++) {
-						
-							//broaderConcept = broaderConcept + arrayInstrument[k].substring(0, 1).toUpperCase() + arrayInstrument[k].substring(1);
-							//broaderConceptText = broaderConceptText + " " + arrayInstrument[k].substring(0, 1).toUpperCase() + arrayInstrument[k].substring(1);
-						//}
-						
-//						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\""+instrumentLabel+"\" .\n");
-//						ttl.append(partObject + skosOntology.replace("OBJECT", "broader") + instrumentTaxonomy.replace("OBJECT", broaderConcept) + " .\n");
-//						ttl.append(instrumentTaxonomy.replace("OBJECT", broaderConcept) + instrumentTaxonomy.replace("OBJECT", "inScheme") +  " <http://purl.org/ontology/mo/instruments#Musical_instruments> .\n");
-//						ttl.append(instrumentTaxonomy.replace("OBJECT", broaderConcept) + skosOntology.replace("OBJECT", "prefLabel") +  "\""+broaderConceptText+"\" .\n");
-
 						ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\""+instrument.getPerformanceMediumDescription()+"\" .\n");					
 						ttl.append(partObject + " <http://www.w3.org/2000/01/rdf-schema#label> \""+instrument.getPerformanceMediumId()+"\" .\n");						
 						ttl.append(partObject + skosOntology.replace("OBJECT", "broader") + instrumentTaxonomy.replace("OBJECT", instrument.getPerformanceMediumTypeId()) + " .\n");
 						ttl.append(instrumentTaxonomy.replace("OBJECT", instrument.getPerformanceMediumTypeId()) + instrumentTaxonomy.replace("OBJECT", "inScheme") +  " <http://purl.org/ontology/mo/instruments#Musical_instruments> .\n");
-						ttl.append(instrumentTaxonomy.replace("OBJECT", instrument.getPerformanceMediumTypeId()) + skosOntology.replace("OBJECT", "prefLabel") +  "\""+instrument.getPerformanceMediumTypeId()+" instrument\" .\n");
+						ttl.append(instrumentTaxonomy.replace("OBJECT", instrument.getPerformanceMediumTypeId()) + skosOntology.replace("OBJECT", "prefLabel") +  "\""+instrument.getPerformanceMediumTypeId()+"\" .\n");
 
 						
 					} else {
