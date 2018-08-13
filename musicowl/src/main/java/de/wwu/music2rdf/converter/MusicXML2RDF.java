@@ -362,7 +362,7 @@ public class MusicXML2RDF {
 				}
 
 				String notesetObject = "";
-
+				String tmpVoice = "";
 
 				for (int k = 0; k < score.getParts().get(i).getMeasures().get(j).getNotes().size(); k++) {
 
@@ -421,11 +421,10 @@ public class MusicXML2RDF {
 
 
 					String staffObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
-
-					
+				
 					
 					if(addStaff) {
-//						System.out.println("Movement: " + staff.getPart().getMovement()+ " Part:" + staff.getPart().getId() +" Staff: "+staff.getId() );
+
 						staves.add(staff);
 						ttl.append(staffObject + rdfTypeURI + musicOWL.replace("OBJECT", "Staff") + " . \n");
 						ttl.append(partObject + musicOWL.replace("OBJECT", "hasStaff") + staffObject +" . \n");
@@ -446,10 +445,19 @@ public class MusicXML2RDF {
 					voice.getPart().setMovement(movementCounter);
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice()==null){
-
+						/**
 						voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_1");
 						voice.setId("1");
-
+						*/
+						//Change regarding voices of notes inside of a chord
+						
+						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isChord()) {
+							voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_" + tmpVoice);
+							voice.setId(tmpVoice);
+						} else {
+							voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_1");
+							voice.setId("1");							
+						}
 
 						score.getParts().get(i).getMeasures().get(j).getNotes().get(k).setVoice(voice);
 
@@ -457,7 +465,7 @@ public class MusicXML2RDF {
 
 						voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId());
 						voice.setId(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId());
-
+						tmpVoice=score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId();
 					}
 
 
@@ -1320,10 +1328,7 @@ public class MusicXML2RDF {
 
 								NodeList listNoteElements = nodeMeasureElementsList.item(l).getChildNodes();
 
-
-
 								for (int m = 0; m < listNoteElements.getLength(); m++) {
-
 
 
 									if (listNoteElements.item(m).getNodeName().equals("staff")) {
