@@ -62,7 +62,8 @@ $ java -jar musicowl-converter.jar
 file="/home/jones/elgar_cello_concerto_op.85.xml" 
 output="/home/jones/elgar_cello_concerto_op.85.nt" 
 uri="http://dbpedia.org/resource/Cello_Concerto_(Elgar)" 
-collectionURI="https://url.collection.de" collectionName="My Collection" person="http://dbpedia.org/resource/Edward_Elgar","Sir Edward Elgar","Composer" 
+collectionURI="https://url.collection.de" collectionName="My Collection"
+person="http://dbpedia.org/resource/Edward_Elgar","Sir Edward Elgar","Composer"
 person="http://jimjones.de","Jim Jones","Encoder" 
 thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg"
 ```
