@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 import java.util.regex.Pattern;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,6 +26,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -34,45 +34,221 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import de.wwu.music2rdf.core.Clef;
+import de.wwu.music2rdf.core.Collection;
 import de.wwu.music2rdf.core.Instrument;
 import de.wwu.music2rdf.core.Key;
 import de.wwu.music2rdf.core.Measure;
 import de.wwu.music2rdf.core.Movement;
 import de.wwu.music2rdf.core.MusicScore;
 import de.wwu.music2rdf.core.Note;
+import de.wwu.music2rdf.core.Person;
+import de.wwu.music2rdf.core.Role;
 import de.wwu.music2rdf.core.ScorePart;
 import de.wwu.music2rdf.core.Staff;
 import de.wwu.music2rdf.core.Voice;
 import de.wwu.music2rdf.util.Util;
 
-
 public class MusicXML2RDF {
 
 	private ArrayList<Clef> clefList;
 	private ArrayList<Note> currentNotes;
-
+	private ArrayList<Instrument> instruments = new Util().getInstruments();
+	private ArrayList<Person> persons;
 	private boolean verbose = false;
 	private String outputFile = "";
 	private File inputFile = null;
-	private String documentURI = "";
+	private String scoreURI = "";
 	private String documentTitle = "";
-//	private ArrayList<Staff> staves = new ArrayList<Staff>();
-//	private ArrayList<Voice> voices = new ArrayList<Voice>();
-//	private ArrayList<String> notesets = new ArrayList<String>();
-	private ArrayList<Instrument> instruments = Util.getInstruments();
+	private String thumbnail = "";
+	private String identifier = "";
+	private Collection collection;
+	private static Logger logger = Logger.getLogger("Converter");
 	
 	public MusicXML2RDF() {
 		super();
 		this.clefList = new ArrayList<Clef>();
 		this.currentNotes = new ArrayList<Note>();
-
+		this.persons = new ArrayList<Person>();
+		this.collection = new Collection();
 	}
 
+	public void addPerson(Person person) {
+		this.persons.add(person);
+	}
 
+	public void addCollection(Collection collection) {
+		this.collection.setCollectionURI(collection.getCollectionURI());
+		this.collection.setCollectionName(collection.getCollectionName());
+	}
+			
+	private String createMetadata(MusicScore score) {
+		
+		StringBuffer metadata = new StringBuffer();
+		
+		metadata.append("<" + score.getURI() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .\n");
+		
+		if(collection.getCollectionURI()==null) {
+			logger.warn("No collection provided for ["+score.getURI()+"]");
+			metadata.append("<http://unknown.collection.wmss> <http://www.w3.org/ns/prov#hadMember> <" + score.getURI() + "> .\n");
+			metadata.append("<http://unknown.collection.wmss> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Collection> .\n");			
+			metadata.append("<http://unknown.collection.wmss> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Unknown Collection\" .\n");
+		} else {
+			metadata.append("<"+collection.getCollectionURI()+"> <http://www.w3.org/ns/prov#hadMember> <" + score.getURI() + "> .\n");	
+			metadata.append("<"+collection.getCollectionURI()+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Collection> .\n");			
+			metadata.append("<"+collection.getCollectionURI()+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \""+collection.getCollectionName()+"\" .\n");
+
+		}
+		
+		if(this.thumbnail.equals("")) {
+			logger.warn("No thumbnail provided for ["+score.getURI()+"]");
+			 metadata.append("<" + score.getURI() + "> <http://xmlns.com/foaf/0.1/thumbnail> <https://www.ulb.uni-muenster.de/imperia/md/images/ulb2/bilder/medien/telemann-noten_730x365.jpg> .\n");
+		} else {
+			metadata.append("<" + score.getURI() + "> <http://xmlns.com/foaf/0.1/thumbnail> <" + this.thumbnail+ "> .\n");	
+		}
+		
+		//metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/identifier> \"" + this.getIdentifier()+ "\" . \n");
+		metadata.append("<" + score.getURI() + "> <http://www.w3.org/ns/prov#wasGeneratedBy> <https://github.com/jimjonesbr/musicowl> . \n");
+		metadata.append("<https://github.com/jimjonesbr/musicowl> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"MusicXML to RDF Converter.\" . \n");
+
+		String activity = "<"+score.getURI()+"_musicxml2rdf>";
+
+		if(persons.size()==0) {
+			logger.warn("No person provided (composer, encoder, etc.) for [" +score.getURI() + "].");
+			persons.add(new Person("http://unknown.person.wmss","Unknown",Role.UNKNOWN));			
+		}
+			
+		for (int i = 0; i < persons.size(); i++) {
+			
+			if(persons.get(i).getUri()==null) {
+				logger.warn("No URI provided for [" +score.getURI() + "].");
+				persons.get(i).setUri("http://unknown.person.wmss/"+UUID.randomUUID());
+			}
+			
+			if(persons.get(i).getName()==null) {
+				logger.warn("No name provided for [" +score.getURI() + "].");
+				persons.get(i).setName("Unknown");
+			}
+			
+			if(persons.get(i).getRole()==null) {
+				logger.warn("No role provided for [" +score.getURI() + "].");
+				persons.get(i).setUri(Role.UNKNOWN);
+			}
+	
+			if(persons.get(i).getRole().equals("Encoder")) {			
+				metadata.append(activity + " <http://www.w3.org/ns/prov#wasAssociatedWith> <"+persons.get(i).getUri()+"> . \n");
+				metadata.append(activity + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> . \n");
+				metadata.append(activity + " <http://www.w3.org/ns/prov#generated> <" + score.getURI() + "> " + " . \n");
+				metadata.append("<"+persons.get(i).getUri()+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> " + " . \n");
+				metadata.append("<"+persons.get(i).getUri()+"> <http://xmlns.com/foaf/0.1/name> \""+persons.get(i).getName()+"\" . \n");
+				metadata.append("<"+persons.get(i).getUri()+"> <http://www.w3.org/ns/prov#hadRole> <http://d-nb.info/gnd/4139395-8> " + " . \n");
+				metadata.append("<http://d-nb.info/gnd/4139395-8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+				metadata.append("<http://d-nb.info/gnd/4139395-8> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Encoder\" . \n");
+			}
+			
+			if(persons.get(i).getRole().equals("Composer")) {
+				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4032009-1> .\n");
+				metadata.append("<http://d-nb.info/gnd/4032009-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+				metadata.append("<http://d-nb.info/gnd/4032009-1> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Composer\" .\n");
+			}
+			
+			if(persons.get(i).getRole().equals("Lyricist")) {
+				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4246394-4> .\n");
+				metadata.append("<http://d-nb.info/gnd/4246394-4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+				metadata.append("<http://d-nb.info/gnd/4246394-4> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Lyricist\" .\n");
+			}
+			
+			if(persons.get(i).getRole().equals("Arranger")) {
+				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4604119-9> .\n");
+				metadata.append("<http://d-nb.info/gnd/4604119-9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+				metadata.append("<http://d-nb.info/gnd/4604119-9> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Arranger\" .\n");
+			}			
+			
+			if(persons.get(i).getRole().equals("Librettist")) {
+				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4294338-3> .\n");
+				metadata.append("<http://d-nb.info/gnd/4294338-3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+				metadata.append("<http://d-nb.info/gnd/4294338-3> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Librettist\" .\n");
+			}			
+			
+			if(persons.get(i).getRole().equals("Editor")) {
+				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4159575-0> .\n");
+				metadata.append("<http://d-nb.info/gnd/4159575-0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+				metadata.append("<http://d-nb.info/gnd/4159575-0> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Editor\" .\n");
+			}	
+			
+			if(persons.get(i).getRole().equals("Performer")) {
+				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4170790-4> .\n");
+				metadata.append("<http://d-nb.info/gnd/4170790-4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+				metadata.append("<http://d-nb.info/gnd/4170790-4> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Performer\" .\n");
+			}
+			
+			if(persons.get(i).getRole().equals("Translator")) {
+				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4061414-1> .\n");
+				metadata.append("<http://d-nb.info/gnd/4061414-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+				metadata.append("<http://d-nb.info/gnd/4061414-1> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Translator\" .\n");
+			}
+			
+			if(persons.get(i).getRole().equals("Dedicatee")) {
+				String dedicatee = "<"+score.getURI()+"_dedicatee>";
+				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> "+dedicatee+" .\n");
+				metadata.append(dedicatee + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+				metadata.append(dedicatee + " <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Dedicatee\" .\n");
+			}
+			
+			if(persons.get(i).getRole().equals("Unknown")) {
+				String unknown = "<"+score.getURI()+"unknown>";
+				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> "+unknown+" .\n");
+				metadata.append(unknown + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+				metadata.append(unknown + " <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Dedicatee\" .\n");
+			}
+		}
+		
+		return metadata.toString();
+	}
+	
 
 	private void createRDF(MusicScore score){
-
+				
 		StringBuffer ttl = new StringBuffer();
+		
+		if(score.getURI().equals("") || score.getURI()==null) {
+			score.setURI("http://wmss.undefined.score/"+UUID.randomUUID().toString());
+			logger.warn("No URI provided for the current score: " + score.getTitle());
+		}
+		
+		if(score.getTitle().equals("") || score.getTitle()==null) {
+			score.setTitle("Unknown Music Score Tile");
+			logger.warn("No title provided for the current score: " + score.getURI());
+		}		
+		
+		ttl.append(createMetadata(score));
+		
 		String uid = UUID.randomUUID().toString();
 
 		String rdfTypeURI = " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ";
@@ -175,6 +351,7 @@ public class MusicXML2RDF {
 					/**
 					 * @see https://github.com/w3c/musicxml/blob/v3.1/schema/sounds.xml
 					 */
+					
 					
 					if(!score.getParts().get(i).getInstrument().toLowerCase().equals("unknown")) {
 
@@ -924,13 +1101,24 @@ public class MusicXML2RDF {
 
 	public void parseMusicXML(){
 
-		String musicXMLString ="";
+		String musicXMLString = "";
 
+		if(this.getOutputFile().equals("")) {
+			logger.fatal("No output file provided (N-Triple output).");
+			System.exit(1);			
+		}
+		
+		if(this.getInputFile()==null) {
+			logger.fatal("No input file provided (MusicXML).");
+			System.exit(1);			
+		}
+		
 		File file = this.getInputFile();
 
 		try {
 
-			System.out.println("\nProcessing " + file.getName() + " ...");
+			logger.info("Processing " + file.getName() + " ...");
+			
 			Date start = new Date();
 
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -955,11 +1143,11 @@ public class MusicXML2RDF {
 			transformer.transform(new DOMSource(document), new StreamResult(writer));
 			musicXMLString = writer.getBuffer().toString().replaceAll("\n|\r", "");
 
-			System.out.println("Loading XML file: " + Util.timeElapsed(start, new Date()));
+			logger.info("Loading XML file: " + Util.timeElapsed(start, new Date()));
 
 		} catch (Exception e) {
 
-			System.err.println("[Error processing MusicXML File]: " + e.getMessage());
+			logger.error("[Error processing MusicXML File]: " + e.getMessage());
 
 		}	
 
@@ -968,13 +1156,19 @@ public class MusicXML2RDF {
 		MusicScore score = createMusicScoreDocument(musicXMLString); 
 		score.setFileContent(musicXMLString);
 		score.setOutputFileName(file.getName());
-		score.setURI(this.getDocumentURI());
-
-		System.out.println("Creating MusicScore object: "+Util.timeElapsed(start, new Date()));
+		score.setURI(this.scoreURI);
+		
+		if(!documentTitle.equals("")) {
+			score.setTitle(this.documentTitle);	
+			logger.warn("The title \""+this.documentTitle+"\" was provided and will therefore overwrite the title provided in the MusicXML document.");
+		}
+		
+		
+		logger.info("Creating MusicScore object: " + Util.timeElapsed(start, new Date()));
 
 		start = new Date();
 		this.createRDF(score);
-		System.out.println("Score serialization: "+Util.timeElapsed(start, new Date()));
+		logger.info("Score serialization: " + Util.timeElapsed(start, new Date())+"\n");
 
 	}
 
@@ -1134,7 +1328,7 @@ public class MusicXML2RDF {
 								//measure.setTitle(movementCount+". (no title)");
 							}
 
-							System.out.println("["+ score.getParts().get(i).getName() + "] Parsing movement > " + movementCount + " ("+measure.getTitle() +") ... ");
+							logger.info("["+ score.getParts().get(i).getName() + "] Parsing movement > " + movementCount + " ("+measure.getTitle() +") ... ");
 							
 						}
 
@@ -1665,14 +1859,14 @@ public class MusicXML2RDF {
 
 	}
 
-	public String getDocumentURI(){
+	public String getScoreURI(){
 
-		return this.documentURI;
+		return this.scoreURI;
 	}
 
-	public void setDocumentURI(String uri){
+	public void setScoreURI(String uri){
 
-		this.documentURI = uri;
+		this.scoreURI = uri;
 	}
 
 	public void setDocumentTitle(String title){
@@ -1686,4 +1880,21 @@ public class MusicXML2RDF {
 		return this.documentTitle;
 
 	}
+
+	public void setPersons(ArrayList<Person> persons) {
+		this.persons = persons;
+	}
+
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
+	
+	
 }

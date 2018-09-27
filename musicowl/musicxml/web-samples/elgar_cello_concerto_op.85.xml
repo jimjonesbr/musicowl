@@ -51,6 +51,7 @@ I</credit-words>
       <part-abbreviation>Vlc.</part-abbreviation>
       <score-instrument id="P1-I3">
         <instrument-name>Violoncello</instrument-name>
+        <instrument-sound>strings.cello</instrument-sound>
         </score-instrument>
       <midi-instrument id="P1-I3">
         <midi-channel>1</midi-channel>

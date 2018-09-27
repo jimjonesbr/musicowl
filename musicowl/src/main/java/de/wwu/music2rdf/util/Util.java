@@ -4,13 +4,15 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
-
 import de.wwu.music2rdf.core.Instrument;
 
 public class Util {
 
+	
 	public static String timeElapsed(Date startDate, Date endDate){
 		
 		long different = endDate.getTime() - startDate.getTime();
@@ -41,18 +43,31 @@ public class Util {
 
 	}
 	
-	public static ArrayList<Instrument> getInstruments(){
+	
+	public Util() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ArrayList<Instrument> getInstruments(){
 		
 		ArrayList<Instrument> result = new ArrayList<Instrument>();
-		String csvFile = "config/mediums_musicxml.csv";
+		//String csvFile = "config/mediums_musicxml.csv";
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
         
         try {
 
-            br = new BufferedReader(new FileReader(csvFile));
+        	InputStream in = this.getClass().getResourceAsStream("/config/mediums_musicxml.csv"); 
+        	
+        	//InputStream in = getClass().getResourceAsStream("/file.txt"); 
+        	BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        	//BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
+            //br = new BufferedReader(new FileReader(csvFile));
+        	br = new BufferedReader(new InputStreamReader(in));
+        	
             while ((line = br.readLine()) != null) {
 
             	Instrument instrument = new Instrument();
