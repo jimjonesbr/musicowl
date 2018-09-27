@@ -62,9 +62,32 @@ $ java -jar musicowl-converter.jar
 file="/home/jones/elgar_cello_concerto_op.85.xml" 
 output="/home/jones/elgar_cello_concerto_op.85.nt" 
 uri="http://dbpedia.org/resource/Cello_Concerto_(Elgar)" 
-collectionURI="https://url.collection.de" collectionName="My Collection"
+collectionURI="https://url.collection.de" 
+collectionName="My Collection"
 person="http://dbpedia.org/resource/Edward_Elgar","Sir Edward Elgar","Composer"
 person="http://jimjones.de","Jim Jones","Encoder" 
-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg"
+thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg";
+
+
+File 	         : /home/jones/elgar_cello_concerto_op.85.xml
+Output File      : /home/jones/elgar_cello_concerto_op.85_console.nt
+URI 	         : http://dbpedia.org/resource/Cello_Concerto_(Elgar)
+Collection URI   : https://url.collection.de
+Collection Name  : My Collection
+Person URI       : http://dbpedia.org/resource/Edward_Elgar
+Person Name      : Sir Edward Elgar
+Person Role      : Composer
+Person URI       : http://jimjones.de
+Person Name      : Jim Jones
+Person Role      : Encoder
+Thumbnail        : https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg
+
+
+[2018-09-27 15:18:09,624] INFO  [Converter] - Processing elgar_cello_concerto_op.85.xml ...
+[2018-09-27 15:18:09,828] INFO  [Converter] - Loading XML file: 202 ms
+[2018-09-27 15:18:10,119] INFO  [Converter] - [Violoncello] Parsing movement > 1 (Adagio) ... 
+[2018-09-27 15:18:11,654] INFO  [Converter] - Creating MusicScore object: 1.825 seconds
+[2018-09-27 15:18:11,795] INFO  [Converter] - Score serialization: 141 ms
+
 ```
 
