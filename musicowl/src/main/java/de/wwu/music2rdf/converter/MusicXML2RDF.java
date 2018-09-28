@@ -314,7 +314,8 @@ public class MusicXML2RDF {
 
 			for (int j = 0; j < score.getParts().get(i).getMeasures().size(); j++) {			
 
-				if(score.getParts().get(i).getMeasures().get(j).getId().equals("1")) {
+				if(score.getParts().get(i).getMeasures().get(j).getId().equals("1") ||
+				   score.getParts().get(i).getMeasures().get(j).getId().equals("0")) {
 
 					movementCounter++;
 
@@ -549,6 +550,14 @@ public class MusicXML2RDF {
 
 				ttl.append(measureObject + musicOWL.replace("OBJECT", "hasTime") + timeObject + ". \n");
 				ttl.append(timeObject + rdfTypeURI + musicOWL.replace("OBJECT", "TimeSignature") + " . \n");
+				
+				if(score.getParts().get(i).getMeasures().get(j).getTime().getBeats().equals("")) {
+					score.getParts().get(i).getMeasures().get(j).getTime().setBeats("0");
+				}
+				if(score.getParts().get(i).getMeasures().get(j).getTime().getBeatType().equals("")) {
+					score.getParts().get(i).getMeasures().get(j).getTime().setBeatType("0");
+				}
+
 				ttl.append(timeObject + musicOWL.replace("OBJECT", "hasBeats") + "\"" + score.getParts().get(i).getMeasures().get(j).getTime().getBeats()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");
 				ttl.append(timeObject + musicOWL.replace("OBJECT", "hasBeatType") + "\"" + score.getParts().get(i).getMeasures().get(j).getTime().getBeatType()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");
 
@@ -1083,7 +1092,7 @@ public class MusicXML2RDF {
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 			//sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-			ttl.append("_:musicxml2rdf"+uid + provOntology.replace("OBJECT", "endedAtTime") + "\"" + sdf.format(new Date()) + "\" .\n");
+			ttl.append("<http://musicxml2rdf.musicowl.de/"+uid+">" + provOntology.replace("OBJECT", "endedAtTime") + "\"" + sdf.format(new Date()) + "\" .\n");
 			
 			FileOutputStream fileStream = new FileOutputStream(new File(this.getOutputFile()),false);
 			OutputStreamWriter writer = new OutputStreamWriter(fileStream, StandardCharsets.UTF_8);
