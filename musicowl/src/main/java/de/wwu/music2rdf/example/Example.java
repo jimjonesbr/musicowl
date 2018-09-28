@@ -12,7 +12,7 @@ public class Example {
 				
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
 		
-		music2rdf.setInputFile(new File("musicxml/web-samples/elgar_cello_concerto_op.85.xml"));
+		music2rdf.setInputFile(new File("musicxml/elgar_cello_concerto_op.85.xml"));
 		music2rdf.setOutputFile("ntriples/elgar_cello_concerto_op.85.nt");
 		music2rdf.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg");
 		music2rdf.setScoreURI("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
@@ -23,6 +23,7 @@ public class Example {
 		
 		music2rdf.parseMusicXML();
 		
+
 	}
 
 }

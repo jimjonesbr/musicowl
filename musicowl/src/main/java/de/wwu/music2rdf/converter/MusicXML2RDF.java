@@ -60,7 +60,7 @@ public class MusicXML2RDF {
 	private String scoreURI = "";
 	private String documentTitle = "";
 	private String thumbnail = "";
-	private String identifier = "";
+//	private String identifier = "";
 	private Collection collection;
 	private static Logger logger = Logger.getLogger("Converter");
 	
@@ -117,6 +117,8 @@ public class MusicXML2RDF {
 			persons.add(new Person("http://unknown.person.wmss","Unknown",Role.UNKNOWN));			
 		}
 			
+		boolean hasEncoder = false;
+		
 		for (int i = 0; i < persons.size(); i++) {
 			
 			if(persons.get(i).getUri()==null) {
@@ -143,6 +145,7 @@ public class MusicXML2RDF {
 				metadata.append("<"+persons.get(i).getUri()+"> <http://www.w3.org/ns/prov#hadRole> <http://d-nb.info/gnd/4139395-8> " + " . \n");
 				metadata.append("<http://d-nb.info/gnd/4139395-8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4139395-8> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Encoder\" . \n");
+				hasEncoder = true;
 			}
 			
 			if(persons.get(i).getRole().equals("Composer")) {
@@ -225,9 +228,24 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> "+unknown+" .\n");
 				metadata.append(unknown + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
-				metadata.append(unknown + " <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Dedicatee\" .\n");
+				metadata.append(unknown + " <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Unknown\" .\n");
 			}
 		}
+		
+		
+		if(!hasEncoder) {
+			
+			metadata.append(activity + " <http://www.w3.org/ns/prov#wasAssociatedWith> <http://wmss.unknown.encoder> . \n");
+			metadata.append(activity + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> . \n");
+			metadata.append(activity + " <http://www.w3.org/ns/prov#generated> <" + score.getURI() + "> " + " . \n");
+			metadata.append("<http://wmss.unknown.encoder> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> " + " . \n");
+			metadata.append("<http://wmss.unknown.encoder> <http://xmlns.com/foaf/0.1/name> \"Unknown Encoder\" . \n");
+			metadata.append("<http://wmss.unknown.encoder> <http://www.w3.org/ns/prov#hadRole> <http://d-nb.info/gnd/4139395-8> " + " . \n");
+			metadata.append("<http://d-nb.info/gnd/4139395-8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+			metadata.append("<http://d-nb.info/gnd/4139395-8> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Encoder\" . \n");
+			
+		}
+		
 		
 		return metadata.toString();
 	}
@@ -237,12 +255,12 @@ public class MusicXML2RDF {
 				
 		StringBuffer ttl = new StringBuffer();
 		
-		if(score.getURI().equals("") || score.getURI()==null) {
+		if(score.getURI().equals("")) {
 			score.setURI("http://wmss.undefined.score/"+UUID.randomUUID().toString());
 			logger.warn("No URI provided for the current score: " + score.getTitle());
 		}
-		
-		if(score.getTitle().equals("") || score.getTitle()==null) {
+
+		if(score.getTitle().equals("")) {
 			score.setTitle("Unknown Music Score Tile");
 			logger.warn("No title provided for the current score: " + score.getURI());
 		}		
@@ -511,6 +529,13 @@ public class MusicXML2RDF {
 
 					}
 
+					if(key.getTonic()==null) {
+						key.setTonic("Unknown");
+					}
+					if(key.getMode()==null) {
+						key.setMode("Unknown");
+					}
+					
 					ttl.append(keyObject + " <http://purl.org/ontology/tonality/tonic> " + chordNoteOWL.replace("OBJECT", key.getTonic()) + " . \n");
 					ttl.append(keyObject + " <http://purl.org/ontology/tonality/mode> " + keyModeOWL.replace("OBJECT", key.getMode()) + " . \n");
 

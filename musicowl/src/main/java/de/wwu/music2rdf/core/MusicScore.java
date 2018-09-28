@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class MusicScore {
 
 	private ArrayList<ScorePart> parts;
-	private String uri;
-	private String fileName;
-	private String fileContent;
-	private String title;
-	private String encoder;
-	private String encodedAt;
+	private String uri = "";
+	private String fileName = "";
+	private String fileContent = "";
+	private String title = "";
+	private String encoder = "";
+	private String encodedAt = "";
 	
 	public MusicScore() {
 	
