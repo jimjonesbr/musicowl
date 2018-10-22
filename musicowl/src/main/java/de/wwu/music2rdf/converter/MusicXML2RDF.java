@@ -323,7 +323,19 @@ public class MusicXML2RDF {
 					String movementObject = nodeURI.replace("OBJECT", "MOV" + movementCounter);
 					ttl.append(scoreURI + musicOntology.replace("OBJECT", "movement") + movementObject + " .\n");
 					ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
-
+										
+					if(score.getParts().get(i).getMeasures().get(j).getBeatUnit()!=null){
+						if(!score.getParts().get(i).getMeasures().get(j).getBeatUnit().equals("")) {
+							String beatUnit = this.getCapital(score.getParts().get(i).getMeasures().get(j).getBeatUnit());
+							ttl.append(movementObject + musicOWL.replace("OBJECT", "hasBeatUnit") + musicOWL.replace("OBJECT", beatUnit) +" .\n");
+						}
+					} 
+					
+					if(score.getParts().get(i).getMeasures().get(j).getBeatsPerMinute()!=0) {
+						ttl.append(movementObject + musicOWL.replace("OBJECT", "hasBeatsPerMinute") + "\""+score.getParts().get(i).getMeasures().get(j).getBeatsPerMinute() +"\" .\n");
+					}
+					
+					
 					boolean addMovement = true;
 					Movement movement = new Movement();
 					movement.setId(movementCounter);
@@ -1431,9 +1443,30 @@ public class MusicXML2RDF {
 										}
 
 									}
+									
+									if(elementDirection.getElementsByTagName("direction-type").item(m)!=null){
+
+										if(!(elementDirection.getElementsByTagName("metronome").item(m)==null)) {
+
+											NodeList listMetronome = elementDirection.getElementsByTagName("metronome").item(m).getChildNodes();
+											//System.out.println(listMetronome.item(1).getTextContent());
+											for (int n = 0; n < listMetronome.getLength(); n++) {
+
+												if(listMetronome.item(n).getNodeName().matches("beat-unit")) {
+													measure.setBeatUnit(listMetronome.item(n).getTextContent());	
+													System.out.println("beat-unit > " + measure.getBeatUnit());
+												}
+
+												if(listMetronome.item(n).getNodeName().matches("per-minute")) {
+													measure.setBeatsPerMinute(Integer.parseInt(listMetronome.item(n).getTextContent().toString()));
+													System.out.println("per-minute > " + measure.getBeatsPerMinute());
+												}
+
+											}
+										}
+									}
 
 								}
-
 
 							}
 
@@ -1637,9 +1670,7 @@ public class MusicXML2RDF {
 								note.getVoice().getPart().setId(score.getParts().get(i).getId());
 								note.getVoice().setMeasure(measure.getId());
 
-
 								if(elementNotes.getElementsByTagName("accidental").item(0)!=null){
-
 									String accidental = elementNotes.getElementsByTagName("accidental").item(0).getTextContent();
 									if(accidental.equals("flat-flat")) {
 										accidental = "doubleflat";
@@ -1648,7 +1679,6 @@ public class MusicXML2RDF {
 									}
 									note.setAccidental(accidental);
 									//note.setAccidental(elementNotes.getElementsByTagName("accidental").item(0).getTextContent());
-
 								}
 
 
@@ -1771,8 +1801,7 @@ public class MusicXML2RDF {
 
 	}
 
-
-
+	
 	private void addClef(Clef clef){
 
 		boolean exists = false;

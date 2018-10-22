@@ -4,6 +4,7 @@ public class Movement {
 
 	private int id;
 	private String title;
+	
 	public Movement() {
 		super();
 	}
@@ -19,6 +20,5 @@ public class Movement {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	
+		
 }

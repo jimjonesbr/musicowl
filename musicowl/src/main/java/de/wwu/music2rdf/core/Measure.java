@@ -10,6 +10,8 @@ public class Measure {
 	private ArrayList<Note> notes;
 	private String barline;
 	private String title;
+	private int beatsPerMinute = 0;
+	private String beatUnit = "";
 	
 	public Measure() {
 		super();
@@ -53,6 +55,23 @@ public class Measure {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+	public int getBeatsPerMinute() {
+		return beatsPerMinute;
+	}
+
+	public void setBeatsPerMinute(int beatsPerMinute) {
+		this.beatsPerMinute = beatsPerMinute;
+	}
+
+	public String getBeatUnit() {
+		return beatUnit;
+	}
+
+	public void setBeatUnit(String beatUnit) {
+		this.beatUnit = beatUnit;
+	}
+
 	
 	
 	
