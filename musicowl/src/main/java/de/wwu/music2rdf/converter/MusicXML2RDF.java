@@ -60,7 +60,6 @@ public class MusicXML2RDF {
 	private String scoreURI = "";
 	private String documentTitle = "";
 	private String thumbnail = "";
-//	private String identifier = "";
 	private Collection collection;
 	private static Logger logger = Logger.getLogger("Converter");
 	
@@ -106,7 +105,6 @@ public class MusicXML2RDF {
 			metadata.append("<" + score.getURI() + "> <http://xmlns.com/foaf/0.1/thumbnail> <" + this.thumbnail+ "> .\n");	
 		}
 		
-		//metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/identifier> \"" + this.getIdentifier()+ "\" . \n");
 		metadata.append("<" + score.getURI() + "> <http://www.w3.org/ns/prov#wasGeneratedBy> <https://github.com/jimjonesbr/musicowl> . \n");
 		metadata.append("<https://github.com/jimjonesbr/musicowl> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"MusicXML to RDF Converter.\" . \n");
 
@@ -1642,7 +1640,14 @@ public class MusicXML2RDF {
 
 								if(elementNotes.getElementsByTagName("accidental").item(0)!=null){
 
-									note.setAccidental(elementNotes.getElementsByTagName("accidental").item(0).getTextContent());
+									String accidental = elementNotes.getElementsByTagName("accidental").item(0).getTextContent();
+									if(accidental.equals("flat-flat")) {
+										accidental = "doubleflat";
+									} else if(accidental.equals("double-sharp")) {
+										accidental = "doublesharp";
+									}
+									note.setAccidental(accidental);
+									//note.setAccidental(elementNotes.getElementsByTagName("accidental").item(0).getTextContent());
 
 								}
 
