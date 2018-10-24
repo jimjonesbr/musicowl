@@ -62,6 +62,7 @@ public class MusicXML2RDF {
 	private String thumbnail = "";
 	private Collection collection;
 	private static Logger logger = Logger.getLogger("Converter");
+	private String dateIssued = "";
 	
 	public MusicXML2RDF() {
 		super();
@@ -96,6 +97,10 @@ public class MusicXML2RDF {
 			metadata.append("<"+collection.getCollectionURI()+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Collection> .\n");			
 			metadata.append("<"+collection.getCollectionURI()+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \""+collection.getCollectionName()+"\" .\n");
 
+		}
+		
+		if(!this.getDateIssued().equals("")) {
+			metadata.append("<" + score.getURI() + "> <http://purl.org/dc/terms/issued> \""+this.getDateIssued().replaceAll("[^\\d]", "")+"\" .\n");
 		}
 		
 		if(this.thumbnail.equals("")) {
@@ -324,18 +329,18 @@ public class MusicXML2RDF {
 					ttl.append(scoreURI + musicOntology.replace("OBJECT", "movement") + movementObject + " .\n");
 					ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
 										
-					if(score.getParts().get(i).getMeasures().get(j).getBeatUnit()!=null){
-						if(!score.getParts().get(i).getMeasures().get(j).getBeatUnit().equals("")) {
+					//if(score.getParts().get(i).getMeasures().get(j).getBeatUnit()!=null){
+					if(!score.getParts().get(i).getMeasures().get(j).getBeatUnit().equals("")){
+						if(score.getParts().get(i).getMeasures().get(j).getBeatUnit().equals("")) {
 							String beatUnit = this.getCapital(score.getParts().get(i).getMeasures().get(j).getBeatUnit());
 							ttl.append(movementObject + musicOWL.replace("OBJECT", "hasBeatUnit") + musicOWL.replace("OBJECT", beatUnit) +" .\n");
 						}
 					} 
 					
 					if(score.getParts().get(i).getMeasures().get(j).getBeatsPerMinute()!=0) {
-						ttl.append(movementObject + musicOWL.replace("OBJECT", "hasBeatsPerMinute") + "\""+score.getParts().get(i).getMeasures().get(j).getBeatsPerMinute() +"\" .\n");
+						ttl.append(movementObject + musicOWL.replace("OBJECT", "hasBeatsPerMinute") + "\""+score.getParts().get(i).getMeasures().get(j).getBeatsPerMinute() +"\"^^<http://www.w3.org/2001/XMLSchema#int> .\n");
 					}
-					
-					
+									
 					boolean addMovement = true;
 					Movement movement = new Movement();
 					movement.setId(movementCounter);
@@ -376,12 +381,10 @@ public class MusicXML2RDF {
 						ttl.append(partObject + musicOWL.replace("OBJECT", "isEnsemble") + "\"false\" .\n");						
 					}
 
-
 					/**
 					 * @see https://github.com/w3c/musicxml/blob/v3.1/schema/sounds.xml
 					 */
-					
-					
+										
 					if(!score.getParts().get(i).getInstrument().toLowerCase().equals("unknown")) {
 
 						String[] arrayInstrument = score.getParts().get(i).getInstrument().split(Pattern.quote("."));
@@ -1454,12 +1457,9 @@ public class MusicXML2RDF {
 
 												if(listMetronome.item(n).getNodeName().matches("beat-unit")) {
 													measure.setBeatUnit(listMetronome.item(n).getTextContent());	
-													System.out.println("beat-unit > " + measure.getBeatUnit());
 												}
-
 												if(listMetronome.item(n).getNodeName().matches("per-minute")) {
 													measure.setBeatsPerMinute(Integer.parseInt(listMetronome.item(n).getTextContent().toString()));
-													System.out.println("per-minute > " + measure.getBeatsPerMinute());
 												}
 
 											}
@@ -1961,6 +1961,14 @@ public class MusicXML2RDF {
 
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+
+	public String getDateIssued() {
+		return dateIssued;
+	}
+
+	public void setDateIssued(String dateIssued) {
+		this.dateIssued = dateIssued;
 	}
 
 	

@@ -18,8 +18,9 @@ public class Example {
 		music2rdf.setScoreURI("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
 		music2rdf.addCollection(new Collection("https://url.collection.de","My Collection"));
 		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Edward_Elgar","Sir Edward William Elgar",Role.COMPOSER));
-		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
 		music2rdf.setDocumentTitle("Cellokonzert e-Moll op. 85");
+		music2rdf.setDateIssued("1919"); //Formats accepted: yyyy, yyyyMM, yyyyMMdd.
 		
 		music2rdf.parseMusicXML();
 		
