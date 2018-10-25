@@ -36,15 +36,16 @@ public class Example {
 	public static void main(String[] args) {
 				
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
-		
-		music2rdf.setInputFile(new File("/home/jones/elgar_cello_concerto_op.85.xml"));
-		music2rdf.setOutputFile("/home/jones/elgar_cello_concerto_op.85.nt");
+			
+		music2rdf.setInputFile(new File("musicxml/elgar_cello_concerto_op.85.xml"));
+		music2rdf.setOutputFile("ntriples/elgar_cello_concerto_op.85.nt");
 		music2rdf.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg");
 		music2rdf.setScoreURI("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
 		music2rdf.addCollection(new Collection("https://url.collection.de","My Collection"));
 		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Edward_Elgar","Sir Edward William Elgar",Role.COMPOSER));
-		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
 		music2rdf.setDocumentTitle("Cellokonzert e-Moll op. 85");
+		music2rdf.setDateIssued("1919"); //Formats accepted: yyyy, yyyyMM, yyyyMMdd.
 		
 		music2rdf.parseMusicXML();
 		
@@ -55,22 +56,21 @@ public class Example {
 ```
 
 ## Using the Java API via Terminal
-Converting a single MusicXML file:
+Converting a MusicXML file:
 
 ```shell
 $ java -jar musicowl-converter.jar 
-file="/home/jones/elgar_cello_concerto_op.85.xml" 
-output="/home/jones/elgar_cello_concerto_op.85.nt" 
+file=/home/jones/git/musicowl/musicowl/musicxml/elgar_cello_concerto_op.85.xml 
+output=/home/jones/git/musicowl/musicowl/ntriples/elgar_cello_concerto_op.85.nt 
 uri="http://dbpedia.org/resource/Cello_Concerto_(Elgar)" 
-collectionURI="https://url.collection.de" 
-collectionName="My Collection"
-person="http://dbpedia.org/resource/Edward_Elgar","Sir Edward Elgar","Composer"
+collectionURI=https://url.collection.de collectionName="My Collection" 
+person="http://dbpedia.org/resource/Edward_Elgar","Sir Edward Elgar","Composer" 
 person="http://jimjones.de","Jim Jones","Encoder" 
-thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg";
+thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg" 
+dateIssued=1919
 
-
-File 	         : /home/jones/elgar_cello_concerto_op.85.xml
-Output File      : /home/jones/elgar_cello_concerto_op.85_console.nt
+File 	         : /home/jones/git/musicowl/musicowl/musicxml/elgar_cello_concerto_op.85.xml
+Output File      : /home/jones/git/musicowl/musicowl/ntriples/elgar_cello_concerto_op.85_console.nt
 URI 	         : http://dbpedia.org/resource/Cello_Concerto_(Elgar)
 Collection URI   : https://url.collection.de
 Collection Name  : My Collection
@@ -81,7 +81,7 @@ Person URI       : http://jimjones.de
 Person Name      : Jim Jones
 Person Role      : Encoder
 Thumbnail        : https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg
-
+Date Issued      : 1919
 
 [2018-09-27 15:18:09,624] INFO  [Converter] - Processing elgar_cello_concerto_op.85.xml ...
 [2018-09-27 15:18:09,828] INFO  [Converter] - Loading XML file: 202 ms
@@ -90,4 +90,3 @@ Thumbnail        : https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elg
 [2018-09-27 15:18:11,795] INFO  [Converter] - Score serialization: 141 ms
 
 ```
-
