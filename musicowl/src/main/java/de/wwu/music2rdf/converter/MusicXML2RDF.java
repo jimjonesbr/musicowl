@@ -330,11 +330,11 @@ public class MusicXML2RDF {
 					ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
 										
 					//if(score.getParts().get(i).getMeasures().get(j).getBeatUnit()!=null){
-					if(!score.getParts().get(i).getMeasures().get(j).getBeatUnit().equals("")){
-						if(score.getParts().get(i).getMeasures().get(j).getBeatUnit().equals("")) {
-							String beatUnit = this.getCapital(score.getParts().get(i).getMeasures().get(j).getBeatUnit());
-							ttl.append(movementObject + musicOWL.replace("OBJECT", "hasBeatUnit") + musicOWL.replace("OBJECT", beatUnit) +" .\n");
-						}
+					//System.out.println(score.getParts().get(i).getMeasures().get(j).getBeatUnit());
+					
+					if(!score.getParts().get(i).getMeasures().get(j).getBeatUnit().equals("")){												
+						String beatUnit = this.getCapital(score.getParts().get(i).getMeasures().get(j).getBeatUnit());
+						ttl.append(movementObject + musicOWL.replace("OBJECT", "hasBeatUnit") + musicOWL.replace("OBJECT", beatUnit) +" .\n");						
 					} 
 					
 					if(score.getParts().get(i).getMeasures().get(j).getBeatsPerMinute()!=0) {
