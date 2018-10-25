@@ -54,6 +54,11 @@ public class Converter {
 				System.out.println("Score Title : " + parameter[1]);				
 				music2rdf.setDocumentTitle(parameter[1]);				
 			}
+			
+			if(parameter[0].toLowerCase().equals("dateissued")){
+				System.out.println("Date Issued      : " + parameter[1]);				
+				music2rdf.setDateIssued(parameter[1]);				
+			}
 
 			if(parameter[0].toLowerCase().equals("person")){
 
