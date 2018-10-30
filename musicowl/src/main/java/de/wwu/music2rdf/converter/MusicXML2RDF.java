@@ -144,7 +144,7 @@ public class MusicXML2RDF {
 				metadata.append(activity + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> . \n");
 				metadata.append(activity + " <http://www.w3.org/ns/prov#generated> <" + score.getURI() + "> " + " . \n");
 				metadata.append("<"+persons.get(i).getUri()+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> " + " . \n");
-				metadata.append("<"+persons.get(i).getUri()+"> <http://xmlns.com/foaf/0.1/name> \""+persons.get(i).getName()+"\" . \n");
+				metadata.append("<"+persons.get(i).getUri()+"> <http://xmlns.com/foaf/0.1/name> \""+persons.get(i).getName().replace("\"", "\\\"")+"\" . \n");
 				metadata.append("<"+persons.get(i).getUri()+"> <http://www.w3.org/ns/prov#hadRole> <http://d-nb.info/gnd/4139395-8> " + " . \n");
 				metadata.append("<http://d-nb.info/gnd/4139395-8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4139395-8> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Encoder\" . \n");
@@ -153,7 +153,7 @@ public class MusicXML2RDF {
 			
 			if(persons.get(i).getRole().equals("Composer")) {
 				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
-				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName().replace("\"", "\\\"") + "\" .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4032009-1> .\n");
 				metadata.append("<http://d-nb.info/gnd/4032009-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
@@ -162,7 +162,7 @@ public class MusicXML2RDF {
 			
 			if(persons.get(i).getRole().equals("Lyricist")) {
 				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
-				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName().replace("\"", "\\\"") + "\" .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4246394-4> .\n");
 				metadata.append("<http://d-nb.info/gnd/4246394-4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
@@ -171,7 +171,7 @@ public class MusicXML2RDF {
 			
 			if(persons.get(i).getRole().equals("Arranger")) {
 				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
-				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName().replace("\"", "\\\"") + "\" .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4604119-9> .\n");
 				metadata.append("<http://d-nb.info/gnd/4604119-9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
@@ -180,7 +180,7 @@ public class MusicXML2RDF {
 			
 			if(persons.get(i).getRole().equals("Librettist")) {
 				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
-				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName().replace("\"", "\\\"") + "\" .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4294338-3> .\n");
 				metadata.append("<http://d-nb.info/gnd/4294338-3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
@@ -189,7 +189,7 @@ public class MusicXML2RDF {
 			
 			if(persons.get(i).getRole().equals("Editor")) {
 				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
-				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName().replace("\"", "\\\"") + "\" .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4159575-0> .\n");
 				metadata.append("<http://d-nb.info/gnd/4159575-0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
@@ -207,7 +207,7 @@ public class MusicXML2RDF {
 			
 			if(persons.get(i).getRole().equals("Translator")) {
 				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
-				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName().replace("\"", "\\\"") + "\" .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4061414-1> .\n");
 				metadata.append("<http://d-nb.info/gnd/4061414-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
@@ -217,7 +217,7 @@ public class MusicXML2RDF {
 			if(persons.get(i).getRole().equals("Dedicatee")) {
 				String dedicatee = "<"+score.getURI()+"_dedicatee>";
 				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
-				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName().replace("\"", "\\\"") + "\" .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> "+dedicatee+" .\n");
 				metadata.append(dedicatee + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
@@ -227,7 +227,7 @@ public class MusicXML2RDF {
 			if(persons.get(i).getRole().equals("Unknown")) {
 				String unknown = "<"+score.getURI()+"unknown>";
 				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
-				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName() + "\" .\n");
+				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName().replace("\"", "\\\"") + "\" .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> "+unknown+" .\n");
 				metadata.append(unknown + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
@@ -294,7 +294,7 @@ public class MusicXML2RDF {
 		
 		if(!score.getTitle().equals("") && (score.getTitle()!=null)) {
 			
-			ttl.append(scoreURI + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle().trim() + "\" .\n");
+			ttl.append(scoreURI + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle().trim().replace("\"", "\\\"") + "\" .\n");
 			
 		}	
 		
@@ -327,10 +327,7 @@ public class MusicXML2RDF {
 
 					String movementObject = nodeURI.replace("OBJECT", "MOV" + movementCounter);
 					ttl.append(scoreURI + musicOntology.replace("OBJECT", "movement") + movementObject + " .\n");
-					ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");
-										
-					//if(score.getParts().get(i).getMeasures().get(j).getBeatUnit()!=null){
-					//System.out.println(score.getParts().get(i).getMeasures().get(j).getBeatUnit());
+					ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");								
 					
 					if(!score.getParts().get(i).getMeasures().get(j).getBeatUnit().equals("")){												
 						String beatUnit = this.getCapital(score.getParts().get(i).getMeasures().get(j).getBeatUnit());
@@ -358,7 +355,7 @@ public class MusicXML2RDF {
 						if(movement.getTitle()==null || movement.getTitle().equals("")) {
 							ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movementCounter + " (no title)\" .\n");
 						} else {
-							ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movement.getTitle().trim() + "\" .\n");		
+							ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movement.getTitle().trim().replace("\"", "\\\"") + "\" .\n");		
 						}
 						movements.add(movement);
 					}			
@@ -367,7 +364,7 @@ public class MusicXML2RDF {
 					ttl.append(partObject + rdfTypeURI + musicOWL.replace("OBJECT", "ScorePart") + " .\n");
 					ttl.append(partObject + rdfTypeURI + musicOntology.replace("OBJECT", "Instrument") + " .\n");
 					ttl.append(partObject + rdfTypeURI + skosOntology.replace("OBJECT", "Concept") + " .\n");
-					ttl.append(partObject + dcOntology.replace("OBJECT", "description") + "\"" + score.getParts().get(i).getName().trim() + "\" .\n");
+					ttl.append(partObject + dcOntology.replace("OBJECT", "description") + "\"" + score.getParts().get(i).getName().trim().replace("\"", "\\\"") + "\" .\n");
 										
 					if(score.getParts().get(i).isSolo()) {
 						ttl.append(partObject + musicOWL.replace("OBJECT", "isSolo") + "\"true\" .\n");
@@ -669,10 +666,7 @@ public class MusicXML2RDF {
 					voice.getPart().setMovement(movementCounter);
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice()==null){
-						/**
-						voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_1");
-						voice.setId("1");
-						*/
+
 						//Change regarding voices of notes inside of a chord
 						
 						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isChord()) {
@@ -1452,14 +1446,17 @@ public class MusicXML2RDF {
 										if(!(elementDirection.getElementsByTagName("metronome").item(m)==null)) {
 
 											NodeList listMetronome = elementDirection.getElementsByTagName("metronome").item(m).getChildNodes();
-											//System.out.println(listMetronome.item(1).getTextContent());
 											for (int n = 0; n < listMetronome.getLength(); n++) {
 
 												if(listMetronome.item(n).getNodeName().matches("beat-unit")) {
 													measure.setBeatUnit(listMetronome.item(n).getTextContent());	
 												}
 												if(listMetronome.item(n).getNodeName().matches("per-minute")) {
-													measure.setBeatsPerMinute(Integer.parseInt(listMetronome.item(n).getTextContent().toString()));
+													int perMinute = 0;
+													if(!listMetronome.item(n).getTextContent().toString().equals("") || listMetronome.item(n).getTextContent().toString().matches("^[0-9]+$")) {
+														perMinute = Integer.parseInt(listMetronome.item(n).getTextContent().toString());
+													}
+													measure.setBeatsPerMinute(perMinute);
 												}
 
 											}

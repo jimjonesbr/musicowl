@@ -1,12 +1,10 @@
 package de.wwu.music2rdf.converter;
 
 import java.io.File;
-
 import de.wwu.music2rdf.core.Collection;
 import de.wwu.music2rdf.core.Person;
 
 public class Converter {
-
 
 	public static void main(String[] args) {
 
