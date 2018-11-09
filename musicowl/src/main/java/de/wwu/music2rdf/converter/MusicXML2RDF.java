@@ -225,7 +225,7 @@ public class MusicXML2RDF {
 			}
 			
 			if(persons.get(i).getRole().equals("Unknown")) {
-				String unknown = "<"+score.getURI()+"unknown>";
+				String unknown = "<http://unknown.role.wmss>";
 				metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <" + persons.get(i).getUri() + "> .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://xmlns.com/foaf/0.1/name> \"" + persons.get(i).getName().replace("\"", "\\\"") + "\" .\n");
 				metadata.append("<" + persons.get(i).getUri() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
@@ -248,8 +248,7 @@ public class MusicXML2RDF {
 			metadata.append("<http://d-nb.info/gnd/4139395-8> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Encoder\" . \n");
 			
 		}
-		
-		
+				
 		return metadata.toString();
 	}
 	
@@ -422,7 +421,7 @@ public class MusicXML2RDF {
 
 				if(j>0){
 					ttl.append(nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + score.getParts().get(i).getMeasures().get(j-1).getId()) + musicOWL.replace("OBJECT", "nextMeasure") + measureObject + ".\n");
-					ttl.append(nodeURI.replace("OBJECT", "INSTANT_"+ score.getParts().get(i).getMeasures().get(j-1).getId()) + musicOWL.replace("OBJECT", "nextInstant") + instantObject + ".\n");
+					ttl.append(nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + "INSTANT_"+ score.getParts().get(i).getMeasures().get(j-1).getId()) + musicOWL.replace("OBJECT", "nextInstant") + instantObject + ".\n");
 				}
 
 				ttl.append(partObject + musicOWL.replace("OBJECT", "hasMeasure") + measureObject  + " . \n");
