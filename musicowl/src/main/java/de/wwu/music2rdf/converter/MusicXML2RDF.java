@@ -743,6 +743,9 @@ public class MusicXML2RDF {
 							}
 
 							if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("percussion")){
+								
+								ttl.append(clefObject + musicOWL.replace("OBJECT", "sign")+ chordNoteOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign()) + ". \n");
+								ttl.append(clefObject + musicOWL.replace("OBJECT", "line")+ "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine() + "\"^^<http://www.w3.org/2001/XMLSchema#int> .\n");
 
 
 								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("3") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
