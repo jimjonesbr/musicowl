@@ -583,14 +583,18 @@ public class MusicXML2RDF {
 
 				String notesetObject = "";
 				String tmpVoice = "";
+				//ArrayList<Note> arrayNotesSignature = new ArrayList<Note>();
 
 				for (int k = 0; k < score.getParts().get(i).getMeasures().get(j).getNotes().size(); k++) {
 
 					if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isChord()){
 
+						//arrayNotesSignature = new ArrayList<Note>();
 						notesetCounter++;
 
 					}
+					
+					//arrayNotesSignature.add(score.getParts().get(i).getMeasures().get(j).getNotes().get(k));
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff()==null){
 
@@ -599,7 +603,7 @@ public class MusicXML2RDF {
 					}
 
 					notesetObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_ST" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() + "_V" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId()  + "_NOTESET_" + notesetCounter) ;					
-					score.getParts().get(i).getMeasures().get(j).getNotes().get(k).setSignature(notesetObject);
+					score.getParts().get(i).getMeasures().get(j).getNotes().get(k).setSignature(notesetObject);										
 
 					if(this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature()!=null){
 
@@ -1215,8 +1219,6 @@ public class MusicXML2RDF {
 
 	}
 
-
-
 	private MusicScore createMusicScoreDocument(String musicXML){
 
 		MusicScore score = new MusicScore();
@@ -1677,7 +1679,6 @@ public class MusicXML2RDF {
 										accidental = "doublesharp";
 									}
 									note.setAccidental(accidental);
-									//note.setAccidental(elementNotes.getElementsByTagName("accidental").item(0).getTextContent());
 								}
 
 
