@@ -1355,7 +1355,6 @@ public class MusicXML2RDF {
 								
 				if (nodeMeasures.getLength() != 0) {
 
-
 					for (int j = 0; j < nodeMeasures.getLength(); j++) {
 
 						Measure measure = new Measure();
@@ -1364,6 +1363,7 @@ public class MusicXML2RDF {
 						if(measure.getId().equals("1")) {
 							
 							movementCount = movementCount +1;
+							//currentFifth = "";
 							
 							Element eElement = (Element) nodeMeasures.item(j);
 
@@ -1374,7 +1374,7 @@ public class MusicXML2RDF {
 							}
 
 							logger.info("["+ score.getParts().get(i).getName() + "] Parsing movement > " + movementCount + " ("+measure.getTitle() +") ... ");
-							
+							//logger.info("["+ score.getParts().get(i).getName() + "] fifth > " + currentFifth +" - mode > "+currentMode+" ... ");
 						}
 
 
@@ -1388,31 +1388,33 @@ public class MusicXML2RDF {
 
 						if(nodeMeasureKeyMode.getLength()!=0){
 
-							score.getParts().get(i).getMeasures().get(j).getKey().setMode(nodeMeasureKeyMode.item(0).getTextContent());
-							currentMode = nodeMeasureKeyMode.item(0).getTextContent();
-
+//							score.getParts().get(i).getMeasures().get(j).getKey().setMode(nodeMeasureKeyMode.item(0).getTextContent());
+//							currentMode = nodeMeasureKeyMode.item(0).getTextContent();
+//
+//							logger.info("["+ score.getParts().get(i).getName() + "] mode > " + currentMode +" ... ");
+							
 						} else {
 
-							score.getParts().get(i).getMeasures().get(j).getKey().setMode(currentMode);
+//							score.getParts().get(i).getMeasures().get(j).getKey().setMode(currentMode);
 						}
 
 						NodeList nodeMeasureKeyFifth = (NodeList) xpath.evaluate("//attributes/key/fifths", nodeMeasures.item(j),XPathConstants.NODESET);
 
 						if(nodeMeasureKeyFifth.getLength()!=0){
 
-							score.getParts().get(i).getMeasures().get(j).getKey().setFifths(nodeMeasureKeyFifth.item(0).getTextContent());
-							currentFifth = nodeMeasureKeyFifth.item(0).getTextContent();
-
+//							score.getParts().get(i).getMeasures().get(j).getKey().setFifths(nodeMeasureKeyFifth.item(0).getTextContent());
+//							currentFifth = nodeMeasureKeyFifth.item(0).getTextContent();
+//							
+//							logger.info("["+ score.getParts().get(i).getName() + "] fifth > " + currentFifth +" ... ");
 
 						} else {
 
-							score.getParts().get(i).getMeasures().get(j).getKey().setFifths(currentFifth);
+//							score.getParts().get(i).getMeasures().get(j).getKey().setFifths(currentFifth);
 
 						}
 
 
-
-
+						
 
 						/**
 						 * one xpath element 4 all
@@ -1423,6 +1425,9 @@ public class MusicXML2RDF {
 						NodeList nodeMeasureElementsList = nodeMeasures.item(j).getChildNodes();
 
 						for (int l = 0; l < nodeMeasureElementsList.getLength(); l++) {
+							
+							
+							
 
 							if(nodeMeasureElementsList.item(l).getNodeName().equals("direction")){
 
@@ -1549,6 +1554,34 @@ public class MusicXML2RDF {
 
 
 									}
+									
+									
+//*****************
+									
+									if(listAttributes.item(m).getNodeName().equals("key")){
+
+										NodeList listKey = listAttributes.item(m).getChildNodes();
+
+										for (int n = 0; n < listKey.getLength(); n++) {
+
+											if (listKey.item(n).getNodeName().equals("fifths")){
+
+												currentFifth=listKey.item(n).getTextContent();
+
+											}
+
+											if (listKey.item(n).getNodeName().equals("mode")){
+
+												currentMode = listKey.item(n).getTextContent();
+
+											}
+
+										}
+
+
+									}
+																								
+//***********									
 
 
 								}
@@ -1556,10 +1589,12 @@ public class MusicXML2RDF {
 							}
 
 
-
+							//score.getParts().get(i).getMeasures().get(j).getKey().setMode(currentMode);
+							measure.getKey().setMode(currentMode);
+							measure.getKey().setFifths(currentFifth);
 							measure.getTime().setBeats(currentBeat);
 							measure.getTime().setBeatType(currentBeatType);
-
+							//System.out.println(">>>>>>>> " + currentFifth + " mode " + currentMode);
 
 							if(nodeMeasureElementsList.item(l).getChildNodes().equals("barline")){
 
