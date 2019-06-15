@@ -1,4 +1,4 @@
-[![](http://linkeddata.uni-muenster.de/musicportal/web/img/partners.png)](https://www.uni-muenster.de/de/)
+[![](https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/wwu.svg)](https://www.uni-muenster.de/de/)
 
 # MusicXML to RDF Converter (BETA)
 
@@ -83,10 +83,40 @@ Person Role      : Encoder
 Thumbnail        : https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg
 Date Issued      : 1919
 
-[2018-09-27 15:18:09,624] INFO  [Converter] - Processing elgar_cello_concerto_op.85.xml ...
-[2018-09-27 15:18:09,828] INFO  [Converter] - Loading XML file: 202 ms
-[2018-09-27 15:18:10,119] INFO  [Converter] - [Violoncello] Parsing movement > 1 (Adagio) ... 
-[2018-09-27 15:18:11,654] INFO  [Converter] - Creating MusicScore object: 1.825 seconds
-[2018-09-27 15:18:11,795] INFO  [Converter] - Score serialization: 141 ms
+[2019-06-15 11:53:30,864] INFO  [Converter] - Processing elgar_cello_concerto_op.85.xml ...
+[2019-06-15 11:53:31,301] INFO  [Converter] - Loading XML file: 433 ms
+[2019-06-15 11:53:31,550] INFO  [Converter] - [Violoncello] Parsing movement: 1 (Adagio) ... 
+[2019-06-15 11:53:31,551] INFO  [Converter] - 	[Key] Measure 1 Mode: major | Fifth: 1
+[2019-06-15 11:53:31,551] INFO  [Converter] - 	[Time] Measure 1 Beats: 4 | Beat-type: 4
+[2019-06-15 11:53:31,552] INFO  [Converter] - 	[Clef] Measure 1 Sign: F | Line: 4
+[2019-06-15 11:53:31,557] INFO  [Converter] - 	[Clef] Measure 7 Sign: C | Line: 4
+[2019-06-15 11:53:31,557] INFO  [Converter] - 	[Time] Measure 9 Beats: 9 | Beat-type: 8
+[2019-06-15 11:53:31,559] INFO  [Converter] - 	[Clef] Measure 18 Sign: F | Line: 4
+[2019-06-15 11:53:31,561] INFO  [Converter] - 	[Clef] Measure 25 Sign: C | Line: 4
+[2019-06-15 11:53:31,562] INFO  [Converter] - 	[Clef] Measure 28 Sign: G | Line: 2
+[2019-06-15 11:53:31,564] INFO  [Converter] - 	[Clef] Measure 38 Sign: C | Line: 4
+[2019-06-15 11:53:31,565] INFO  [Converter] - 	[Clef] Measure 42 Sign: F | Line: 4
+[2019-06-15 11:53:31,566] INFO  [Converter] - 	[Clef] Measure 47 Sign: C | Line: 4
+[2019-06-15 11:53:31,567] INFO  [Converter] - 	[Time] Measure 48 Beats: 12 | Beat-type: 8
+[2019-06-15 11:53:31,567] INFO  [Converter] - 	[Clef] Measure 50 Sign: G | Line: 2
+[2019-06-15 11:53:31,568] INFO  [Converter] - 	[Clef] Measure 52 Sign: F | Line: 4
+[2019-06-15 11:53:31,569] INFO  [Converter] - 	[Key] Measure 55 Mode: major | Fifth: 4
+[2019-06-15 11:53:31,569] INFO  [Converter] - 	[Clef] Measure 55 Sign: C | Line: 4
+[2019-06-15 11:53:31,570] INFO  [Converter] - 	[Clef] Measure 61 Sign: G | Line: 2
+[2019-06-15 11:53:31,572] INFO  [Converter] - 	[Time] Measure 66 Beats: 6 | Beat-type: 8
+[2019-06-15 11:53:31,572] INFO  [Converter] - 	[Time] Measure 67 Beats: 12 | Beat-type: 8
+[2019-06-15 11:53:31,575] INFO  [Converter] - 	[Time] Measure 74 Beats: 6 | Beat-type: 8
+[2019-06-15 11:53:31,575] INFO  [Converter] - 	[Key] Measure 75 Mode: major | Fifth: 1
+[2019-06-15 11:53:31,576] INFO  [Converter] - 	[Time] Measure 75 Beats: 12 | Beat-type: 8
+[2019-06-15 11:53:31,577] INFO  [Converter] - 	[Time] Measure 80 Beats: 9 | Beat-type: 8
+[2019-06-15 11:53:31,578] INFO  [Converter] - 	[Clef] Measure 81 Sign: C | Line: 4
+[2019-06-15 11:53:31,578] INFO  [Converter] - 	[Clef] Measure 82 Sign: C | Line: 4
+[2019-06-15 11:53:31,579] INFO  [Converter] - 	[Clef] Measure 83 Sign: F | Line: 4
+[2019-06-15 11:53:31,580] INFO  [Converter] - 	[Clef] Measure 88 Sign: G | Line: 2
+[2019-06-15 11:53:31,582] INFO  [Converter] - 	[Clef] Measure 99 Sign: C | Line: 4
+[2019-06-15 11:53:31,582] INFO  [Converter] - 	[Clef] Measure 101 Sign: F | Line: 4
+[2019-06-15 11:53:31,583] WARN  [Converter] - The title "Cellokonzert e-Moll op. 85" was provided and will therefore overwrite the title provided in the MusicXML document.
+[2019-06-15 11:53:31,583] INFO  [Converter] - Creating MusicScore object: 281 ms
+[2019-06-15 11:53:31,760] INFO  [Converter] - Score serialization: 177 ms
 
 ```
