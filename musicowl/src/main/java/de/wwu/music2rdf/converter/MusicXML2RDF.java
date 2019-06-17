@@ -84,7 +84,6 @@ public class MusicXML2RDF {
 	private String createMetadata(MusicScore score) {
 
 		StringBuffer metadata = new StringBuffer();
-
 		metadata.append("<" + score.getURI() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/mo/Score> .\n");
 
 		if(collection.getCollectionURI()==null) {
@@ -96,7 +95,6 @@ public class MusicXML2RDF {
 			metadata.append("<"+collection.getCollectionURI()+"> <http://www.w3.org/ns/prov#hadMember> <" + score.getURI() + "> .\n");	
 			metadata.append("<"+collection.getCollectionURI()+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Collection> .\n");			
 			metadata.append("<"+collection.getCollectionURI()+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \""+collection.getCollectionName()+"\" .\n");
-
 		}
 
 		if(!this.getDateIssued().equals("")) {
@@ -583,18 +581,14 @@ public class MusicXML2RDF {
 
 				String notesetObject = "";
 				String tmpVoice = "";
-				//ArrayList<Note> arrayNotesSignature = new ArrayList<Note>();
 
 				for (int k = 0; k < score.getParts().get(i).getMeasures().get(j).getNotes().size(); k++) {
 
 					if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isChord()){
 
-						//arrayNotesSignature = new ArrayList<Note>();
 						notesetCounter++;
 
 					}
-
-					//arrayNotesSignature.add(score.getParts().get(i).getMeasures().get(j).getNotes().get(k));
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff()==null){
 
@@ -670,7 +664,9 @@ public class MusicXML2RDF {
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice()==null){
 
-						//Change regarding voices of notes inside of a chord
+						/**
+						 * Change regarding voices of notes inside of a chord
+						 */
 
 						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isChord()) {
 							voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_" + tmpVoice);
@@ -1056,22 +1052,11 @@ public class MusicXML2RDF {
 					}
 
 
-
-
-
-
-
-
-
-
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave()!=null){
 
 						ttl.append(noteObject + musicOWL.replace("OBJECT", "hasOctave") + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");	
 
 					}
-
-
-
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isDot()){
 						String dotObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" +partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_D_DOT");
@@ -1102,9 +1087,7 @@ public class MusicXML2RDF {
 			String xml = new String(score.getFileContent().getBytes(StandardCharsets.UTF_8));
 			xml = xml.replace("\\", "\\\\");
 			ttl.append(scoreURI + musicOWL.replace("OBJECT", "asMusicXML")+ "\"" + xml.replace("\"", "'") + "\" . \n" );
-
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-			//sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 			ttl.append("<http://musicxml2rdf.musicowl.de/"+uid+">" + provOntology.replace("OBJECT", "endedAtTime") + "\"" + sdf.format(new Date()) + "\" .\n");
 
 			FileOutputStream fileStream = new FileOutputStream(new File(this.getOutputFile()),false);
@@ -1112,7 +1095,6 @@ public class MusicXML2RDF {
 
 			writer.append(ttl.toString());
 			writer.close();		
-
 
 			staves = null;
 			voices = null;
@@ -1546,7 +1528,7 @@ public class MusicXML2RDF {
 
 										}
 
-										logger.info("	[Time] Measure "+measure.getId()+" Beats: "+ currentBeat+ " | Beat-type: " + currentBeatType);
+										logger.info("	[Time] Measure: "+measure.getId()+" Beats: "+ currentBeat+ " | Beat-type: " + currentBeatType);
 
 									}
 
@@ -1570,7 +1552,7 @@ public class MusicXML2RDF {
 
 										}
 
-										logger.info("	[Key] Measure "+measure.getId()+" Mode: "+ currentMode+ " | Fifth: " + currentFifth);
+										logger.info("	[Key] Measure: "+measure.getId()+" Mode: "+ currentMode+ " | Fifth: " + currentFifth);
 
 									}
 
@@ -1600,9 +1582,6 @@ public class MusicXML2RDF {
 								}
 
 							}
-
-
-
 
 
 							Note note = new Note();
@@ -1644,7 +1623,6 @@ public class MusicXML2RDF {
 												note.setSlur(Integer.toString(slurCount));
 
 											}
-
 
 
 											if(listNotationElements.item(n).getNodeName().equals("articulations")){
@@ -1742,11 +1720,6 @@ public class MusicXML2RDF {
 			}
 
 
-
-
-
-
-
 			if(verbose){
 
 				System.out.println("Score: "+score.getTitle()+"\n");
@@ -1825,7 +1798,6 @@ public class MusicXML2RDF {
 
 	}
 
-
 	private void addClef(Clef clef){
 
 		boolean exists = false;
@@ -1845,7 +1817,6 @@ public class MusicXML2RDF {
 
 		if(!exists) 
 			clefList.add(clef);
-
 
 	}
 
@@ -1994,7 +1965,6 @@ public class MusicXML2RDF {
 	public void setDateIssued(String dateIssued) {
 		this.dateIssued = dateIssued;
 	}
-
 
 
 }
