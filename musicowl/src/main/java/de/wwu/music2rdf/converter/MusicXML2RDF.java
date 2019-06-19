@@ -26,6 +26,8 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -119,6 +121,7 @@ public class MusicXML2RDF {
 		}
 
 		boolean hasEncoder = false;
+		boolean hasComposer = false;
 
 		for (int i = 0; i < persons.size(); i++) {
 
@@ -156,6 +159,7 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4032009-1> .\n");
 				metadata.append("<http://d-nb.info/gnd/4032009-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4032009-1> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Composer\" .\n");
+				hasComposer = true;
 			}
 
 			if(persons.get(i).getRole().equals("Lyricist")) {
@@ -244,6 +248,17 @@ public class MusicXML2RDF {
 			metadata.append("<http://wmss.unknown.encoder> <http://www.w3.org/ns/prov#hadRole> <http://d-nb.info/gnd/4139395-8> " + " . \n");
 			metadata.append("<http://d-nb.info/gnd/4139395-8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 			metadata.append("<http://d-nb.info/gnd/4139395-8> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Encoder\" . \n");
+
+		}
+		
+		if(!hasComposer) {
+
+			metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <http://dbpedia.org/page/Composer> .\n");
+			metadata.append("<http://dbpedia.org/page/Composer> <http://xmlns.com/foaf/0.1/name> \"Unknown Composer\" .\n");
+			metadata.append("<http://dbpedia.org/page/Composer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+			metadata.append("<http://dbpedia.org/page/Composer> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4032009-1> .\n");
+			metadata.append("<http://d-nb.info/gnd/4032009-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
+			metadata.append("<http://d-nb.info/gnd/4032009-1> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Composer\" .\n");
 
 		}
 
@@ -558,10 +573,15 @@ public class MusicXML2RDF {
 				ttl.append(measureObject + musicOWL.replace("OBJECT", "hasTime") + timeObject + ". \n");
 				ttl.append(timeObject + rdfTypeURI + musicOWL.replace("OBJECT", "TimeSignature") + " . \n");
 
-				if(score.getParts().get(i).getMeasures().get(j).getTime().getBeats().equals("")) {
+				if(score.getParts().get(i).getMeasures().get(j).getTime().getBeats()==null) {
+					score.getParts().get(i).getMeasures().get(j).getTime().setBeats("0");
+				} else if(score.getParts().get(i).getMeasures().get(j).getTime().getBeats().equals("")) {
 					score.getParts().get(i).getMeasures().get(j).getTime().setBeats("0");
 				}
-				if(score.getParts().get(i).getMeasures().get(j).getTime().getBeatType().equals("")) {
+				
+				if(score.getParts().get(i).getMeasures().get(j).getTime().getBeatType()==null) {
+					score.getParts().get(i).getMeasures().get(j).getTime().setBeatType("0");
+				} else if(score.getParts().get(i).getMeasures().get(j).getTime().getBeatType().equals("")) {
 					score.getParts().get(i).getMeasures().get(j).getTime().setBeatType("0");
 				}
 
@@ -741,85 +761,93 @@ public class MusicXML2RDF {
 								ttl.append(articulationObject + rdfTypeURI + musicOWL.replace("OBJECT", this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getArticulations().get(l))) + ".\n");													
 
 							}
+							
+							//System.out.println(">>> DELETE ME >> " + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine());
+							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign()!=null && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine()!=null){
 
-							if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("percussion")){
+								if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("percussion")){
 
-								ttl.append(clefObject + musicOWL.replace("OBJECT", "sign")+ chordNoteOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign()) + ". \n");
-								ttl.append(clefObject + musicOWL.replace("OBJECT", "line")+ "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine() + "\"^^<http://www.w3.org/2001/XMLSchema#int> .\n");
+									ttl.append(clefObject + musicOWL.replace("OBJECT", "sign")+ chordNoteOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign()) + ". \n");
+									ttl.append(clefObject + musicOWL.replace("OBJECT", "line")+ "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine() + "\"^^<http://www.w3.org/2001/XMLSchema#int> .\n");
 
 
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("3") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("3") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
 
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Alto")+ ".\n");
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Alto")+ ".\n");
+
+									}
+
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("5") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
+
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Baritone")+ ".\n");						
+
+									}
+
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("3") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("F")){
+
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Baritone")+ ".\n");					
+
+									}
+
+
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("4") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("F")){
+
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Bass") + ".\n");					
+
+									}
+
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("1") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("G")){
+
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "FrenchViolin") + ".\n");				
+
+									}
+
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("2") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
+
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "MezzoSoprano") + ".\n");		
+
+									}
+
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("1") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
+
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Soprano") + ".\n");		
+
+									}
+
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("5") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("F")){
+
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "SubBass") + ".\n");	
+
+									}
+
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("4") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
+
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Tenor") + ".\n");
+
+									}
+
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("2") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("G")){
+
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Trebble") + ".\n");
+
+									}
+
+									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("percussion")){
+
+										ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Percussion") + ".\n");
+									}
+
+								} else {
+
+									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Percussion")+ ".\n");
 
 								}
 
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("5") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
-
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Baritone")+ ".\n");						
-
-								}
-
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("3") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("F")){
-
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Baritone")+ ".\n");					
-
-								}
-
-
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("4") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("F")){
-
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Bass") + ".\n");					
-
-								}
-
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("1") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("G")){
-
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "FrenchViolin") + ".\n");				
-
-								}
-
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("2") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
-
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "MezzoSoprano") + ".\n");		
-
-								}
-
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("1") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
-
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Soprano") + ".\n");		
-
-								}
-
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("5") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("F")){
-
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "SubBass") + ".\n");	
-
-								}
-
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("4") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
-
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Tenor") + ".\n");
-
-								}
-
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("2") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("G")){
-
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Trebble") + ".\n");
-
-								}
-
-								if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("percussion")){
-
-									ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Percussion") + ".\n");
-								}
 
 							} else {
 
 								ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Percussion")+ ".\n");
-
 							}
-
 						}
 
 						ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasDuration") + durationObject + ".\n");
@@ -1126,7 +1154,17 @@ public class MusicXML2RDF {
 		return result;
 
 	}
-
+	
+	private boolean isMusicXML(File file) {
+		
+		boolean result = false;
+		
+		if(FilenameUtils.getExtension(file.getName()).equals("xml") || FilenameUtils.getExtension(file.getName()).equals("mxl")) {
+			result = true;
+		}
+		
+		return result;
+	}
 
 	public void parseMusicXML(){
 
@@ -1144,60 +1182,72 @@ public class MusicXML2RDF {
 
 		File file = this.getInputFile();
 
-		try {
+		if(this.isMusicXML(file)) {
 
-			logger.info("Processing " + file.getName() + " ...");
+			if(FilenameUtils.getExtension(file.getName()).equals("mxl")) {
+				logger.info("Decompressing MusicXML file: " + file.getName());
+				file = Util.decompressMXL(file.getAbsolutePath(), "tmp/");			
+			}
+
+			try {
+
+				logger.info("Processing " + file.getName() + " ...");
+
+				Date start = new Date();
+
+				DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+				documentBuilderFactory.setValidating(false);
+				DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
+
+				builder.setEntityResolver(new EntityResolver() {
+
+					public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
+
+						return new InputSource(new StringReader(""));
+
+					}
+				});
+
+				Document document = builder.parse(file);
+
+				TransformerFactory tf = TransformerFactory.newInstance();
+				Transformer transformer = tf.newTransformer();
+				transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+				StringWriter writer = new StringWriter();
+				transformer.transform(new DOMSource(document), new StreamResult(writer));
+				musicXMLString = writer.getBuffer().toString().replaceAll("\n|\r", "");
+
+				logger.info("Loading XML file: " + Util.timeElapsed(start, new Date()));
+
+			} catch (Exception e) {
+
+				logger.error("[Error processing MusicXML File]: " + e.getMessage());
+
+			}	
+
 
 			Date start = new Date();
+			MusicScore score = createMusicScoreDocument(musicXMLString); 
+			score.setFileContent(musicXMLString);
+			score.setOutputFileName(file.getName());
+			score.setURI(this.scoreURI);
 
-			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-			documentBuilderFactory.setValidating(false);
-			DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
-
-			builder.setEntityResolver(new EntityResolver() {
-
-				public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
-
-					return new InputSource(new StringReader(""));
-
-				}
-			});
-
-			Document document = builder.parse(file);
-
-			TransformerFactory tf = TransformerFactory.newInstance();
-			Transformer transformer = tf.newTransformer();
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			StringWriter writer = new StringWriter();
-			transformer.transform(new DOMSource(document), new StreamResult(writer));
-			musicXMLString = writer.getBuffer().toString().replaceAll("\n|\r", "");
-
-			logger.info("Loading XML file: " + Util.timeElapsed(start, new Date()));
-
-		} catch (Exception e) {
-
-			logger.error("[Error processing MusicXML File]: " + e.getMessage());
-
-		}	
+			if(!documentTitle.equals("")) {
+				score.setTitle(this.documentTitle);	
+				logger.warn("The title \""+this.documentTitle+"\" was provided and will therefore overwrite the title provided in the MusicXML document.");
+			}
 
 
-		Date start = new Date();
-		MusicScore score = createMusicScoreDocument(musicXMLString); 
-		score.setFileContent(musicXMLString);
-		score.setOutputFileName(file.getName());
-		score.setURI(this.scoreURI);
+			logger.info("Creating MusicScore object: " + Util.timeElapsed(start, new Date()));
 
-		if(!documentTitle.equals("")) {
-			score.setTitle(this.documentTitle);	
-			logger.warn("The title \""+this.documentTitle+"\" was provided and will therefore overwrite the title provided in the MusicXML document.");
+			start = new Date();
+			this.createRDF(score);
+			logger.info("Score serialization: " + Util.timeElapsed(start, new Date())+"\n");
+
+		} else {
+			
+			logger.error("Invalid file format: " + file.getName());
 		}
-
-
-		logger.info("Creating MusicScore object: " + Util.timeElapsed(start, new Date()));
-
-		start = new Date();
-		this.createRDF(score);
-		logger.info("Score serialization: " + Util.timeElapsed(start, new Date())+"\n");
 
 	}
 
@@ -1240,8 +1290,21 @@ public class MusicXML2RDF {
 			if (subfields.getLength() != 0) {
 
 				score.setTitle(subfields.item(0).getTextContent());
-
+				
+			} 
+			
+			
+			/**
+			 * In case title isn't provided in the 'work-titlke' tag, tries to find it at'movement-title'. 
+			 */
+			if(score.getTitle().equals("")) {			
+				subfields = (NodeList) xpath.evaluate("//movement-title", document,XPathConstants.NODESET);				
+				if (subfields.getLength() != 0) {
+					score.setTitle(subfields.item(0).getTextContent());
+				}
 			}
+			
+			
 
 			subfields = (NodeList) xpath.evaluate("//identification/encoding/encoder", document,XPathConstants.NODESET);
 
@@ -1444,7 +1507,7 @@ public class MusicXML2RDF {
 												if(listMetronome.item(n).getNodeName().matches("per-minute")) {
 													int perMinute = 0;
 													if(!listMetronome.item(n).getTextContent().toString().equals("") || listMetronome.item(n).getTextContent().toString().matches("^[0-9]+$")) {
-														perMinute = Integer.parseInt(listMetronome.item(n).getTextContent().toString());
+														perMinute = Integer.parseInt(listMetronome.item(n).getTextContent().toString().replaceAll("[^\\d]", ""));
 													}
 													measure.setBeatsPerMinute(perMinute);
 												}

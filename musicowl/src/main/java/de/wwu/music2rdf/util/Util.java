@@ -1,12 +1,18 @@
 package de.wwu.music2rdf.util;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
 import de.wwu.music2rdf.core.Instrument;
 
 public class Util {
@@ -87,5 +93,54 @@ public class Util {
 		return result;
 		
 	}
+
+	public static File decompressMXL(String mxlFile, String outputFolder){
+
+		byte[] buffer = new byte[1024];
+		File newFile = new File("");
+		
+		try{
+
+			File folder = new File(outputFolder);
+			if(!folder.exists()){
+				folder.mkdir();
+			}
+
+			ZipInputStream zis = new ZipInputStream(new FileInputStream(mxlFile));
+			ZipEntry ze = zis.getNextEntry();
+
+			while(ze!=null){
+
+				String fileName = ze.getName();
+
+				if(fileName.toLowerCase().equals("musicxml.xml")) { 
+
+					newFile = new File(outputFolder + File.separator + new File (mxlFile).getName().replace(".mxl", ".xml"));
+					
+					//System.out.println("file unzip : "+ newFile.getAbsoluteFile());
+					new File(newFile.getParent()).mkdirs();
+					FileOutputStream fos = new FileOutputStream(newFile);             
+
+					int len;
+					while ((len = zis.read(buffer)) > 0) {
+						fos.write(buffer, 0, len);
+					}
+
+					fos.close();   
+					
+				}
+				
+				ze = zis.getNextEntry();
+			}
+
+			zis.closeEntry();
+			zis.close();
+
+		
+		}catch(IOException ex){
+			ex.printStackTrace(); 
+		}
+		return newFile;
+	}    
 
 }
