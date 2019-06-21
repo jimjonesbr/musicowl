@@ -14,7 +14,97 @@ import org.junit.Test;
 public class ConverterTest {
 	
 	@Test
-	public void melodyElgar1() {
+	public void elgarChordSequence() {
+
+		String result = "";		
+        URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+        File file = new File(url.getFile());
+        
+		Model modelElgar = ModelFactory.createDefaultModel();
+		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
+		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
+				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
+				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
+				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
+				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
+				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
+				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"SELECT DISTINCT ?scoreTitle ?measure\n" + 
+				"WHERE {\n" + 
+				"\n" + 
+				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:title ?scoreTitle.\n" + 
+				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
+				"?movementNode mso:hasScorePart ?part.\n" + 
+				"?part mso:hasMeasure ?measureNode.\n" + 
+				"?part rdfs:ID ?partID.\n" + 
+				"?part dc:description ?partName.\n" + 
+				"?part mso:hasStaff ?staff.\n" + 
+				"?measureNode rdfs:ID ?measure.\n" + 
+				"?voice a mso:Voice.\n" + 
+				"?voice rdfs:ID ?voiceID.\n" + 
+				"?measureNode mso:hasNoteSet ?chord_1.\n" + 
+				"?staff mso:hasVoice ?voice.\n" + 
+				"?staff rdfs:ID ?staffID.\n" + 
+				"\n" + 
+				"?voice mso:hasNoteSet ?chord_1.\n" + 
+				"?chord_1 mso:hasNote ?note_chord1_B.\n" + 
+				"?note_chord1_B chord:natural note:B.\n" + 
+				"?note_chord1_B mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
+				"?chord_1 mso:hasNote ?note_chord1_E.\n" + 
+				"?note_chord1_E chord:natural note:E.\n" + 
+				"?note_chord1_E mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
+				"?chord_1 mso:hasNote ?note_chord1_G.\n" + 
+				"?note_chord1_G chord:natural note:G.\n" + 
+				"?note_chord1_G mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int> .    \n" + 
+				"?chord_1 mso:hasDynamic ?dynamic .\n" + 
+				"?dynamic a mso:ff   .\n" + 
+				"?chord_1 mso:hasDuration ?duration_chord1.\n" + 
+				"?duration_chord1 a mso:Half.\n" + 
+				"        \n" + 
+				"?chord_1 mso:nextNoteSet ?chord_2.\n" + 
+				"    \n" + 
+				"?chord_2 mso:hasNote ?note_chord2_E.\n" + 
+				"?note_chord2_E chord:natural note:E.\n" + 
+				"?note_chord2_E mso:hasOctave \"4\"^^<http://www.w3.org/2001/XMLSchema#int>  .  \n" + 
+				"?chord_2 mso:hasNote ?note_chord2_G .\n" + 
+				"?note_chord2_G chord:natural note:G .\n" + 
+				"?note_chord2_G mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
+				"?chord_2 mso:hasNote ?note_chord2_B .\n" + 
+				"?note_chord2_B chord:natural note:B .\n" + 
+				"?note_chord2_B mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
+				"?chord_2 mso:hasNote ?note_chord2_E2 .\n" + 
+				"?note_chord2_E2 chord:natural note:E .\n" + 
+				"?note_chord2_E2 mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
+				"    \n" + 
+				"?chord_2 mso:hasDuration ?duration_chord2.\n" + 
+				"?duration_chord2 a mso:Half.\n" + 
+				"    \n" + 
+				"FILTER ( NOT EXISTS {?note_chord1_B chord:modifier ?m1} )\n" + 
+				"FILTER ( NOT EXISTS {?note_chord1_E chord:modifier ?m2} )\n" + 
+				"FILTER ( NOT EXISTS {?note_chord1_G chord:modifier ?m3} )\n" + 
+				"FILTER ( NOT EXISTS {?note_chord2_E chord:modifier ?m4} )\n" + 
+				"FILTER ( NOT EXISTS {?note_chord2_G chord:modifier ?m5} )\n" + 
+				"FILTER ( NOT EXISTS {?note_chord2_B chord:modifier ?m6} )\n" + 
+				"FILTER ( NOT EXISTS {?note_chord2_E2 chord:modifier ?m7} )\n" + 
+				"}";
+		
+		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
+			ResultSet results = qexec.execSelect() ;
+			for ( ; results.hasNext() ; )
+			{
+				QuerySolution soln = results.nextSolution() ;
+				result = soln.get("?measure").toString();
+				System.out.println("Elgar Chord Sequence: Measure "+soln.get("?measure"));
+			}
+		}
+		
+		assertEquals(result, "1");
+
+	}
+	
+	
+	@Test
+	public void elgarSimpleMelody() {
 
 		String result = "";		
         URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
@@ -106,7 +196,7 @@ public class ConverterTest {
 			{
 				QuerySolution soln = results.nextSolution() ;
 				result = soln.get("?measure").toString();
-				System.out.println("Elgar Melody 1 - Measure > "+soln.get("?measure"));
+				System.out.println("Elgar Simple Melody: Measure "+soln.get("?measure"));
 			}
 		}
 		
