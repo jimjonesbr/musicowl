@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/jimjonesbr/musicowl.svg?branch=master)](https://travis-ci.com/jimjonesbr/musicowl)
+
 [![](https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/wwu.svg)](https://www.uni-muenster.de/de/)
 
 # MusicXML to RDF Converter (BETA)
