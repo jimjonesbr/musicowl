@@ -1,9 +1,8 @@
 package de.wwu.music2rdf.junit;
 
 import static org.junit.Assert.assertEquals;
-
 import java.io.File;
-
+import java.net.URL;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
@@ -17,13 +16,12 @@ public class ConverterTest {
 	@Test
 	public void melodyElgar1() {
 
-		String result = "";
-		
-	    File resourcesDirectory = new File("src/test/resources/elgar_cello_concerto_op.85.nt");
-	    System.out.println(resourcesDirectory.getAbsolutePath());
-			
+		String result = "";		
+        URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+        File file = new File(url.getFile());
+        
 		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(resourcesDirectory.getAbsolutePath(),"N-TRIPLES");
+		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
 		
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
@@ -108,11 +106,12 @@ public class ConverterTest {
 			{
 				QuerySolution soln = results.nextSolution() ;
 				result = soln.get("?measure").toString();
-				System.out.println("Elgar 1 - Measure > "+soln.get("?measure"));
+				System.out.println("Elgar Melody 1 - Measure > "+soln.get("?measure"));
 			}
 		}
 		
 		assertEquals(result, "8");
+		
 		
 	}
 
