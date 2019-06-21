@@ -2,6 +2,8 @@ package de.wwu.music2rdf.junit;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
@@ -11,21 +13,18 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.junit.Test;
 
 public class ConverterTest {
-
-	private Model modelElgar;
-
-	public static void main(String[] args) {
-
-		ConverterTest elgar = new ConverterTest();
-	}
-
+	
 	@Test
 	public void melodyElgar1() {
 
 		String result = "";
-
-		modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read("ntriples/elgar_cello_concerto_op.85.nt","N-TRIPLES");
+		
+	    File resourcesDirectory = new File("src/test/resources/elgar_cello_concerto_op.85.nt");
+	    System.out.println(resourcesDirectory.getAbsolutePath());
+			
+		Model modelElgar = ModelFactory.createDefaultModel();
+		modelElgar.read(resourcesDirectory.getAbsolutePath(),"N-TRIPLES");
+		
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
@@ -103,14 +102,13 @@ public class ConverterTest {
 				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier5} )     \n" + 
 				"}";
 		
-
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
 			ResultSet results = qexec.execSelect() ;
 			for ( ; results.hasNext() ; )
 			{
 				QuerySolution soln = results.nextSolution() ;
 				result = soln.get("?measure").toString();
-				System.out.println("measure > "+soln.get("?measure"));
+				System.out.println("Elgar 1 - Measure > "+soln.get("?measure"));
 			}
 		}
 		
