@@ -1,4 +1,4 @@
-package java.io.music2rdf.junit;
+package de.wwu.music2rdf.junit;
 
 import java.util.*;
 import static org.junit.Assert.*;
