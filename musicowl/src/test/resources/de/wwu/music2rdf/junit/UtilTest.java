@@ -9,8 +9,8 @@ public class UtilTest {
 	@Test
 	public void testTimeElapsed() {
 		System.out.println("Executing tests ...");
-		//Util x = new Util();
-		assertEquals(Util.timeElapsed(new Date(), new Date()), "0 ms");
+		Util x = new Util();
+		assertEquals(x.timeElapsed(new Date(), new Date()), "0 ms");
 		
 	}
 	@Test
