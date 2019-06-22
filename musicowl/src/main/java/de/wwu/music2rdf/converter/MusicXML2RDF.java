@@ -854,7 +854,11 @@ public class MusicXML2RDF {
 
 						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()==null){
 
-							ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", "Duration") + ".\n");
+							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()==null) {
+								ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", "Whole") + ".\n");	
+							} else {
+								ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", "Duration") + ".\n");
+							}
 
 						} else {
 
