@@ -4,8 +4,7 @@
 
 # MusicXML to RDF Converter (BETA)
 
-This converter parses MusicXML files and converts them to RDF, based on the [MusicOWL Ontology](http://linkeddata.uni-muenster.de/ontology/musicscore/mso.owl). It currently supports the following concepts:
-
+This converter parses MusicXML 3.0 files and converts them to RDF, based on the [MusicOWL Ontology](http://linkeddata.uni-muenster.de/ontology/musicscore/mso.owl). It currently supports the following concepts:
  
  * Articulations
  * Clefs
@@ -17,6 +16,37 @@ This converter parses MusicXML files and converts them to RDF, based on the [Mus
  * Staves
  * Tonalities 
  * Voices
+
+## Parameters
+
+`setInputFile`&nbsp;   MusicXML 3.0 file to be converted.
+
+`setOutputFile`&nbsp;   Path and name for RDF output file.
+
+`setThumbnail`&nbsp;   Thumbnail for the converted music score (optional).
+
+`setScoreURI`&nbsp;   URI for the converted score (optional) .
+
+`setDocumentTitle`&nbsp;   Music score title.
+
+`issued`&nbsp;   Date issued. Formats accepted: `yyyy`, `yyyyMM`, `yyyyMMdd` (optional).
+
+`setCollection`&nbsp;   Collections can be used for classifying music scores into certaing groups, e.g. "18th Century Composers", "Advanced Music Scores", etc.
+
+`addPerson`&nbsp;   This method can be used to add persons related to the music score. It consists of an URI, a name and a role, which can have one of the following attributes:
+
+```java
+Role.ARRANGER;
+Role.COMPOSER;
+Role.EDITOR;
+Role.ENCODER;
+Role.LIBRETTIST;
+Role.LYRICIST;
+Role.PERFORMER;
+Role.TRANSLATOR;
+Role.UNKNOWN;
+```
+
 
 ## Using the Java API
 
@@ -39,7 +69,7 @@ public class Example {
 		music2rdf.setOutputFile("ntriples/elgar_cello_concerto_op.85.nt");
 		music2rdf.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg");
 		music2rdf.setScoreURI("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
-		music2rdf.addCollection(new Collection("https://url.collection.de","My Collection"));
+		music2rdf.addCollection(new Collection("https://url.collection.de","Great Composers"));
 		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Edward_Elgar","Sir Edward William Elgar",Role.COMPOSER));
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
 		music2rdf.setDocumentTitle("Cellokonzert e-Moll op. 85");
