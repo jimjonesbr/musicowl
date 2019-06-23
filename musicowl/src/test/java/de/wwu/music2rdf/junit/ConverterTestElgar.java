@@ -13,14 +13,13 @@ import org.junit.Test;
 
 public class ConverterTestElgar {
 
-	
 	@Test
 	public void melodyWithRests() {
 
 		String result = "";		
-        URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
-        File file = new File(url.getFile());
-        
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		File file = new File(url.getFile());
+
 		Model modelElgar = ModelFactory.createDefaultModel();
 		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
@@ -126,7 +125,8 @@ public class ConverterTestElgar {
 				"    \n" + 
 				"    ?voice mso:hasNoteSet ?noteset_10.\n" + 
 				"    ?noteset_10 mso:hasNote ?note_F.\n" + 
-				"    ?note_F chord:natural note:F.\n" + 
+				"    ?note_F chord:natural note:F.\n"+
+				"	 ?note_F chord:modifier chord:sharp." + 
 				"    ?note_F mso:hasOctave \"4\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
 				"    ?noteset_10 mso:hasDuration ?duration_10.\n" + 
 				"    ?duration_10 a mso:Quarter.\n" + 
@@ -143,27 +143,29 @@ public class ConverterTestElgar {
 				System.out.println("Melody containing rests in multiple durations: Measure " + result);
 			}
 		}
-		
+
 		assertEquals(result, "33");
 	}
 	@Test
 	public void checkMetadata() {
 		boolean result = true;		
-        URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
-        File file = new File(url.getFile());
-        
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		File file = new File(url.getFile());
+
 		Model modelElgar = ModelFactory.createDefaultModel();
 		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
-				"PREFIX dct: <http://purl.org/dc/terms/>\n" + 
-				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
+				"PREFIX dct: <http://purl.org/dc/terms/>\n" + 			 
+				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+				
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
 				"PREFIX prov: <http://www.w3.org/ns/prov#>\n" + 
-				"PREFIX gnd: <http://d-nb.info/standards/elementset/gnd#>\n" + 
+				"PREFIX gnd: <http://d-nb.info/standards/elementset/gnd#>\n"+
+				"PREFIX dbp: <http://dbpedia.org/ontology/> \n"
+				+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" + 
 				"\n" + 
-				"SELECT ?collection ?collectionName ?scoreTitle ?issued ?movementTitle ?partID ?partName ?thumbnail ?creator ?creatorName ?creatorRole ?creatorRoleName ?generatedBy ?encoder ?encoderName ?encoderRole ?encoderRoleName\n" + 
+				"SELECT ?collection ?collectionName ?scoreTitle ?issued ?movementTitle ?partID ?partName ?thumbnail ?creator ?creatorName ?creatorRole ?creatorRoleName ?creatorRoleDbp ?creatorRoleDbpName ?generatedBy ?encoder ?encoderName ?encoderRole ?encoderRoleName ?encoderRoleDbpName ?encoderRoleDbp\n" + 
 				"WHERE {\n" + 
 				"	?collection prov:hadMember <http://dbpedia.org/resource/Cello_Concerto_(Elgar)>.\n" + 
 				"    ?collection rdfs:label ?collectionName.\n" + 
@@ -177,8 +179,12 @@ public class ConverterTestElgar {
 				"    ?creator foaf:name ?creatorName.\n" + 
 				"    ?creator gnd:professionOrOccupation ?creatorRole.\n" + 
 				"    ?creatorRole gnd:preferredNameForTheSubjectHeading ?creatorRoleName.\n" + 
+				"    ?creator dbp:occupation ?creatorRoleDbp.\n" +
+				"    ?creatorRoleDbp rdfs:label ?creatorRoleDbpName.\n" +
 				"    ?generatedBy prov:wasAssociatedWith ?encoder. \n" + 
-				"    ?encoder a foaf:Person.\n" + 
+				"    ?encoder a foaf:Person.\n" +
+				"    ?encoder dbp:occupation ?encoderRoleDbp .\n" + 
+				"    ?encoderRoleDbp rdfs:label ?encoderRoleDbpName.\n" + 
 				"    ?generatedBy a prov:Activity.\n" + 
 				"    ?encoder foaf:name ?encoderName.    \n" + 
 				"    ?encoder a foaf:Person.\n" + 
@@ -186,16 +192,21 @@ public class ConverterTestElgar {
 				"    ?encoderRole gnd:preferredNameForTheSubjectHeading ?encoderRoleName.\n" + 
 				"    ?movementNode dc:title ?movementTitle.\n" + 
 				"	?movementNode mso:hasScorePart ?part.\n" + 
-				"	?part rdfs:ID ?partID.\n" + 
+				"	?part rdf:ID ?partID.\n" + 
 				"	?part dc:description ?partName.		  \n" + 
 				"}";
-		
+
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
 			ResultSet results = qexec.execSelect() ;
+
+			if(results.getResultVars().size()==0) {
+				result=false;
+			}
+
 			for ( ; results.hasNext() ; )
 			{
 				QuerySolution soln = results.nextSolution() ;
-				
+
 				if(!soln.getLiteral("?scoreTitle").toString().equals("Cellokonzert e-Moll op. 85")) result = false;
 				if(!soln.get("?thumbnail").toString().equals("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg")) result = false;
 				if(!soln.get("?collection").toString().equals("https://url.collection.de")) result = false;
@@ -204,42 +215,50 @@ public class ConverterTestElgar {
 				if(!soln.getLiteral("?movementTitle").toString().equals("Adagio")) result = false;
 				if(!soln.get("?creator").toString().equals("http://dbpedia.org/resource/Edward_Elgar")) result = false;
 				if(!soln.getLiteral("?creatorName").toString().equals("Sir Edward William Elgar")) result = false;
+
 				if(!soln.get("?creatorRole").toString().equals("http://d-nb.info/gnd/4032009-1")) result = false;
 				if(!soln.getLiteral("?creatorRoleName").toString().equals("Composer")) result = false;
+				if(!soln.get("?creatorRoleDbp").toString().equals("http://dbpedia.org/resource/Composer")) result = false;
+				if(!soln.getLiteral("?creatorRoleDbpName").toString().trim().equals("Composer")) result = false;
 
 				if(!soln.get("?encoder").toString().equals("http://jimjones.de")) result = false;
 				if(!soln.getLiteral("?encoderName").toString().equals("Jim Jones")) result = false;
 				if(!soln.get("?encoderRole").toString().equals("http://d-nb.info/gnd/4139395-8")) result = false;
 				if(!soln.getLiteral("?encoderRoleName").toString().equals("Encoder")) result = false;
+				if(!soln.get("?encoderRoleDbp").toString().equals("http://dbpedia.org/resource/Encoder")) result = false;
+				if(!soln.getLiteral("?encoderRoleDbpName").toString().trim().equals("Encoder")) result = false;
 
-				
-				System.out.println("\nScore Title: " + soln.get("?scoreTitle") + 
-						           "\nThumbnail: " + soln.get("?thumbnail")+
-						           "\nCollection URI: " + soln.get("?collection")+
-						           "\nCollection Name: " + soln.get("?collectionName")+
-						           "\nDate Issued: " + soln.get("?issued")+
-						           "\nMovement: " + soln.get("?movementTitle")+
-						           "\nComposer URI: " + soln.get("?creator")+
-						           "\nComposer Name: " + soln.get("?creatorName")+
-						           "\nComposer Role URI: " + soln.get("?creatorRole")+
-						           "\nComposer Role Name: " + soln.get("?creatorRoleName")+
-						           "\nEncoder URI: " + soln.get("?encoder")+
-						           "\nEncoder Name: " + soln.get("?encoderName")+
-						           "\nEncoder Role URI: " + soln.get("?encoderRole")+
-						           "\nEncoder Role Name: " + soln.get("?encoderRoleName")
-						           );
+				System.out.println("Meta data:\n");
+				System.out.println("  Score Title: " + soln.get("?scoreTitle") + 
+						"\n  Thumbnail: " + soln.get("?thumbnail")+
+						"\n  Collection URI: " + soln.get("?collection")+
+						"\n  Collection Name: " + soln.get("?collectionName")+
+						"\n  Date Issued: " + soln.get("?issued")+
+						"\n  Movement: " + soln.get("?movementTitle")+
+						"\n  Composer URI: " + soln.get("?creator")+
+						"\n  Composer Name: " + soln.get("?creatorName")+
+						"\n  Composer Role URI: " + soln.get("?creatorRole")+
+						"\n  Composer Role Name: " + soln.get("?creatorRoleName")+
+						"\n  Composer Role URI (DBpedia): " + soln.get("?creatorRoleDbp")+
+						"\n  Composer Role Name (DBpedia): " + soln.get("?creatorRoleDbpName")+
+						"\n  Encoder URI: " + soln.get("?encoder")+
+						"\n  Encoder Name: " + soln.get("?encoderName")+
+						"\n  Encoder Role URI: " + soln.get("?encoderRole")+
+						"\n  Encoder Role Name: " + soln.get("?encoderRoleName")
+						);
 			}
 		}
-		
+
 		assertEquals(result,true);
-		
+
 	}
+	
 	@Test
 	public void totalMeasures() {
 		int result = 0;		
-        URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
-        File file = new File(url.getFile());
-        
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		File file = new File(url.getFile());
+
 		Model modelElgar = ModelFactory.createDefaultModel();
 		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
@@ -262,17 +281,17 @@ public class ConverterTestElgar {
 				System.out.println("Total measures: " + result);
 			}
 		}
-		
+
 		assertEquals(result, 106);
-		
+
 	}
-	
+
 	@Test
 	public void changingKeys() {
 		String result = "";		
-        URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
-        File file = new File(url.getFile());
-        
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		File file = new File(url.getFile());
+
 		Model modelElgar = ModelFactory.createDefaultModel();
 		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
@@ -300,7 +319,7 @@ public class ConverterTestElgar {
 				"?key_2 ton:tonic note:G  .\n" + 
 				"?key_2 ton:mode mode:major .\n" + 
 				"}"; 		
-		
+
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
 			ResultSet results = qexec.execSelect() ;
 			for ( ; results.hasNext() ; )
@@ -310,17 +329,17 @@ public class ConverterTestElgar {
 				System.out.println("Key signature change EMajor -> GMajor: Measure " + result);
 			}
 		}
-		
+
 		assertEquals(result, "74");
 	}
-	
+
 	@Test
 	public void changingTimeSignatures() {
 
 		int result = 0;		
-        URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
-        File file = new File(url.getFile());
-        
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		File file = new File(url.getFile());
+
 		Model modelElgar = ModelFactory.createDefaultModel();
 		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
@@ -358,7 +377,7 @@ public class ConverterTestElgar {
 				System.out.println("Time signature change 8/6 -> 12/8: "+soln.getLiteral("?qt").getInt() + " times");
 			}
 		}
-		
+
 		assertEquals(result, 2);
 	}
 
@@ -366,9 +385,9 @@ public class ConverterTestElgar {
 	public void elgarChordSequence() {
 
 		String result = "";		
-        URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
-        File file = new File(url.getFile());
-        
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		File file = new File(url.getFile());
+
 		Model modelElgar = ModelFactory.createDefaultModel();
 		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
@@ -436,7 +455,7 @@ public class ConverterTestElgar {
 				"FILTER ( NOT EXISTS {?note_chord2_B chord:modifier ?m6} )\n" + 
 				"FILTER ( NOT EXISTS {?note_chord2_E2 chord:modifier ?m7} )\n" + 
 				"}";
-		
+
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
 			ResultSet results = qexec.execSelect() ;
 			for ( ; results.hasNext() ; )
@@ -446,21 +465,21 @@ public class ConverterTestElgar {
 				System.out.println("Chord sequence: Measure "+soln.get("?measure"));
 			}
 		}
-		
+
 		assertEquals(result, "1");
 
 	}
-	
+
 	@Test
 	public void elgarMelodyChangingKeys() {
-		
+
 		String result = "";		
-        URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
-        File file = new File(url.getFile());
-        
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		File file = new File(url.getFile());
+
 		Model modelElgar = ModelFactory.createDefaultModel();
 		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
-		
+
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
@@ -542,7 +561,7 @@ public class ConverterTestElgar {
 				"\n" + 
 				"FILTER ( NOT EXISTS {?noteset_4 chord:modifier ?m1} )\n" + 
 				"}";
-		
+
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
 			ResultSet results = qexec.execSelect() ;
 			for ( ; results.hasNext() ; )
@@ -552,20 +571,20 @@ public class ConverterTestElgar {
 				System.out.println("Melody containing multiple keys, dynamics and duration attributes: Measure "+soln.get("?measure"));
 			}
 		}
-		
+
 		assertEquals(result, "54");
 	}
-	
+
 	@Test
 	public void elgarSimpleMelody() {
 
 		String result = "";		
-        URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
-        File file = new File(url.getFile());
-        
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		File file = new File(url.getFile());
+
 		Model modelElgar = ModelFactory.createDefaultModel();
 		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
-		
+
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
@@ -642,7 +661,7 @@ public class ConverterTestElgar {
 				"FILTER ( NOT EXISTS {?note3 chord:modifier ?modifier3} )\n" + 
 				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier5} )\n" + 
 				"}";
-		
+
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
 			ResultSet results = qexec.execSelect() ;
 			for ( ; results.hasNext() ; )
@@ -652,11 +671,9 @@ public class ConverterTestElgar {
 				System.out.println("Simple melody: Measure "+soln.get("?measure"));
 			}
 		}
-		
+
 		assertEquals(result, "8");		
 
 	}
-
-
 
 }

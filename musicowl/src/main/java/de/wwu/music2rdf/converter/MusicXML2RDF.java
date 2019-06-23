@@ -145,10 +145,14 @@ public class MusicXML2RDF {
 				metadata.append(activity + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Activity> . \n");
 				metadata.append(activity + " <http://www.w3.org/ns/prov#generated> <" + score.getURI() + "> " + " . \n");
 				metadata.append("<"+persons.get(i).getUri()+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> " + " . \n");
-				metadata.append("<"+persons.get(i).getUri()+"> <http://xmlns.com/foaf/0.1/name> \""+persons.get(i).getName().replace("\"", "\\\"")+"\" . \n");
-				metadata.append("<"+persons.get(i).getUri()+"> <http://www.w3.org/ns/prov#hadRole> <http://d-nb.info/gnd/4139395-8> " + " . \n");
+				metadata.append("<"+persons.get(i).getUri()+"> <http://xmlns.com/foaf/0.1/name> \""+persons.get(i).getName().replace("\"", "\\\"")+"\" . \n");		
+				metadata.append("<"+persons.get(i).getUri()+"> <http://www.w3.org/ns/prov#hadRole> <http://d-nb.info/gnd/4139395-8> " + " . \n");				
 				metadata.append("<http://d-nb.info/gnd/4139395-8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4139395-8> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Encoder\" . \n");
+				
+				metadata.append("<"+persons.get(i).getUri()+"> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Encoder> . \n");
+				metadata.append("<http://dbpedia.org/resource/Encoder> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Encoder\". \n");
+				
 				hasEncoder = true;
 			}
 
@@ -159,6 +163,9 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4032009-1> .\n");
 				metadata.append("<http://d-nb.info/gnd/4032009-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4032009-1> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Composer\" .\n");
+				
+				metadata.append("<"+persons.get(i).getUri()+"> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Composer> . \n");
+				metadata.append("<http://dbpedia.org/resource/Composer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Composer\". \n");
 				hasComposer = true;
 			}
 
@@ -169,6 +176,9 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4246394-4> .\n");
 				metadata.append("<http://d-nb.info/gnd/4246394-4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4246394-4> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Lyricist\" .\n");
+				
+				metadata.append("<"+persons.get(i).getUri()+"> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Lyricist> . \n");
+				metadata.append("<http://dbpedia.org/resource/Lyricist> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Lyricist\". \n");
 			}
 
 			if(persons.get(i).getRole().equals("Arranger")) {
@@ -178,6 +188,9 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4604119-9> .\n");
 				metadata.append("<http://d-nb.info/gnd/4604119-9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4604119-9> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Arranger\" .\n");
+				
+				metadata.append("<"+persons.get(i).getUri()+"> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Arranger> . \n");
+				metadata.append("<http://dbpedia.org/resource/Arranger> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Arranger\". \n");
 			}			
 
 			if(persons.get(i).getRole().equals("Librettist")) {
@@ -187,6 +200,9 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4294338-3> .\n");
 				metadata.append("<http://d-nb.info/gnd/4294338-3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4294338-3> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Librettist\" .\n");
+
+				metadata.append("<"+persons.get(i).getUri()+"> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Librettist> . \n");
+				metadata.append("<http://dbpedia.org/resource/Librettist> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Librettist\". \n");
 			}			
 
 			if(persons.get(i).getRole().equals("Editor")) {
@@ -196,6 +212,9 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4159575-0> .\n");
 				metadata.append("<http://d-nb.info/gnd/4159575-0> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4159575-0> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Editor\" .\n");
+				
+				metadata.append("<"+persons.get(i).getUri()+"> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Editor> . \n");
+				metadata.append("<http://dbpedia.org/resource/Editor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Editor\". \n");
 			}	
 
 			if(persons.get(i).getRole().equals("Performer")) {
@@ -205,6 +224,10 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4170790-4> .\n");
 				metadata.append("<http://d-nb.info/gnd/4170790-4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4170790-4> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Performer\" .\n");
+				
+				metadata.append("<"+persons.get(i).getUri()+"> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Performer> . \n");
+				metadata.append("<http://dbpedia.org/resource/Performer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Performer\". \n");
+
 			}
 
 			if(persons.get(i).getRole().equals("Translator")) {
@@ -214,6 +237,9 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4061414-1> .\n");
 				metadata.append("<http://d-nb.info/gnd/4061414-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append("<http://d-nb.info/gnd/4061414-1> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Translator\" .\n");
+				
+				metadata.append("<"+persons.get(i).getUri()+"> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Translator> . \n");
+				metadata.append("<http://dbpedia.org/resource/Translator> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Translator\". \n");
 			}
 
 			if(persons.get(i).getRole().equals("Dedicatee")) {
@@ -224,6 +250,9 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> "+dedicatee+" .\n");
 				metadata.append(dedicatee + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append(dedicatee + " <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Dedicatee\" .\n");
+				
+				metadata.append("<"+persons.get(i).getUri()+"> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Dedicatee> . \n");
+				metadata.append("<http://dbpedia.org/resource/Dedicatee> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Dedicatee\". \n");
 			}
 
 			if(persons.get(i).getRole().equals("Unknown")) {
@@ -234,6 +263,10 @@ public class MusicXML2RDF {
 				metadata.append("<" + persons.get(i).getUri() + "> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> "+unknown+" .\n");
 				metadata.append(unknown + " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 				metadata.append(unknown + " <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Unknown\" .\n");
+				
+				metadata.append("<"+persons.get(i).getUri()+"> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Unknown> . \n");
+				metadata.append("<http://dbpedia.org/resource/Unknown> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Unknown\". \n");
+
 			}
 		}
 
@@ -249,16 +282,23 @@ public class MusicXML2RDF {
 			metadata.append("<http://d-nb.info/gnd/4139395-8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 			metadata.append("<http://d-nb.info/gnd/4139395-8> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Encoder\" . \n");
 
+			metadata.append("<http://wmss.unknown.encoder> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Encoder> . \n");
+			metadata.append("<http://dbpedia.org/resource/Encoder> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Encoder\". \n");
+
 		}
 		
 		if(!hasComposer) {
 
-			metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <http://dbpedia.org/page/Composer> .\n");
-			metadata.append("<http://dbpedia.org/page/Composer> <http://xmlns.com/foaf/0.1/name> \"Unknown Composer\" .\n");
-			metadata.append("<http://dbpedia.org/page/Composer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
-			metadata.append("<http://dbpedia.org/page/Composer> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4032009-1> .\n");
+			metadata.append("<" + score.getURI() + "> <http://purl.org/dc/elements/1.1/creator> <http://unknown.composer.de/> .\n");
+			metadata.append("<http://unknown.composer.de/> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/resource/Composer> .\n");
+			metadata.append("<http://unknown.composer.de/> <http://xmlns.com/foaf/0.1/name> \"Unknown Composer\" .\n");
+			metadata.append("<http://unknown.composer.de/> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .\n");
+			metadata.append("<http://unknown.composer.de/> <http://d-nb.info/standards/elementset/gnd#professionOrOccupation> <http://d-nb.info/gnd/4032009-1> .\n");
 			metadata.append("<http://d-nb.info/gnd/4032009-1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Role> . \n");
 			metadata.append("<http://d-nb.info/gnd/4032009-1> <http://d-nb.info/standards/elementset/gnd#preferredNameForTheSubjectHeading> \"Composer\" .\n");
+			
+			metadata.append("<http://wmss.unknown.encoder> <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Composer> . \n");
+			metadata.append("<http://dbpedia.org/resource/Composer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> \"Composer\". \n");
 
 		}
 
