@@ -18,7 +18,7 @@ public class GenerateRDFTest {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
 		File file = new File("src/test/resources/rdf/elgar_cello_concerto_op.85.nt");
-		file.delete();
+		//file.delete();
 		
 		music2rdf.setInputFile(new File("musicxml/elgar_cello_concerto_op.85.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/elgar_cello_concerto_op.85.nt");
@@ -41,7 +41,7 @@ public class GenerateRDFTest {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
 		File file = new File("src/test/resources/rdf/achilles_grand-opera.nt");
-		file.delete();
+		//file.delete();
 		
 		music2rdf.setInputFile(new File("musicxml/achilles_grand-opera.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/achilles_grand-opera.nt");
@@ -65,7 +65,7 @@ public class GenerateRDFTest {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
 		File file = new File("src/test/resources/rdf/ariettes_paroles_italienes_et_allemandes.nt");
-		file.delete();
+		//file.delete();
 		
 		music2rdf.setInputFile(new File("musicxml/ariettes_paroles_italienes_et_allemandes.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/ariettes_paroles_italienes_et_allemandes.nt");
