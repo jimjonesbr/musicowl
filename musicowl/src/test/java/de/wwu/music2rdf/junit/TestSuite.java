@@ -6,7 +6,9 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	GenerateRDFTest.class, 
-	ConverterTestElgar.class
+	ElgarConcerto.class,
+	AchillesGrandOpera.class,
+	Ariettes.class
 })
 
 public class TestSuite {

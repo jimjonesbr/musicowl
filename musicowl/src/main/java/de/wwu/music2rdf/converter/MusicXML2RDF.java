@@ -26,7 +26,6 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
@@ -83,6 +82,9 @@ public class MusicXML2RDF {
 		this.collection.setCollectionName(collection.getCollectionName());
 	}
 
+	public void isVerbose (boolean verbose) {
+		this.verbose = verbose;
+	}
 	private String createMetadata(MusicScore score) {
 
 		StringBuffer metadata = new StringBuffer();
@@ -802,7 +804,6 @@ public class MusicXML2RDF {
 
 							}
 							
-							//System.out.println(">>> DELETE ME >> " + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine());
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign()!=null && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine()!=null){
 
 								if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("percussion")){
@@ -1456,9 +1457,13 @@ public class MusicXML2RDF {
 
 							if(eElement.getElementsByTagName("words").getLength() != 0) {
 								measure.setTitle(eElement.getElementsByTagName("words").item(0).getTextContent());
-								logger.info("["+ score.getParts().get(i).getName() + "] Parsing movement: " + movementCount + " ("+measure.getTitle() +") ... ");
+								if(verbose) {
+									logger.info("["+ score.getParts().get(i).getName() + "] Parsing movement: " + movementCount + " ("+measure.getTitle() +") ... ");
+								}
 							} else {
-								logger.info("["+ score.getParts().get(i).getName() + "] Parsing movement: " + movementCount + " ... ");
+								if(verbose) {
+									logger.info("["+ score.getParts().get(i).getName() + "] Parsing movement: " + movementCount + " ... ");
+								}
 							}
 
 
@@ -1610,7 +1615,9 @@ public class MusicXML2RDF {
 
 										this.addClef(clef);										
 
-										logger.info("	[Clef] Measure: "+measure.getId()+" Sign: "+ clef.getSign()+ " | Line: " + clef.getLine());
+										if(verbose) {
+											logger.info("	[Clef] Measure: "+measure.getId()+" Sign: "+ clef.getSign()+ " | Line: " + clef.getLine());
+										}
 									}
 
 
@@ -1635,7 +1642,9 @@ public class MusicXML2RDF {
 
 										}
 
+										if(this.verbose) {
 										logger.info("	[Time] Measure: "+measure.getId()+" Beats: "+ currentBeat+ " | Beat-type: " + currentBeatType);
+										}
 
 									}
 
@@ -1659,8 +1668,9 @@ public class MusicXML2RDF {
 
 										}
 
-										logger.info("	[Key] Measure: "+measure.getId()+" Mode: "+ currentMode+ " | Fifth: " + currentFifth);
-
+										if(this.verbose) {
+											logger.info("	[Key] Measure: "+measure.getId()+" Mode: "+ currentMode+ " | Fifth: " + currentFifth);
+										}
 									}
 
 
@@ -1826,7 +1836,7 @@ public class MusicXML2RDF {
 
 			}
 
-
+			/**
 			if(verbose){
 
 				System.out.println("Score: "+score.getTitle()+"\n");
@@ -1889,6 +1899,7 @@ public class MusicXML2RDF {
 
 
 			}
+			*/
 
 
 		} catch (SAXException  e) {
