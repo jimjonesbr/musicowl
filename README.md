@@ -4,7 +4,7 @@
 
 # MusicXML to RDF Converter (BETA)
 
-This converter parses MusicXML 3.0 files and converts them to RDF, based on the [MusicOWL Ontology](http://linkeddata.uni-muenster.de/ontology/musicscore/mso.owl). It currently supports the following concepts:
+This converter parses MusicXML 3.0 files and converts them to RDF, based on the [MusicOWL Ontology](http://linkeddata.uni-muenster.de/ontology/musicscore/mso.owl) [ˈmjuːzɪkəl]. It currently supports the following concepts:
  
  * Articulations
  * Clefs
