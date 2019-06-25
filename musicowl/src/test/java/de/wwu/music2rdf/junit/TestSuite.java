@@ -8,7 +8,9 @@ import org.junit.runners.Suite;
 	GenerateRDFTest.class, 
 	ElgarConcerto.class,
 	AchillesGrandOpera.class,
-	Ariettes.class
+	Ariettes.class,
+	AchtzehnLiederChor.class,
+	TroisAirs.class
 })
 
 public class TestSuite {

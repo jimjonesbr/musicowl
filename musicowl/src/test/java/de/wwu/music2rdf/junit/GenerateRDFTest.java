@@ -1,14 +1,11 @@
 package de.wwu.music2rdf.junit;
 
 import org.junit.*;
-
 import de.wwu.music2rdf.converter.MusicXML2RDF;
 import de.wwu.music2rdf.core.Collection;
 import de.wwu.music2rdf.core.Person;
 import de.wwu.music2rdf.core.Role;
-
 import static org.junit.Assert.*;
-
 import java.io.File;
 
 public class GenerateRDFTest {
@@ -82,5 +79,54 @@ public class GenerateRDFTest {
 		
 		assertEquals(true, file.exists());
 
-	}	
+	}
+	
+	@Test
+	public void convertAchtzhenNeueLiederMusicXML() {
+	
+		MusicXML2RDF music2rdf = new MusicXML2RDF();
+		File file = new File("src/test/resources/rdf/achtzehn_neue_lieder_gemischten-chor.nt");
+		//file.delete();
+		
+		music2rdf.setInputFile(new File("musicxml/achtzehn_neue_lieder_gemischten-chor.xml"));
+		music2rdf.setOutputFile("src/test/resources/rdf/achtzehn_neue_lieder_gemischten-chor.nt");
+		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/2398469");
+		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/2398460");
+		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
+		music2rdf.addPerson(new Person("http://d-nb.info/gnd/117735647","Bisping, Max",Role.COMPOSER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.setDocumentTitle("Achtzehn neue Lieder für Gemischten Chor");
+		music2rdf.setDateIssued("1871"); 
+		music2rdf.isVerbose(false);
+		
+		music2rdf.parseMusicXML();
+		
+		assertEquals(true, file.exists());
+	}
+	
+	
+	@Test
+	public void convertATroisAirsMusicXML() {
+	
+		MusicXML2RDF music2rdf = new MusicXML2RDF();
+		File file = new File("src/test/resources/rdf/trois_airs_violon.nt");
+		//file.delete();
+		
+		music2rdf.setInputFile(new File("musicxml/trois_airs_violon.xml"));
+		music2rdf.setOutputFile("src/test/resources/rdf/trois_airs_violon.nt");
+		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/4287180");
+		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/4287173");
+		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
+		music2rdf.addPerson(new Person("http://d-nb.info/gnd/117735647","Romberg, Andreas",Role.COMPOSER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.setDocumentTitle("Trois airs Variés pour le violon");
+		//music2rdf.setDateIssued("1871"); 
+		music2rdf.isVerbose(false);
+		
+		music2rdf.parseMusicXML();
+		
+		assertEquals(true, file.exists());
+
+	}
+	
 }

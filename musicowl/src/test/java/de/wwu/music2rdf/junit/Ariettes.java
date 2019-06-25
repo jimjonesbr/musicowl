@@ -152,12 +152,12 @@ public class Ariettes {
 				"	?duration11 a mso:Quarter.\n" + 
 				"	?noteset11 mso:nextNoteSet ?noteset12.\n" + 
 				"    \n" + 
-				"	FILTER ( NOT EXISTS {?note0 chord:modifier ?m0} )\n" + 
+				"	 FILTER ( NOT EXISTS {?note0 chord:modifier ?m0} )\n" + 
 				"    FILTER ( NOT EXISTS {?note1 chord:modifier ?m1} )\n" + 
 				"    FILTER ( NOT EXISTS {?note2 chord:modifier ?m2} )\n" + 
 				"    FILTER ( NOT EXISTS {?note3 chord:modifier ?m3} )\n" + 
 				"    FILTER ( NOT EXISTS {?note4 chord:modifier ?m4} )\n" + 
-				"	FILTER ( NOT EXISTS {?note6 chord:modifier ?m6} )\n" + 
+				"	 FILTER ( NOT EXISTS {?note6 chord:modifier ?m6} )\n" + 
 				"    FILTER ( NOT EXISTS {?note7 chord:modifier ?m7} )\n" + 
 				"    FILTER ( NOT EXISTS {?note8 chord:modifier ?m8} )\n" + 
 				"    FILTER ( NOT EXISTS {?note9 chord:modifier ?m9} )\n" + 
@@ -173,8 +173,7 @@ public class Ariettes {
 						result = false;
 					} else {
 						logger.info("Melody containing rests in multiple durations: Measure " + soln.get("?measure"));
-					}
-					
+					}				
 
 				}
 			}

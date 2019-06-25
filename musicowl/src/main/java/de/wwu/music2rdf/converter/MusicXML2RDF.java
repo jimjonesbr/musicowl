@@ -1137,6 +1137,16 @@ public class MusicXML2RDF {
 						ttl.append(dotObject + rdfTypeURI + musicOWL.replace("OBJECT", "Dot") + ".\n");
 					}
 
+					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isDoubleDot()){
+						String dotObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" +partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_D_DOT");
+						ttl.append(durationObject + musicOWL.replace("OBJECT", "hasDurationAttribute") + dotObject + ".\n" );
+						ttl.append(dotObject + rdfTypeURI + musicOWL.replace("OBJECT", "DoubleDot") + ".\n");
+					}
+					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isTripleDot()){
+						String dotObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" +partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_D_DOT");
+						ttl.append(durationObject + musicOWL.replace("OBJECT", "hasDurationAttribute") + dotObject + ".\n" );
+						ttl.append(dotObject + rdfTypeURI + musicOWL.replace("OBJECT", "TripleDot") + ".\n");
+					}
 
 
 					for (int l = 0; l < score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().size(); l++) {
@@ -1772,7 +1782,20 @@ public class MusicXML2RDF {
 								Element elementNotes = (Element) nodeMeasureElementsList.item(l).getChildNodes();
 
 								if(elementNotes.getElementsByTagName("chord").item(0)!=null) note.setChord(true);
-								if(elementNotes.getElementsByTagName("dot").item(0)!=null) note.setDot(true);
+								//if(elementNotes.getElementsByTagName("dot").item(0)!=null) note.setDot(true);
+								
+								if(elementNotes.getElementsByTagName("dot").getLength()==1) {
+									note.setDot(true);
+								}
+								
+								if(elementNotes.getElementsByTagName("dot").getLength()==2) {
+									note.setDoubleDot(true);
+								}
+								if(elementNotes.getElementsByTagName("dot").getLength()==3) {
+									note.setTripleDot(true);
+									System.out.println(">>>>>>>>> elementNotes.getElementsByTagName(\"dot\").item(0) "+elementNotes.getElementsByTagName("dot").getLength());
+								}
+																
 								if(elementNotes.getElementsByTagName("octave").item(0)!=null) note.setOctave(elementNotes.getElementsByTagName("octave").item(0).getTextContent());
 								if(elementNotes.getElementsByTagName("step").item(0)!=null) note.setPitch(elementNotes.getElementsByTagName("step").item(0).getTextContent());								
 								if(elementNotes.getElementsByTagName("type").item(0)!=null) note.setType(elementNotes.getElementsByTagName("type").item(0).getTextContent());

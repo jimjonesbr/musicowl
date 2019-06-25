@@ -15,6 +15,8 @@ public class Note {
 	private ArrayList<String> dynamics;
 	private ArrayList<String> articulations;
 	private boolean isDot;
+	private boolean isDoubleDot;
+	private boolean isTripleDot;
 	private boolean isChord;
 	
 	private String signature;
@@ -124,6 +126,23 @@ public class Note {
 	public void setSignature(String signature) {
 		this.signature = signature;
 	}
+
+	public boolean isDoubleDot() {
+		return isDoubleDot;
+	}
+
+	public void setDoubleDot(boolean isDoubleDot) {
+		this.isDoubleDot = isDoubleDot;
+	}
+
+	public boolean isTripleDot() {
+		return isTripleDot;
+	}
+
+	public void setTripleDot(boolean isTripleDot) {
+		this.isTripleDot = isTripleDot;
+	}
+	
 	
 	
 	
