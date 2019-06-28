@@ -9,6 +9,7 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.shared.PrefixMapping;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -20,16 +21,17 @@ public class ElgarConcerto {
 	public void melodyWithRests() {
 
 		String result = "";		
-		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		//URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
 		File file = new File(url.getFile());
 
 		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
+		modelElgar.read(file.getAbsolutePath());
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
 				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
-				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
+				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
 				"SELECT DISTINCT ?scoreTitle ?measure ?noteset_5\n" + 
@@ -39,15 +41,15 @@ public class ElgarConcerto {
 				"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
 				"    ?movementNode mso:hasScorePart ?part.\n" + 
 				"    ?part mso:hasMeasure ?measureNode.\n" + 
-				"    ?part rdfs:ID ?partID.\n" + 
+				"    ?part rdfs:label ?partID.\n" + 
 				"    ?part dc:description ?partName.\n" + 
 				"    ?part mso:hasStaff ?staff.\n" + 
-				"    ?measureNode rdfs:ID ?measure.\n" + 
+				"    ?measureNode rdfs:label ?measure.\n" + 
 				"    ?voice a mso:Voice.\n" + 
-				"    ?voice rdfs:ID ?voiceID.\n" + 
+				"    ?voice rdfs:label ?voiceID.\n" + 
 				"    ?measureNode mso:hasNoteSet ?noteset_1.\n" + 
 				"    ?staff mso:hasVoice ?voice.\n" + 
-				"    ?staff rdfs:ID ?staffID.\n" + 
+				"    ?staff rdfs:label ?staffID.\n" + 
 				"\n" + 
 				"    ?voice mso:hasNoteSet ?noteset_1.\n" + 
 				"    ?noteset_1 mso:hasNote ?note_E.\n" + 
@@ -153,52 +155,52 @@ public class ElgarConcerto {
 	@Test
 	public void checkMetadata() {
 		boolean result = true;		
-		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+//		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+
 		File file = new File(url.getFile());
 
 		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
+		modelElgar.read(file.getAbsolutePath());
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
-				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
-				"PREFIX dct: <http://purl.org/dc/terms/>\n" + 			 
-				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+				
-				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
-				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
-				"PREFIX prov: <http://www.w3.org/ns/prov#>\n" + 
-				"PREFIX gnd: <http://d-nb.info/standards/elementset/gnd#>\n"+
-				"PREFIX dbp: <http://dbpedia.org/ontology/> \n"
-				+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" + 
-				"\n" + 
-				"SELECT ?collection ?collectionName ?scoreTitle ?issued ?movementTitle ?partID ?partName ?thumbnail ?creator ?creatorName ?creatorRole ?creatorRoleName ?creatorRoleDbp ?creatorRoleDbpName ?generatedBy ?encoder ?encoderName ?encoderRole ?encoderRoleName ?encoderRoleDbpName ?encoderRoleDbp\n" + 
-				"WHERE {\n" + 
-				"	?collection prov:hadMember <http://dbpedia.org/resource/Cello_Concerto_(Elgar)>.\n" + 
-				"    ?collection rdfs:label ?collectionName.\n" + 
-				"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:title ?scoreTitle.\n" + 
-				"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dct:issued ?issued.\n" + 
-				"	 <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
-				"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> foaf:thumbnail ?thumbnail.\n" + 
-				"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> prov:wasGeneratedBy ?generatedBy.\n" + 
-				"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:creator ?creator.\n" + 
-				"    ?creator a foaf:Person.\n" + 
-				"    ?creator foaf:name ?creatorName.\n" + 
-				"    ?creator gnd:professionOrOccupation ?creatorRole.\n" + 
-				"    ?creatorRole gnd:preferredNameForTheSubjectHeading ?creatorRoleName.\n" + 
-				"    ?creator dbp:occupation ?creatorRoleDbp.\n" +
-				"    ?creatorRoleDbp rdfs:label ?creatorRoleDbpName.\n" +
-				"    ?generatedBy prov:wasAssociatedWith ?encoder. \n" + 
-				"    ?encoder a foaf:Person.\n" +
-				"    ?encoder dbp:occupation ?encoderRoleDbp .\n" + 
-				"    ?encoderRoleDbp rdfs:label ?encoderRoleDbpName.\n" + 
-				"    ?generatedBy a prov:Activity.\n" + 
-				"    ?encoder foaf:name ?encoderName.    \n" + 
-				"    ?encoder a foaf:Person.\n" + 
-				"    ?encoder prov:hadRole ?encoderRole.\n" + 
-				"    ?encoderRole gnd:preferredNameForTheSubjectHeading ?encoderRoleName.\n" + 
-				"    ?movementNode dc:title ?movementTitle.\n" + 
-				"	?movementNode mso:hasScorePart ?part.\n" + 
-				"	?part rdf:ID ?partID.\n" + 
-				"	?part dc:description ?partName.		  \n" + 
-				"}";
+						"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
+						"PREFIX dct: <http://purl.org/dc/terms/>\n" + 			 
+						"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+				
+						"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
+						"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+						"PREFIX prov: <http://www.w3.org/ns/prov#>\n" + 
+						"PREFIX gnd: <http://d-nb.info/standards/elementset/gnd#>\n"+
+						"PREFIX dbp: <http://dbpedia.org/ontology/> \n"+ 
+						"SELECT ?collection ?collectionName ?scoreTitle ?issued ?movementTitle ?partID ?partName ?thumbnail ?creator ?creatorName ?creatorRole ?creatorRoleName ?creatorRoleDbp ?creatorRoleDbpName ?generatedBy ?encoder ?encoderName ?encoderRole ?encoderRoleName ?encoderRoleDbpName ?encoderRoleDbp\n" + 
+						"WHERE {\n" + 
+						"	?collection prov:hadMember <http://dbpedia.org/resource/Cello_Concerto_(Elgar)>.\n" + 
+						"    ?collection rdfs:label ?collectionName.\n" + 
+						"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:title ?scoreTitle.\n" + 
+						"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dct:issued ?issued.\n" + 
+						"	 <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
+						"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> foaf:thumbnail ?thumbnail.\n" + 
+						"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> prov:wasGeneratedBy ?generatedBy.\n" + 
+						"    <http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:creator ?creator.\n" + 
+						"    ?creator a foaf:Person.\n" + 
+						"    ?creator foaf:name ?creatorName.\n" + 
+						"    ?creator gnd:professionOrOccupation ?creatorRole.\n" + 
+						"    ?creatorRole gnd:preferredNameForTheSubjectHeading ?creatorRoleName.\n" + 
+						"    ?creator dbp:occupation ?creatorRoleDbp.\n" +
+						"    ?creatorRoleDbp rdfs:label ?creatorRoleDbpName.\n" +
+						"    ?generatedBy prov:wasAssociatedWith ?encoder. \n" + 
+						"    ?encoder a foaf:Person.\n" +
+						"    ?encoder dbp:occupation ?encoderRoleDbp .\n" + 
+						"    ?encoderRoleDbp rdfs:label ?encoderRoleDbpName.\n" + 
+						"    ?generatedBy a prov:Activity.\n" + 
+						"    ?encoder foaf:name ?encoderName.    \n" + 
+						"    ?encoder a foaf:Person.\n" + 
+						"    ?encoder prov:hadRole ?encoderRole.\n" + 
+						"    ?encoderRole gnd:preferredNameForTheSubjectHeading ?encoderRoleName.\n" + 
+						"    ?movementNode dc:title ?movementTitle.\n" + 
+						"	 ?movementNode mso:hasScorePart ?part.\n" + 
+						"	 ?part rdfs:label ?partID.\n" + 
+						"	 ?part dc:description ?partName.		  \n" + 
+						"}";
 
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
 			ResultSet results = qexec.execSelect() ;
@@ -260,11 +262,13 @@ public class ElgarConcerto {
 	@Test
 	public void totalMeasures() {
 		int result = 0;		
-		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		//URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+
 		File file = new File(url.getFile());
 
 		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
+		modelElgar.read(file.getAbsolutePath());
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
@@ -293,27 +297,30 @@ public class ElgarConcerto {
 	@Test
 	public void changingKeys() {
 		String result = "";		
-		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+//		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+
 		File file = new File(url.getFile());
 
 		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
+		modelElgar.read(file.getAbsolutePath());
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
 				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
-				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
+				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
 				"PREFIX ton: <http://purl.org/ontology/tonality/>\n" + 
-				"PREFIX mode: <http://purl.org/ontology/tonality/mode/>\n" + 
+				"PREFIX mode: <http://purl.org/ontology/tonality/mode/>"+
+				"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n" + 
 				"SELECT *\n" + 
 				"WHERE {\n" + 
 				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:title ?scoreTitle.\n" + 
 				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
 				"?movementNode mso:hasScorePart ?part.\n" + 
 				"?part mso:hasMeasure ?measure_1.\n" + 
-				"?measure_1 rdfs:ID ?measure.\n" + 
+				"?measure_1 rdfs:label ?measure.\n" + 
 				"?measure_1 mso:hasKey ?key_1.\n" + 
 				"?key_1 ton:tonic note:E  .\n" + 
 				"?key_1 ton:mode mode:major .\n" + 
@@ -341,16 +348,16 @@ public class ElgarConcerto {
 	public void changingTimeSignatures() {
 
 		int result = 0;		
-		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
 		File file = new File(url.getFile());
 
 		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
+		modelElgar.read(file.getAbsolutePath());
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
 				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
-				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
+				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
 				"SELECT (COUNT (?measure_1) AS ?qt)\n" + 
@@ -359,10 +366,10 @@ public class ElgarConcerto {
 				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
 				"?movementNode mso:hasScorePart ?part.\n" + 
 				"?part mso:hasMeasure ?measure_1.\n" + 
-				"?part rdfs:ID ?partID.\n" + 
+				"?part rdfs:label ?partID.\n" + 
 				"?part dc:description ?partName.\n" + 
 				"?part mso:hasStaff ?staff.\n" + 
-				"?measure_1 rdfs:ID ?measure.\n" + 
+				"?measure_1 rdfs:label ?measure.\n" + 
 				"?measure_1 mso:hasTime ?time1.\n" + 
 				"?time1 mso:hasBeats \"6\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
 				"?time1 mso:hasBeatType \"8\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
@@ -389,68 +396,68 @@ public class ElgarConcerto {
 	public void elgarChordSequence() {
 
 		String result = "";		
-		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		//URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+
 		File file = new File(url.getFile());
 
 		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
+		modelElgar.read(file.getAbsolutePath());
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
 				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
-				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
+				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
 				"SELECT DISTINCT ?scoreTitle ?measure\n" + 
 				"WHERE {\n" + 
 				"\n" + 
-				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:title ?scoreTitle.\n" + 
-				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
-				"?movementNode mso:hasScorePart ?part.\n" + 
-				"?part mso:hasMeasure ?measureNode.\n" + 
-				"?part rdfs:ID ?partID.\n" + 
-				"?part dc:description ?partName.\n" + 
-				"?part mso:hasStaff ?staff.\n" + 
-				"?measureNode rdfs:ID ?measure.\n" + 
-				"?voice a mso:Voice.\n" + 
-				"?voice rdfs:ID ?voiceID.\n" + 
-				"?measureNode mso:hasNoteSet ?chord_1.\n" + 
-				"?staff mso:hasVoice ?voice.\n" + 
-				"?staff rdfs:ID ?staffID.\n" + 
+				"	<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:title ?scoreTitle.\n" + 
+				"	<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
+				"	?movementNode mso:hasScorePart ?part.\n" + 
+				"	?part mso:hasMeasure ?measureNode.\n" + 
+				"	?part rdfs:label ?partID.\n" + 
+				"	?part dc:description ?partName.\n" + 
+				"	?part mso:hasStaff ?staff.\n" + 
+				"	?measureNode rdfs:label ?measure.\n" + 
+				"	?voice a mso:Voice.\n" + 
+				"	?voice rdfs:label ?voiceID.\n" + 
+				"	?measureNode mso:hasNoteSet ?chord_1.\n" + 
+				"	?staff mso:hasVoice ?voice.\n" + 
+				"	?staff rdfs:label ?staffID.\n" + 
 				"\n" + 
-				"?voice mso:hasNoteSet ?chord_1.\n" + 
-				"?chord_1 mso:hasNote ?note_chord1_B.\n" + 
-				"?note_chord1_B chord:natural note:B.\n" + 
-				"?note_chord1_B mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
-				"?chord_1 mso:hasNote ?note_chord1_E.\n" + 
-				"?note_chord1_E chord:natural note:E.\n" + 
-				"?note_chord1_E mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
-				"?chord_1 mso:hasNote ?note_chord1_G.\n" + 
-				"?note_chord1_G chord:natural note:G.\n" + 
-				"?note_chord1_G mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int> .    \n" + 
-				"?chord_1 mso:hasDynamic ?dynamic .\n" + 
-				"?dynamic a mso:ff   .\n" + 
-				"?chord_1 mso:hasDuration ?duration_chord1.\n" + 
-				"?duration_chord1 a mso:Half.\n" + 
+				"	?voice mso:hasNoteSet ?chord_1.\n" + 
+				"	?chord_1 mso:hasNote ?note_chord1_B.\n" + 
+				"	?note_chord1_B chord:natural note:B.\n" + 
+				"	?note_chord1_B mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
+				"	?chord_1 mso:hasNote ?note_chord1_E.\n" + 
+				"	?note_chord1_E chord:natural note:E.\n" + 
+				"	?note_chord1_E mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
+				"	?chord_1 mso:hasNote ?note_chord1_G.\n" + 
+				"	?note_chord1_G chord:natural note:G.\n" + 
+				"	?note_chord1_G mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int> .    \n" + 
+				"	?chord_1 mso:hasDynamic ?dynamic .\n" + 
+				"	?dynamic a mso:ff   .\n" + 
+				"	?chord_1 mso:hasDuration ?duration_chord1.\n" + 
+				"	?duration_chord1 a mso:Half.\n" + 
 				"        \n" + 
-				"?chord_1 mso:nextNoteSet ?chord_2.\n" + 
+				"	?chord_1 mso:nextNoteSet ?chord_2.\n" + 
 				"    \n" + 
-				"?chord_2 mso:hasNote ?note_chord2_E.\n" + 
-				"?note_chord2_E chord:natural note:E.\n" + 
-				"?note_chord2_E mso:hasOctave \"4\"^^<http://www.w3.org/2001/XMLSchema#int>  .  \n" + 
-				"?chord_2 mso:hasNote ?note_chord2_G .\n" + 
-				"?note_chord2_G chord:natural note:G .\n" + 
-				"?note_chord2_G mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
-				"?chord_2 mso:hasNote ?note_chord2_B .\n" + 
-				"?note_chord2_B chord:natural note:B .\n" + 
-				"?note_chord2_B mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
-				"?chord_2 mso:hasNote ?note_chord2_E2 .\n" + 
-				"?note_chord2_E2 chord:natural note:E .\n" + 
-				"?note_chord2_E2 mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
-				"    \n" + 
-				"?chord_2 mso:hasDuration ?duration_chord2.\n" + 
-				"?duration_chord2 a mso:Half.\n" + 
-				"    \n" + 
+				"	?chord_2 mso:hasNote ?note_chord2_E.\n" + 
+				"	?note_chord2_E chord:natural note:E.\n" + 
+				"	?note_chord2_E mso:hasOctave \"4\"^^<http://www.w3.org/2001/XMLSchema#int>  .  \n" + 
+				"	?chord_2 mso:hasNote ?note_chord2_G .\n" + 
+				"	?note_chord2_G chord:natural note:G .\n" + 
+				"	?note_chord2_G mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
+				"	?chord_2 mso:hasNote ?note_chord2_B .\n" + 
+				"	?note_chord2_B chord:natural note:B .\n" + 
+				"	?note_chord2_B mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
+				"	?chord_2 mso:hasNote ?note_chord2_E2 .\n" + 
+				"	?note_chord2_E2 chord:natural note:E .\n" + 
+				"	?note_chord2_E2 mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
+				"	?chord_2 mso:hasDuration ?duration_chord2.\n" + 
+				"	?duration_chord2 a mso:Half.\n" + 
 				"FILTER ( NOT EXISTS {?note_chord1_B chord:modifier ?m1} )\n" + 
 				"FILTER ( NOT EXISTS {?note_chord1_E chord:modifier ?m2} )\n" + 
 				"FILTER ( NOT EXISTS {?note_chord1_G chord:modifier ?m3} )\n" + 
@@ -478,19 +485,24 @@ public class ElgarConcerto {
 	public void elgarMelodyChangingKeys() {
 
 		String result = "";		
-		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		//URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+
 		File file = new File(url.getFile());
 
 		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
-
-		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
+		modelElgar.read(file.getAbsolutePath());
+		
+		String sparql = 
+				
+				"PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
 				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
-				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
+				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
-				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"+
+				"PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 				
 				"SELECT DISTINCT ?scoreTitle ?measure ?note_F ?chord_1\n" + 
 				"WHERE {\n" + 
 				"\n" + 
@@ -498,15 +510,15 @@ public class ElgarConcerto {
 				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
 				"?movementNode mso:hasScorePart ?part.\n" + 
 				"?part mso:hasMeasure ?measureNode.\n" + 
-				"?part rdfs:ID ?partID.\n" + 
+				"?part rdfs:label ?partID.\n" + 
 				"?part dc:description ?partName.\n" + 
 				"?part mso:hasStaff ?staff.\n" + 
-				"?measureNode rdfs:ID ?measure.\n" + 
+				"?measureNode rdfs:label ?measure.\n" + 
 				"?voice a mso:Voice.\n" + 
-				"?voice rdfs:ID ?voiceID.\n" + 
+				"?voice rdfs:label ?voiceID.\n" + 
 				"?measureNode mso:hasNoteSet ?noteset_1.\n" + 
 				"?staff mso:hasVoice ?voice.\n" + 
-				"?staff rdfs:ID ?staffID.\n" + 
+				"?staff rdfs:label ?staffID.\n" + 
 				"\n" + 
 				"?voice mso:hasNoteSet ?noteset_1.\n" + 
 				"?noteset_1 mso:hasNote ?note_F.\n" + 
@@ -583,39 +595,41 @@ public class ElgarConcerto {
 	public void elgarSimpleMelody() {
 
 		String result = "";		
-		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.nt");
+		//URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+
 		File file = new File(url.getFile());
 
 		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
+		modelElgar.read(file.getAbsolutePath());
 
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
 				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
-				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
+				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
-				"SELECT DISTINCT ?scoreNode ?scoreTitle ?movement ?partName ?voice ?measure\n" + 
+				"SELECT DISTINCT ?scoreTitle ?movement ?partName ?voice ?measure\n" + 
 				"WHERE {\n" + 
 				"\n" + 
-				"?scoreNode dc:title ?scoreTitle.\n" + 
-				"?scoreNode mo:movement ?movementNode.\n" + 
+				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:title ?scoreTitle.\n" + 
+				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
 				"?movementNode dc:title ?movemenTitle.\n" + 
-				"?scoreNode dc:creator ?creatorNode.\n" + 
+				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:creator ?creatorNode.\n" + 
 				"?creatorNode foaf:name ?creator.\n" + 
 				"?movementNode mso:hasScorePart ?part.\n" + 
 				"?movementNode dc:title ?movement.\n" + 
 				"?part mso:hasMeasure ?measureNode.\n" + 
-				"?part rdfs:ID ?partID.\n" + 
+				"?part rdfs:label ?partID.\n" + 
 				"?part dc:description ?partName.\n" + 
 				"?part mso:hasStaff ?staff.\n" + 
-				"?measureNode rdfs:ID ?measure.\n" + 
+				"?measureNode rdfs:label ?measure.\n" + 
 				"?voice a mso:Voice.\n" + 
-				"?voice rdfs:ID ?voiceID.\n" + 
+				"?voice rdfs:label ?voiceID.\n" + 
 				"?measureNode mso:hasNoteSet ?noteset0.\n" + 
 				"?staff mso:hasVoice ?voice.\n" + 
-				"?staff rdfs:ID ?staffID.\n" + 
+				"?staff rdfs:label ?staffID.\n" + 
 				"\n" + 
 				"?noteset0 mso:hasNote ?note0.\n" + 
 				"?voice mso:hasNoteSet ?noteset0.\n" + 

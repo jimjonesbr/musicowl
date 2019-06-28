@@ -20,7 +20,8 @@ public class AchtzehnLiederChor {
 	@Test
 	public void melodyWithRests() {
 		
-		URL url = this.getClass().getResource("/rdf/achtzehn_neue_lieder_gemischten-chor.nt");
+		//URL url = this.getClass().getResource("/rdf/achtzehn_neue_lieder_gemischten-chor.ttl");
+		URL url = this.getClass().getResource("/rdf/achtzehn_neue_lieder_gemischten-chor.ttl");
 		File file = new File(url.getFile());
 
 		Model modelElgar = ModelFactory.createDefaultModel();
@@ -29,7 +30,7 @@ public class AchtzehnLiederChor {
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
 				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
-				"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 
+				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
 				"SELECT DISTINCT ?scoreNode ?scoreTitle ?movement ?partName ?voice ?measure ?staffID ?voiceID\n" + 
@@ -43,15 +44,15 @@ public class AchtzehnLiederChor {
 				"	?movementNode mso:hasScorePart ?part.\n" + 
 				"	?movementNode dc:title ?movement.\n" + 
 				"	?part mso:hasMeasure ?measureNode.\n" + 
-				"	?part rdfs:ID ?partID.\n" + 
+				"	?part rdfs:label ?partID.\n" + 
 				"	?part dc:description ?partName.\n" + 
 				"	?part mso:hasStaff ?staff.    \n" + 
-				"	?measureNode rdfs:ID ?measure.\n" + 
+				"	?measureNode rdfs:label ?measure.\n" + 
 				"	?voice a mso:Voice.\n" + 
-				"	?voice rdfs:ID ?voiceID.\n" + 
+				"	?voice rdfs:label ?voiceID.\n" + 
 				"	?measureNode mso:hasNoteSet ?noteset0.\n" + 
 				"	?staff mso:hasVoice ?voice.\n" + 
-				"	?staff rdfs:ID ?staffID.\n" + 
+				"	?staff rdfs:label ?staffID.\n" + 
 				"\n" + 
 				"	?noteset0 mso:hasNote ?note0.       \n" + 
 				"	?voice mso:hasNoteSet ?noteset0.\n" + 

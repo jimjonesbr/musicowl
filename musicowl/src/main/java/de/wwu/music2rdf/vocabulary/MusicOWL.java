@@ -10,13 +10,13 @@ public class MusicOWL {
     public static final String NS = "http://linkeddata.uni-muenster.de/ontology/musicscore#";
 
 	private static Model musicowl_model = ModelFactory.createDefaultModel();
-	public static final Resource NAMESPACE = musicowl_model.createResource(NS);
-    public static String getURI() {return NS;}
+	//public static final Resource NAMESPACE = musicowl_model.createResource(NS);
+    //public static String getURI() {return NS;}
 
 	public static final Property hasBeatUnit = musicowl_model.createProperty(NS + "hasBeatUnit");
 	public static final Property hasBeatsPerMinute = musicowl_model.createProperty(NS + "hasBeatsPerMinute");
 	public static final Property hasScorePart = musicowl_model.createProperty(NS + "hasScorePart");
-	public static final Property isSolo = musicowl_model.createProperty(NS + "hasBeatUnit");
+	public static final Property isSolo = musicowl_model.createProperty(NS + "isSolo");
 	public static final Property isEnsemble = musicowl_model.createProperty(NS + "isEnsemble");
 	public static final Property hasMeasure = musicowl_model.createProperty(NS + "hasMeasure");
 	public static final Property nextMeasure = musicowl_model.createProperty(NS + "nextMeasure");
@@ -26,7 +26,7 @@ public class MusicOWL {
 	public static final Property hasBarline = musicowl_model.createProperty(NS + "hasBarline");
 	public static final Property nextNoteSet = musicowl_model.createProperty(NS + "nextNoteSet");
 	public static final Property hasVoice = musicowl_model.createProperty(NS + "hasVoice");
-	public static final Property hasNoteSet = musicowl_model.createProperty(NS + "hasNoteSet");
+	public static final Property hasNoteSet = musicowl_model.createProperty(NS + "hasNoteSet"); 
 	public static final Property hasClef = musicowl_model.createProperty(NS + "hasClef");
 	public static final Property hasArticulation = musicowl_model.createProperty(NS + "hasArticulation");
 	public static final Property hasDuration = musicowl_model.createProperty(NS + "hasDuration");
@@ -38,6 +38,9 @@ public class MusicOWL {
 	public static final Property hasDynamic = musicowl_model.createProperty(NS + "hasDynamic");
 	public static final Property asMusicXML = musicowl_model.createProperty(NS + "asMusicXML");
 	public static final Property asMEI = musicowl_model.createProperty(NS + "asMEI");
+	public static final Property hasBeats = musicowl_model.createProperty(NS + "hasBeats");
+	public static final Property hasBeatType = musicowl_model.createProperty(NS + "hasBeatType");
+	public static final Property hasStaff = musicowl_model.createProperty(NS + "hasStaff");
 
     public static final Resource Instant  = musicowl_model.createProperty(NS + "Instant");
     public static final Resource Measure  = musicowl_model.createProperty(NS + "Measure");
@@ -71,6 +74,10 @@ public class MusicOWL {
     public static final Resource TempoMarking  = musicowl_model.createProperty(NS + "TempoMarking");
     public static final Resource Duration  = musicowl_model.createProperty(NS + "Duration");
     public static final Resource Note  = musicowl_model.createProperty(NS + "Note");
+    public static final Resource ScorePart  = musicowl_model.createProperty(NS + "ScorePart");
+    public static final Resource Dot  = musicowl_model.createProperty(NS + "Dot");
+    public static final Resource DoubleDot  = musicowl_model.createProperty(NS + "DoubleDot");
+    public static final Resource TripleDot  = musicowl_model.createProperty(NS + "TripleDot");
     
     
   		

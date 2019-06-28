@@ -11,14 +11,9 @@ public class Chord {
 	public static final String NS_Note = "http://purl.org/ontology/chord/note/";
 	public static final String NS_Modifier = "http://purl.org/ontology/chord/modifier/";
 	public static final String NS_Base = "http://purl.org/ontology/chord/";
-	
 	public static final Resource NAMESPACE_NOTE = chord_model.createResource(NS_Note);
 	public static final Resource NAMESPACE_BASE = chord_model.createResource(NS_Base);
 	public static final Resource NAMESPACE_MODIFIER = chord_model.createResource(NS_Modifier);
-	
-    public static String getNoteURI() {return NS_Note;}
-    public static String getBaseURI() {return NS_Base;}
-    public static String getModifierURI() {return NS_Modifier;}
     
     public static final Resource C  = chord_model.createResource(NS_Note+"C");
     public static final Resource D  = chord_model.createResource(NS_Note+"D");
@@ -36,9 +31,9 @@ public class Chord {
     public static final Resource Demisharp  = chord_model.createResource(NS_Base+"demisharp");
     public static final Resource Sesquisharp  = chord_model.createResource(NS_Base+"sesquisharp");
     public static final Resource Sesquiflat  = chord_model.createResource(NS_Base+"sesquiflat");
-    
-    public static final Property name  = chord_model.createProperty(NS_Note+"name");
-    public static final Resource Person  = chord_model.createProperty(NS_Note+"Person");
+    public static final Resource Rest  = chord_model.createResource(NS_Note+"Rest");
+    public static final Resource Note  = chord_model.createResource(NS_Base+"Note");
+
     public static final Property modifier  = chord_model.createProperty(NS_Base+"modifier");
-    
+    public static final Property natural  = chord_model.createProperty(NS_Base+"natural");
 }

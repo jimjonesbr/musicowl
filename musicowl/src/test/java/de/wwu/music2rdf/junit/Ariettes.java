@@ -24,7 +24,10 @@ public class Ariettes {
 
 		boolean result = true;
 		
-		URL url = this.getClass().getResource("/rdf/ariettes_paroles_italienes_et_allemandes.nt");
+		//URL url = this.getClass().getResource("/rdf/ariettes_paroles_italienes_et_allemandes.nt");
+		URL url = this.getClass().getResource("/rdf/ariettes_paroles_italienes_et_allemandes.ttl");
+		
+		
 		File file = new File(url.getFile());
 
 		Model modelElgar = ModelFactory.createDefaultModel();
@@ -47,7 +50,7 @@ public class Ariettes {
 				"	?movementNode mso:hasScorePart ?part.\n" + 
 				"	?movementNode dc:title ?movement.\n" + 
 				"	?part mso:hasMeasure ?measureNode.\n" + 
-				"	?part rdfs:ID ?partID.\n" + 
+				"	?part rdfs:label ?partID.\n" + 
 				"	?part dc:description ?partName.\n" + 
 				"	?part mso:hasStaff ?staff.    \n" + 
 				"	?measureNode rdfs:ID ?measure.\n" + 
@@ -177,7 +180,7 @@ public class Ariettes {
 
 				}
 			}
-
+			
 		assertEquals(result, true);			
 	}
 

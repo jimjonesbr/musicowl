@@ -14,11 +14,11 @@ public class GenerateRDFTest {
 	public void convertElgarMusicXML() {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
-		File file = new File("src/test/resources/rdf/elgar_cello_concerto_op.85.nt");
+		
 		//file.delete();
 		
 		music2rdf.setInputFile(new File("musicxml/elgar_cello_concerto_op.85.xml"));
-		music2rdf.setOutputFile("src/test/resources/rdf/elgar_cello_concerto_op.85.nt");
+		music2rdf.setOutputFile("src/test/resources/rdf/elgar_cello_concerto_op.85");
 		music2rdf.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg");
 		music2rdf.setScoreURI("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
 		music2rdf.addCollection(new Collection("https://url.collection.de","Great Composers"));
@@ -27,8 +27,10 @@ public class GenerateRDFTest {
 		music2rdf.setDocumentTitle("Cellokonzert e-Moll op. 85");
 		music2rdf.setDateIssued("1919"); 
 		music2rdf.isVerbose(false);
+		music2rdf.setOutputFormat("TURTLE");
 		music2rdf.parseMusicXML();
 		
+		File file = new File("src/test/resources/rdf/elgar_cello_concerto_op.85.ttl");
 		assertEquals(true, file.exists());
 
 	}
@@ -37,11 +39,10 @@ public class GenerateRDFTest {
 	public void convertAchillesGrandOperaMusicXML() {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
-		File file = new File("src/test/resources/rdf/achilles_grand-opera.nt");
 		//file.delete();
 		
 		music2rdf.setInputFile(new File("musicxml/achilles_grand-opera.xml"));
-		music2rdf.setOutputFile("src/test/resources/rdf/achilles_grand-opera.nt");
+		music2rdf.setOutputFile("src/test/resources/rdf/achilles_grand-opera");
 		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/5731637");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5731633");
 		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
@@ -49,10 +50,12 @@ public class GenerateRDFTest {
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
 		music2rdf.setDocumentTitle("Achilles: Grand Opera");
 		music2rdf.setDateIssued("1802"); 
+		music2rdf.setOutputFormat("TURTLE");
 		music2rdf.isVerbose(false);
 		
 		music2rdf.parseMusicXML();
 		
+		File file = new File("src/test/resources/rdf/achilles_grand-opera.ttl");
 		assertEquals(true, file.exists());
 
 	}
@@ -61,11 +64,10 @@ public class GenerateRDFTest {
 	public void convertAriettesGrandOperaMusicXML() {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
-		File file = new File("src/test/resources/rdf/ariettes_paroles_italienes_et_allemandes.nt");
 		//file.delete();
 		
 		music2rdf.setInputFile(new File("musicxml/ariettes_paroles_italienes_et_allemandes.xml"));
-		music2rdf.setOutputFile("src/test/resources/rdf/ariettes_paroles_italienes_et_allemandes.nt");
+		music2rdf.setOutputFile("src/test/resources/rdf/ariettes_paroles_italienes_et_allemandes");
 		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/5109624");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5109620");
 		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
@@ -73,10 +75,12 @@ public class GenerateRDFTest {
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
 		music2rdf.setDocumentTitle("VI Ariettes: Paroles italienes et Allemandesaccompagnées du Piano Forte ou de la Guitarre");
 		music2rdf.setDateIssued("1802"); 
+		music2rdf.setOutputFormat("TURTLE");
 		music2rdf.isVerbose(false);
 		
 		music2rdf.parseMusicXML();
 		
+		File file = new File("src/test/resources/rdf/ariettes_paroles_italienes_et_allemandes.ttl");
 		assertEquals(true, file.exists());
 
 	}
@@ -85,11 +89,11 @@ public class GenerateRDFTest {
 	public void convertAchtzhenNeueLiederMusicXML() {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
-		File file = new File("src/test/resources/rdf/achtzehn_neue_lieder_gemischten-chor.nt");
+		
 		//file.delete();
 		
 		music2rdf.setInputFile(new File("musicxml/achtzehn_neue_lieder_gemischten-chor.xml"));
-		music2rdf.setOutputFile("src/test/resources/rdf/achtzehn_neue_lieder_gemischten-chor.nt");
+		music2rdf.setOutputFile("src/test/resources/rdf/achtzehn_neue_lieder_gemischten-chor");
 		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/2398469");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/2398460");
 		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
@@ -97,10 +101,12 @@ public class GenerateRDFTest {
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
 		music2rdf.setDocumentTitle("Achtzehn neue Lieder für Gemischten Chor");
 		music2rdf.setDateIssued("1871"); 
+		music2rdf.setOutputFormat("TURTLE");
 		music2rdf.isVerbose(false);
 		
 		music2rdf.parseMusicXML();
 		
+		File file = new File("src/test/resources/rdf/achtzehn_neue_lieder_gemischten-chor.ttl");
 		assertEquals(true, file.exists());
 	}
 	
@@ -108,12 +114,11 @@ public class GenerateRDFTest {
 	@Test
 	public void convertATroisAirsMusicXML() {
 	
-		MusicXML2RDF music2rdf = new MusicXML2RDF();
-		File file = new File("src/test/resources/rdf/trois_airs_violon.nt");
+		MusicXML2RDF music2rdf = new MusicXML2RDF();		
 		//file.delete();
 		
 		music2rdf.setInputFile(new File("musicxml/trois_airs_violon.xml"));
-		music2rdf.setOutputFile("src/test/resources/rdf/trois_airs_violon.nt");
+		music2rdf.setOutputFile("src/test/resources/rdf/trois_airs_violon");
 		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/4287180");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/4287173");
 		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
@@ -121,10 +126,12 @@ public class GenerateRDFTest {
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
 		music2rdf.setDocumentTitle("Trois airs Variés pour le violon");
 		//music2rdf.setDateIssued("1871"); 
+		music2rdf.setOutputFormat("TURTLE");
 		music2rdf.isVerbose(false);
 		
 		music2rdf.parseMusicXML();
 		
+		File file = new File("src/test/resources/rdf/trois_airs_violon.ttl");
 		assertEquals(true, file.exists());
 
 	}
