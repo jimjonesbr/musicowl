@@ -7,10 +7,12 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
 	GenerateRDFTest.class, 
 	ElgarConcerto.class,
-	AchillesGrandOpera.class,
 	Ariettes.class,
 	AchtzehnLiederChor.class,
-	TroisAirs.class
+	TroisAirs.class,
+	AchillesGrandOpera.class,
+	LeichtesRondoPianoForte.class,
+	SiegesMaerschePianoForte.class
 })
 
 public class TestSuite {

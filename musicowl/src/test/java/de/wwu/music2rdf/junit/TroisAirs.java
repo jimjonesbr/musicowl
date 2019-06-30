@@ -126,7 +126,7 @@ public class TroisAirs {
 				"	?voice mso:hasNoteSet ?noteset8.\n" + 
 				"	?note8 chord:natural note:C.   	\n" + 
 				"    ?noteset8 mso:hasDuration ?duration8.\n" + 
-				"	?duration8 a mso:32nd.\n" + 
+				"	?duration8 a mso:32nd.\n" + 	
 				"    ?noteset8 mso:nextNoteSet ?noteset9.\n" + 
 				"\n" + 
 				"    ?noteset9 mso:hasNote ?note9.\n" + 
@@ -148,6 +148,8 @@ public class TroisAirs {
 				"    FILTER ( NOT EXISTS {?note8 chord:modifier ?m8} )\n" + 
 				"    FILTER ( NOT EXISTS {?note9 chord:modifier ?m9} )\n" +  
 				"}"; 
+		
+		System.out.println(sparql);
 		
 		boolean result = false;
 		String measure = "";

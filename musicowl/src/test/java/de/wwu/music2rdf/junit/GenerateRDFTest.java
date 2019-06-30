@@ -135,5 +135,53 @@ public class GenerateRDFTest {
 		assertEquals(true, file.exists());
 
 	}
+
 	
+	@Test
+	public void convertLeichtesRondoMusicXML() {
+	
+		MusicXML2RDF music2rdf = new MusicXML2RDF();		
+		
+		music2rdf.setInputFile(new File("musicxml/leichtes_rondo_piano-forte.xml"));
+		music2rdf.setOutputFile("src/test/resources/rdf/leichtes_rondo_piano-forte");
+		music2rdf.setThumbnail("https://sammlungen.ulb.uni-muenster.de/hd/image/largethumb/5464454");
+		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5464450");
+		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
+		music2rdf.addPerson(new Person("http://d-nb.info/gnd/129246638","Kelz, Johann Friedrich",Role.COMPOSER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.setDocumentTitle("Leichtes Rondo für das Piano-Forte");
+		music2rdf.setDateIssued("1861"); 
+		music2rdf.setOutputFormat("TURTLE");
+		music2rdf.isVerbose(false);
+		
+		music2rdf.parseMusicXML();
+		
+		File file = new File("src/test/resources/rdf/leichtes_rondo_piano-forte.ttl");
+		assertEquals(true, file.exists());
+	}
+	
+	@Test
+	public void convertSiegesMaerscheMusicXML() {
+	
+		MusicXML2RDF music2rdf = new MusicXML2RDF();		
+		
+		music2rdf.setInputFile(new File("musicxml/sieges_maersche_piano-forte.xml"));
+		music2rdf.setOutputFile("src/test/resources/rdf/sieges_maersche_piano-forte");
+		music2rdf.setThumbnail("https://sammlungen.ulb.uni-muenster.de/hd/image/largethumb/5393369");
+		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5393365");
+		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
+		music2rdf.addPerson(new Person("http://d-nb.info/gnd/129246638","Eppinger, L.J.",Role.COMPOSER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.setDocumentTitle("Sieges Mærsche für's Piano-Forte : gewidmet den Witwen und Waisen der Landwehr-mäner des k.k. Hoch und Deutschmeister Regiments");
+		music2rdf.setDateIssued("1850"); 
+		music2rdf.setOutputFormat("TURTLE");
+		music2rdf.isVerbose(false);
+		
+		music2rdf.parseMusicXML();
+		
+		File file = new File("src/test/resources/rdf/sieges_maersche_piano-forte.ttl");
+		assertEquals(true, file.exists());
+
+	}
+
 }

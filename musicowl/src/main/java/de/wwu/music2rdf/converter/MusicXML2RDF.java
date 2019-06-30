@@ -82,7 +82,8 @@ public class MusicXML2RDF {
 	private Collection collection;
 	private static Logger logger = Logger.getLogger("Converter");
 	private String dateIssued = "";
-
+	private ArrayList<Note> accidentalsOverwrite = new ArrayList<Note>();
+	
 	public MusicXML2RDF() {
 		super();
 		this.clefList = new ArrayList<Clef>();
@@ -104,6 +105,196 @@ public class MusicXML2RDF {
 		this.verbose = verbose;
 	}
 
+	
+	
+	private String getAccidental(Key key, Note note) {
+
+		String result = "";
+
+		if((key.getTonic().equals("G") && key.getMode().equals("major")) || (key.getTonic().equals("E") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("F")){
+				result = Note.Sharp;
+			}
+		}
+
+		if((key.getTonic().equals("D") && key.getMode().equals("major")) || (key.getTonic().equals("B") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("F") || 
+					note.getPitch().equals("C")){
+				result = Note.Sharp;
+			}
+		}
+
+		if((key.getTonic().equals("A") && key.getMode().equals("major")) || (key.getTonic().equals("F") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("F") || 
+					note.getPitch().equals("C") ||
+					note.getPitch().equals("G")){
+				result = Note.Sharp;
+			} 
+		}
+
+		if((key.getTonic().equals("E") && key.getMode().equals("major")) || (key.getTonic().equals("C") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("F") || 
+					note.getPitch().equals("C") || 
+					note.getPitch().equals("G") || 
+					note.getPitch().equals("D")){
+				result = Note.Sharp;
+			}
+		}
+
+		if((key.getTonic().equals("B") && key.getMode().equals("major")) || (key.getTonic().equals("G") && key.getMode().equals("minor"))){							
+			if(note.getPitch().equals("F") ||
+					note.getPitch().equals("C") || 
+					note.getPitch().equals("G") ||	
+					note.getPitch().equals("D") ||	
+					note.getPitch().equals("A")){
+				result= Note.Sharp;
+			}
+		}
+
+		if((key.getTonic().equals("Fs") && key.getMode().equals("major")) || (key.getTonic().equals("Ds") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("F") || 
+					note.getPitch().equals("C") || 
+					note.getPitch().equals("G") || 
+					note.getPitch().equals("D") ||
+					note.getPitch().equals("A") || 
+					note.getPitch().equals("E")){
+				result = Note.Sharp;
+			}
+		}
+
+		if((key.getTonic().equals("Cs") && key.getMode().equals("major")) || (key.getTonic().equals("As") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("F") || 
+					note.getPitch().equals("C") || 
+					note.getPitch().equals("G") ||
+					note.getPitch().equals("D") ||
+					note.getPitch().equals("A") ||
+					note.getPitch().equals("E") ||
+					note.getPitch().equals("B")){
+
+				result = Note.Sharp;
+
+			}
+
+		}
+
+		
+		/*
+		 * Flat 
+		 */
+		
+		
+		if((key.getTonic().equals("F") && key.getMode().equals("major")) || (key.getTonic().equals("D") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("B")){
+				result = Note.Flat;
+			}
+		}
+
+		if((key.getTonic().equals("Bb") && key.getMode().equals("major")) || (key.getTonic().equals("G") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("B") ||
+					note.getPitch().equals("E")){
+				result = Note.Flat;
+			}
+
+		}
+
+		if((key.getTonic().equals("Eb") && key.getMode().equals("major")) || (key.getTonic().equals("C") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("B") ||
+					note.getPitch().equals("E") ||
+					note.getPitch().equals("A")) {
+				result = Note.Flat;
+			}
+		}
+
+		if((key.getTonic().equals("Ab") && key.getMode().equals("major")) || (key.getTonic().equals("F") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("B") ||
+					note.getPitch().equals("E") ||
+					note.getPitch().equals("A") ||
+					note.getPitch().equals("D")) {
+				result = Note.Flat;
+			}
+
+		}
+
+		if((key.getTonic().equals("Db") && key.getMode().equals("major")) || (key.getTonic().equals("Bb") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("B") ||
+					note.getPitch().equals("E") ||
+					note.getPitch().equals("A") ||
+					note.getPitch().equals("D") ||
+					note.getPitch().equals("G")) {
+				result = Note.Flat;
+			}
+		}
+
+		if((key.getTonic().equals("Gb") && key.getMode().equals("major")) || (key.getTonic().equals("Eb") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("B") ||
+					note.getPitch().equals("E") ||
+					note.getPitch().equals("A") ||
+					note.getPitch().equals("D") ||
+					note.getPitch().equals("G") ||
+					note.getPitch().equals("C")) {
+				result = Note.Flat;
+			}
+
+		}
+
+		if((key.getTonic().equals("Cb") && key.getMode().equals("major")) || (key.getTonic().equals("Ab") && key.getMode().equals("minor"))){
+			if(note.getPitch().equals("B") ||
+					note.getPitch().equals("E") ||
+					note.getPitch().equals("A") ||
+					note.getPitch().equals("D") ||
+					note.getPitch().equals("G") ||
+					note.getPitch().equals("C") ||
+					note.getPitch().equals("F")) {
+
+				result = Note.Flat;
+			}
+
+		}
+		
+		
+		for (int i = 0; i < this.accidentalsOverwrite.size(); i++) {
+
+			if(note.getPitch().equals(this.accidentalsOverwrite.get(i).getPitch())) {
+				result = this.accidentalsOverwrite.get(i).getAccidental();
+			}
+		}	
+
+		return result;
+	}
+	
+
+	private void updateAccidentalsList(Note note) {
+		
+		boolean accidentalExists = false;
+		
+		for (int i = 0; i < this.accidentalsOverwrite.size(); i++) {
+			if(this.accidentalsOverwrite.get(i).getPitch().equals(note.getPitch())) {
+				if(note.getAccidental().equals("natural")) {
+					this.accidentalsOverwrite.remove(accidentalsOverwrite.get(i));
+				} else {
+					this.accidentalsOverwrite.get(i).setAccidental(note.getAccidental());
+				} 
+				accidentalExists = true;
+			}
+		}
+		
+		if(!accidentalExists && !note.getAccidental().equals("natural")) {
+			this.accidentalsOverwrite.add(note);
+		}	
+	}
+	
+	
+//	private String getOverwrittenAccidental(Note note) {
+//		String result = "";
+//		
+//		for (int i = 0; i < this.accidentalsOverwrite.size(); i++) {
+//			if(note.getPitch().equals(this.accidentalsOverwrite.get(i).getPitch())) {
+//				result = this.accidentalsOverwrite.get(i).getAccidental();
+//			}
+//		}		
+//		return result;
+//				
+//	}
 	
 	private void createRDF(MusicScore score){
 
@@ -466,7 +657,9 @@ public class MusicXML2RDF {
 			int notesetCounter = 0;
 			int movementCounter = 0;		
 			Resource resPart = null;
-			for (int j = 0; j < score.getParts().get(i).getMeasures().size(); j++) {			
+			for (int j = 0; j < score.getParts().get(i).getMeasures().size(); j++) {
+				
+				
 
 				if(score.getParts().get(i).getMeasures().get(j).getId().equals("1") ||
 						score.getParts().get(i).getMeasures().get(j).getId().equals("0")) {
@@ -600,7 +793,8 @@ public class MusicXML2RDF {
 				//String keyObject = "";
 				
 				Resource resMeasure = model.createResource(nodeBaseURI+"MOV"+movementCounter+"_"+partID+"_M"+measureID);
-
+				this.accidentalsOverwrite.clear();
+				
 				Key key = new Key();
 
 				//String instantObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + "INSTANT_" + measureID); 				
@@ -819,7 +1013,10 @@ public class MusicXML2RDF {
 
 				String notesetObject = "";
 				String tmpVoice = "";
-
+				//ArrayList<Note> accidentalsInMeasure = new ArrayList<Note>();
+				
+				this.accidentalsOverwrite.clear();
+				
 				for (int k = 0; k < score.getParts().get(i).getMeasures().get(j).getNotes().size(); k++) {
 
 					if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isChord()){
@@ -1159,21 +1356,82 @@ public class MusicXML2RDF {
 					}
 
 
-					if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("") &&
-							!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("natural")){
+//					if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("") &&
+//							!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("natural")){
+//
+//
+//						model.add(model.createStatement(resNote, Chord.modifier, model.createResource(Chord.NS_Base+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental())));
+//					
+//						Note noteAccidental = new Note();
+//						noteAccidental.setAccidental(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental());
+//						noteAccidental.setPitch(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch());
+//						accidentalsInMeasure.add(noteAccidental);
+//						
+//						//System.out.println(">> M:" +score.getParts().get(i).getMeasures().get(j).getId() + " " + noteAccidental.getPitch() + " " + noteAccidental.getAccidental());
+//					} 
 
-						//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental()) + ".\n");
-						model.add(model.createStatement(resNote, Chord.modifier, model.createResource(Chord.NS_Base+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental())));
-					} 
-
+					
 
 					/**
-					 * Add sharps and flats to notes depending on the key. MuaicXML relies on the reader to identify the accidentals depending on the keys. 
+					 * Add sharps and flats to notes depending on the key. 
 					 */
+					
+					Note note = new Note();
+					note.setPitch(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch());
+					note.setAccidental(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental());
+					note.setOctave(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave());
+					
+					if(!note.getAccidental().equals("")){
+						
+						if(!note.getAccidental().toLowerCase().equals("natural")) {
+							
+							model.add(model.createStatement(resNote, Chord.modifier, model.createResource(Chord.NS_Base+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental())));
+							
+						} 
+						
+							this.updateAccidentalsList(note);
+						
+					
+					} else {
 
+						if(note.getPitch() != null){							
+						
+							if(!this.getAccidental(key, note).equals("")) {
+								model.add(model.createStatement(resNote, Chord.modifier, model.createResource(Chord.NS_Base+this.getAccidental(key, note))));							
+							}
+							
+						}
+						
+					}
+
+					
+					
+					
+					
+					//String accidentalOverwrite = "";
+					
+
+
+					
+					
+					
+					
+					
+					
+//					if(!note.getAccidental().equals("")) {
+//						
+//						
+//						//System.out.println(">>>> M: "+score.getParts().get(i).getMeasures().get(j).getId() + " " + note.getPitch() + " " + note.getAccidental());
+//					}
+														
+					
+					/**
+					
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("") &&
 							score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch() != null){						
 
+						note.setPitch(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch());
+						
 						//if((key.getTonic().equals("A") && key.getMode().equals("minor")) || (key.getTonic().equals("C") && key.getMode().equals("major"))){
 							////ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental()) + ".\n");
 						//}
@@ -1183,7 +1441,8 @@ public class MusicXML2RDF {
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F")){
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								note.setAccidental("sharp");
 
 							}
 
@@ -1195,7 +1454,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C")){
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								note.setAccidental("sharp");
 
 							}
 
@@ -1207,7 +1467,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G")){
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								note.setAccidental("sharp");
 
 							} 
 
@@ -1220,7 +1481,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D")){
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								note.setAccidental("sharp");
 
 							}
 
@@ -1234,8 +1496,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A")){
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
-
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								note.setAccidental("sharp");
 							}
 
 						}
@@ -1249,7 +1511,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E")){
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								note.setAccidental("sharp");
 
 							}
 
@@ -1265,7 +1528,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B")){
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
+								note.setAccidental("sharp");
 
 							}
 
@@ -1275,7 +1539,8 @@ public class MusicXML2RDF {
 							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B")){
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								note.setAccidental("flat");
 
 							}
 
@@ -1286,7 +1551,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E")){
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								note.setAccidental("flat");
 
 							}
 
@@ -1298,7 +1564,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A")) {
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								note.setAccidental("flat");
 
 							}
 
@@ -1311,7 +1578,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D")) {
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								note.setAccidental("flat");
 
 							}
 
@@ -1325,7 +1593,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G")) {
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								note.setAccidental("flat");
 
 							}
 
@@ -1340,7 +1609,8 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C")) {
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								note.setAccidental("flat");
 
 							}
 
@@ -1356,15 +1626,32 @@ public class MusicXML2RDF {
 									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F")) {
 
 								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
+								note.setAccidental("flat");
 
 							}
 
 						}
 
+						
+						for (int l = 0; l < accidentalsInMeasure.size(); l++) {
+							
+							if(accidentalsInMeasure.get(l).getPitch().equals(note.getPitch())){ 
+							   //accidentalsInMeasure.get(l).getAccidental().equals(note.)) {
+								note.setAccidental(accidentalsInMeasure.get(l).getAccidental());
+							}
+						}
+						
+						
 					}
+					
+					**/
+
+				
 
 
+					//note = null;
+					
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave()!=null){
 
 						//ttl.append(noteObject + musicOWL.replace("OBJECT", "hasOctave") + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");	
@@ -1415,7 +1702,11 @@ public class MusicXML2RDF {
 
 					}
 
+					
+					
 				}
+				
+				//accidentalsInMeasure = null;
 
 			}
 
@@ -2067,7 +2358,7 @@ public class MusicXML2RDF {
 								}
 								if(elementNotes.getElementsByTagName("dot").getLength()==3) {
 									note.setTripleDot(true);
-									System.out.println(">>>>>>>>> elementNotes.getElementsByTagName(\"dot\").item(0) "+elementNotes.getElementsByTagName("dot").getLength());
+									//System.out.println(">>>>>>>>> elementNotes.getElementsByTagName(\"dot\").item(0) "+elementNotes.getElementsByTagName("dot").getLength());
 								}
 																
 								if(elementNotes.getElementsByTagName("octave").item(0)!=null) note.setOctave(elementNotes.getElementsByTagName("octave").item(0).getTextContent());

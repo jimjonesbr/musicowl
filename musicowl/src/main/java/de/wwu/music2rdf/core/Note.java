@@ -17,9 +17,12 @@ public class Note {
 	private boolean isDot;
 	private boolean isDoubleDot;
 	private boolean isTripleDot;
-	private boolean isChord;
-	
+	private boolean isChord;	
 	private String signature;
+	public static final String Sharp = "sharp";
+	public static final String Doubleharp = "doublesharp";
+	public static final String Flat = "flat";
+	public static final String DoubleFlat = "doubleflat";
 	
 	public Note() {
 

@@ -21,13 +21,13 @@ public class AchillesGrandOpera {
 	@Test
 	public void melodyWithDots() {
 
-		String result = "";		
-		//URL url = this.getClass().getResource("/rdf/achilles_grand-opera.ttl");
+		String result = "";				
 		URL url = this.getClass().getResource("/rdf/achilles_grand-opera.ttl");
 		File file = new File(url.getFile());
 
-		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath(),"N-TRIPLES");
+		Model model = ModelFactory.createDefaultModel();
+		model.read(file.getAbsolutePath(),"N-TRIPLES");
+		
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
 				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
@@ -151,7 +151,7 @@ public class AchillesGrandOpera {
 				"   FILTER ( NOT EXISTS {?note7 chord:modifier ?modifier7} )\n" + 
 				"}";
 		
-		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
+		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, model)) {
 			ResultSet results = qexec.execSelect() ;
 			for ( ; results.hasNext() ; )
 			{
