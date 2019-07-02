@@ -18,6 +18,7 @@ public class Note {
 	private boolean isDoubleDot;
 	private boolean isTripleDot;
 	private boolean isChord;	
+	private boolean isGrace;
 	private String signature;
 	public static final String Sharp = "sharp";
 	public static final String Doubleharp = "doublesharp";
@@ -34,6 +35,7 @@ public class Note {
 		this.accidental = "";
 		isChord = false;
 		isDot = false;
+		isGrace = false;
 
 	}
 	
@@ -150,6 +152,14 @@ public class Note {
 
 	public void setTripleDot(boolean isTripleDot) {
 		this.isTripleDot = isTripleDot;
+	}
+
+	public boolean isGrace() {
+		return isGrace;
+	}
+
+	public void setGrace(boolean isGrace) {
+		this.isGrace = isGrace;
 	}
 	
 	

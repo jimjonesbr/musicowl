@@ -1399,7 +1399,7 @@ public class MusicXML2RDF {
 					note.setPitch(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch());
 					note.setAccidental(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental());
 					note.setOctave(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave());
-				
+					note.setGrace(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isGrace());
 					
 					if(!note.getAccidental().equals("")){
 											
@@ -1425,7 +1425,11 @@ public class MusicXML2RDF {
 					}
 
 					
-					
+					if(note.isGrace()) {
+						Resource resGraceNote = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS_" + notesetCounter + "_N" + k + "_NA_GRACE");
+						model.add(model.createStatement(resNote, MusicOWL.hasNoteAttribute, resGraceNote));
+						model.add(model.createStatement(resGraceNote,RDF.type,MusicOWL.GraceNote));
+					}
 					
 					
 					//String accidentalOverwrite = "";
@@ -2306,6 +2310,12 @@ public class MusicXML2RDF {
 								for (int m = 0; m < listNoteElements.getLength(); m++) {
 
 
+									if (listNoteElements.item(m).getNodeName().equals("grace")) {
+
+										note.setGrace(true);
+										
+									}
+									
 									if (listNoteElements.item(m).getNodeName().equals("staff")) {
 
 										note.setStaff(listNoteElements.item(m).getTextContent());

@@ -35,9 +35,6 @@
         <NamedIndividual IRI="http://purl.org/ontology/chord/demisharp"/>
     </Declaration>
     <Declaration>
-        <Class IRI="256th"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="hasMode"/>
     </Declaration>
     <Declaration>
@@ -135,9 +132,6 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Aminor"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="1024th"/>
     </Declaration>
     <Declaration>
         <Class IRI="OctupleWhole"/>
@@ -326,6 +320,9 @@
         <Class IRI="Quarter"/>
     </Declaration>
     <Declaration>
+        <Class IRI="Appoggiatura"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="adagio"/>
     </Declaration>
     <Declaration>
@@ -401,6 +398,9 @@
         <Class IRI="Duplet"/>
     </Declaration>
     <Declaration>
+        <Class IRI="NoteAttribute"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Fb"/>
     </Declaration>
     <Declaration>
@@ -449,10 +449,16 @@
         <Class IRI="FClef"/>
     </Declaration>
     <Declaration>
+        <Class IRI="Acciaccatura"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="Scoop"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="hasTempoMarking"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="GraceNote"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/Cdoublesharp"/>
@@ -516,6 +522,9 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/chord/note/E"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasNoteAttribute"/>
     </Declaration>
     <Declaration>
         <Class IRI="TimeSignature"/>
@@ -684,9 +693,6 @@
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Ebmajor"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="hasBeatUnit"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="http://purl.org/ontology/tonality/key/Gmajor"/>
@@ -960,9 +966,6 @@
     </Declaration>
     <Declaration>
         <Class IRI="NeutralClef"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="512th"/>
     </Declaration>
     <Declaration>
         <Class IRI="Nontuplet"/>
@@ -1547,6 +1550,14 @@
         <Class IRI="Articulation"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="Acciaccatura"/>
+        <Class IRI="GraceNote"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Appoggiatura"/>
+        <Class IRI="GraceNote"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="BartokPizzicato"/>
         <Class IRI="Articulation"/>
     </SubClassOf>
@@ -1637,6 +1648,10 @@
     <SubClassOf>
         <Class IRI="GhostNote"/>
         <Class IRI="Articulation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="GraceNote"/>
+        <Class IRI="NoteAttribute"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="Half"/>
@@ -1803,10 +1818,6 @@
         <Class IRI="Duration"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="1024th"/>
-        <Class IRI="Duration"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="128th"/>
         <Class IRI="Duration"/>
     </SubClassOf>
@@ -1815,15 +1826,7 @@
         <Class IRI="Duration"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="256th"/>
-        <Class IRI="Duration"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="32nd"/>
-        <Class IRI="Duration"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="512th"/>
         <Class IRI="Duration"/>
     </SubClassOf>
     <SubClassOf>
@@ -4846,10 +4849,6 @@
         <Class IRI="NoteSet"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="hasBeatUnit"/>
-        <Class IRI="TempoMarking"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
         <ObjectProperty IRI="hasClef"/>
         <Class IRI="NoteSet"/>
     </ObjectPropertyDomain>
@@ -4900,6 +4899,10 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="hasNote"/>
         <Class IRI="NoteSet"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasNoteAttribute"/>
+        <Class IRI="http://purl.org/ontology/chord/Note"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="hasNoteSet"/>
@@ -4986,10 +4989,6 @@
         <Class IRI="Articulation"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="hasBeatUnit"/>
-        <Class IRI="Duration"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
         <ObjectProperty IRI="hasClef"/>
         <Class IRI="Clef"/>
     </ObjectPropertyRange>
@@ -5036,6 +5035,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="hasNote"/>
         <Class IRI="http://purl.org/ontology/chord/Note"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasNoteAttribute"/>
+        <Class IRI="NoteAttribute"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="hasNoteSet"/>
@@ -5935,6 +5938,16 @@
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Grazioso</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>hasDirection</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">has Direction</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>hasDynamic</IRI>
+        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">has Dynamic</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>incalzando</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Encouraging, building.</Literal>
@@ -6411,11 +6424,6 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>1024th</IRI>
-        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Thousand-twenty-fourth Note</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>128th</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Hundred-twenty-eigth Note</Literal>
     </AnnotationAssertion>
@@ -6426,18 +6434,8 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>256th</IRI>
-        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Two-hundred-fifty-sixth Note</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>32nd</IRI>
         <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Thirty-second Note</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>512th</IRI>
-        <Literal xml:lang="en" datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Five-hundred-twelfth Note</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>

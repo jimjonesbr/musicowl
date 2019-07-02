@@ -9,7 +9,6 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.shared.PrefixMapping;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -21,7 +20,6 @@ public class ElgarConcerto {
 	public void melodyWithRests() {
 
 		String result = "";		
-		//URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
 		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
 		File file = new File(url.getFile());
 
@@ -154,14 +152,13 @@ public class ElgarConcerto {
 	
 	@Test
 	public void checkMetadata() {
+
 		boolean result = true;		
-//		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
 		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
-
 		File file = new File(url.getFile());
-
-		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath());
+		
+		Model model = ModelFactory.createDefaultModel();
+		model.read(file.getAbsolutePath());
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 						"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
 						"PREFIX dct: <http://purl.org/dc/terms/>\n" + 			 
@@ -202,7 +199,7 @@ public class ElgarConcerto {
 						"	 ?part dc:description ?partName.		  \n" + 
 						"}";
 
-		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
+		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, model)) {
 			ResultSet results = qexec.execSelect() ;
 
 			if(results.getResultVars().size()==0) {
@@ -592,16 +589,14 @@ public class ElgarConcerto {
 	}
 
 	@Test
-	public void elgarSimpleMelody() {
+	public void simpleMelody() {
 
 		String result = "";		
-		//URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
 		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
-
 		File file = new File(url.getFile());
 
-		Model modelElgar = ModelFactory.createDefaultModel();
-		modelElgar.read(file.getAbsolutePath());
+		Model model = ModelFactory.createDefaultModel();
+		model.read(file.getAbsolutePath());
 
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
@@ -679,8 +674,8 @@ public class ElgarConcerto {
 				"FILTER ( NOT EXISTS {?note3 chord:modifier ?modifier3} )\n" + 
 				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier5} )\n" + 
 				"}";
-		
-		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, modelElgar)) {
+					
+		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, model)) {
 			ResultSet results = qexec.execSelect() ;
 			for ( ; results.hasNext() ; )
 			{
@@ -694,4 +689,168 @@ public class ElgarConcerto {
 
 	}
 
+	@Test
+	public void melodyGraceNotesDynamicsMultipleDurationsMultipleMeasures() {
+
+		String result = "";		
+		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
+		File file = new File(url.getFile());
+
+		Model model = ModelFactory.createDefaultModel();
+		model.read(file.getAbsolutePath());
+
+		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
+				"PREFIX chord: <http://purl.org/ontology/chord/>\n" + 
+				"PREFIX note: <http://purl.org/ontology/chord/note/>\n" + 
+				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
+				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
+				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
+				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"SELECT DISTINCT ?scoreTitle ?movement ?partName ?voiceID ?measure ?noteset11\n" + 
+				"WHERE {\n" + 
+				"\n" + 
+				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:title ?scoreTitle.\n" + 
+				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
+				"?movementNode dc:title ?movemenTitle.\n" + 
+				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:creator ?creatorNode.\n" + 
+				"?creatorNode foaf:name ?creator.\n" + 
+				"?movementNode mso:hasScorePart ?part.\n" + 
+				"?movementNode dc:title ?movement.\n" + 
+				"?part mso:hasMeasure ?measureNode.\n" + 
+				"?part rdfs:label ?partID.\n" + 
+				"?part dc:description ?partName.\n" + 
+				"?part mso:hasStaff ?staff.\n" + 
+				"?measureNode rdfs:label ?measure.\n" + 
+				"?voice a mso:Voice.\n" + 
+				"?voice rdfs:label ?voiceID.\n" + 
+				"?measureNode mso:hasNoteSet ?noteset0.\n" + 
+				"?staff mso:hasVoice ?voice.\n" + 
+				"?staff rdfs:label ?staffID.\n" + 
+				"\n" + 
+				"?noteset0 mso:hasNote ?note0.\n" + 
+				"?voice mso:hasNoteSet ?noteset0.\n" + 
+				"?note0 chord:natural note:A.\n" + 
+				"?note0 mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?noteset0 mso:hasDuration ?duration0.\n" + 
+				"?duration0 a mso:Eighth.\n" + 
+				"?noteset0 mso:nextNoteSet ?noteset1.\n" + 
+				"\n" + 
+				"?noteset1 mso:hasNote ?note1.\n" + 
+				"?voice mso:hasNoteSet ?noteset1.\n" + 
+				"?note1 chord:natural note:G.\n" + 
+				"?note1 mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?noteset1 mso:hasDuration ?duration1.\n" + 
+				"?duration1 a mso:Eighth.\n" + 
+				"?noteset1 mso:nextNoteSet ?noteset2.\n" + 
+				"\n" + 
+				"?noteset2 mso:hasNote ?note2.\n" + 
+				"?voice mso:hasNoteSet ?noteset2.\n" + 
+				"?note2 chord:natural note:F.\n" + 
+				"?note2 mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?note2 chord:modifier chord:sharp .    \n" + 
+				"?noteset2 mso:hasDuration ?duration2.\n" + 
+				"?duration2 a mso:Eighth.\n" + 
+				"?noteset2 mso:nextNoteSet ?noteset3.\n" + 
+				"\n" + 
+				"?noteset3 mso:hasNote ?note3.\n" + 
+				"?voice mso:hasNoteSet ?noteset3.\n" + 
+				"?note3 chord:natural note:A.\n" + 
+				"?note3 mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?note3 mso:hasNoteAttribute ?note3_attribute.\n" + 
+				"?note3_attribute a mso:GraceNote.\n" + 
+				"?noteset3 mso:hasDuration ?duration3.\n" + 
+				"?duration3 a mso:Eighth.\n" + 
+				"?noteset3 mso:nextNoteSet ?noteset4.\n" + 
+				"\n" + 
+				"?noteset4 mso:hasNote ?note4.\n" + 
+				"?voice mso:hasNoteSet ?noteset4.\n" + 
+				"?note4 chord:natural note:G.\n" + 
+				"?note4 mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?noteset4 mso:hasDuration ?duration4.\n" + 
+				"?duration4 a mso:Eighth.\n" + 
+				"?noteset4 mso:nextNoteSet ?noteset5.\n" + 
+				"   \n" + 
+				"?noteset5 mso:hasNote ?note5.\n" + 
+				"?voice mso:hasNoteSet ?noteset5.\n" + 
+				"?note5 chord:natural note:C.\n" + 
+				"?note5 mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?noteset5 mso:hasDuration ?duration5.\n" + 
+				"?duration5 a mso:Half.   \n" + 
+				"?noteset5 mso:nextNoteSet ?noteset6.\n" + 
+				"\n" + 
+				"?noteset6 mso:hasNote ?note6.\n" + 
+				"?voice mso:hasNoteSet ?noteset6.\n" + 
+				"?note6 chord:natural note:C.\n" + 
+				"?note6 mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?noteset6 mso:hasDuration ?duration6.\n" + 
+				"?duration6 a mso:Eighth.   \n" + 
+				"?noteset6 mso:nextNoteSet ?noteset7.\n" + 
+				"    \n" + 
+				"?noteset7 mso:hasNote ?note7.\n" + 
+				"?voice mso:hasNoteSet ?noteset7.\n" + 
+				"?note7 chord:natural note:B.\n" + 
+				"?note7 mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?noteset7 mso:hasDuration ?duration7.\n" + 
+				"?duration7 a mso:Eighth.   \n" + 
+				"?noteset7 mso:nextNoteSet ?noteset8.    \n" + 
+				"\n" + 
+				"?noteset8 mso:hasNote ?note8.\n" + 
+				"?voice mso:hasNoteSet ?noteset8.\n" + 
+				"?note8 chord:natural note:A.\n" + 
+				"?note8 mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?noteset8 mso:hasDuration ?duration8.\n" + 
+				"?duration8 a mso:Eighth.   \n" + 
+				"?noteset8 mso:nextNoteSet ?noteset9.    \n" + 
+				"    \n" + 
+				"?noteset9 mso:hasNote ?note9.\n" + 
+				"?voice mso:hasNoteSet ?noteset9.\n" + 
+				"?note9 chord:natural note:D.\n" + 
+				"?note9 mso:hasNoteAttribute ?note9_attribute.\n" + 
+				"?note9_attribute a mso:GraceNote.\n" + 
+				"?note9 mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?noteset9 mso:hasDuration ?duration9.\n" + 
+				"?duration9 a mso:Eighth.   \n" + 
+				"?noteset9 mso:nextNoteSet ?noteset10.      \n" + 
+				"    \n" + 
+				"?noteset10 mso:hasNote ?note10.\n" + 
+				"?voice mso:hasNoteSet ?noteset10.\n" + 
+				"?note10 chord:natural note:C.\n" + 
+				"?note10 mso:hasOctave \"3\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?noteset10 mso:hasDuration ?duration10.\n" + 
+				"?duration10 a mso:Eighth.   \n" + 
+				"?noteset10 mso:nextNoteSet ?noteset11.    \n" + 
+				"\n" + 
+				"?noteset11 mso:hasNote ?note11.\n" + 
+				"?voice mso:hasNoteSet ?noteset11.\n" + 
+				"?note11 chord:natural note:B.\n" + 
+				"?note11 mso:hasOctave \"2\"^^<http://www.w3.org/2001/XMLSchema#int>.\n" + 
+				"?noteset11 mso:hasDuration ?duration11.\n" + 
+				"?duration11 a mso:Half.   \n" + 
+				"?noteset11 mso:hasDynamic ?noteset11_dynamic.\n" + 
+				"?noteset11_dynamic a  mso:p.\n" + 
+				"FILTER ( NOT EXISTS {?note0 chord:modifier ?modifier0} )\n" + 
+				"FILTER ( NOT EXISTS {?note1 chord:modifier ?modifier1} )\n" + 
+				"FILTER ( NOT EXISTS {?note3 chord:modifier ?modifier3} )\n" + 
+				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier5} )\n" + 
+				"FILTER ( NOT EXISTS {?note6 chord:modifier ?modifier6} )\n" + 
+				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier7} )\n" + 
+				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier8} )\n" + 
+				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier9} )\n" + 
+				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier10} )\n" + 
+				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier11} )\n" +  
+				"}";
+					
+		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, model)) {
+			ResultSet results = qexec.execSelect() ;
+			for ( ; results.hasNext() ; )
+			{
+				QuerySolution soln = results.nextSolution() ;
+				result = soln.get("?measure").toString();
+				logger.info("Simple melody: Measure "+soln.get("?measure"));
+			}
+		}
+
+		assertEquals(result, "3");		
+
+	}
 }
