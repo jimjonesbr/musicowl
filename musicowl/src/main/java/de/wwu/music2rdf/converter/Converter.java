@@ -58,6 +58,16 @@ public class Converter {
 				music2rdf.setDateIssued(parameter[1]);				
 			}
 
+			if(parameter[0].toLowerCase().equals("verbose")){
+				System.out.println("Verbose      	 : " + parameter[1]);				
+				music2rdf.isVerbose(Boolean.valueOf(parameter[1]));				
+			}
+			
+			if(parameter[0].toLowerCase().equals("outputformat")){
+				System.out.println("OutputFormat     : " + parameter[1]);				
+				music2rdf.setOutputFormat(parameter[1]);				
+			}
+			
 			if(parameter[0].toLowerCase().equals("person")){
 
 				String[] tokens = parameter[1].split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
