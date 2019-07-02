@@ -12,7 +12,8 @@ import org.junit.runners.Suite;
 	TroisAirs.class,
 	AchillesGrandOpera.class,
 	LeichtesRondoPianoForte.class,
-	SiegesMaerschePianoForte.class
+	SiegesMaerschePianoForte.class,
+	SonateFacile.class
 })
 
 public class TestSuite {

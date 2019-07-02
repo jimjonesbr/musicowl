@@ -36,6 +36,12 @@ public class Note {
 		isDot = false;
 
 	}
+	
+	public Note(String pitch, String accidental) {
+		super();
+		this.pitch = pitch;
+		this.accidental = accidental;
+	}
 
 	public String getOctave() {
 		return octave;

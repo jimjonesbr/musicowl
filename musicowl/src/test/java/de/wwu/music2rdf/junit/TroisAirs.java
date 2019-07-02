@@ -149,8 +149,6 @@ public class TroisAirs {
 				"    FILTER ( NOT EXISTS {?note9 chord:modifier ?m9} )\n" +  
 				"}"; 
 		
-		System.out.println(sparql);
-		
 		boolean result = false;
 		String measure = "";
 		String movement = "";

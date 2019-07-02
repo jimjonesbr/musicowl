@@ -169,6 +169,8 @@ public class LeichtesRondoPianoForte {
 				"    FILTER ( NOT EXISTS {?note11 chord:modifier ?11} )   \n" +  
 				"}\n"; 
 		
+		//System.out.println("Leichtes Rondo SPARQL > \n"+sparql);
+
 		
 		boolean result = false;
 

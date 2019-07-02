@@ -177,8 +177,7 @@ public class SiegesMaerschePianoForte {
 				"    FILTER ( NOT EXISTS {?note12 chord:modifier ?m12} )\n" + 
 				"    FILTER ( NOT EXISTS {?note13 chord:modifier ?m13} )\n" +  
 				"}\n"; 
-		
-		
+			
 		boolean result = false;
 		String measure = "";
 		String movement = "";

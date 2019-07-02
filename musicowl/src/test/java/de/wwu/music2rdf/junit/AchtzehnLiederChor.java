@@ -18,7 +18,7 @@ public class AchtzehnLiederChor {
 
 			
 	@Test
-	public void melodyWithRests() {
+	public void melody() {
 		
 		//URL url = this.getClass().getResource("/rdf/achtzehn_neue_lieder_gemischten-chor.ttl");
 		URL url = this.getClass().getResource("/rdf/achtzehn_neue_lieder_gemischten-chor.ttl");
@@ -93,6 +93,7 @@ public class AchtzehnLiederChor {
 				"    FILTER ( NOT EXISTS {?note3 chord:modifier ?m3} )\n" + 
 				"}"; 
 			
+		System.out.println(">> \n"+sparql);
 		boolean result = false;
 		String measure = "";
 		String movement = "";

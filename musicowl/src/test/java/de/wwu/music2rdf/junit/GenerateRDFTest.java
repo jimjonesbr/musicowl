@@ -161,6 +161,30 @@ public class GenerateRDFTest {
 	}
 	
 	@Test
+	public void convertSonateFacilePianoForte() {
+	
+		MusicXML2RDF music2rdf = new MusicXML2RDF();		
+		
+		music2rdf.setInputFile(new File("musicxml/sonate_facile_piano-forte.xml"));
+		music2rdf.setOutputFile("src/test/resources/rdf/sonate_facile_piano-forte");
+		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/5109295");
+		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5109291");
+		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
+		music2rdf.addPerson(new Person("http://d-nb.info/gnd/129246638","Bečvařovský, Antonín František",Role.COMPOSER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.setDocumentTitle("Sonate facile pour Piano-Forte");
+		music2rdf.setDateIssued("1800"); 
+		music2rdf.setOutputFormat("TURTLE");
+		music2rdf.isVerbose(false);
+		
+		music2rdf.parseMusicXML();
+		
+		File file = new File("src/test/resources/rdf/sonate_facile_piano-forte.ttl");
+		assertEquals(true, file.exists());
+
+	}
+
+	@Test
 	public void convertSiegesMaerscheMusicXML() {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();		
@@ -183,5 +207,4 @@ public class GenerateRDFTest {
 		assertEquals(true, file.exists());
 
 	}
-
 }

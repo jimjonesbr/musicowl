@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.UUID;
 import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
@@ -108,158 +109,189 @@ public class MusicXML2RDF {
 	
 	
 	private String getAccidental(Key key, Note note) {
-
-		String result = "";
-
+		
+		ArrayList<Note> measureAccidentals = new ArrayList<Note>();
+				
 		if((key.getTonic().equals("G") && key.getMode().equals("major")) || (key.getTonic().equals("E") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("F")){
-				result = Note.Sharp;
-			}
+
+				measureAccidentals.add(new Note("F","sharp"));
+
 		}
 
 		if((key.getTonic().equals("D") && key.getMode().equals("major")) || (key.getTonic().equals("B") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("F") || 
-					note.getPitch().equals("C")){
-				result = Note.Sharp;
-			}
+
+				measureAccidentals.add(new Note("F","sharp"));
+				measureAccidentals.add(new Note("C","sharp"));
+
 		}
 
 		if((key.getTonic().equals("A") && key.getMode().equals("major")) || (key.getTonic().equals("F") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("F") || 
-					note.getPitch().equals("C") ||
-					note.getPitch().equals("G")){
-				result = Note.Sharp;
-			} 
+				
+				measureAccidentals.add(new Note("F","sharp"));
+				measureAccidentals.add(new Note("C","sharp"));
+				measureAccidentals.add(new Note("G","sharp"));
+
 		}
 
 		if((key.getTonic().equals("E") && key.getMode().equals("major")) || (key.getTonic().equals("C") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("F") || 
-					note.getPitch().equals("C") || 
-					note.getPitch().equals("G") || 
-					note.getPitch().equals("D")){
-				result = Note.Sharp;
-			}
+				
+				measureAccidentals.add(new Note("F","sharp"));
+				measureAccidentals.add(new Note("C","sharp"));
+				measureAccidentals.add(new Note("G","sharp"));
+				measureAccidentals.add(new Note("D","sharp"));
+
 		}
 
 		if((key.getTonic().equals("B") && key.getMode().equals("major")) || (key.getTonic().equals("G") && key.getMode().equals("minor"))){							
-			if(note.getPitch().equals("F") ||
-					note.getPitch().equals("C") || 
-					note.getPitch().equals("G") ||	
-					note.getPitch().equals("D") ||	
-					note.getPitch().equals("A")){
-				result= Note.Sharp;
-			}
+				
+				measureAccidentals.add(new Note("F","sharp"));
+				measureAccidentals.add(new Note("C","sharp"));
+				measureAccidentals.add(new Note("G","sharp"));
+				measureAccidentals.add(new Note("D","sharp"));
+				measureAccidentals.add(new Note("A","sharp"));
+	
 		}
 
 		if((key.getTonic().equals("Fs") && key.getMode().equals("major")) || (key.getTonic().equals("Ds") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("F") || 
-					note.getPitch().equals("C") || 
-					note.getPitch().equals("G") || 
-					note.getPitch().equals("D") ||
-					note.getPitch().equals("A") || 
-					note.getPitch().equals("E")){
-				result = Note.Sharp;
-			}
+				
+				measureAccidentals.add(new Note("F","sharp"));
+				measureAccidentals.add(new Note("C","sharp"));
+				measureAccidentals.add(new Note("G","sharp"));
+				measureAccidentals.add(new Note("D","sharp"));
+				measureAccidentals.add(new Note("A","sharp"));
+				measureAccidentals.add(new Note("E","sharp"));
+
 		}
 
 		if((key.getTonic().equals("Cs") && key.getMode().equals("major")) || (key.getTonic().equals("As") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("F") || 
-					note.getPitch().equals("C") || 
-					note.getPitch().equals("G") ||
-					note.getPitch().equals("D") ||
-					note.getPitch().equals("A") ||
-					note.getPitch().equals("E") ||
-					note.getPitch().equals("B")){
 
-				result = Note.Sharp;
-
-			}
+				measureAccidentals.add(new Note("F","sharp"));
+				measureAccidentals.add(new Note("C","sharp"));
+				measureAccidentals.add(new Note("G","sharp"));
+				measureAccidentals.add(new Note("D","sharp"));
+				measureAccidentals.add(new Note("A","sharp"));
+				measureAccidentals.add(new Note("E","sharp"));
+				measureAccidentals.add(new Note("B","sharp"));
 
 		}
-
-		
-		/*
-		 * Flat 
-		 */
-		
+	
 		
 		if((key.getTonic().equals("F") && key.getMode().equals("major")) || (key.getTonic().equals("D") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("B")){
-				result = Note.Flat;
-			}
+
+				measureAccidentals.add(new Note("B","flat"));
+
 		}
 
 		if((key.getTonic().equals("Bb") && key.getMode().equals("major")) || (key.getTonic().equals("G") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("B") ||
-					note.getPitch().equals("E")){
-				result = Note.Flat;
-			}
+				
+				measureAccidentals.add(new Note("B","flat"));
+				measureAccidentals.add(new Note("E","flat"));
+
 
 		}
 
 		if((key.getTonic().equals("Eb") && key.getMode().equals("major")) || (key.getTonic().equals("C") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("B") ||
-					note.getPitch().equals("E") ||
-					note.getPitch().equals("A")) {
-				result = Note.Flat;
-			}
+				
+				measureAccidentals.add(new Note("B","flat"));
+				measureAccidentals.add(new Note("E","flat"));
+				measureAccidentals.add(new Note("A","flat"));
+
 		}
 
 		if((key.getTonic().equals("Ab") && key.getMode().equals("major")) || (key.getTonic().equals("F") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("B") ||
-					note.getPitch().equals("E") ||
-					note.getPitch().equals("A") ||
-					note.getPitch().equals("D")) {
-				result = Note.Flat;
-			}
+				
+				measureAccidentals.add(new Note("B","flat"));
+				measureAccidentals.add(new Note("E","flat"));
+				measureAccidentals.add(new Note("A","flat"));
+				measureAccidentals.add(new Note("D","flat"));
+
 
 		}
 
 		if((key.getTonic().equals("Db") && key.getMode().equals("major")) || (key.getTonic().equals("Bb") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("B") ||
-					note.getPitch().equals("E") ||
-					note.getPitch().equals("A") ||
-					note.getPitch().equals("D") ||
-					note.getPitch().equals("G")) {
-				result = Note.Flat;
-			}
+				
+				measureAccidentals.add(new Note("B","flat"));
+				measureAccidentals.add(new Note("E","flat"));
+				measureAccidentals.add(new Note("A","flat"));
+				measureAccidentals.add(new Note("D","flat"));
+				measureAccidentals.add(new Note("G","flat"));
+	
 		}
 
 		if((key.getTonic().equals("Gb") && key.getMode().equals("major")) || (key.getTonic().equals("Eb") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("B") ||
-					note.getPitch().equals("E") ||
-					note.getPitch().equals("A") ||
-					note.getPitch().equals("D") ||
-					note.getPitch().equals("G") ||
-					note.getPitch().equals("C")) {
-				result = Note.Flat;
-			}
+				
+				measureAccidentals.add(new Note("B","flat"));
+				measureAccidentals.add(new Note("E","flat"));
+				measureAccidentals.add(new Note("A","flat"));
+				measureAccidentals.add(new Note("D","flat"));
+				measureAccidentals.add(new Note("G","flat"));
+				measureAccidentals.add(new Note("C","flat"));		
 
 		}
 
 		if((key.getTonic().equals("Cb") && key.getMode().equals("major")) || (key.getTonic().equals("Ab") && key.getMode().equals("minor"))){
-			if(note.getPitch().equals("B") ||
-					note.getPitch().equals("E") ||
-					note.getPitch().equals("A") ||
-					note.getPitch().equals("D") ||
-					note.getPitch().equals("G") ||
-					note.getPitch().equals("C") ||
-					note.getPitch().equals("F")) {
+				
+				measureAccidentals.add(new Note("B","flat"));
+				measureAccidentals.add(new Note("E","flat"));
+				measureAccidentals.add(new Note("A","flat"));
+				measureAccidentals.add(new Note("D","flat"));
+				measureAccidentals.add(new Note("G","flat"));
+				measureAccidentals.add(new Note("C","flat"));
+				measureAccidentals.add(new Note("F","flat"));
+		
+		}
+		
 
-				result = Note.Flat;
+
+		/**
+		 * Updating accidental list with measure specific accidentals
+		 */
+		
+		for (int i = 0; i < this.accidentalsOverwrite.size(); i++) {
+		
+			boolean accidentalOverwritten = false;
+			
+			for (int j = 0; j < measureAccidentals.size(); j++) {
+				
+				if(measureAccidentals.get(j).getPitch().equals(this.accidentalsOverwrite.get(i).getPitch())) {
+					
+					measureAccidentals.get(j).setAccidental(this.accidentalsOverwrite.get(i).getAccidental());										
+					accidentalOverwritten = true;
+				}
+				
 			}
-
+			
+			if(!accidentalOverwritten) {
+				measureAccidentals.add(this.accidentalsOverwrite.get(i));
+			}
+			
 		}
 		
 		
-		for (int i = 0; i < this.accidentalsOverwrite.size(); i++) {
-
-			if(note.getPitch().equals(this.accidentalsOverwrite.get(i).getPitch())) {
-				result = this.accidentalsOverwrite.get(i).getAccidental();
+		/**
+		 * Removing from accidental overwrite in case of natural
+		 */
+		
+		for (Iterator<Note> it = measureAccidentals.iterator(); it.hasNext(); ){
+			Note n = it.next();
+			if(n.getAccidental().equals("natural")) {
+				it.remove();
 			}
-		}	
+		}
+		
+		
+		
+		/**
+		 * Returning the accidental for a given note, taking into account key related modifiers and possible overwrites inside of a measure.
+		 */
+		for (int i = 0; i < measureAccidentals.size(); i++) {
+			if(measureAccidentals.get(i).getPitch().equals(note.getPitch())) {
+				note.setAccidental(measureAccidentals.get(i).getAccidental());
+			}
+		}
+		
 
-		return result;
+		return note.getAccidental();
 	}
 	
 
@@ -268,33 +300,20 @@ public class MusicXML2RDF {
 		boolean accidentalExists = false;
 		
 		for (int i = 0; i < this.accidentalsOverwrite.size(); i++) {
+			
 			if(this.accidentalsOverwrite.get(i).getPitch().equals(note.getPitch())) {
-				if(note.getAccidental().equals("natural")) {
-					this.accidentalsOverwrite.remove(accidentalsOverwrite.get(i));
-				} else {
-					this.accidentalsOverwrite.get(i).setAccidental(note.getAccidental());
-				} 
+
+				this.accidentalsOverwrite.get(i).setAccidental(note.getAccidental()); 
 				accidentalExists = true;
+				
 			}
 		}
 		
-		if(!accidentalExists && !note.getAccidental().equals("natural")) {
+		if(!accidentalExists) {
 			this.accidentalsOverwrite.add(note);
 		}	
 	}
 	
-	
-//	private String getOverwrittenAccidental(Note note) {
-//		String result = "";
-//		
-//		for (int i = 0; i < this.accidentalsOverwrite.size(); i++) {
-//			if(note.getPitch().equals(this.accidentalsOverwrite.get(i).getPitch())) {
-//				result = this.accidentalsOverwrite.get(i).getAccidental();
-//			}
-//		}		
-//		return result;
-//				
-//	}
 	
 	private void createRDF(MusicScore score){
 
@@ -1380,24 +1399,25 @@ public class MusicXML2RDF {
 					note.setPitch(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch());
 					note.setAccidental(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental());
 					note.setOctave(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave());
+				
 					
 					if(!note.getAccidental().equals("")){
-						
+											
 						if(!note.getAccidental().toLowerCase().equals("natural")) {
 							
 							model.add(model.createStatement(resNote, Chord.modifier, model.createResource(Chord.NS_Base+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental())));
 							
 						} 
 						
-							this.updateAccidentalsList(note);
-						
+						this.updateAccidentalsList(note);
 					
 					} else {
 
 						if(note.getPitch() != null){							
 						
 							if(!this.getAccidental(key, note).equals("")) {
-								model.add(model.createStatement(resNote, Chord.modifier, model.createResource(Chord.NS_Base+this.getAccidental(key, note))));							
+								model.add(model.createStatement(resNote, Chord.modifier, model.createResource(Chord.NS_Base+this.getAccidental(key, note))));
+								//System.out.println(this.getAccidental(key, note));
 							}
 							
 						}
