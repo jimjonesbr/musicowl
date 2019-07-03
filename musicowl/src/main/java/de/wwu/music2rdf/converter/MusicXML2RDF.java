@@ -1745,8 +1745,9 @@ public class MusicXML2RDF {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 			//ttl.append("<http://musicxml2rdf.musicowl.de/"+uid+">" + provOntology.replace("OBJECT", "endedAtTime") + "\"" + sdf.format(new Date()) + "\" .\n");
 			
-			model.add(model.createLiteralStatement(resScore, MusicOWL.asMusicXML, xml.replace("\"", "'")));
-			model.add(model.createLiteralStatement(model.createResource("http://musicxml2rdf.musicowl.de/"+uid), ProvO.endedAtTime, sdf.format(new Date())));
+			model.add(model.createLiteralStatement(resScore, MusicOWL.asMusicXML, xml.replace("\"", "'")));			
+			//model.add(model.createLiteralStatement(model.createResource("http://musicxml2rdf.musicowl.de/"+uid), ProvO.endedAtTime, sdf.format(new Date())));
+			model.add(model.createLiteralStatement(resActivity, ProvO.endedAtTime, sdf.format(new Date())));
 
 //			FileOutputStream fileStream = new FileOutputStream(new File(this.getOutputFile()),false);
 //			OutputStreamWriter writer = new OutputStreamWriter(fileStream, StandardCharsets.UTF_8);
