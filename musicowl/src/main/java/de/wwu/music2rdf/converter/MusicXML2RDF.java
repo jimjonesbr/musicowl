@@ -822,7 +822,7 @@ public class MusicXML2RDF {
 
 				Resource resInstant = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + "INSTANT_" + measureID);
 				model.add(model.createStatement(resInstant, MusicOWL.hasMeasure, resMeasure));
-				model.add(model.createStatement(resInstant, RDF.type, resInstant));			
+				model.add(model.createStatement(resInstant, RDF.type, MusicOWL.Instant));			
 
 				if(j>0){
 					//ttl.append(nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + score.getParts().get(i).getMeasures().get(j-1).getId()) + musicOWL.replace("OBJECT", "nextMeasure") + measureObject + ".\n");
