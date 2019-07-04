@@ -50,7 +50,49 @@ Role.PERFORMER;
 Role.TRANSLATOR;
 Role.UNKNOWN;
 ```
+## Installation
 
+If you don't feel like building the Musci2RDF converter from soruce, visit the [releases area](https://github.com/jimjonesbr/musicowl/releases) to get a prebuilt jar. You can execute it from your terminal using the following syntax:
+
+```shell
+$ java -jar music2rdf-[VERSION].jar 
+	file=/home/jones/git/musicowl/musicowl/musicxml/elgar_cello_concerto_op.85.xml 
+	output=/home/jones/git/musicowl/musicowl/rdf/elgar_cello_concerto_op.85 
+	uri="http://dbpedia.org/resource/Cello_Concerto_(Elgar)" 
+	collectionURI=https://url.collection.de 
+	collectionName="Great Composers" 
+	person="http://dbpedia.org/resource/Edward_Elgar","Sir Edward Elgar","Composer" 
+	person="http://jimjones.de","Jim Jones","Encoder" 
+	thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg" 
+	dateIssued=1919 
+	outputformat=TURTLE 
+	verbose=false
+
+
+File 	         : /home/jones/git/musicowl/musicowl/musicxml/elgar_cello_concerto_op.85.xml
+Output File      : /home/jones/git/musicowl/musicowl/rdf/elgar_cello_concerto_op.85
+URI 	         : http://dbpedia.org/resource/Cello_Concerto_(Elgar)
+Collection URI   : https://url.collection.de
+Collection Name  : Great Composers
+Person URI       : http://dbpedia.org/resource/Edward_Elgar
+Person Name      : Sir Edward Elgar
+Person Role      : Composer
+Person URI       : http://jimjones.de
+Person Name      : Jim Jones
+Person Role      : Encoder
+Thumbnail        : https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg
+Date Issued      : 1919
+OutputFormat     : TURTLE
+Verbose      	 : false
+
+
+
+[2019-07-02 16:23:52,397] INFO  [Converter] - Processing elgar_cello_concerto_op.85.xml ...
+[2019-07-02 16:23:52,528] INFO  [Converter] - Loading XML file: 131 ms
+[2019-07-02 16:23:52,684] INFO  [Converter] - Creating MusicScore object: 156 ms
+[2019-07-02 16:23:53,347] INFO  [Converter] - Score serialization: 662 ms
+
+```
 
 ## Using the Java API
 
@@ -89,44 +131,3 @@ public class Example {
 
 ```
 
-## Using the converter via terminal
-
-```shell
-$ java -jar musicowl-converter.jar 
-	file=/home/jones/git/musicowl/musicowl/musicxml/elgar_cello_concerto_op.85.xml 
-	output=/home/jones/git/musicowl/musicowl/rdf/elgar_cello_concerto_op.85 
-	uri="http://dbpedia.org/resource/Cello_Concerto_(Elgar)" 
-	collectionURI=https://url.collection.de 
-	collectionName="Great Composers" 
-	person="http://dbpedia.org/resource/Edward_Elgar","Sir Edward Elgar","Composer" 
-	person="http://jimjones.de","Jim Jones","Encoder" 
-	thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg" 
-	dateIssued=1919 
-	outputformat=TURTLE 
-	verbose=false
-
-
-File 	         : /home/jones/git/musicowl/musicowl/musicxml/elgar_cello_concerto_op.85.xml
-Output File      : /home/jones/git/musicowl/musicowl/rdf/elgar_cello_concerto_op.85
-URI 	         : http://dbpedia.org/resource/Cello_Concerto_(Elgar)
-Collection URI   : https://url.collection.de
-Collection Name  : Great Composers
-Person URI       : http://dbpedia.org/resource/Edward_Elgar
-Person Name      : Sir Edward Elgar
-Person Role      : Composer
-Person URI       : http://jimjones.de
-Person Name      : Jim Jones
-Person Role      : Encoder
-Thumbnail        : https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg
-Date Issued      : 1919
-OutputFormat     : TURTLE
-Verbose      	 : false
-
-
-
-[2019-07-02 16:23:52,397] INFO  [Converter] - Processing elgar_cello_concerto_op.85.xml ...
-[2019-07-02 16:23:52,528] INFO  [Converter] - Loading XML file: 131 ms
-[2019-07-02 16:23:52,684] INFO  [Converter] - Creating MusicScore object: 156 ms
-[2019-07-02 16:23:53,347] INFO  [Converter] - Score serialization: 662 ms
-
-```
