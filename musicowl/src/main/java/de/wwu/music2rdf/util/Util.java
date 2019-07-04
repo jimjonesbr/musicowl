@@ -115,9 +115,7 @@ public class Util {
 
 				if(fileName.toLowerCase().equals("musicxml.xml")) { 
 
-					newFile = new File(outputFolder + File.separator + new File (mxlFile).getName().replace(".mxl", ".xml"));
-					
-					//System.out.println("file unzip : "+ newFile.getAbsoluteFile());
+					newFile = new File(outputFolder + File.separator + new File (mxlFile).getName().replace(".mxl", ".xml"));					
 					new File(newFile.getParent()).mkdirs();
 					FileOutputStream fos = new FileOutputStream(newFile);             
 

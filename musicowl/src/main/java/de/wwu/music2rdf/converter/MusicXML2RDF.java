@@ -377,7 +377,6 @@ public class MusicXML2RDF {
 		model.add(model.createLiteralStatement(resEconder, RDFS.label, "MusicXML to RDF Converter"));
 		
 		Resource resActivity = model.createResource(score.getURI()+"_musicxml2rdf");
-		//String activity = "<"+score.getURI()+"_musicxml2rdf>";
 
 		if(persons.size()==0) {
 			logger.warn("No person provided (composer, encoder, etc.) for [" +score.getURI() + "].");
@@ -594,18 +593,11 @@ public class MusicXML2RDF {
 			model.add(model.createStatement(DBpediaResource.Composer, RDFS.label, "Composer"));
 
 		}
-		
-		//model.write(System.out, "TTL");
-		
 				
-		
 		/**
 		 * END METADATA
 		 */
 		
-		
-		//StringBuffer ttl = new StringBuffer();
-
 		if(score.getURI().equals("")) {
 			score.setURI("http://wmss.undefined.score/"+UUID.randomUUID().toString());
 			logger.warn("No URI provided for the current score: " + score.getTitle());
@@ -616,49 +608,16 @@ public class MusicXML2RDF {
 			logger.warn("No title provided for the current score: " + score.getURI());
 		}		
 
-		////ttl.append(createMetadata(score));
-
 		String uid = UUID.randomUUID().toString();
-		
-		/**
-		
-		String rdfTypeURI = " <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ";
-		String rdfIdURI = " <http://www.w3.org/1999/02/22-rdf-syntax-ns#ID> ";		
-		String musicOWL = " <http://linkeddata.uni-muenster.de/ontology/musicscore#OBJECT> ";		
-		String chordNoteOWL = " <http://purl.org/ontology/chord/note/OBJECT> ";
-		String keyModeOWL = " <http://purl.org/ontology/tonality/mode/OBJECT> ";
-		String chordOWL = " <http://purl.org/ontology/chord/OBJECT> ";
-		String scoreURI = " <"+score.getURI()+"> ";
-		String nodeURI = " <http://linkeddata.uni-muenster.de/node/"+uid+"/OBJECT> ";
-		String musicOntology = " <http://purl.org/ontology/mo/OBJECT> "; 
-		String dcOntology = " <http://purl.org/dc/elements/1.1/OBJECT> ";
-		String provOntology = " <http://www.w3.org/ns/prov#OBJECT> ";
-		String skosOntology = " <http://www.w3.org/2004/02/skos/core#OBJECT> ";
-		String instrumentTaxonomy = " <http://purl.org/ontology/mo/mit#OBJECT> ";
-		 */
-
 		String nodeBaseURI = "http://linkeddata.uni-muenster.de/node/"+uid+"_";
-
-
 		ArrayList<Staff> staves = new ArrayList<Staff>();
 		ArrayList<Voice> voices = new ArrayList<Voice>();
 		ArrayList<String> notesets = new ArrayList<String>();
 		ArrayList<Movement> movements = new ArrayList<Movement>();
 
 		if(!score.getTitle().equals("") && (score.getTitle()!=null)) {
-
-			////ttl.append(scoreURI + dcOntology.replace("OBJECT", "title") + "\"" + score.getTitle().trim().replace("\"", "\\\"") + "\" .\n");
 			model.add(model.createLiteralStatement(resScore, DC.title, score.getTitle().trim().replace("\"", "\\\"")));
 		}	
-
-		//String activityURI = "<"+score.getURI()+"_musicxml2rdf>";
-		////ttl.append("<https://github.com/jimjonesbr/musicowl>" + rdfTypeURI + provOntology.replace("OBJECT", "SoftwareAgent") + " .\n");
-		////ttl.append("<https://github.com/jimjonesbr/musicowl> <http://xmlns.com/foaf/0.1/name> \"MusicXML2RDF Converter\" .\n");
-		//ttl.append(activityURI + rdfTypeURI + provOntology.replace("OBJECT", "Activity") + " .\n");
-		//ttl.append(activityURI + " <http://www.w3.org/2000/01/rdf-schema#comment> \"File convertion from MusicXML to RDF based on the MusicOWL Ontology. \" .\n"); 
-		//ttl.append(activityURI + provOntology.replace("OBJECT", "startedAtTime") + "\"" + score.getEncodingStartTime().trim() + "\" .\n");
-		//ttl.append(activityURI + provOntology.replace("OBJECT", "wasAssociatedWith") + " <https://github.com/jimjonesbr/musicowl> .\n");
-		//ttl.append(scoreURI + provOntology.replace("OBJECT", "wasGeneratedBy") + activityURI + " . \n");
 
 		Resource resSoftwareAgent = model.createResource("https://github.com/jimjonesbr/musicowl");
 		model.add(model.createStatement(resSoftwareAgent, RDF.type, ProvO.SoftwareAgent));
@@ -672,44 +631,30 @@ public class MusicXML2RDF {
 		for (int i = 0; i < score.getParts().size(); i++) {		
 
 			String partID = score.getParts().get(i).getId();
-			String partObject = "";
 			int notesetCounter = 0;
 			int movementCounter = 0;		
 			Resource resPart = null;
+			
 			for (int j = 0; j < score.getParts().get(i).getMeasures().size(); j++) {
 				
-				
-
-				if(score.getParts().get(i).getMeasures().get(j).getId().equals("1") ||
-						score.getParts().get(i).getMeasures().get(j).getId().equals("0")) {
+				if(score.getParts().get(i).getMeasures().get(j).getId().equals("1") || 
+				   score.getParts().get(i).getMeasures().get(j).getId().equals("0")) {
 
 					movementCounter++;
 
-					//Resource resPart = model.createResource(nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + "PART_" + partID));
 					resPart = model.createResource(nodeBaseURI+"MOV"+movementCounter+"_"+"PART_"+partID);
-					//partObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + "PART_" + partID);
-					
-					//ttl.append(partObject + rdfIdURI + "\"" + partID  + "\" . \n");					
-					//model.add(model.createLiteralStatement(resPart, model.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#ID"), partID));
 					model.add(model.createLiteralStatement(resPart, RDFS.label, partID));
-					
-					//String movementObject = nodeURI.replace("OBJECT", "MOV" + movementCounter);
 					Resource resMovement = model.createResource(nodeBaseURI+ "MOV" + movementCounter);
 					
-					//ttl.append(scoreURI + musicOntology.replace("OBJECT", "movement") + movementObject + " .\n");
-					//ttl.append(movementObject + rdfTypeURI + musicOntology.replace("OBJECT", "Movement") + " .\n");								
 					model.add(model.createStatement(resScore, MusicOntology.movement, resMovement));
 					model.add(model.createStatement(resMovement, RDF.type, MusicOntology.Movement));
 					
 					if(!score.getParts().get(i).getMeasures().get(j).getBeatUnit().equals("")){												
-						String beatUnit = this.getCapital(score.getParts().get(i).getMeasures().get(j).getBeatUnit());
-						//ttl.append(movementObject + musicOWL.replace("OBJECT", "hasBeatUnit") + musicOWL.replace("OBJECT", beatUnit) +" .\n");			
-						
+						String beatUnit = this.getCapital(score.getParts().get(i).getMeasures().get(j).getBeatUnit());		
 						model.add(model.createStatement(resMovement, MusicOWL.hasBeatUnit, model.createResource(MusicOWL.NS+beatUnit)));
 					} 
 
 					if(score.getParts().get(i).getMeasures().get(j).getBeatsPerMinute()!=0) {
-						//ttl.append(movementObject + musicOWL.replace("OBJECT", "hasBeatsPerMinute") + "\""+score.getParts().get(i).getMeasures().get(j).getBeatsPerMinute() +"\"^^<http://www.w3.org/2001/XMLSchema#int> .\n");
 						model.add(model.createLiteralStatement(resMovement, MusicOWL.hasBeatsPerMinute, score.getParts().get(i).getMeasures().get(j).getBeatsPerMinute()));
 					}
 
@@ -728,42 +673,21 @@ public class MusicXML2RDF {
 
 					if(addMovement) {
 						if(movement.getTitle()==null || movement.getTitle().equals("")) {
-							//ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movementCounter + " (no title)\" .\n");
 							model.add(model.createLiteralStatement(resMovement, DC.title, "(no title)" ));
 						} else {
-							//ttl.append(movementObject + dcOntology.replace("OBJECT", "title") + "\"" + movement.getTitle().trim().replace("\"", "\\\"") + "\" .\n");
 							model.add(model.createLiteralStatement(resMovement, DC.title, movement.getTitle().trim().replace("\"", "\\\"")));
 						}
 						movements.add(movement);
 					}			
-
-					//ttl.append(movementObject + musicOWL.replace("OBJECT", "hasScorePart") + partObject + " . \n");		
-					//ttl.append(partObject + rdfTypeURI + musicOWL.replace("OBJECT", "ScorePart") + " .\n");
-					//ttl.append(partObject + rdfTypeURI + musicOntology.replace("OBJECT", "Instrument") + " .\n");
-					//ttl.append(partObject + rdfTypeURI + skosOntology.replace("OBJECT", "Concept") + " .\n");
-					//ttl.append(partObject + dcOntology.replace("OBJECT", "description") + "\"" + score.getParts().get(i).getName().trim().replace("\"", "\\\"") + "\" .\n");
 
 					model.add(model.createStatement(resMovement, MusicOWL.hasScorePart, resPart));
 					model.add(model.createStatement(resPart, RDF.type, MusicOWL.ScorePart));
 					model.add(model.createStatement(resPart, RDF.type, MusicOntology.Instrument));
 					model.add(model.createStatement(resPart, RDF.type, SKOS.Concept));
 					model.add(model.createLiteralStatement(resPart, DC.description,score.getParts().get(i).getName().trim().replace("\"", "\\\"")));
-					
-					if(score.getParts().get(i).isSolo()) {
-						//ttl.append(partObject + musicOWL.replace("OBJECT", "isSolo") + "\"true\" .\n");
-					} else {
-						//ttl.append(partObject + musicOWL.replace("OBJECT", "isSolo") + "\"false\" .\n");						
-					}
-
 					model.add(model.createLiteralStatement(resPart, MusicOWL.isSolo, score.getParts().get(i).isSolo()));
-
-					if(score.getParts().get(i).isEnsemble()) {
-						//ttl.append(partObject + musicOWL.replace("OBJECT", "isEnsemble") + "\"true\" .\n");
-					} else {
-						//ttl.append(partObject + musicOWL.replace("OBJECT", "isEnsemble") + "\"false\" .\n");						
-					}
-
 					model.add(model.createLiteralStatement(resPart, MusicOWL.isEnsemble, score.getParts().get(i).isEnsemble()));
+					
 					/**
 					 * @see https://github.com/w3c/musicxml/blob/v3.1/schema/sounds.xml 
 					 */
@@ -775,12 +699,6 @@ public class MusicXML2RDF {
 						instrumentLabel = instrumentLabel.substring(0, 1).toUpperCase() + instrumentLabel.substring(1);
 						Instrument instrument = getInstrument(score.getParts().get(i).getInstrument());
 
-						//ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\""+instrument.getPerformanceMediumDescription()+"\" .\n");					
-						//ttl.append(partObject + " <http://www.w3.org/2000/01/rdf-schema#label> \""+instrument.getPerformanceMediumId()+"\" .\n");						
-						//ttl.append(partObject + skosOntology.replace("OBJECT", "broader") + instrumentTaxonomy.replace("OBJECT", instrument.getPerformanceMediumTypeId()) + " .\n");
-						//ttl.append(instrumentTaxonomy.replace("OBJECT", instrument.getPerformanceMediumTypeId()) + instrumentTaxonomy.replace("OBJECT", "inScheme") +  " <http://purl.org/ontology/mo/instruments#Musical_instruments> .\n");
-						//ttl.append(instrumentTaxonomy.replace("OBJECT", instrument.getPerformanceMediumTypeId()) + skosOntology.replace("OBJECT", "prefLabel") +  "\""+instrument.getPerformanceMediumTypeId()+"\" .\n");
-						
 						model.add(model.createLiteralStatement(resPart, SKOS.prefLabel, instrument.getPerformanceMediumDescription()));
 						model.add(model.createLiteralStatement(resPart, SKOS.altLabel, instrument.getPerformanceMediumId()));
 						Resource resInstrumentBroader = model.createResource(InstrumentTaxonomy.NS + instrument.getPerformanceMediumTypeId());
@@ -789,11 +707,6 @@ public class MusicXML2RDF {
 						model.add(model.createLiteralStatement(resInstrumentBroader, SKOS.prefLabel, instrument.getPerformanceMediumTypeId()));
 
 					} else {
-						//ttl.append(partObject + skosOntology.replace("OBJECT", "prefLabel") + "\"Unspecified\" .\n");
-						//ttl.append(partObject + " <http://www.w3.org/2000/01/rdf-schema#label> \"unspecidied.unspecified\" .\n");
-						//ttl.append(partObject + skosOntology.replace("OBJECT", "broader") + instrumentTaxonomy.replace("OBJECT", "unspecified") + " .\n");
-						//ttl.append(instrumentTaxonomy.replace("OBJECT", "unspecified") + instrumentTaxonomy.replace("OBJECT", "inScheme") +  " <http://purl.org/ontology/mo/instruments#Musical_instruments> .\n");
-						//ttl.append(instrumentTaxonomy.replace("OBJECT", "unspecified") + skosOntology.replace("OBJECT", "prefLabel") +  "\"Unspecified\" .\n");
 
 						model.add(model.createLiteralStatement(resPart, SKOS.prefLabel, "Unspecified"));
 						model.add(model.createLiteralStatement(resPart, SKOS.altLabel, "unspecidied.unspecified"));
@@ -807,53 +720,30 @@ public class MusicXML2RDF {
 				}
 
 
-				String measureID = score.getParts().get(i).getMeasures().get(j).getId();
-				//String measureObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID);
-				//String keyObject = "";
-				
+				String measureID = score.getParts().get(i).getMeasures().get(j).getId();			
 				Resource resMeasure = model.createResource(nodeBaseURI+"MOV"+movementCounter+"_"+partID+"_M"+measureID);
 				this.accidentalsOverwrite.clear();
 				
 				Key key = new Key();
-
-				//String instantObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + "INSTANT_" + measureID); 				
-				//ttl.append(instantObject + musicOWL.replace("OBJECT", "hasMeasure") + measureObject+ ".\n");
-				//ttl.append(instantObject + rdfTypeURI + musicOWL.replace("OBJECT", "Instant")+ ".\n");
 
 				Resource resInstant = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + "INSTANT_" + measureID);
 				model.add(model.createStatement(resInstant, MusicOWL.hasMeasure, resMeasure));
 				model.add(model.createStatement(resInstant, RDF.type, MusicOWL.Instant));			
 
 				if(j>0){
-					//ttl.append(nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + score.getParts().get(i).getMeasures().get(j-1).getId()) + musicOWL.replace("OBJECT", "nextMeasure") + measureObject + ".\n");
-					//ttl.append(nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + "INSTANT_"+ score.getParts().get(i).getMeasures().get(j-1).getId()) + musicOWL.replace("OBJECT", "nextInstant") + instantObject + ".\n");
-					
+
 					Resource resPreviousMeasure = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + score.getParts().get(i).getMeasures().get(j-1).getId());					
 					model.add(model.createStatement(resPreviousMeasure, MusicOWL.nextMeasure, resMeasure));
 					Resource resPreviousInstant = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + "INSTANT_"+ score.getParts().get(i).getMeasures().get(j-1).getId());
 					model.add(model.createStatement(resPreviousInstant, MusicOWL.nextInstant, resInstant));					
 				}
 
-				//ttl.append(partObject + musicOWL.replace("OBJECT", "hasMeasure") + measureObject  + " . \n");
-				//ttl.append(measureObject + rdfTypeURI +  musicOWL.replace("OBJECT", "Measure")+ " . \n");
-				//ttl.append(measureObject + rdfIdURI + "\""+ score.getParts().get(i).getMeasures().get(j).getId() +"\" . \n");
-
 				model.add(model.createStatement(resPart, MusicOWL.hasMeasure, resMeasure));
 				model.add(model.createStatement(resMeasure, RDF.type, MusicOWL.Measure));
-				//model.add(model.createStatement(resMeasure, model.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#ID"), score.getParts().get(i).getMeasures().get(j).getId()));
 				model.add(model.createStatement(resMeasure, RDFS.label, score.getParts().get(i).getMeasures().get(j).getId()));
-
-				//keyObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_KEY");
 				Resource resKey = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + measureID + "_KEY");
 
 				if(score.getParts().get(i).getMeasures().get(j).getKey().getMode()!=null){
-
-					//ttl.append(measureObject + musicOWL.replace("OBJECT", "hasKey") + keyObject + ". \n");
-					//ttl.append(keyObject + rdfTypeURI + " <http://purl.org/ontology/tonality/Key> . \n");
-					
-					
-//					model.add(model.createStatement(resKey,RDF.type,Tonality.Key));
-//					model.add(model.createStatement(resMeasure,MusicOWL.hasKey,resKey));
 					
 					if(score.getParts().get(i).getMeasures().get(j).getKey().getMode().equals("major")){
 
@@ -966,10 +856,6 @@ public class MusicXML2RDF {
 						key.setMode("Unknown");
 					}
 
-					//ttl.append(keyObject + " <http://purl.org/ontology/tonality/tonic> " + chordNoteOWL.replace("OBJECT", key.getTonic()) + " . \n");
-					//ttl.append(keyObject + " <http://purl.org/ontology/tonality/mode> " + keyModeOWL.replace("OBJECT", key.getMode()) + " . \n");
-					
-					
 					model.add(model.createStatement(resKey, Tonality.tonic, model.createResource(Chord.NS_Note+key.getTonic())));
 					model.add(model.createStatement(resKey, Tonality.mode, model.createResource(Tonality.NAMESPACE_MODE+key.getMode())));
 					model.add(model.createStatement(resKey,RDF.type,Tonality.Key));
@@ -978,17 +864,10 @@ public class MusicXML2RDF {
 					
 				} else {
 
-					//ttl.append(keyObject + rdfTypeURI + " <http://purl.org/ontology/tonality/Key> . \n");
 					model.add(model.createStatement(resKey, RDF.type,Tonality.Key));
 				}
 
-
-				//String timeObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_M" +measureID + "_TIME");
 				Resource resTime = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" +measureID + "_TIME");
-
-				//ttl.append(measureObject + musicOWL.replace("OBJECT", "hasTime") + timeObject + ". \n");
-				//ttl.append(timeObject + rdfTypeURI + musicOWL.replace("OBJECT", "TimeSignature") + " . \n");
-				
 				model.add(model.createStatement(resMeasure, MusicOWL.hasTime,resTime));
 				model.add(model.createStatement(resTime, RDF.type,MusicOWL.TimeSignature));
 
@@ -1004,35 +883,28 @@ public class MusicXML2RDF {
 					score.getParts().get(i).getMeasures().get(j).getTime().setBeatType("0");
 				}
 
-				//ttl.append(timeObject + musicOWL.replace("OBJECT", "hasBeats") + "\"" + score.getParts().get(i).getMeasures().get(j).getTime().getBeats()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");
-				//ttl.append(timeObject + musicOWL.replace("OBJECT", "hasBeatType") + "\"" + score.getParts().get(i).getMeasures().get(j).getTime().getBeatType()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");
-
 				model.add(model.createLiteralStatement(resTime, MusicOWL.hasBeats, Integer.parseInt(score.getParts().get(i).getMeasures().get(j).getTime().getBeats())));
 				model.add(model.createLiteralStatement(resTime, MusicOWL.hasBeatType,Integer.parseInt(score.getParts().get(i).getMeasures().get(j).getTime().getBeatType())));
 				
 				if(score.getParts().get(i).getMeasures().get(j).getBarline()!=null){
 
-					//String barlineObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_M" +measureID + "_REPEAT");
-					//ttl.append(measureObject + musicOWL.replace("OBJECT", "hasBarline") + barlineObject + ". \n" );
-					
 					Resource resBarline = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" +measureID + "_REPEAT");					
 					model.add(model.createLiteralStatement(resMeasure, MusicOWL.hasBarline,resBarline));
 
 					if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("backward")) //ttl.append(barlineObject + rdfTypeURI + musicOWL.replace("OBJECT", "EndRepeat") + " . \n" );
-					if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("forward")) //ttl.append(barlineObject + rdfTypeURI + musicOWL.replace("OBJECT", "BeginRepeat") + " . \n" );
-					
-					if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("backward")){
-					model.add(model.createStatement(resBarline,RDF.type, MusicOWL.EndRepeat));
-					 }
-					 if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("forward")) {
-					 model.add(model.createStatement(resBarline,RDF.type, MusicOWL.BeginRepeat));
-					 }
+						if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("forward")) //ttl.append(barlineObject + rdfTypeURI + musicOWL.replace("OBJECT", "BeginRepeat") + " . \n" );
+
+							if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("backward")){
+								model.add(model.createStatement(resBarline,RDF.type, MusicOWL.EndRepeat));
+							}
+					if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("forward")) {
+						model.add(model.createStatement(resBarline,RDF.type, MusicOWL.BeginRepeat));
+					}
 
 				}
 
 				String notesetObject = "";
 				String tmpVoice = "";
-				//ArrayList<Note> accidentalsInMeasure = new ArrayList<Note>();
 				
 				this.accidentalsOverwrite.clear();
 				
@@ -1049,8 +921,7 @@ public class MusicXML2RDF {
 						score.getParts().get(i).getMeasures().get(j).getNotes().get(k).setStaff("1");
 
 					}
-
-					//notesetObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_ST" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() + "_V" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId()  + "_NOTESET_" + notesetCounter) ;					
+					
 					notesetObject = nodeBaseURI+ "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_ST" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() + "_V" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId()  + "_NOTESET_" + notesetCounter ;
 					Resource resNoteset = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + measureID + "_ST" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() + "_V" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId()  + "_NOTESET_" + notesetCounter);
 					
@@ -1061,7 +932,6 @@ public class MusicXML2RDF {
 						if(!this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature().equals(notesetObject)){
 
 							Resource resPreivousNoteset = model.createResource(this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature().trim().replaceAll("[<>]", ""));							
-							//ttl.append(this.getPreviousNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k)).getSignature() + musicOWL.replace("OBJECT", "nextNoteSet") + notesetObject + " .\n");
 							model.add(model.createStatement(resPreivousNoteset, MusicOWL.nextNoteSet, resNoteset));
 							
 							this.setCurrentNoteSet(score.getParts().get(i).getMeasures().get(j).getNotes().get(k));
@@ -1097,20 +967,13 @@ public class MusicXML2RDF {
 
 					}
 
-
-					//String staffObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
 					Resource resStaff = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_STAFF_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff());
 
 					if(addStaff) {
 
-						staves.add(staff);
-						//ttl.append(staffObject + rdfTypeURI + musicOWL.replace("OBJECT", "Staff") + " . \n");
-						//ttl.append(partObject + musicOWL.replace("OBJECT", "hasStaff") + staffObject +" . \n");
-						//ttl.append(staffObject + rdfIdURI + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() + "\" . \n");
-						
+						staves.add(staff);					
 						model.add(model.createStatement(resStaff, RDF.type, MusicOWL.Staff));
 						model.add(model.createStatement(resPart, MusicOWL.hasStaff, resStaff));
-						///model.add(model.createStatement(resStaff,model.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#ID"),score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() ));
 						model.add(model.createStatement(resStaff,RDFS.label,score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getStaff() ));
 
 					}
@@ -1120,13 +983,10 @@ public class MusicXML2RDF {
 					 * Voice
 					 */
 
-					String clefObject ="";
-					String voiceObject = "";
 					Resource resVoice = null;
 					Resource resClef = null;
 					Resource resDuration = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_DURATION");
 					
-					//String durationObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_DURATION");
 					Voice voice = new Voice();
 					voice.getPart().setId(partID);
 					voice.getPart().setMovement(movementCounter);
@@ -1137,11 +997,9 @@ public class MusicXML2RDF {
 						 * Change regarding voices of notes inside of a chord
 						 */
 
-						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isChord()) {
-							//voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_" + tmpVoice);
+						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isChord()) {					
 							voice.setId(tmpVoice);
 						} else {
-							//voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_1");
 							voice.setId("1");							
 						}
 
@@ -1149,7 +1007,6 @@ public class MusicXML2RDF {
 
 					} else {
 
-						//voiceObject = nodeURI.replace("OBJECT","MOV" + movementCounter + "_" + partID + "_VOICE_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId());
 						resVoice = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_VOICE_" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId());
 						voice.setId(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId());
 						tmpVoice=score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getVoice().getId();
@@ -1172,11 +1029,6 @@ public class MusicXML2RDF {
 					if(addVoice) {
 
 						voices.add(voice);
-						//ttl.append(voiceObject + rdfIdURI + "\"" + voice.getId() +"\" . \n");
-						//ttl.append(voiceObject + rdfTypeURI + musicOWL.replace("OBJECT", "Voice") + " . \n");										
-						//ttl.append(staffObject + musicOWL.replace("OBJECT", "hasVoice") + voiceObject + " . \n");
-						
-						//model.add(model.createLiteralStatement(resVoice, model.createProperty("http://www.w3.org/1999/02/22-rdf-syntax-ns#ID"), voice.getId()));
 						model.add(model.createLiteralStatement(resVoice, RDFS.label, voice.getId()));
 						model.add(model.createStatement(resVoice, RDF.type, MusicOWL.Voice));
 						model.add(model.createStatement(resStaff, MusicOWL.hasVoice, resVoice));
@@ -1197,12 +1049,6 @@ public class MusicXML2RDF {
 					if(addNoteSet) {
 
 						notesets.add(notesetObject);
-						//ttl.append(voiceObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
-						//ttl.append(notesetObject + rdfTypeURI + musicOWL.replace("OBJECT", "NoteSet") + ". \n");
-						//clefObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS_" + notesetCounter + "_CLEF");	
-						//ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasClef") + clefObject + ". \n");
-						//ttl.append(measureObject + musicOWL.replace("OBJECT", "hasNoteSet") + notesetObject + ". \n");
-
 						resClef = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS_" + notesetCounter + "_CLEF");
 						model.add(model.createStatement(resVoice, MusicOWL.hasNoteSet, resNoteset));
 						model.add(model.createStatement(resNoteset, RDF.type, MusicOWL.NoteSet));
@@ -1213,10 +1059,6 @@ public class MusicXML2RDF {
 
 							for (int l = 0; l < score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getArticulations().size(); l++) {
 
-								//String articulationObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_ARTICULATION_" + l);
-								//ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasArticulation") + articulationObject + ".\n");
-								//ttl.append(articulationObject + rdfTypeURI + musicOWL.replace("OBJECT", this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getArticulations().get(l))) + ".\n");
-								
 								Resource resArticulation = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_ARTICULATION_" + l);
 								model.add(model.createStatement(resNoteset, MusicOWL.hasArticulation, resArticulation));
 								model.add(model.createStatement(resArticulation, RDF.type,model.createResource(MusicOWL.NS+this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getArticulations().get(l)))));
@@ -1227,28 +1069,22 @@ public class MusicXML2RDF {
 
 								if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("percussion")){
 
-									//ttl.append(clefObject + musicOWL.replace("OBJECT", "sign")+ chordNoteOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign()) + ". \n");
-									//ttl.append(clefObject + musicOWL.replace("OBJECT", "line")+ "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine() + "\"^^<http://www.w3.org/2001/XMLSchema#int> .\n");
-									
 									model.add(model.createStatement(resClef, MusicOWL.sign,model.createResource(Chord.NS_Note+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign())));
 									model.add(model.createLiteralStatement(resClef, MusicOWL.line, Integer.parseInt(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine())));
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("3") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
 
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Alto")+ ".\n");
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.Alto));
 
 									}
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("5") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
-
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Baritone")+ ".\n");						
+						
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.Baritone));
 									}
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("3") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("F")){
-
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Baritone")+ ".\n");		
+		
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.Baritone));			
 
 									}
@@ -1256,62 +1092,53 @@ public class MusicXML2RDF {
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("4") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("F")){
 
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Bass") + ".\n");
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.Bass));					
 
 									}
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("1") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("G")){
-
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "FrenchViolin") + ".\n");		
+	
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.FrenchViolin));		
 
 									}
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("2") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
 
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "MezzoSoprano") + ".\n");
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.MezzoSoprano));		
 
 									}
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("1") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
 
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Soprano") + ".\n");
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.Soprano));		
 
 									}
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("5") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("F")){
 
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "SubBass") + ".\n");
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.SubBass));	
 
 									}
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("4") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("C")){
 
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Tenor") + ".\n");
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.Tenor));
 
 									}
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getLine().equals("2") && score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("G")){
 
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Trebble") + ".\n");
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.Trebble));
 
 									}
 
 									if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getClef().getSign().equals("percussion")){
 
-										//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Percussion") + ".\n");
 										model.add(model.createStatement(resClef, RDF.type, MusicOWL.Percussion));
 									}
 
 								} else {
 
-									//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Percussion")+ ".\n");
 									model.add(model.createStatement(resClef, RDF.type, MusicOWL.Percussion));
 
 								}
@@ -1319,27 +1146,22 @@ public class MusicXML2RDF {
 
 							} else {
 
-								//ttl.append(clefObject + rdfTypeURI + musicOWL.replace("OBJECT", "Percussion")+ ".\n");
 								model.add(model.createStatement(resClef, RDF.type, MusicOWL.Percussion));
 							}
 						}
 
-						//ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasDuration") + durationObject + ".\n");
 						model.add(model.createStatement(resNoteset, MusicOWL.hasDuration,resDuration));
 
 						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()==null){
 
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()==null) {
-								//ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", "Whole") + ".\n");	
+							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()==null) {	
 								model.add(model.createStatement(resDuration, RDF.type, MusicOWL.Whole));
 							} else {
-								//ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", "Duration") + ".\n");
 								model.add(model.createStatement(resDuration, RDF.type, MusicOWL.Duration));
 							}
 
 						} else {
 
-							//ttl.append(durationObject + rdfTypeURI + musicOWL.replace("OBJECT", this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()))+ ".\n");
 							model.add(model.createStatement(resDuration, RDF.type, model.createResource(MusicOWL.NS + this.getCapital(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getType()))));
 						}
 
@@ -1350,45 +1172,20 @@ public class MusicXML2RDF {
 					 * Note
 					 */
 
- 
-					//String noteObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS_" + notesetCounter + "_NOTE_" + k);
-					//ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasNote") + noteObject + ".\n");
-					//ttl.append(noteObject + rdfTypeURI + chordOWL.replace("OBJECT", "Note") + ".\n");
-
-					Resource resNote = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS_" + notesetCounter + "_NOTE_" + k);
+ 					Resource resNote = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS_" + notesetCounter + "_NOTE_" + k);
 					model.add(model.createStatement(resNoteset, MusicOWL.hasNote, resNote));
 					model.add(model.createStatement(resNote, RDF.type, Chord.Note));
 										
 					if (score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()==null) {
 
-						//ttl.append(noteObject + chordOWL.replace("OBJECT", "natural") + chordOWL.replace("OBJECT", "note/Rest") + ".\n");
 						model.add(model.createStatement(resNote, Chord.natural, Chord.Rest));
 
 					} else { 
-
-						//ttl.append(noteObject + chordOWL.replace("OBJECT", "natural") + chordOWL.replace("OBJECT", "note/" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()) + ".\n");
-						//ttl.append(chordOWL.replace("OBJECT", "note/" + score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()) + rdfTypeURI + chordOWL.replace("OBJECT", "Natural")+ ".\n");
 
 						model.add(model.createStatement(resNote, Chord.natural, model.createResource(Chord.NS_Note+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch())));
 						model.add(model.createStatement(model.createResource(Chord.NS_Note+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch()),RDF.type,Chord.Natural));
 						
 					}
-
-
-//					if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("") &&
-//							!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("natural")){
-//
-//
-//						model.add(model.createStatement(resNote, Chord.modifier, model.createResource(Chord.NS_Base+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental())));
-//					
-//						Note noteAccidental = new Note();
-//						noteAccidental.setAccidental(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental());
-//						noteAccidental.setPitch(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch());
-//						accidentalsInMeasure.add(noteAccidental);
-//						
-//						//System.out.println(">> M:" +score.getParts().get(i).getMeasures().get(j).getId() + " " + noteAccidental.getPitch() + " " + noteAccidental.getAccidental());
-//					} 
-
 					
 
 					/**
@@ -1417,7 +1214,6 @@ public class MusicXML2RDF {
 						
 							if(!this.getAccidental(key, note).equals("")) {
 								model.add(model.createStatement(resNote, Chord.modifier, model.createResource(Chord.NS_Base+this.getAccidental(key, note))));
-								//System.out.println(this.getAccidental(key, note));
 							}
 							
 						}
@@ -1430,282 +1226,28 @@ public class MusicXML2RDF {
 						model.add(model.createStatement(resNote, MusicOWL.hasNoteAttribute, resGraceNote));
 						model.add(model.createStatement(resGraceNote,RDF.type,MusicOWL.GraceNote));
 					}
-					
-					
-					//String accidentalOverwrite = "";
-					
-
-
-					
-					
-					
-					
-					
-					
-//					if(!note.getAccidental().equals("")) {
-//						
-//						
-//						//System.out.println(">>>> M: "+score.getParts().get(i).getMeasures().get(j).getId() + " " + note.getPitch() + " " + note.getAccidental());
-//					}
-														
-					
-					/**
-					
-					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental().equals("") &&
-							score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch() != null){						
-
-						note.setPitch(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch());
-						
-						//if((key.getTonic().equals("A") && key.getMode().equals("minor")) || (key.getTonic().equals("C") && key.getMode().equals("major"))){
-							////ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getAccidental()) + ".\n");
-						//}
-
-						if((key.getTonic().equals("G") && key.getMode().equals("major")) || (key.getTonic().equals("E") && key.getMode().equals("minor"))){
-
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F")){
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
-								note.setAccidental("sharp");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("D") && key.getMode().equals("major")) || (key.getTonic().equals("B") && key.getMode().equals("minor"))){
-
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C")){
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
-								note.setAccidental("sharp");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("A") && key.getMode().equals("major")) || (key.getTonic().equals("F") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G")){
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
-								note.setAccidental("sharp");
-
-							} 
-
-						}
-
-						if((key.getTonic().equals("E") && key.getMode().equals("major")) || (key.getTonic().equals("C") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D")){
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
-								note.setAccidental("sharp");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("B") && key.getMode().equals("major")) || (key.getTonic().equals("G") && key.getMode().equals("minor"))){							
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A")){
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
-								note.setAccidental("sharp");
-							}
-
-						}
-
-						if((key.getTonic().equals("Fs") && key.getMode().equals("major")) || (key.getTonic().equals("Ds") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E")){
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
-								note.setAccidental("sharp");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("Cs") && key.getMode().equals("major")) || (key.getTonic().equals("As") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") || 
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B")){
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "sharp") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Sharp));
-								note.setAccidental("sharp");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("F") && key.getMode().equals("major")) || (key.getTonic().equals("D") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B")){
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
-								note.setAccidental("flat");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("Bb") && key.getMode().equals("major")) || (key.getTonic().equals("G") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E")){
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
-								note.setAccidental("flat");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("Eb") && key.getMode().equals("major")) || (key.getTonic().equals("C") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A")) {
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
-								note.setAccidental("flat");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("Ab") && key.getMode().equals("major")) || (key.getTonic().equals("F") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D")) {
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
-								note.setAccidental("flat");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("Db") && key.getMode().equals("major")) || (key.getTonic().equals("Bb") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G")) {
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
-								note.setAccidental("flat");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("Gb") && key.getMode().equals("major")) || (key.getTonic().equals("Eb") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C")) {
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
-								note.setAccidental("flat");
-
-							}
-
-						}
-
-						if((key.getTonic().equals("Cb") && key.getMode().equals("major")) || (key.getTonic().equals("Ab") && key.getMode().equals("minor"))){
-							if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("B") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("E") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("A") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("D") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("G") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("C") ||
-									score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getPitch().equals("F")) {
-
-								//ttl.append(noteObject + chordOWL.replace("OBJECT", "modifier") + chordOWL.replace("OBJECT", "flat") + ".\n");
-								//model.add(model.createStatement(resNote, Chord.modifier, Chord.Flat));
-								note.setAccidental("flat");
-
-							}
-
-						}
-
-						
-						for (int l = 0; l < accidentalsInMeasure.size(); l++) {
-							
-							if(accidentalsInMeasure.get(l).getPitch().equals(note.getPitch())){ 
-							   //accidentalsInMeasure.get(l).getAccidental().equals(note.)) {
-								note.setAccidental(accidentalsInMeasure.get(l).getAccidental());
-							}
-						}
-						
-						
-					}
-					
-					**/
-
-				
-
-
-					//note = null;
-					
+																		
+																		
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave()!=null){
 
-						//ttl.append(noteObject + musicOWL.replace("OBJECT", "hasOctave") + "\""+ score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave()+ "\"^^<http://www.w3.org/2001/XMLSchema#int> . \n");	
 						model.add(model.createLiteralStatement(resNote, MusicOWL.hasOctave, Integer.parseInt(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getOctave())));
 					}
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isDot()){
-						//String dotObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" +partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_D_DOT");
-						//ttl.append(durationObject + musicOWL.replace("OBJECT", "hasDurationAttribute") + dotObject + ".\n" );
-						//ttl.append(dotObject + rdfTypeURI + musicOWL.replace("OBJECT", "Dot") + ".\n");
-						
+
 						Resource resDot = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" +partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_D_DOT");
 						model.add(model.createStatement(resDuration, MusicOWL.hasDurationAttribute, resDot));
 						model.add(model.createStatement(resDot, RDF.type, MusicOWL.Dot));
 					}
 
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isDoubleDot()){
-						//String dotObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" +partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_D_DOUBLEDOT");
-						//ttl.append(durationObject + musicOWL.replace("OBJECT", "hasDurationAttribute") + dotObject + ".\n" );
-						//ttl.append(dotObject + rdfTypeURI + musicOWL.replace("OBJECT", "DoubleDot") + ".\n");
-						
+					
 						Resource resDoubleDot = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" +partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_D_DOUBLEDOT");
 						model.add(model.createStatement(resDuration, MusicOWL.hasDurationAttribute, resDoubleDot));
 						model.add(model.createStatement(resDoubleDot, RDF.type, MusicOWL.DoubleDot));
 						
 					}
 					if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isTripleDot()){
-						//String dotObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" +partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_D_TRIPLEDOT");
-						//ttl.append(durationObject + musicOWL.replace("OBJECT", "hasDurationAttribute") + dotObject + ".\n" );
-						//ttl.append(dotObject + rdfTypeURI + musicOWL.replace("OBJECT", "TripleDot") + ".\n");
 						
 						Resource resTripleDot = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" +partID + "_M" + measureID + "_NS" + notesetCounter + "_N" + k + "_D_TRIPLEDOT");
 						model.add(model.createStatement(resDuration, MusicOWL.hasDurationAttribute, resTripleDot));
@@ -1716,10 +1258,6 @@ public class MusicXML2RDF {
 
 					for (int l = 0; l < score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().size(); l++) {
 
-						//String dynamicObject = nodeURI.replace("OBJECT", "MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_DYNAMIC_" + l);
-						//ttl.append(dynamicObject + rdfTypeURI + musicOWL.replace("OBJECT", score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().get(l)) + ".\n");
-						//ttl.append(notesetObject + musicOWL.replace("OBJECT", "hasDynamic") + dynamicObject + ".\n");
-						
 						Resource resDynamic = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + measureID + "_NS" + notesetCounter + "_DYNAMIC_" + l);
 						model.add(model.createStatement(resDynamic, RDF.type, model.createResource(MusicOWL.NS+score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getDynamics().get(l))));
 						model.add(model.createStatement(resNoteset, MusicOWL.hasDynamic, resDynamic));
@@ -1729,8 +1267,6 @@ public class MusicXML2RDF {
 					
 					
 				}
-				
-				//accidentalsInMeasure = null;
 
 			}
 
@@ -1741,25 +1277,15 @@ public class MusicXML2RDF {
 
 			String xml = new String(score.getFileContent().getBytes(StandardCharsets.UTF_8));
 			xml = xml.replace("\\", "\\\\");
-			//ttl.append(scoreURI + musicOWL.replace("OBJECT", "asMusicXML")+ "\"" + xml.replace("\"", "'") + "\" . \n" );
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-			//ttl.append("<http://musicxml2rdf.musicowl.de/"+uid+">" + provOntology.replace("OBJECT", "endedAtTime") + "\"" + sdf.format(new Date()) + "\" .\n");
 			
 			model.add(model.createLiteralStatement(resScore, MusicOWL.asMusicXML, xml.replace("\"", "'")));			
-			//model.add(model.createLiteralStatement(model.createResource("http://musicxml2rdf.musicowl.de/"+uid), ProvO.endedAtTime, sdf.format(new Date())));
 			model.add(model.createLiteralStatement(resActivity, ProvO.endedAtTime, sdf.format(new Date())));
-
-//			FileOutputStream fileStream = new FileOutputStream(new File(this.getOutputFile()),false);
-//			OutputStreamWriter writer = new OutputStreamWriter(fileStream, StandardCharsets.UTF_8);
-//
-//			writer.append(ttl.toString());
-//			writer.close();		
 
 			staves = null;
 			voices = null;
 			notesets = null;
-		
-			
+					
 			model.write(new FileOutputStream(new File(this.getOutputFile())), this.getOutputFormat());
 			
 			
@@ -2072,42 +1598,6 @@ public class MusicXML2RDF {
 
 						score.getParts().get(i).getMeasures().add(measure);
 
-						/**
-						 * Key
-						 */
-
-						/**						
-						NodeList nodeMeasureKeyMode = (NodeList) xpath.evaluate("//attributes/key/mode", nodeMeasures.item(j),XPathConstants.NODESET);
-
-						if(nodeMeasureKeyMode.getLength()!=0){
-
-//							score.getParts().get(i).getMeasures().get(j).getKey().setMode(nodeMeasureKeyMode.item(0).getTextContent());
-//							currentMode = nodeMeasureKeyMode.item(0).getTextContent();
-//
-//							logger.info("["+ score.getParts().get(i).getName() + "] mode > " + currentMode +" ... ");
-
-						} else {
-
-//							score.getParts().get(i).getMeasures().get(j).getKey().setMode(currentMode);
-						}
-
-						NodeList nodeMeasureKeyFifth = (NodeList) xpath.evaluate("//attributes/key/fifths", nodeMeasures.item(j),XPathConstants.NODESET);
-
-						if(nodeMeasureKeyFifth.getLength()!=0){
-
-//							score.getParts().get(i).getMeasures().get(j).getKey().setFifths(nodeMeasureKeyFifth.item(0).getTextContent());
-//							currentFifth = nodeMeasureKeyFifth.item(0).getTextContent();
-//							
-//							logger.info("["+ score.getParts().get(i).getName() + "] fifth > " + currentFifth +" ... ");
-
-						} else {
-
-//							score.getParts().get(i).getMeasures().get(j).getKey().setFifths(currentFifth);
-
-						}
-
-						 */
-
 
 						/**
 						 * one xpath element 4 all
@@ -2378,20 +1868,18 @@ public class MusicXML2RDF {
 								Element elementNotes = (Element) nodeMeasureElementsList.item(l).getChildNodes();
 
 								if(elementNotes.getElementsByTagName("chord").item(0)!=null) note.setChord(true);
-								//if(elementNotes.getElementsByTagName("dot").item(0)!=null) note.setDot(true);
-								
+
 								if(elementNotes.getElementsByTagName("dot").getLength()==1) {
 									note.setDot(true);
 								}
-								
+
 								if(elementNotes.getElementsByTagName("dot").getLength()==2) {
 									note.setDoubleDot(true);
 								}
 								if(elementNotes.getElementsByTagName("dot").getLength()==3) {
 									note.setTripleDot(true);
-									//System.out.println(">>>>>>>>> elementNotes.getElementsByTagName(\"dot\").item(0) "+elementNotes.getElementsByTagName("dot").getLength());
 								}
-																
+
 								if(elementNotes.getElementsByTagName("octave").item(0)!=null) note.setOctave(elementNotes.getElementsByTagName("octave").item(0).getTextContent());
 								if(elementNotes.getElementsByTagName("step").item(0)!=null) note.setPitch(elementNotes.getElementsByTagName("step").item(0).getTextContent());								
 								if(elementNotes.getElementsByTagName("type").item(0)!=null) note.setType(elementNotes.getElementsByTagName("type").item(0).getTextContent());
@@ -2638,7 +2126,6 @@ public class MusicXML2RDF {
 	public void setPersons(ArrayList<Person> persons) {
 		this.persons = persons;
 	}
-
 
 	public String getThumbnail() {
 		return thumbnail;
