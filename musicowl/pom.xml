@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.uni-muenster.music2rdf</groupId>
 	<artifactId>musicxml2rdf</artifactId>
-	<version>0.0.1-BETA</version>
+	<version>1.0.0</version>
 	<name>MusicXML to RDF Converter</name>
 	<url>http://maven.apache.org</url>
 	<build>
@@ -15,7 +15,7 @@
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
-					<finalName>musicowl-converter</finalName>
+					<finalName>music2rdf-${project.version}</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 					<archive>
 						<manifest>
