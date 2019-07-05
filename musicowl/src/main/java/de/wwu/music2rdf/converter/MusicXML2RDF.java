@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +28,9 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.jena.datatypes.RDFDatatype;
+import org.apache.jena.datatypes.xsd.XSDDatatype;
+import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
@@ -362,7 +367,8 @@ public class MusicXML2RDF {
 		}
 
 		if(!this.getDateIssued().equals("")) {
-			model.add(model.createLiteralStatement(resScore, DCTerms.issued, this.getDateIssued().replaceAll("[^\\d]", "")));
+			Literal issuedLiteral = model.createTypedLiteral(this.getDateIssued().replaceAll("[^\\d]", ""),XSDDatatype.XSDdate);
+			model.add(model.createLiteralStatement(resScore, DCTerms.issued, issuedLiteral));
 		}
 
 		if(this.thumbnail.equals("")) {
@@ -624,7 +630,8 @@ public class MusicXML2RDF {
 		model.add(model.createLiteralStatement(resSoftwareAgent, FOAF.name, "MusicXML2RDF Converter"));
 		model.add(model.createStatement(resActivity, RDF.type, ProvO.Activity));
 		model.add(model.createLiteralStatement(resActivity, RDFS.comment, "File convertion from MusicXML to RDF based on the MusicOWL Ontology."));
-		model.add(model.createLiteralStatement(resActivity, ProvO.startedAtTime, score.getEncodingStartTime().trim() ));
+		Literal literalStasrted = model.createTypedLiteral(score.getEncodingStartTime().trim(),XSDDatatype.XSDdateTime);
+		model.add(model.createLiteralStatement(resActivity, ProvO.startedAtTime, literalStasrted ));
 		model.add(model.createStatement(resActivity, ProvO.wasAssociatedWith, resSoftwareAgent));
 		model.add(model.createStatement(resScore, ProvO.wasGeneratedBy, resActivity));
 		
@@ -1280,7 +1287,9 @@ public class MusicXML2RDF {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 			
 			model.add(model.createLiteralStatement(resScore, MusicOWL.asMusicXML, xml.replace("\"", "'")));			
-			model.add(model.createLiteralStatement(resActivity, ProvO.endedAtTime, sdf.format(new Date())));
+			
+			Literal literalEnded = model.createTypedLiteral(sdf.format(new Date()),XSDDatatype.XSDdateTime);
+			model.add(model.createLiteralStatement(resActivity, ProvO.endedAtTime, literalEnded));
 
 			staves = null;
 			voices = null;

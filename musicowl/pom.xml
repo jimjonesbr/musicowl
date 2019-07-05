@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.uni-muenster.music2rdf</groupId>
 	<artifactId>musicxml2rdf</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>MusicXML to RDF Converter</name>
 	<url>http://maven.apache.org</url>
 	<build>
@@ -91,18 +91,16 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.jena/jena-arq -->
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.jena/apache-jena-libs -->
 		<dependency>
-			<groupId>org.apache.jena</groupId>
-			<artifactId>jena-core</artifactId>
-			<version>3.12.0</version>
+		    <groupId>org.apache.jena</groupId>
+		    <artifactId>apache-jena-libs</artifactId>
+		    <version>3.12.0</version>
+		    <type>pom</type>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.jena/jena-arq -->
-		<dependency>
-			<groupId>org.apache.jena</groupId>
-			<artifactId>jena-arq</artifactId>
-			<version>3.12.0</version>
-		</dependency>
+		
+		
 		<dependency>
 			<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
 			<groupId>org.slf4j</groupId>
