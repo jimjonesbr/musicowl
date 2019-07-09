@@ -19,7 +19,7 @@ This converter parses MusicXML 3.0 files and converts them to RDF, based on the 
 
 ## Parameters
 
-`setInputFile`&nbsp;   MusicXML 3.0 file to be converted.
+`setInputFile`&nbsp;   MusicXML 3.0 file to be converted. Supported are `.xml` and `.mxl` files.
 
 `setOutputFile`&nbsp;   Path and name for RDF output file.
 
