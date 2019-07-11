@@ -25,6 +25,7 @@ public class Example {
 		music2rdf.setDateIssued("1919"); //Formats accepted: yyyy, yyyyMM, yyyyMMdd.
 		
 		music2rdf.parseMusicXML();
+		
 	}
 
 }

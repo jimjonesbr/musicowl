@@ -2,13 +2,25 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.uni-muenster.music2rdf</groupId>
-	<artifactId>musicxml2rdf</artifactId>
+	<groupId>de.wwu.music2rdf</groupId>
+	<artifactId>music2rdf</artifactId>
 	<version>1.0.1</version>
 	<name>MusicXML to RDF Converter</name>
 	<url>http://maven.apache.org</url>
 	<build>
+		<finalName>music2rdf</finalName>
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
@@ -54,7 +66,6 @@
 				</configuration>
 			</plugin>
 
-
 		</plugins>
 		<resources>
 			<resource>
@@ -62,7 +73,7 @@
 				<filtering>false</filtering>
 				<includes>
 					<include>config/mediums_musicxml.csv</include>
-				</includes>
+				</includes>				
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -71,6 +82,12 @@
 			<resource>
 				<directory>src/test/resources</directory>
 			</resource>
+			<resource>
+				<directory>${basedir}</directory>				
+				<includes>
+					<include>pom.xml</include>
+				</includes>
+			</resource>			
 		</resources>
 	</build>
 	<dependencies>
@@ -91,16 +108,21 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.apache.jena/apache-jena-libs -->
 		<dependency>
-		    <groupId>org.apache.jena</groupId>
-		    <artifactId>apache-jena-libs</artifactId>
-		    <version>3.12.0</version>
-		    <type>pom</type>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>apache-jena-libs</artifactId>
+			<version>3.12.0</version>
+			<type>pom</type>
 		</dependency>
-		
-		
+
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-model</artifactId>
+			<version>3.6.1</version>
+		</dependency>
+
 		<dependency>
 			<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
 			<groupId>org.slf4j</groupId>

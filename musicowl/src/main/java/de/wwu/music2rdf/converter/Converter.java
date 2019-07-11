@@ -9,15 +9,22 @@ public class Converter {
 	public static void main(String[] args) {
 
 		String collectionURI = "";
-		String collectionName = "";
-
+		String collectionName = "";		
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
 
 		System.out.println("\n");
 		for(int i = 0; i < args.length; i++) {
-
+			
+			if(args[i].toLowerCase().equals("version")){
+								
+				System.out.println("Music2RDF Converter ");
+				System.out.println("Version: "+music2rdf.getVersion());
+				System.exit(0);
+				
+			}
+			
 			String[] parameter = args[i].split("=");
-
+			
 			if(parameter[0].toLowerCase().equals("file")){
 				System.out.println("File 	         : " + parameter[1]);
 				music2rdf.setInputFile(new File(parameter[1]));

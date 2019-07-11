@@ -4,11 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +27,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
@@ -42,6 +40,8 @@ import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.vocabulary.SKOS;
 import org.apache.log4j.Logger;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -1346,6 +1346,12 @@ public class MusicXML2RDF {
 			System.exit(1);			
 		}
 		
+		if(this.getInputFile()==null) {
+			logger.fatal("No input file provided (MusicXML).");
+			System.exit(1);			
+		}
+		
+		
 		if(!this.getOutputFormat().equals("")&&
 			!this.getOutputFormat().toLowerCase().trim().equals("turtle")&&
 			!this.getOutputFormat().toLowerCase().trim().equals("json-ld")&&
@@ -2161,5 +2167,22 @@ public class MusicXML2RDF {
 		this.outputFormat = outputFormat;
 	}
 
+	public String getVersion() {
+		
+		String result = "";
+		
+		try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("pom.xml")) {
+            
+			MavenXpp3Reader reader = new MavenXpp3Reader();
+            org.apache.maven.model.Model model = reader.read(is);
+            result = model.getVersion();			
 
+        }
+        catch (IOException e) {
+        } catch (XmlPullParserException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
