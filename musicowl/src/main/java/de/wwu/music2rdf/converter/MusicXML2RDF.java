@@ -112,7 +112,6 @@ public class MusicXML2RDF {
 	}
 
 	
-	
 	private String getAccidental(Key key, Note note) {
 		
 		ArrayList<Note> measureAccidentals = new ArrayList<Note>();
