@@ -6,8 +6,9 @@ import org.apache.jena.rdf.model.Property;
 
 public class DBpediaOntology {
 	
-	private static Model dbpo_model = ModelFactory.createDefaultModel();
+	private static Model model = ModelFactory.createDefaultModel();
 
-    public static final Property occupation  = dbpo_model.createProperty("http://dbpedia.org/ontology/occupation");
+    public static final Property occupation  = model.createProperty("http://dbpedia.org/ontology/occupation");
+    public static final Property version  = model.createProperty("http://dbpedia.org/ontology/version");
 
 }

@@ -626,6 +626,7 @@ public class MusicXML2RDF {
 
 		Resource resSoftwareAgent = model.createResource("https://github.com/jimjonesbr/musicowl");
 		model.add(model.createStatement(resSoftwareAgent, RDF.type, ProvO.SoftwareAgent));
+		model.add(model.createLiteralStatement(resSoftwareAgent, DBpediaOntology.version, this.getVersion()));
 		model.add(model.createLiteralStatement(resSoftwareAgent, FOAF.name, "MusicXML2RDF Converter"));
 		model.add(model.createStatement(resActivity, RDF.type, ProvO.Activity));
 		model.add(model.createLiteralStatement(resActivity, RDFS.comment, "File convertion from MusicXML to RDF based on the MusicOWL Ontology."));
