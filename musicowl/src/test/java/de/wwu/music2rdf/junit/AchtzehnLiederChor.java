@@ -19,8 +19,7 @@ public class AchtzehnLiederChor {
 			
 	@Test
 	public void melody() {
-		
-		//URL url = this.getClass().getResource("/rdf/achtzehn_neue_lieder_gemischten-chor.ttl");
+
 		URL url = this.getClass().getResource("/rdf/achtzehn_neue_lieder_gemischten-chor.ttl");
 		File file = new File(url.getFile());
 
@@ -33,6 +32,7 @@ public class AchtzehnLiederChor {
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT DISTINCT ?scoreNode ?scoreTitle ?movement ?partName ?voice ?measure ?staffID ?voiceID\n" + 
 				"WHERE {\n" + 
 				"\n" + 
@@ -47,7 +47,7 @@ public class AchtzehnLiederChor {
 				"	?part rdfs:label ?partID.\n" + 
 				"	?part dc:description ?partName.\n" + 
 				"	?part mso:hasStaff ?staff.    \n" + 
-				"	?measureNode rdfs:label ?measure.\n" + 
+				"	?measureNode dbo:order ?measure.\n" + 
 				"	?voice a mso:Voice.\n" + 
 				"	?voice rdfs:label ?voiceID.\n" + 
 				"	?measureNode mso:hasNoteSet ?noteset0.\n" + 

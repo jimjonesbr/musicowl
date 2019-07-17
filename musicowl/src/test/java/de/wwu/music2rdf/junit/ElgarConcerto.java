@@ -32,6 +32,7 @@ public class ElgarConcerto {
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT DISTINCT ?scoreTitle ?measure ?noteset_5\n" + 
 				"WHERE {\n" + 
 				"\n" + 
@@ -42,7 +43,7 @@ public class ElgarConcerto {
 				"    ?part rdfs:label ?partID.\n" + 
 				"    ?part dc:description ?partName.\n" + 
 				"    ?part mso:hasStaff ?staff.\n" + 
-				"    ?measureNode rdfs:label ?measure.\n" + 
+				"    ?measureNode dbo:order ?measure.\n" + 
 				"    ?voice a mso:Voice.\n" + 
 				"    ?voice rdfs:label ?voiceID.\n" + 
 				"    ?measureNode mso:hasNoteSet ?noteset_1.\n" + 
@@ -311,13 +312,14 @@ public class ElgarConcerto {
 				"PREFIX ton: <http://purl.org/ontology/tonality/>\n" + 
 				"PREFIX mode: <http://purl.org/ontology/tonality/mode/>"+
 				"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n" + 
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT *\n" + 
 				"WHERE {\n" + 
 				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:title ?scoreTitle.\n" + 
 				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> mo:movement ?movementNode.\n" + 
 				"?movementNode mso:hasScorePart ?part.\n" + 
 				"?part mso:hasMeasure ?measure_1.\n" + 
-				"?measure_1 rdfs:label ?measure.\n" + 
+				"?measure_1 dbo:order ?measure.\n" + 
 				"?measure_1 mso:hasKey ?key_1.\n" + 
 				"?key_1 ton:tonic note:E  .\n" + 
 				"?key_1 ton:mode mode:major .\n" + 
@@ -356,7 +358,8 @@ public class ElgarConcerto {
 				"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
-				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT (COUNT (?measure_1) AS ?qt)\n" + 
 				"WHERE {\n" + 
 				"<http://dbpedia.org/resource/Cello_Concerto_(Elgar)> dc:title ?scoreTitle.\n" + 
@@ -366,7 +369,7 @@ public class ElgarConcerto {
 				"?part rdfs:label ?partID.\n" + 
 				"?part dc:description ?partName.\n" + 
 				"?part mso:hasStaff ?staff.\n" + 
-				"?measure_1 rdfs:label ?measure.\n" + 
+				"?measure_1 dbo:order ?measure.\n" + 
 				"?measure_1 mso:hasTime ?time1.\n" + 
 				"?time1 mso:hasBeats \"6\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
 				"?time1 mso:hasBeatType \"8\"^^<http://www.w3.org/2001/XMLSchema#int> .\n" + 
@@ -393,7 +396,6 @@ public class ElgarConcerto {
 	public void elgarChordSequence() {
 
 		String result = "";		
-		//URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
 		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
 
 		File file = new File(url.getFile());
@@ -407,6 +409,7 @@ public class ElgarConcerto {
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT DISTINCT ?scoreTitle ?measure\n" + 
 				"WHERE {\n" + 
 				"\n" + 
@@ -417,7 +420,7 @@ public class ElgarConcerto {
 				"	?part rdfs:label ?partID.\n" + 
 				"	?part dc:description ?partName.\n" + 
 				"	?part mso:hasStaff ?staff.\n" + 
-				"	?measureNode rdfs:label ?measure.\n" + 
+				"	?measureNode dbo:order ?measure.\n" + 
 				"	?voice a mso:Voice.\n" + 
 				"	?voice rdfs:label ?voiceID.\n" + 
 				"	?measureNode mso:hasNoteSet ?chord_1.\n" + 
@@ -482,7 +485,6 @@ public class ElgarConcerto {
 	public void elgarMelodyChangingKeys() {
 
 		String result = "";		
-		//URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
 		URL url = this.getClass().getResource("/rdf/elgar_cello_concerto_op.85.ttl");
 
 		File file = new File(url.getFile());
@@ -499,7 +501,8 @@ public class ElgarConcerto {
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"+
-				"PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" + 				
+				"PREFIX rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT DISTINCT ?scoreTitle ?measure ?note_F ?chord_1\n" + 
 				"WHERE {\n" + 
 				"\n" + 
@@ -510,7 +513,7 @@ public class ElgarConcerto {
 				"?part rdfs:label ?partID.\n" + 
 				"?part dc:description ?partName.\n" + 
 				"?part mso:hasStaff ?staff.\n" + 
-				"?measureNode rdfs:label ?measure.\n" + 
+				"?measureNode dbo:order ?measure.\n" + 
 				"?voice a mso:Voice.\n" + 
 				"?voice rdfs:label ?voiceID.\n" + 
 				"?measureNode mso:hasNoteSet ?noteset_1.\n" + 
@@ -605,6 +608,7 @@ public class ElgarConcerto {
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT DISTINCT ?scoreTitle ?movement ?partName ?voice ?measure\n" + 
 				"WHERE {\n" + 
 				"\n" + 
@@ -619,7 +623,7 @@ public class ElgarConcerto {
 				"?part rdfs:label ?partID.\n" + 
 				"?part dc:description ?partName.\n" + 
 				"?part mso:hasStaff ?staff.\n" + 
-				"?measureNode rdfs:label ?measure.\n" + 
+				"?measureNode dbo:order ?measure.\n" + 
 				"?voice a mso:Voice.\n" + 
 				"?voice rdfs:label ?voiceID.\n" + 
 				"?measureNode mso:hasNoteSet ?noteset0.\n" + 
@@ -706,6 +710,7 @@ public class ElgarConcerto {
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT DISTINCT ?scoreTitle ?movement ?partName ?voiceID ?measure ?noteset11\n" + 
 				"WHERE {\n" + 
 				"\n" + 
@@ -720,7 +725,7 @@ public class ElgarConcerto {
 				"?part rdfs:label ?partID.\n" + 
 				"?part dc:description ?partName.\n" + 
 				"?part mso:hasStaff ?staff.\n" + 
-				"?measureNode rdfs:label ?measure.\n" + 
+				"?measureNode dbo:order ?measure.\n" + 
 				"?voice a mso:Voice.\n" + 
 				"?voice rdfs:label ?voiceID.\n" + 
 				"?measureNode mso:hasNoteSet ?noteset0.\n" + 

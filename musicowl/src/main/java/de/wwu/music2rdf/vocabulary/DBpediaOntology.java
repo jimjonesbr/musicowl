@@ -8,7 +8,8 @@ public class DBpediaOntology {
 	
 	private static Model model = ModelFactory.createDefaultModel();
 
-    public static final Property occupation  = model.createProperty("http://dbpedia.org/ontology/occupation");
-    public static final Property version  = model.createProperty("http://dbpedia.org/ontology/version");
-
+    public static final Property occupation  = model.createProperty("http://dbpedia.org/property/occupation");
+    public static final Property version  = model.createProperty("http://dbpedia.org/property/version");
+    public static final Property order = model.createProperty("http://dbpedia.org/property/order");
+    
 }

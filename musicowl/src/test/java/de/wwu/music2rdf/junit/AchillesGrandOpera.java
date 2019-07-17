@@ -35,6 +35,7 @@ public class AchillesGrandOpera {
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT DISTINCT ?scoreNode ?scoreTitle ?movement ?partName ?voice ?measure\n" + 
 				"WHERE {\n" + 
 				"\n" + 
@@ -49,7 +50,7 @@ public class AchillesGrandOpera {
 				"	?part rdfs:label ?partID.\n" + 
 				"	?part dc:description ?partName.\n" + 
 				"	?part mso:hasStaff ?staff.\n" + 
-				"	?measureNode rdfs:label ?measure.\n" + 
+				"	?measureNode dbo:order ?measure.\n" + 
 				"	?voice a mso:Voice.\n" + 
 				"	?voice rdfs:label ?voiceID.\n" + 
 				"	?measureNode mso:hasNoteSet ?noteset0.\n" + 
@@ -170,7 +171,6 @@ public class AchillesGrandOpera {
 	public void melodyWithRestAndDynamic() {
 
 		String result = "";		
-		//URL url = this.getClass().getResource("/rdf/achilles_grand-opera.ttl");
 		URL url = this.getClass().getResource("/rdf/achilles_grand-opera.ttl");
 		File file = new File(url.getFile());
 
@@ -183,6 +183,7 @@ public class AchillesGrandOpera {
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT DISTINCT ?scoreNode ?scoreTitle ?movement ?partName ?voice ?measure \n" + 
 				"WHERE {\n" + 
 				"\n" + 
@@ -197,7 +198,7 @@ public class AchillesGrandOpera {
 				"	?part rdfs:label ?partID.\n" + 
 				"	?part dc:description ?partName.\n" + 
 				"	?part mso:hasStaff ?staff.\n" + 
-				"	?measureNode rdfs:label ?measure.\n" + 
+				"	?measureNode dbo:order ?measure.\n" + 
 				"	?voice a mso:Voice.\n" + 
 				"	?voice rdfs:label ?voiceID.\n" + 
 				"	?measureNode mso:hasNoteSet ?noteset0.\n" + 
@@ -279,8 +280,6 @@ public class AchillesGrandOpera {
 				"    FILTER ( NOT EXISTS {?note6 chord:modifier ?m6} )\n" + 
 				"\n" + 
 				"}"; 
-
-		//System.out.println("Achiles SPARQL > \n"+sparql);
 		
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, model)) {
 			ResultSet results = qexec.execSelect() ;

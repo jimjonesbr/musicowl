@@ -32,6 +32,7 @@ public class SonateFacile {
 				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + 
 				"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 				"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
+				"PREFIX dbo: <http://dbpedia.org/property/> \n"+
 				"SELECT DISTINCT ?scoreTitle ?movement ?partName ?voiceID ?measure ?staffID ?note3\n" + 
 				"WHERE {\n" + 
 				"	<https://sammlungen.ulb.uni-muenster.de/id/5109291> dc:title ?scoreTitle.\n" + 
@@ -45,7 +46,7 @@ public class SonateFacile {
 				"	?part rdfs:label ?partID.\n" + 
 				"	?part dc:description ?partName.\n" + 
 				"	?part mso:hasStaff ?staff.    \n" + 
-				"	?measureNode rdfs:label ?measure.\n" + 
+				"	?measureNode dbo:order ?measure.\n" + 
 				"	?voice a mso:Voice.\n" + 
 				"	?voice rdfs:label ?voiceID.\n" + 
 				"	?measureNode mso:hasNoteSet ?noteset0.\n" + 

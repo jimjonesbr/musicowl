@@ -338,7 +338,7 @@ public class MusicXML2RDF {
 		model.setNsPrefix("mode", "http://purl.org/ontology/tonality/mode/");
 		model.setNsPrefix("prov", "http://www.w3.org/ns/prov#");
 		model.setNsPrefix("dbpedia", "http://dbpedia.org/resource/");
-		model.setNsPrefix("dbpedia-ont", "http://dbpedia.org/ontology/");
+		model.setNsPrefix("dbpedia-ont", "http://dbpedia.org/property/");
 		model.setNsPrefix("node", "http://linkeddata.uni-muenster.de/node/");
 		model.setNsPrefix("dc-terms", "http://purl.org/dc/terms/");
 		model.setNsPrefix("gndo", "http://d-nb.info/standards/elementset/gnd#");
@@ -655,6 +655,7 @@ public class MusicXML2RDF {
 					
 					model.add(model.createStatement(resScore, MusicOntology.movement, resMovement));
 					model.add(model.createStatement(resMovement, RDF.type, MusicOntology.Movement));
+					model.add(model.createLiteralStatement(resMovement, DBpediaOntology.order, movementCounter ));
 					
 					if(!score.getParts().get(i).getMeasures().get(j).getBeatUnit().equals("")){												
 						String beatUnit = this.getCapital(score.getParts().get(i).getMeasures().get(j).getBeatUnit());		
@@ -747,7 +748,9 @@ public class MusicXML2RDF {
 
 				model.add(model.createStatement(resPart, MusicOWL.hasMeasure, resMeasure));
 				model.add(model.createStatement(resMeasure, RDF.type, MusicOWL.Measure));
-				model.add(model.createStatement(resMeasure, RDFS.label, score.getParts().get(i).getMeasures().get(j).getId()));
+
+				model.add(model.createStatement(resMeasure, DBpediaOntology.order, score.getParts().get(i).getMeasures().get(j).getId()));
+				
 				Resource resKey = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" + measureID + "_KEY");
 
 				if(score.getParts().get(i).getMeasures().get(j).getKey().getMode()!=null){
