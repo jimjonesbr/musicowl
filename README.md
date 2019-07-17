@@ -1,6 +1,7 @@
 [![](https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/wwu.svg)](https://www.uni-muenster.de/de/)
 
 [![Build Status](https://travis-ci.com/jimjonesbr/musicowl.svg?branch=master)](https://travis-ci.com/jimjonesbr/musicowl)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 # MusicXML to RDF Converter
 
