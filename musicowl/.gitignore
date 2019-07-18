@@ -1,4 +1,5 @@
 *target*
+/log/
 *.jar
 *.war
 *.ear
@@ -12,6 +13,7 @@ tmp/**/*
 *.tmp
 *.bak
 *.swp
+*.log
 *~.nib
 local.properties
 .settings/

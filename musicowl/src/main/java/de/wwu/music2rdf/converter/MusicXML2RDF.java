@@ -338,7 +338,7 @@ public class MusicXML2RDF {
 		model.setNsPrefix("mode", "http://purl.org/ontology/tonality/mode/");
 		model.setNsPrefix("prov", "http://www.w3.org/ns/prov#");
 		model.setNsPrefix("dbpedia", "http://dbpedia.org/resource/");
-		model.setNsPrefix("dbpedia-ont", "http://dbpedia.org/property/");
+		model.setNsPrefix("dbo", "http://dbpedia.org/property/");
 		model.setNsPrefix("node", "http://linkeddata.uni-muenster.de/node/");
 		model.setNsPrefix("dc-terms", "http://purl.org/dc/terms/");
 		model.setNsPrefix("gndo", "http://d-nb.info/standards/elementset/gnd#");

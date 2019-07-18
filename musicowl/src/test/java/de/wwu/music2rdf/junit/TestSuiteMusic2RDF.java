@@ -16,6 +16,6 @@ import org.junit.runners.Suite;
 	SonateFacile.class
 })
 
-public class TestSuite {
+public class TestSuiteMusic2RDF {
 
 }
