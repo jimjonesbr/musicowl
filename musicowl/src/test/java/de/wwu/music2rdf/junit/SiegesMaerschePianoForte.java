@@ -212,7 +212,7 @@ public class SiegesMaerschePianoForte {
 						movement.equals("Marsch Nº1.")&&
 						staff.equals("1")&&
 						part.equals("Piano")&&
-						title.equals("Sieges Mærsche für's Piano-Forte : gewidmet den Witwen und Waisen der Landwehr-mäner des k.k. Hoch und Deutschmeister Regiments")&&
+						title.equals("Sieges Märsche für's Piano-Forte")&&
 						voice.equals("1")) {
 					result = true;
 				}				

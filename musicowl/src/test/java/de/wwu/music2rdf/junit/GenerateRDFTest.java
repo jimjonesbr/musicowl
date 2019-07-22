@@ -194,9 +194,9 @@ public class GenerateRDFTest {
 		music2rdf.setThumbnail("https://sammlungen.ulb.uni-muenster.de/hd/image/largethumb/5393369");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5393365");
 		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
-		music2rdf.addPerson(new Person("http://d-nb.info/gnd/129246638","Eppinger, L.J.",Role.COMPOSER));
+		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Eppinger","Eppinger, L.J.",Role.COMPOSER));
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
-		music2rdf.setDocumentTitle("Sieges Mærsche für's Piano-Forte : gewidmet den Witwen und Waisen der Landwehr-mäner des k.k. Hoch und Deutschmeister Regiments");
+		music2rdf.setDocumentTitle("Sieges Märsche für's Piano-Forte");
 		music2rdf.setDateIssued("1850"); 
 		music2rdf.setOutputFormat("TURTLE");
 		music2rdf.isVerbose(false);
