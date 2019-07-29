@@ -112,7 +112,7 @@ public class Util {
 
 				String fileName = ze.getName();
 
-				if(fileName.toLowerCase().equals("musicxml.xml")) { 
+				if(fileName.toLowerCase().contains(".xml")) { 
 
 					newFile = new File(outputFolder + File.separator + new File (mxlFile).getName().replace(".mxl", ".xml"));					
 					new File(newFile.getParent()).mkdirs();
