@@ -17,7 +17,7 @@ public class GenerateRDFTest {
 		
 		//file.delete();
 		
-		music2rdf.setInputFile(new File("musicxml/elgar_cello_concerto_op.85.xml"));
+		music2rdf.setInputFile(new File("musicxml/ulb-muenster/elgar_cello_concerto_op.85.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/elgar_cello_concerto_op.85");
 		music2rdf.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg");
 		music2rdf.setScoreURI("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
@@ -41,7 +41,7 @@ public class GenerateRDFTest {
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
 		//file.delete();
 		
-		music2rdf.setInputFile(new File("musicxml/achilles_grand-opera.xml"));
+		music2rdf.setInputFile(new File("musicxml/ulb-muenster/achilles_grand-opera.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/achilles_grand-opera");
 		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/5731637");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5731633");
@@ -66,7 +66,7 @@ public class GenerateRDFTest {
 		MusicXML2RDF music2rdf = new MusicXML2RDF();
 		//file.delete();
 		
-		music2rdf.setInputFile(new File("musicxml/ariettes_paroles_italienes_et_allemandes.xml"));
+		music2rdf.setInputFile(new File("musicxml/ulb-muenster/ariettes_paroles_italienes_et_allemandes.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/ariettes_paroles_italienes_et_allemandes");
 		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/5109624");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5109620");
@@ -92,7 +92,7 @@ public class GenerateRDFTest {
 		
 		//file.delete();
 		
-		music2rdf.setInputFile(new File("musicxml/achtzehn_neue_lieder_gemischten-chor.xml"));
+		music2rdf.setInputFile(new File("musicxml/ulb-muenster/achtzehn_neue_lieder_gemischten-chor.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/achtzehn_neue_lieder_gemischten-chor");
 		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/2398469");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/2398460");
@@ -117,7 +117,7 @@ public class GenerateRDFTest {
 		MusicXML2RDF music2rdf = new MusicXML2RDF();		
 		//file.delete();
 		
-		music2rdf.setInputFile(new File("musicxml/trois_airs_violon.xml"));
+		music2rdf.setInputFile(new File("musicxml/ulb-muenster/trois_airs_violon.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/trois_airs_violon");
 		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/4287180");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/4287173");
@@ -142,7 +142,7 @@ public class GenerateRDFTest {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();		
 		
-		music2rdf.setInputFile(new File("musicxml/leichtes_rondo_piano-forte.xml"));
+		music2rdf.setInputFile(new File("musicxml/ulb-muenster/leichtes_rondo_piano-forte.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/leichtes_rondo_piano-forte");
 		music2rdf.setThumbnail("https://sammlungen.ulb.uni-muenster.de/hd/image/largethumb/5464454");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5464450");
@@ -165,7 +165,7 @@ public class GenerateRDFTest {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();		
 		
-		music2rdf.setInputFile(new File("musicxml/sonate_facile_piano-forte.xml"));
+		music2rdf.setInputFile(new File("musicxml/ulb-muenster/sonate_facile_piano-forte.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/sonate_facile_piano-forte");
 		music2rdf.setThumbnail("http://sammlungen.ulb.uni-muenster.de/download/webcache/304/5109295");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5109291");
@@ -189,7 +189,7 @@ public class GenerateRDFTest {
 	
 		MusicXML2RDF music2rdf = new MusicXML2RDF();		
 		
-		music2rdf.setInputFile(new File("musicxml/sieges_maersche_piano-forte.xml"));
+		music2rdf.setInputFile(new File("musicxml/ulb-muenster/sieges_maersche_piano-forte.xml"));
 		music2rdf.setOutputFile("src/test/resources/rdf/sieges_maersche_piano-forte");
 		music2rdf.setThumbnail("https://sammlungen.ulb.uni-muenster.de/hd/image/largethumb/5393369");
 		music2rdf.setScoreURI("https://sammlungen.ulb.uni-muenster.de/id/5393365");
