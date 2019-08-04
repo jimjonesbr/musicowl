@@ -1,10 +1,14 @@
 package de.wwu.music2rdf.example;
 
 import java.io.File;
+
+import com.google.common.net.MediaType;
+
 import de.wwu.music2rdf.converter.MusicXML2RDF;
 import de.wwu.music2rdf.core.Collection;
 import de.wwu.music2rdf.core.Person;
 import de.wwu.music2rdf.core.Role;
+import de.wwu.music2rdf.core.ScoreResource;
 
 public class ExampleMuseScore {
 
@@ -20,6 +24,7 @@ public class ExampleMuseScore {
 		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Heitor_Villa-Lobos","Heitor Villa-Lobos",Role.COMPOSER));
 		music2rdf.addPerson(new Person("https://musescore.com/user/10811666","Herivaldo Alves Pereira",Role.ENCODER));
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.setOnlineResource(new ScoreResource("https://musescore.com/score/2369571/download/pdf", "Print File",MediaType.PDF.toString()));
 		music2rdf.setDocumentTitle("Bachianas Brasileiras N°5 - Cantilena");
 		music2rdf.isVerbose(false);
 		music2rdf.setOutputFormat("turtle");
@@ -34,10 +39,11 @@ public class ExampleMuseScore {
 		music2rdf.addCollection(new Collection("https://musescore.com","MuseScore"));
 		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Frederic_Chopin","Frédéric Chopin",Role.COMPOSER));
 		music2rdf.addPerson(new Person("https://musescore.com/ericfontainejazz","Eric Fontaine",Role.ENCODER));
-		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));
 		music2rdf.setDocumentTitle("Chopin Prelude E minor, Op 28, No 4");
+		music2rdf.setOnlineResource(new ScoreResource("https://musescore.com/score/1191021/download/pdf", "Print File",MediaType.PDF.toString()));		
 		music2rdf.isVerbose(false);
-		music2rdf.setOutputFormat("turtle");
+		music2rdf.setOutputFormat("json-ld");
 		music2rdf.setDateIssued("1848"); 
 		music2rdf.parseMusicXML();	
 				
@@ -49,10 +55,11 @@ public class ExampleMuseScore {
 		music2rdf.addCollection(new Collection("https://musescore.com","MuseScore"));
 		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Johann_Sebastian_Bach","Johann Sebastian Bach",Role.COMPOSER));
 		music2rdf.addPerson(new Person("https://musescore.com/bsg","BSG",Role.ENCODER));
-		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));
+		music2rdf.setOnlineResource(new ScoreResource("https://musescore.com/score/3649631/download/pdf", "Print File",MediaType.PDF.toString()));
 		music2rdf.setDocumentTitle("Air from Suite in D, BWV 1068");
 		music2rdf.isVerbose(false);
-		music2rdf.setOutputFormat("turtle");
+		music2rdf.setOutputFormat("n-triples");
 		music2rdf.setDateIssued("1717"); 
 		music2rdf.parseMusicXML();	
 		
@@ -65,7 +72,8 @@ public class ExampleMuseScore {
 		music2rdf.addCollection(new Collection("https://musescore.com","MuseScore"));
 		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Johann_Sebastian_Bach","Johann Sebastian Bach",Role.COMPOSER));
 		music2rdf.addPerson(new Person("https://musescore.com/classicman","ClassicMan",Role.ENCODER));
-		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));
+		music2rdf.setOnlineResource(new ScoreResource("https://musescore.com/score/55680/download/pdf", "Print File",MediaType.PDF.toString()));
 		music2rdf.setDocumentTitle("Toccata and Fugue in D Minor");
 		music2rdf.isVerbose(false);
 		music2rdf.setOutputFormat("turtle");
@@ -82,6 +90,7 @@ public class ExampleMuseScore {
 		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Sergei_Wassiljewitsch_Rachmaninow","Sergei Wassiljewitsch Rachmaninow",Role.COMPOSER));
 		music2rdf.addPerson(new Person("https://musescore.com/user/30892962","ViolinWorker",Role.ENCODER));
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.setOnlineResource(new ScoreResource("https://musescore.com/score/5398515/download/pdf", "Print File",MediaType.PDF.toString()));
 		music2rdf.setDocumentTitle("Vocalise");
 		music2rdf.isVerbose(false);
 		music2rdf.setOutputFormat("turtle");

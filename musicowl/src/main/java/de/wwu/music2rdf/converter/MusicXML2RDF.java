@@ -48,6 +48,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import com.google.common.net.MediaType;
+
 import de.wwu.music2rdf.core.Clef;
 import de.wwu.music2rdf.core.Collection;
 import de.wwu.music2rdf.core.Instrument;
@@ -59,6 +62,7 @@ import de.wwu.music2rdf.core.Note;
 import de.wwu.music2rdf.core.Person;
 import de.wwu.music2rdf.core.Role;
 import de.wwu.music2rdf.core.ScorePart;
+import de.wwu.music2rdf.core.ScoreResource;
 import de.wwu.music2rdf.core.Staff;
 import de.wwu.music2rdf.core.Voice;
 import de.wwu.music2rdf.util.Util;
@@ -89,12 +93,14 @@ public class MusicXML2RDF {
 	private static Logger logger = Logger.getLogger("Converter");
 	private String dateIssued = "";
 	private ArrayList<Note> accidentalsOverwrite = new ArrayList<Note>();
-	
+	private ScoreResource onlineResource;
+		
 	public MusicXML2RDF() {
 		super();
 		this.clefList = new ArrayList<Clef>();
 		this.currentNotes = new ArrayList<Note>();
 		this.persons = new ArrayList<Person>();
+		this.onlineResource = new ScoreResource();
 		this.collection = new Collection();
 	}
 
@@ -347,6 +353,26 @@ public class MusicXML2RDF {
 		
 		
 		model.add(model.createStatement(resScore, RDF.type, MusicOntology.Score));
+		
+		
+		if(onlineResource.getUrl()!=null) {
+
+			Resource resOnlineResource = model.createResource(onlineResource.getUrl());
+			model.add(model.createStatement(resScore, DBpediaOntology.document, resOnlineResource));
+			model.add(model.createStatement(resOnlineResource, RDF.type, DBpediaResource.Document));
+			if(onlineResource.getDescription().equals("")) {
+				model.add(model.createLiteralStatement(resOnlineResource, RDFS.label, onlineResource.getUrl()));
+			} else {
+				model.add(model.createLiteralStatement(resOnlineResource, RDFS.label, onlineResource.getDescription()));
+			}
+			
+			if(!onlineResource.getType().equals("")) {
+				model.add(model.createLiteralStatement(resOnlineResource, DBpediaOntology.mime, onlineResource.getType()));
+			} else {
+				model.add(model.createLiteralStatement(resOnlineResource, DBpediaOntology.mime, MediaType.ANY_TYPE.toString()));
+			}
+			
+		} 
 		
 		if(collection.getCollectionURI()==null) {
 			logger.warn("No collection provided for ["+score.getURI()+"]");
@@ -2168,6 +2194,14 @@ public class MusicXML2RDF {
 
 	public void setOutputFormat(String outputFormat) {
 		this.outputFormat = outputFormat;
+	}
+	
+	public ScoreResource getOnlineResource() {
+		return onlineResource;
+	}
+
+	public void setOnlineResource(ScoreResource onlineResource) {
+		this.onlineResource = onlineResource;
 	}
 
 	public String getVersion() {

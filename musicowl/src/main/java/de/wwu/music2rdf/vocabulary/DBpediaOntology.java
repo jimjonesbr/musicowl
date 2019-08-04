@@ -11,5 +11,7 @@ public class DBpediaOntology {
     public static final Property occupation  = model.createProperty("http://dbpedia.org/property/occupation");
     public static final Property version  = model.createProperty("http://dbpedia.org/property/version");
     public static final Property order = model.createProperty("http://dbpedia.org/property/order");
+    public static final Property document = model.createProperty("http://dbpedia.org/property/document");
+    public static final Property mime = model.createProperty("http://dbpedia.org/property/mime");
     
 }

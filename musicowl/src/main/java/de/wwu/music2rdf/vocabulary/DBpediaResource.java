@@ -18,5 +18,6 @@ public class DBpediaResource {
     public static final Resource Dedicatee  = dbpedia_model.createResource("http://dbpedia.org/resource/Dedicatee");
     public static final Resource Composer  = dbpedia_model.createResource("http://dbpedia.org/resource/Composer");
     public static final Resource Unknown  = dbpedia_model.createResource("http://dbpedia.org/resource/Unknown");
+    public static final Resource Document  = dbpedia_model.createResource("http://dbpedia.org/resource/Document");
 	
 }
