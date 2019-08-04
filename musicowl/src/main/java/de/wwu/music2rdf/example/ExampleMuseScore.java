@@ -50,11 +50,44 @@ public class ExampleMuseScore {
 		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Johann_Sebastian_Bach","Johann Sebastian Bach",Role.COMPOSER));
 		music2rdf.addPerson(new Person("https://musescore.com/bsg","BSG",Role.ENCODER));
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
-		music2rdf.setDocumentTitle("Bach: Air from Suite in D, BWV 1068");
+		music2rdf.setDocumentTitle("Air from Suite in D, BWV 1068");
 		music2rdf.isVerbose(false);
 		music2rdf.setOutputFormat("turtle");
 		music2rdf.setDateIssued("1717"); 
 		music2rdf.parseMusicXML();	
+		
+		
+		music2rdf = new MusicXML2RDF();			
+		music2rdf.setInputFile(new File("musicxml/musescore/Toccata_and_Fugue_in_D_Minor.mxl"));
+		music2rdf.setOutputFile("rdf/toccata-fugue-d_minor");
+		music2rdf.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Rincgk_01.jpg/800px-Rincgk_01.jpg");
+		music2rdf.setScoreURI("https://musescore.com/classicman/scores/55680");
+		music2rdf.addCollection(new Collection("https://musescore.com","MuseScore"));
+		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Johann_Sebastian_Bach","Johann Sebastian Bach",Role.COMPOSER));
+		music2rdf.addPerson(new Person("https://musescore.com/classicman","ClassicMan",Role.ENCODER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.setDocumentTitle("Toccata and Fugue in D Minor");
+		music2rdf.isVerbose(false);
+		music2rdf.setOutputFormat("turtle");
+		music2rdf.setDateIssued("1703"); 
+		music2rdf.parseMusicXML();
+		
+
+		music2rdf = new MusicXML2RDF();	
+		music2rdf.setInputFile(new File("musicxml/musescore/Vocalise_by_Rachmaninoff_for_Violin_and_Piano.mxl"));
+		music2rdf.setOutputFile("rdf/vocalise-rachmaninoff-piano_violin");
+		music2rdf.setThumbnail("https://www.cmuse.org/wp-content/uploads/2015/12/silent-night-manuscript-1.jpg");
+		music2rdf.setScoreURI("https://musescore.com/user/30892962/scores/5398515");
+		music2rdf.addCollection(new Collection("https://musescore.com","MuseScore"));
+		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Sergei_Wassiljewitsch_Rachmaninow","Sergei Wassiljewitsch Rachmaninow",Role.COMPOSER));
+		music2rdf.addPerson(new Person("https://musescore.com/user/30892962","ViolinWorker",Role.ENCODER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.setDocumentTitle("Vocalise");
+		music2rdf.isVerbose(false);
+		music2rdf.setOutputFormat("turtle");
+		music2rdf.setDateIssued("1912"); 
+		music2rdf.parseMusicXML();	
+
 				
 	}
 
