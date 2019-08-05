@@ -93,14 +93,14 @@ public class MusicXML2RDF {
 	private static Logger logger = Logger.getLogger("Converter");
 	private String dateIssued = "";
 	private ArrayList<Note> accidentalsOverwrite = new ArrayList<Note>();
-	private ScoreResource onlineResource;
+	private ArrayList<ScoreResource> resources;
 		
 	public MusicXML2RDF() {
 		super();
 		this.clefList = new ArrayList<Clef>();
 		this.currentNotes = new ArrayList<Note>();
 		this.persons = new ArrayList<Person>();
-		this.onlineResource = new ScoreResource();
+		this.resources = new ArrayList<ScoreResource>();
 		this.collection = new Collection();
 	}
 
@@ -355,19 +355,18 @@ public class MusicXML2RDF {
 		model.add(model.createStatement(resScore, RDF.type, MusicOntology.Score));
 		
 		
-		if(onlineResource.getUrl()!=null) {
+		for (int i = 0; i < this.resources.size(); i++) {
 
-			Resource resOnlineResource = model.createResource(onlineResource.getUrl());
+			Resource resOnlineResource = model.createResource(resources.get(i).getUrl());
 			model.add(model.createStatement(resScore, DBpediaOntology.document, resOnlineResource));
 			model.add(model.createStatement(resOnlineResource, RDF.type, DBpediaResource.Document));
-			if(onlineResource.getDescription().equals("")) {
-				model.add(model.createLiteralStatement(resOnlineResource, RDFS.label, onlineResource.getUrl()));
+			if(resources.get(i).getDescription().equals("")) {
+				model.add(model.createLiteralStatement(resOnlineResource, RDFS.label, resources.get(i).getUrl()));
 			} else {
-				model.add(model.createLiteralStatement(resOnlineResource, RDFS.label, onlineResource.getDescription()));
-			}
-			
-			if(!onlineResource.getType().equals("")) {
-				model.add(model.createLiteralStatement(resOnlineResource, DBpediaOntology.mime, onlineResource.getType()));
+				model.add(model.createLiteralStatement(resOnlineResource, RDFS.label, resources.get(i).getDescription()));
+			}			
+			if(!resources.get(i).getType().equals("")) {
+				model.add(model.createLiteralStatement(resOnlineResource, DBpediaOntology.mime, resources.get(i).getType()));
 			} else {
 				model.add(model.createLiteralStatement(resOnlineResource, DBpediaOntology.mime, MediaType.ANY_TYPE.toString()));
 			}
@@ -2195,13 +2194,13 @@ public class MusicXML2RDF {
 	public void setOutputFormat(String outputFormat) {
 		this.outputFormat = outputFormat;
 	}
-	
-	public ScoreResource getOnlineResource() {
-		return onlineResource;
+		
+	public ArrayList<ScoreResource> getResources() {
+		return resources;
 	}
 
-	public void setOnlineResource(ScoreResource onlineResource) {
-		this.onlineResource = onlineResource;
+	public void addResource(ScoreResource resource) {
+		this.resources.add(resource);
 	}
 
 	public String getVersion() {
