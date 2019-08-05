@@ -25,7 +25,7 @@ public class ExampleOpenScore {
 		music2rdf.addPerson(new Person("https://musescore.com/user/1231121","Roberto Frigato",Role.ENCODER));
 		music2rdf.addPerson(new Person("https://www.c82.net/offthestaff","Nicholas Rougeux",Role.LIBRETTIST));
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
-		music2rdf.setOnlineResource(new ScoreResource("https://musescore.com/score/5090058/download/pdf", "Print File",MediaType.PDF.toString()));	
+		music2rdf.addResource(new ScoreResource("https://musescore.com/score/5090058/download/pdf", "Print File",MediaType.PDF.toString()));	
 		music2rdf.setDocumentTitle("Brandenburg Concerto No.3-BWV 1048");
 		music2rdf.isVerbose(false);
 		music2rdf.setOutputFormat("n-triples");
@@ -44,7 +44,7 @@ public class ExampleOpenScore {
 		music2rdf.addPerson(new Person("https://www.c82.net/offthestaff","Nicholas Rougeux",Role.LIBRETTIST));
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
 		music2rdf.addPerson(new Person("https://musescore.com/user/13502736","Musemeister",Role.ENCODER));
-		music2rdf.setOnlineResource(new ScoreResource("https://musescore.com/score/4861738/download/pdf", "Print File",MediaType.PDF.toString()));
+		music2rdf.addResource(new ScoreResource("https://musescore.com/score/4861738/download/pdf", "Print File",MediaType.PDF.toString()));
 		music2rdf.setDocumentTitle("Symphony No.41");
 		music2rdf.isVerbose(false);
 		music2rdf.setOutputFormat("turtle");
@@ -61,7 +61,7 @@ public class ExampleOpenScore {
 		music2rdf.addPerson(new Person("https://musescore.com/user/6105546","Mike Nelson",Role.ENCODER));
 		music2rdf.addPerson(new Person("https://www.c82.net/offthestaff","Nicholas Rougeux",Role.LIBRETTIST));
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));			
-		music2rdf.setOnlineResource(new ScoreResource("https://musescore.com/score/4145221/download/pdf", "Print File",MediaType.PDF.toString()));
+		music2rdf.addResource(new ScoreResource("https://musescore.com/score/4145221/download/pdf", "Print File",MediaType.PDF.toString()));
 		music2rdf.setDocumentTitle("The Year 1812 Op.49");
 		music2rdf.isVerbose(false);
 		music2rdf.setOutputFormat("turtle");

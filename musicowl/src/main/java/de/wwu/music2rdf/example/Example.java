@@ -23,7 +23,8 @@ public class Example {
 		music2rdf.addCollection(new Collection("https://wwu.greatcomposers.de","Great Composers"));
 		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Edward_Elgar","Sir Edward William Elgar",Role.COMPOSER));
 		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));
-		music2rdf.setOnlineResource(new ScoreResource("https://musescore.com/score/152011/download/pdf", "Print File",MediaType.PDF.toString()));
+		music2rdf.addResource(new ScoreResource("https://musescore.com/score/152011/download/pdf", "Print",MediaType.PDF.toString()));
+		music2rdf.addResource(new ScoreResource("https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)", "Wikipedia Article",MediaType.HTML_UTF_8.toString()));
 		music2rdf.setDocumentTitle("Cellokonzert e-Moll op. 85");
 		music2rdf.isVerbose(false);
 		music2rdf.setOutputFormat("json-ld");
