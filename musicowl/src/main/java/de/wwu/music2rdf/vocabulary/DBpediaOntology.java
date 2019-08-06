@@ -13,5 +13,6 @@ public class DBpediaOntology {
     public static final Property order = model.createProperty("http://dbpedia.org/property/order");
     public static final Property document = model.createProperty("http://dbpedia.org/property/document");
     public static final Property mime = model.createProperty("http://dbpedia.org/property/mime");
+    public static final Property url = model.createProperty("http://dbpedia.org/property/url");
     
 }

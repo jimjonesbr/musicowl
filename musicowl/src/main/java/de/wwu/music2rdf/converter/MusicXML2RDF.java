@@ -331,6 +331,9 @@ public class MusicXML2RDF {
 		 * BEGIN METADATA
 		 */
 			
+		String uid = UUID.randomUUID().toString();
+		String nodeBaseURI = "http://linkeddata.uni-muenster.de/node/"+uid+"_";
+		
 		Model model = ModelFactory.createDefaultModel();
 		Resource resScore = model.createResource(score.getURI());
 				
@@ -357,18 +360,22 @@ public class MusicXML2RDF {
 		
 		for (int i = 0; i < this.resources.size(); i++) {
 
-			Resource resOnlineResource = model.createResource(resources.get(i).getUrl());
-			model.add(model.createStatement(resScore, DBpediaOntology.document, resOnlineResource));
-			model.add(model.createStatement(resOnlineResource, RDF.type, DBpediaResource.Document));
+			//Resource resResource = model.createResource(resources.get(i).getUrl());
+			Resource resResource = model.createResource(nodeBaseURI+"DOC_"+i);
+			model.add(model.createLiteralStatement(resResource, DBpediaOntology.url, resources.get(i).getUrl()));
+			model.add(model.createStatement(resResource, RDF.type, DBpediaResource.Document));
+			model.add(model.createStatement(resScore, DBpediaOntology.document, resResource));
+			
 			if(resources.get(i).getDescription().equals("")) {
-				model.add(model.createLiteralStatement(resOnlineResource, RDFS.label, resources.get(i).getUrl()));
+				model.add(model.createLiteralStatement(resResource, RDFS.label, resources.get(i).getUrl()));
 			} else {
-				model.add(model.createLiteralStatement(resOnlineResource, RDFS.label, resources.get(i).getDescription()));
+				model.add(model.createLiteralStatement(resResource, RDFS.label, resources.get(i).getDescription()));
 			}			
+			
 			if(!resources.get(i).getType().equals("")) {
-				model.add(model.createLiteralStatement(resOnlineResource, DBpediaOntology.mime, resources.get(i).getType()));
+				model.add(model.createLiteralStatement(resResource, DBpediaOntology.mime, resources.get(i).getType()));
 			} else {
-				model.add(model.createLiteralStatement(resOnlineResource, DBpediaOntology.mime, MediaType.ANY_TYPE.toString()));
+				model.add(model.createLiteralStatement(resResource, DBpediaOntology.mime, MediaType.ANY_TYPE.toString()));
 			}
 			
 		} 
@@ -638,8 +645,6 @@ public class MusicXML2RDF {
 			logger.warn("No title provided for the current score: " + score.getURI());
 		}		
 
-		String uid = UUID.randomUUID().toString();
-		String nodeBaseURI = "http://linkeddata.uni-muenster.de/node/"+uid+"_";
 		ArrayList<Staff> staves = new ArrayList<Staff>();
 		ArrayList<Voice> voices = new ArrayList<Voice>();
 		ArrayList<String> notesets = new ArrayList<String>();

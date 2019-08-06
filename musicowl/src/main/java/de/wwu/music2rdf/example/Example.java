@@ -27,7 +27,7 @@ public class Example {
 		music2rdf.addResource(new ScoreResource("https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)", "Wikipedia Article",MediaType.HTML_UTF_8.toString()));
 		music2rdf.setDocumentTitle("Cellokonzert e-Moll op. 85");
 		music2rdf.isVerbose(false);
-		music2rdf.setOutputFormat("json-ld");
+		music2rdf.setOutputFormat("turtle");
 		music2rdf.setDateIssued("1919"); //Formats accepted: yyyy, yyyyMM, yyyyMMdd.
 		
 		music2rdf.parseMusicXML();
