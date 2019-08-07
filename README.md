@@ -51,7 +51,57 @@ Role.PERFORMER;
 Role.TRANSLATOR;
 Role.UNKNOWN;
 ```
-## Installation
+
+`addResource`&nbsp;   Links existing resources to the converted music score, such as pdf or mp3 files. This method relies on three parameters:
+
+- **Link**: Link to the resource
+- **Description**: Text describing the resource
+- **Type**: MIME Type
+
+## Using the Java API
+
+```java
+package de.wwu.music2rdf.example;
+
+import java.io.File;
+
+import com.google.common.net.MediaType;
+
+import de.wwu.music2rdf.converter.MusicXML2RDF;
+import de.wwu.music2rdf.core.Collection;
+import de.wwu.music2rdf.core.Person;
+import de.wwu.music2rdf.core.Role;
+import de.wwu.music2rdf.core.ScoreResource;
+
+public class Example {
+
+	public static void main(String[] args) {
+				
+		MusicXML2RDF music2rdf = new MusicXML2RDF();
+			
+		music2rdf.setInputFile(new File("musicxml/ulb-muenster/elgar_cello_concerto_op.85.xml"));
+		music2rdf.setOutputFile("rdf/elgar_cello_concerto_op.85");
+		music2rdf.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg");
+		music2rdf.setScoreURI("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
+		music2rdf.addCollection(new Collection("https://wwu.greatcomposers.de","Great Composers"));
+		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Edward_Elgar","Sir Edward William Elgar",Role.COMPOSER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));
+		music2rdf.addResource(new ScoreResource("https://musescore.com/score/152011/download/pdf", "Print",MediaType.PDF.toString()));
+		music2rdf.addResource(new ScoreResource("https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)", "Wikipedia Article",MediaType.HTML_UTF_8.toString()));
+		music2rdf.setDocumentTitle("Cellokonzert e-Moll op. 85");
+		music2rdf.isVerbose(false);
+		music2rdf.setOutputFormat("turtle");
+		music2rdf.setDateIssued("1919"); //Formats accepted: yyyy, yyyyMM, yyyyMMdd.
+		
+		music2rdf.parseMusicXML();
+		
+	}
+
+}
+
+```
+
+## Using the converter in the console
 
 If you don't feel like building the Musci2RDF converter from soruce, visit the [releases area](https://github.com/jimjonesbr/musicowl/releases) to get a prebuilt jar. You can execute it from your terminal using the following syntax:
 
@@ -94,41 +144,3 @@ Verbose      	 : false
 [2019-07-02 16:23:53,347] INFO  [Converter] - Score serialization: 662 ms
 
 ```
-
-## Using the Java API
-
-```java
-package de.wwu.music2rdf.example;
-
-import java.io.File;
-import de.wwu.music2rdf.converter.MusicXML2RDF;
-import de.wwu.music2rdf.core.Collection;
-import de.wwu.music2rdf.core.Person;
-import de.wwu.music2rdf.core.Role;
-
-public class Example {
-
-	public static void main(String[] args) {
-				
-		MusicXML2RDF music2rdf = new MusicXML2RDF();
-			
-		music2rdf.setInputFile(new File("musicxml/elgar_cello_concerto_op.85.xml"));
-		music2rdf.setOutputFile("ntriples/elgar_cello_concerto_op.85.nt");
-		music2rdf.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg");
-		music2rdf.setScoreURI("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
-		music2rdf.addCollection(new Collection("https://wwu.greatcomposers.de","Great Composers"));
-		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Edward_Elgar","Sir Edward William Elgar",Role.COMPOSER));
-		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
-		music2rdf.setDocumentTitle("Cellokonzert e-Moll op. 85");
-		music2rdf.isVerbose(false);
-		music2rdf.setOutputFormat("TURTLE");
-		music2rdf.setDateIssued("1919"); //Formats accepted: yyyy, yyyyMM, yyyyMMdd.
-		
-		music2rdf.parseMusicXML();
-	}
-
-}
-
-
-```
-
