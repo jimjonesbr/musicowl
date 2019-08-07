@@ -360,24 +360,26 @@ public class MusicXML2RDF {
 		
 		for (int i = 0; i < this.resources.size(); i++) {
 
-			//Resource resResource = model.createResource(resources.get(i).getUrl());
-			Resource resResource = model.createResource(nodeBaseURI+"DOC_"+i);
-			model.add(model.createLiteralStatement(resResource, DBpediaOntology.url, resources.get(i).getUrl()));
-			model.add(model.createStatement(resResource, RDF.type, DBpediaResource.Document));
-			model.add(model.createStatement(resScore, DBpediaOntology.document, resResource));
-			
-			if(resources.get(i).getDescription().equals("")) {
-				model.add(model.createLiteralStatement(resResource, RDFS.label, resources.get(i).getUrl()));
-			} else {
-				model.add(model.createLiteralStatement(resResource, RDFS.label, resources.get(i).getDescription()));
-			}			
-			
-			if(!resources.get(i).getType().equals("")) {
-				model.add(model.createLiteralStatement(resResource, DBpediaOntology.mime, resources.get(i).getType()));
-			} else {
-				model.add(model.createLiteralStatement(resResource, DBpediaOntology.mime, MediaType.ANY_TYPE.toString()));
+			if(resources.get(i).getUrl()!=null) {
+				
+				Resource resResource = model.createResource(nodeBaseURI+"DOC_"+i);
+				model.add(model.createLiteralStatement(resResource, DBpediaOntology.url, resources.get(i).getUrl()));
+				model.add(model.createStatement(resResource, RDF.type, DBpediaResource.Document));
+				model.add(model.createStatement(resScore, DBpediaOntology.document, resResource));
+				
+				if(resources.get(i).getDescription().equals("")) {
+					model.add(model.createLiteralStatement(resResource, RDFS.label, resources.get(i).getUrl()));
+				} else {
+					model.add(model.createLiteralStatement(resResource, RDFS.label, resources.get(i).getDescription()));
+				}			
+				
+				if(!resources.get(i).getType().equals("")) {
+					model.add(model.createLiteralStatement(resResource, DBpediaOntology.mime, resources.get(i).getType()));
+				} else {
+					model.add(model.createLiteralStatement(resResource, DBpediaOntology.mime, MediaType.ANY_TYPE.toString()));
+				}
+				
 			}
-			
 		} 
 		
 		if(collection.getCollectionURI()==null) {
@@ -746,12 +748,12 @@ public class MusicXML2RDF {
 
 					} else {
 
-						model.add(model.createLiteralStatement(resPart, SKOS.prefLabel, "Unspecified"));
+						model.add(model.createLiteralStatement(resPart, SKOS.prefLabel, "unspecified"));
 						model.add(model.createLiteralStatement(resPart, SKOS.altLabel, "unspecidied.unspecified"));
 						Resource resInstrumentBroader = model.createResource(InstrumentTaxonomy.NS + "unspecified");
 						model.add(model.createStatement(resPart, SKOS.broader,resInstrumentBroader));
 						model.add(model.createStatement(resInstrumentBroader, InstrumentTaxonomy.inScheme, InstrumentTaxonomy.Musical_instruments));
-						model.add(model.createLiteralStatement(resInstrumentBroader, SKOS.prefLabel, "Unspecified"));
+						model.add(model.createLiteralStatement(resInstrumentBroader, SKOS.prefLabel, "unspecified"));
 
 					}
 

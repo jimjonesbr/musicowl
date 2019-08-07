@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.wwu.music2rdf</groupId>
 	<artifactId>music2rdf</artifactId>
-	<version>1.0.1</version>
+	<version>1.1.0</version>
 	<name>MusicXML to RDF Converter</name>
 	<url>http://maven.apache.org</url>
 	<build>
