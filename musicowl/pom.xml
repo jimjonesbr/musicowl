@@ -2,15 +2,59 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.wwu.music2rdf</groupId>
+	<groupId>de.uni-muenster.music2rdf</groupId>
 	<artifactId>music2rdf</artifactId>
 	<version>1.1.0</version>
-	<name>MusicXML to RDF Converter</name>
-	<url>http://maven.apache.org</url>
+	<name>${project.groupId}:${project.artifactId}</name>
+	<url>https://github.com/jimjonesbr/musicowl</url>
+	<description>Music Score to RDF Converter</description>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Jim Jones</name>
+			<email>jim.jones@math.uni-muenster.de</email>
+			<organization>Universität Münster</organization>
+			<organizationUrl>https://www.uni-muenster.de/</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/jimjonesbr/musicowl.git</connection>
+		<developerConnection>scm:git:ssh://github.com/jimjonesbr/musicowl.git</developerConnection>
+		<url>https://github.com/jimjonesbr/musicowl</url>
+	</scm>
+
+	<distributionManagement>
+	  <snapshotRepository>
+	    <id>ossrh</id>
+	    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+	  </snapshotRepository>
+	</distributionManagement>
+	
 	<build>
 		<finalName>music2rdf</finalName>
 		<plugins>
 
+		
+		    <plugin>
+		      <groupId>org.sonatype.plugins</groupId>
+		      <artifactId>nexus-staging-maven-plugin</artifactId>
+		      <version>1.6.7</version>
+		      <extensions>true</extensions>
+		      <configuration>
+		        <serverId>ossrh</serverId>
+		        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+		        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+		      </configuration>
+		    </plugin>
+		    
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -66,6 +110,21 @@
 				</configuration>
 			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 		<resources>
 			<resource>
@@ -73,7 +132,7 @@
 				<filtering>false</filtering>
 				<includes>
 					<include>config/mediums_musicxml.csv</include>
-				</includes>				
+				</includes>
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -83,11 +142,11 @@
 				<directory>src/test/resources</directory>
 			</resource>
 			<resource>
-				<directory>${basedir}</directory>				
+				<directory>${basedir}</directory>
 				<includes>
 					<include>pom.xml</include>
 				</includes>
-			</resource>			
+			</resource>
 		</resources>
 	</build>
 	<dependencies>
@@ -129,13 +188,13 @@
 			<version>1.7.26</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
 		<dependency>
-		    <groupId>com.google.guava</groupId>
-		    <artifactId>guava</artifactId>
-		    <version>28.0-jre</version>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>28.0-jre</version>
 		</dependency>
-				
+
 	</dependencies>
 </project>
