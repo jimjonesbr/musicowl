@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/jimjonesbr/musicowl.svg?branch=master)](https://travis-ci.com/jimjonesbr/musicowl)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-# MusicXML to RDF Converter
+# Music Score to RDF Converter
 
 This converter parses MusicXML 3.0 files and converts them to RDF, based on the [MusicOWL Ontology](http://linkeddata.uni-muenster.de/ontology/musicscore/mso.owl) [ˈmjuːzɪkəl]. It fully supports the following concepts:
  
@@ -60,6 +60,8 @@ Role.UNKNOWN;
 
 ## Using the Java API
 
+The above mentioned parameters can be used as follows:
+
 ```java
 package de.wwu.music2rdf.example;
 
@@ -101,44 +103,90 @@ public class Example {
 
 ## Using the converter in the console
 
-If you don't feel like building the Musci2RDF converter from soruce, visit the [releases area](https://github.com/jimjonesbr/musicowl/releases) to get a prebuilt jar. You can execute it from your terminal using the following syntax:
+If you don't feel like building the Musci2RDF converter from soruce, visit the [releases area](https://github.com/jimjonesbr/musicowl/releases) to get a prebuilt jar. You can use this jar with following parameters:
+
+`metadata`&nbsp; In order to keep the full metadata support via console, you have to pass the metadata in separated xml file. The XML file has to be encoded in the following format:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<score>
+	<scoreIdentifier>http://dbpedia.org/resource/Cello_Concerto_(Elgar)</scoreIdentifier>
+	<title>Cellokonzert e-Moll op. 85</title>
+	<thumbnail>https://www.rcm.ac.uk/media/Elgar%20Cello%20Concerto%20maunscript%206x4.jpg</thumbnail>
+	<issued>1919</issued>
+	<collections>
+		<collection>
+			<collectionName>Great Composers</collectionName>
+			<collectionURL>https://wwu.greatcomposers.de</collectionURL>
+		</collection>
+	</collections>
+	<persons>
+		<person>
+			<personIdentifier>http://dbpedia.org/resource/Edward_Elgar</personIdentifier>
+			<personName>Sir Edward William Elgar</personName>
+			<personRole>Composer</personRole>
+		</person>
+		<person>
+			<personIdentifier>http://jimjones.de</personIdentifier>
+			<personName>Jim Jones</personName>
+			<personRole>Encoder</personRole>
+		</person>
+	</persons>
+	<resources>
+		<resource>
+			<resourceURL>https://musescore.com/score/152011/download/pdf</resourceURL>
+			<resourceDescription>Print</resourceDescription>
+			<resourceType>application/pdf</resourceType>
+		</resource>
+		<resource>
+			<resourceURL>https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)</resourceURL>
+			<resourceDescription>Wikipedia Article</resourceDescription>
+			<resourceType>text/html</resourceType>
+		</resource>
+	</resources>
+</score>
+
+```
+
+`file` &nbsp; Music score file.
+
+`output`&nbsp;  Name for the output file.
+
+`outputFormat`&nbsp; RDF notation for the output file
+
+Example (using the above described metadata file):
 
 ```shell
-$ java -jar music2rdf-[VERSION].jar 
-	file=/home/jones/git/musicowl/musicowl/musicxml/elgar_cello_concerto_op.85.xml 
-	output=/home/jones/git/musicowl/musicowl/rdf/elgar_cello_concerto_op.85 
-	uri="http://dbpedia.org/resource/Cello_Concerto_(Elgar)" 
-	collectionURI=https://url.collection.de 
-	collectionName="Great Composers" 
-	person="http://dbpedia.org/resource/Edward_Elgar","Sir Edward Elgar","Composer" 
-	person="http://jimjones.de","Jim Jones","Encoder" 
-	thumbnail="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg" 
-	dateIssued=1919 
-	outputformat=TURTLE 
-	verbose=false
+$ java -jar music2rdf-[VERSION].jar file=musicxml/metadata-file/elgar_cello_concerto_op.85.xml
+metadata=musicxml/elgar_cello_concerto_op.85-metadata.xml 
+output=rdf/elgar_cello_concerto_op.85 
+outputFormat=turtle
 
+File  	        : /home/jones/git/musicowl/musicowl/musicxml/metadata-file/elgar_cello_concerto_op.85.xml
+Score URI       : http://dbpedia.org/resource/Cello_Concerto_(Elgar)
+Title           : Cellokonzert e-Moll op. 85
+Date Issued     : 1919
+Thumbnail       : https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg
+Person URI      : http://dbpedia.org/resource/Edward_Elgar
+Person Name     : Sir Edward William Elgar
+Person Role     : Composer
+Person URI      : http://jimjones.de
+Person Name     : Jim Jones
+Person Role     : Encoder
+Resource URI    : https://musescore.com/score/152011/download/pdf
+Resource Desc.  : Print
+Resource Type   : application/pdf
+Resource URI    : https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)
+Resource Desc.  : Wikipedia Article
+Resource Type   : text/html
+Collection URI  : https://wwu.greatcomposers.de
+Collection Name : Great Composers
+Output File     : /home/jones/Schreibtisch/test-meta
+OutputFormat    : turtle
 
-File 	         : /home/jones/git/musicowl/musicowl/musicxml/elgar_cello_concerto_op.85.xml
-Output File      : /home/jones/git/musicowl/musicowl/rdf/elgar_cello_concerto_op.85
-URI 	         : http://dbpedia.org/resource/Cello_Concerto_(Elgar)
-Collection URI   : https://url.collection.de
-Collection Name  : Great Composers
-Person URI       : http://dbpedia.org/resource/Edward_Elgar
-Person Name      : Sir Edward Elgar
-Person Role      : Composer
-Person URI       : http://jimjones.de
-Person Name      : Jim Jones
-Person Role      : Encoder
-Thumbnail        : https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg
-Date Issued      : 1919
-OutputFormat     : TURTLE
-Verbose      	 : false
-
-
-
-[2019-07-02 16:23:52,397] INFO  [Converter] - Processing elgar_cello_concerto_op.85.xml ...
-[2019-07-02 16:23:52,528] INFO  [Converter] - Loading XML file: 131 ms
-[2019-07-02 16:23:52,684] INFO  [Converter] - Creating MusicScore object: 156 ms
-[2019-07-02 16:23:53,347] INFO  [Converter] - Score serialization: 662 ms
-
+[2019-08-11 19:33:14,788] INFO  [Converter] - Processing elgar_cello_concerto_op.85.xml ...
+[2019-08-11 19:33:15,011] INFO  [Converter] - Loading XML file: 222 ms
+[2019-08-11 19:33:15,341] WARN  [Converter] - The title "Cellokonzert e-Moll op. 85" was provided and will therefore overwrite the title provided in the MusicXML document.
+[2019-08-11 19:33:15,341] INFO  [Converter] - Creating MusicScore object: 329 ms
+[2019-08-11 19:33:16,224] INFO  [Converter] - Score serialization: 883 ms
 ```
