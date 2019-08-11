@@ -103,7 +103,7 @@ public class Example {
 
 ## Using the converter in the console
 
-If you don't feel like building the Musci2RDF converter from soruce, visit the [releases area](https://github.com/jimjonesbr/musicowl/releases) to get a prebuilt jar. You can use this jar with following parameters:
+If you don't feel like building the Musci2RDF converter from source, visit the [releases area](https://github.com/jimjonesbr/musicowl/releases) to get a prebuilt jar. You can use this jar with following parameters:
 
 `metadata`&nbsp; In order to keep the full metadata support via console, you have to pass the metadata in separated xml file. The XML file has to be encoded in the following format:
 
