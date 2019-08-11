@@ -4,6 +4,12 @@
 	<title>Cellokonzert e-Moll op. 85</title>
 	<thumbnail>https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg</thumbnail>
 	<issued>1919</issued>
+	<collections>
+		<collection>
+			<collectionName>Great Composers</collectionName>
+			<collectionURL>https://wwu.greatcomposers.de</collectionURL>
+		</collection>
+	</collections>
 	<persons>
 		<person>
 			<personIdentifier>http://dbpedia.org/resource/Edward_Elgar</personIdentifier>
