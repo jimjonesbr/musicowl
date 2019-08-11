@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.uni-muenster.music2rdf</groupId>
+	<groupId>de.uni-muenster.ulb</groupId>
 	<artifactId>music2rdf</artifactId>
 	<version>1.2.0</version>
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -15,46 +15,40 @@
 			<url>http://www.opensource.org/licenses/mit-license.php</url>
 		</license>
 	</licenses>
-
 	<developers>
 		<developer>
 			<name>Jim Jones</name>
 			<email>jim.jones@math.uni-muenster.de</email>
-			<organization>Universität Münster</organization>
+			<organization>University of Münster</organization>
 			<organizationUrl>https://www.uni-muenster.de/</organizationUrl>
 		</developer>
 	</developers>
-
 	<scm>
 		<connection>scm:git:git://github.com/jimjonesbr/musicowl.git</connection>
 		<developerConnection>scm:git:ssh://github.com/jimjonesbr/musicowl.git</developerConnection>
 		<url>https://github.com/jimjonesbr/musicowl</url>
 	</scm>
-
 	<distributionManagement>
-	  <snapshotRepository>
-	    <id>ossrh</id>
-	    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-	  </snapshotRepository>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
 	</distributionManagement>
-	
+
 	<build>
 		<finalName>music2rdf</finalName>
 		<plugins>
-
-		
-		    <plugin>
-		      <groupId>org.sonatype.plugins</groupId>
-		      <artifactId>nexus-staging-maven-plugin</artifactId>
-		      <version>1.6.7</version>
-		      <extensions>true</extensions>
-		      <configuration>
-		        <serverId>ossrh</serverId>
-		        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-		        <autoReleaseAfterClose>true</autoReleaseAfterClose>
-		      </configuration>
-		    </plugin>
-		    
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -124,7 +118,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 		</plugins>
 		<resources>
 			<resource>
@@ -195,6 +189,6 @@
 			<artifactId>guava</artifactId>
 			<version>28.0-jre</version>
 		</dependency>
-
+		
 	</dependencies>
 </project>
