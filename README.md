@@ -64,9 +64,7 @@ Role.UNKNOWN;
 package de.wwu.music2rdf.example;
 
 import java.io.File;
-
 import com.google.common.net.MediaType;
-
 import de.wwu.music2rdf.converter.MusicXML2RDF;
 import de.wwu.music2rdf.core.Collection;
 import de.wwu.music2rdf.core.Person;
