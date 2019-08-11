@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="score">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:anyURI" name="scoreIdentifier"/>
+        <xs:element type="xs:string" name="title"/>
+        <xs:element type="xs:string" name="thumbnail"/>
+        <xs:element type="xs:date" name="issued"/>
+        <xs:element name="persons">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="person" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:anyURI" name="personIdentifier"/>
+                    <xs:element type="xs:string" name="personName"/>
+                    <xs:element name="personRole">
+                    	 <xs:simpleType>
+                    	 	<xs:restriction base="xs:string">
+	                    	 	<xs:enumeration value="Arranger"/>
+	                    	 	<xs:enumeration value="Composer"/>
+	                    	 	<xs:enumeration value="Editor"/>
+						      	<xs:enumeration value="Librettist"/>
+						      	<xs:enumeration value="Lyricist"/>
+						      	<xs:enumeration value="Performer"/>
+						      	<xs:enumeration value="Encoder"/>
+						      	<xs:enumeration value="Translator"/>
+						      	<xs:enumeration value="Unknown"/>
+                    	 	</xs:restriction>
+                    	 </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="resources">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="resource" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:anyURI" name="resourceURL"/>
+                    <xs:element type="xs:string" name="resourceDescription"/>
+                    <xs:element type="xs:string" name="resourceType"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

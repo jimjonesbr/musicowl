@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<score>
+	<scoreIdentifier>http://dbpedia.org/resource/Cello_Concerto_(Elgar)</scoreIdentifier>
+	<title>Cellokonzert e-Moll op. 85</title>
+	<thumbnail>https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg</thumbnail>
+	<issued>1919</issued>
+	<persons>
+		<person>
+			<personIdentifier>http://dbpedia.org/resource/Edward_Elgar</personIdentifier>
+			<personName>Sir Edward William Elgar</personName>
+			<personRole>Composer</personRole>
+		</person>
+		<person>
+			<personIdentifier>http://jimjones.de</personIdentifier>
+			<personName>Jim Jones</personName>
+			<personRole>Encoder</personRole>
+		</person>
+	</persons>
+	<resources>
+		<resource>
+			<resourceURL>https://musescore.com/score/152011/download/pdf</resourceURL>
+			<resourceDescription>Print</resourceDescription>
+			<resourceType>application/pdf</resourceType>
+		</resource>
+		<resource>
+			<resourceURL>https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)</resourceURL>
+			<resourceDescription>Wikipedia Article</resourceDescription>
+			<resourceType>text/html</resourceType>
+		</resource>
+	</resources>
+</score>
