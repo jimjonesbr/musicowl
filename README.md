@@ -162,11 +162,11 @@ metadata=musicxml/elgar_cello_concerto_op.85-metadata.xml
 output=rdf/elgar_cello_concerto_op.85 
 outputFormat=turtle
 
-File  	        : /home/jones/git/musicowl/musicowl/musicxml/metadata-file/elgar_cello_concerto_op.85.xml
+File  	        : musicxml/metadata-file/elgar_cello_concerto_op.85.xml
 Score URI       : http://dbpedia.org/resource/Cello_Concerto_(Elgar)
 Title           : Cellokonzert e-Moll op. 85
 Date Issued     : 1919
-Thumbnail       : https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg
+Thumbnail       : https://www.rcm.ac.uk/media/Elgar%20Cello%20Concerto%20maunscript%206x4.jpg
 Person URI      : http://dbpedia.org/resource/Edward_Elgar
 Person Name     : Sir Edward William Elgar
 Person Role     : Composer
@@ -181,7 +181,7 @@ Resource Desc.  : Wikipedia Article
 Resource Type   : text/html
 Collection URI  : https://wwu.greatcomposers.de
 Collection Name : Great Composers
-Output File     : /home/jones/Schreibtisch/test-meta
+Output File     : rdf/elgar_cello_concerto_op.85
 OutputFormat    : turtle
 
 [2019-08-11 19:33:14,788] INFO  [Converter] - Processing elgar_cello_concerto_op.85.xml ...
