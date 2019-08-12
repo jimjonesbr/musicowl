@@ -162,7 +162,7 @@ metadata=musicxml/elgar_cello_concerto_op.85-metadata.xml
 output=rdf/elgar_cello_concerto_op.85 
 outputFormat=turtle
 
-File  	        : musicxml/metadata-file/elgar_cello_concerto_op.85.xml
+File  	        : musicxml/elgar_cello_concerto_op.85.xml
 Score URI       : http://dbpedia.org/resource/Cello_Concerto_(Elgar)
 Title           : Cellokonzert e-Moll op. 85
 Date Issued     : 1919
