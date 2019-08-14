@@ -39,6 +39,7 @@ import org.apache.jena.vocabulary.DCTerms;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.vocabulary.SKOS;
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -102,6 +103,8 @@ public class MusicXML2RDF {
 		this.persons = new ArrayList<Person>();
 		this.resources = new ArrayList<ScoreResource>();
 		this.collection = new Collection();
+		
+		BasicConfigurator.configure();
 	}
 
 	public void addPerson(Person person) {
