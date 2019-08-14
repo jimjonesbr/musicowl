@@ -1,6 +1,7 @@
 [![](https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/wwu.svg)](https://www.uni-muenster.de/de/)
 
 [![Build Status](https://travis-ci.com/jimjonesbr/musicowl.svg?branch=master)](https://travis-ci.com/jimjonesbr/musicowl)
+[![Maven Central](https://img.shields.io/maven-central/v/de.uni-muenster/music2rdf.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22de.uni-muenster%22%20AND%20a:%22music2rdf%22)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 # Music Score to RDF Converter
