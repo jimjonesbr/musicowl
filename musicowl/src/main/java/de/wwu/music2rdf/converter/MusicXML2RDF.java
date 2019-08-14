@@ -1375,7 +1375,7 @@ public class MusicXML2RDF {
 		String musicXMLString = "";
 
 		if(this.getOutputFile().equals("")) {
-			logger.fatal("No output file provided (N-Triple output).");		
+			logger.fatal("No output file provided.");		
 		}
 
 		if(this.getInputFile()==null) {
