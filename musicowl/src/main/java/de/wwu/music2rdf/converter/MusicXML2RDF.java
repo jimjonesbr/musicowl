@@ -1375,18 +1375,15 @@ public class MusicXML2RDF {
 		String musicXMLString = "";
 
 		if(this.getOutputFile().equals("")) {
-			logger.fatal("No output file provided (N-Triple output).");
-			System.exit(1);			
+			logger.fatal("No output file provided (N-Triple output).");		
 		}
 
 		if(this.getInputFile()==null) {
 			logger.fatal("No input file provided (MusicXML).");
-			System.exit(1);			
 		}
 		
 		if(this.getInputFile()==null) {
-			logger.fatal("No input file provided (MusicXML).");
-			System.exit(1);			
+			logger.fatal("No input file provided (MusicXML).");		
 		}
 		
 		
@@ -1399,8 +1396,7 @@ public class MusicXML2RDF {
 			!this.getOutputFormat().toLowerCase().trim().equals("trix")&&
 			!this.getOutputFormat().toLowerCase().trim().equals("rdf/xml")&&
 			!this.getOutputFormat().toLowerCase().trim().equals("rdf/json")){
-			logger.fatal("Invalid output format ["+this.getOutputFormat()+"]. Supported formats are: TURTLE, JSON-LD, N-TRIPLES, N-QUADS, TRIG, TRIX, RDF/XML, RDF/JSON");
-			System.exit(1);			
+			logger.fatal("Invalid output format ["+this.getOutputFormat()+"]. Supported formats are: TURTLE, JSON-LD, N-TRIPLES, N-QUADS, TRIG, TRIX, RDF/XML, RDF/JSON");		
 
 		}
 
