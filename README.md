@@ -2,9 +2,8 @@
 
 [![Build Status](https://travis-ci.com/jimjonesbr/musicowl.svg?branch=master)](https://travis-ci.com/jimjonesbr/musicowl)
 [![Maven Central](https://img.shields.io/maven-central/v/de.uni-muenster/music2rdf.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22de.uni-muenster%22%20AND%20a:%22music2rdf%22)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/jimjonesbr/musicowl)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Contribute: Gitpod](https://img.shields.io/badge/contribute-gitpod-9cf)](https://gitpod.io/#https://github.com/jimjonesbr/musicowl)
 
 # Music Score to RDF Converter
 
@@ -60,6 +59,18 @@ Role.UNKNOWN;
 - **Link**: Link to the resource
 - **Description**: Text describing the resource
 - **Type**: MIME Type
+
+## Music2RDF at Maven Central
+
+To add the Music Score to RDF Converter to your project just add the following dependency in your `pom.xml` file:
+
+```
+<dependency>
+  <groupId>de.uni-muenster</groupId>
+  <artifactId>music2rdf</artifactId>
+  <version>[VERSION]</version>
+</dependency>
+```
 
 ## Using the Java API
 
