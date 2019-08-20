@@ -102,9 +102,7 @@ public class MusicXML2RDF {
 		this.currentNotes = new ArrayList<Note>();
 		this.persons = new ArrayList<Person>();
 		this.resources = new ArrayList<ScoreResource>();
-		this.collection = new Collection();
-		
-		BasicConfigurator.configure();
+		this.collection = new Collection();		
 	}
 
 	public void addPerson(Person person) {
