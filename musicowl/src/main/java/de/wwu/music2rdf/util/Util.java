@@ -8,12 +8,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import org.apache.commons.io.FileUtils;
 import de.wwu.music2rdf.core.Instrument;
 
 public class Util {
@@ -143,29 +141,8 @@ public class Util {
 	}    
 
 	
-	public static boolean isXMLValid(File xml) {
-		boolean result = false;				
-	    try {
-			if(FileUtils.readFileToString(xml, StandardCharsets.UTF_8).startsWith("<")) {
-				result = true;
-			}			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
-	public static boolean isJSONValid(File json) {
-		
-		boolean result = false;				
-	    try {
-			if(FileUtils.readFileToString(json, StandardCharsets.UTF_8).startsWith("{")) {
-				result = true;
-			}			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
 
+
+	
+	
 }
