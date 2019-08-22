@@ -39,7 +39,6 @@ import org.apache.jena.vocabulary.DCTerms;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.vocabulary.SKOS;
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -49,9 +48,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
 import com.google.common.net.MediaType;
-
 import de.wwu.music2rdf.core.Clef;
 import de.wwu.music2rdf.core.Collection;
 import de.wwu.music2rdf.core.Instrument;
