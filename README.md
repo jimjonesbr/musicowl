@@ -119,48 +119,90 @@ public class Example {
 
 If you don't feel like building the Musci2RDF converter from source, visit the [releases area](https://github.com/jimjonesbr/musicowl/releases) to get a prebuilt jar. You can use this jar with following parameters:
 
-`metadata`&nbsp; In order to keep the full metadata support via console, you have to pass the metadata in separated xml file. The XML file has to be encoded in the following format:
+`metadata`&nbsp; In order to keep the full metadata support via console, you have to pass the metadata in separated file. This metadata file can be encoded in XML ...
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <score>
-	<scoreIdentifier>http://dbpedia.org/resource/Cello_Concerto_(Elgar)</scoreIdentifier>
-	<title>Cellokonzert e-Moll op. 85</title>
-	<thumbnail>https://www.rcm.ac.uk/media/Elgar%20Cello%20Concerto%20maunscript%206x4.jpg</thumbnail>
-	<issued>1919</issued>
-	<collections>
-		<collection>
-			<collectionName>Great Composers</collectionName>
-			<collectionURL>https://wwu.greatcomposers.de</collectionURL>
-		</collection>
-	</collections>
-	<persons>
-		<person>
-			<personIdentifier>http://dbpedia.org/resource/Edward_Elgar</personIdentifier>
-			<personName>Sir Edward William Elgar</personName>
-			<personRole>Composer</personRole>
-		</person>
-		<person>
-			<personIdentifier>http://jimjones.de</personIdentifier>
-			<personName>Jim Jones</personName>
-			<personRole>Encoder</personRole>
-		</person>
-	</persons>
-	<resources>
-		<resource>
-			<resourceURL>https://musescore.com/score/152011/download/pdf</resourceURL>
-			<resourceDescription>Print</resourceDescription>
-			<resourceType>application/pdf</resourceType>
-		</resource>
-		<resource>
-			<resourceURL>https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)</resourceURL>
-			<resourceDescription>Wikipedia Article</resourceDescription>
-			<resourceType>text/html</resourceType>
-		</resource>
-	</resources>
+  <scoreIdentifier>http://dbpedia.org/resource/Cello_Concerto_(Elgar)</scoreIdentifier>
+  <title>Cellokonzert e-Moll op. 85</title>
+  <thumbnail>https://www.rcm.ac.uk/media/Elgar%20Cello%20Concerto%20maunscript%206x4.jpg</thumbnail>
+  <issued>1919</issued>
+  <collections>
+    <collection>
+      <collectionName>Great Composers</collectionName>
+      <collectionURL>https://wwu.greatcomposers.de</collectionURL>
+    </collection>
+  </collections>
+  <persons>
+    <person>
+      <personIdentifier>http://dbpedia.org/resource/Edward_Elgar</personIdentifier>
+      <personName>Sir Edward William Elgar</personName>
+      <personRole>Composer</personRole>
+    </person>
+    <person>
+      <personIdentifier>http://jimjones.de</personIdentifier>
+      <personName>Jim Jones</personName>
+      <personRole>Encoder</personRole>
+    </person>
+  </persons>
+  <resources>
+    <resource>
+      <resourceURL>https://musescore.com/score/152011/download/pdf</resourceURL>
+      <resourceDescription>Print</resourceDescription>
+      <resourceType>application/pdf</resourceType>
+    </resource>
+    <resource>
+      <resourceURL>https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)</resourceURL>
+      <resourceDescription>Wikipedia Article</resourceDescription>
+      <resourceType>text/html</resourceType>
+    </resource>
+  </resources>
 </score>
-
 ```
+
+.. or in case you fancy JSON:
+
+```json
+{
+   "scoreIdentifier": "http://dbpedia.org/resource/Cello_Concerto_(Elgar)",
+   "title": "Cellokonzert e-Moll op. 85",
+   "thumbnail": "https://www.rcm.ac.uk/media/Elgar%20Cello%20Concerto%20maunscript%206x4.jpg",
+   "issued": "1919",
+   "collections": [       
+      {
+         "collectionName": "Great Composers",
+         "collectionURL": "https://wwu.greatcomposers.de"
+      }
+   ],
+   "persons": [
+      {
+         "personIdentifier": "http://dbpedia.org/resource/Edward_Elgar",
+         "personName": "Sir Edward William Elgar",
+         "personRole": "Composer"
+      },
+      {
+         "personIdentifier": "http://jimjones.de",
+         "personName": "Jim Jones",
+         "personRole": "Encoder"
+      }
+   ],
+   "resources": [
+      {
+         "resourceURL": "https://musescore.com/score/152011/download/pdf",
+         "resourceDescription": "Print",
+         "resourceType": "application/pdf"
+      },
+      {
+         "resourceURL": "https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)",
+         "resourceDescription": "Wikipedia Article",
+         "resourceType": "text/html"
+      }
+   ]
+}
+```
+
+Further parameters are:
 
 `file` &nbsp; Music score file.
 
