@@ -163,13 +163,15 @@ public class ElgarConcerto {
 		String sparql = "PREFIX mso: <http://linkeddata.uni-muenster.de/ontology/musicscore#>\n" + 
 						"PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" + 
 						"PREFIX dct: <http://purl.org/dc/terms/>\n" + 			 
-						"PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+				
+						"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"+				
 						"PREFIX mo: <http://purl.org/ontology/mo/>\n" + 
 						"PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" + 
 						"PREFIX prov: <http://www.w3.org/ns/prov#>\n" + 
 						"PREFIX gnd: <http://d-nb.info/standards/elementset/gnd#>\n"+
-						"PREFIX dbp: <http://dbpedia.org/ontology/> \n"+ 
+						"PREFIX dbp: <http://dbpedia.org/property/> \n"+ 
+						
 						"SELECT ?collection ?collectionName ?scoreTitle ?issued ?movementTitle ?partID ?partName ?thumbnail ?creator ?creatorName ?creatorRole ?creatorRoleName ?creatorRoleDbp ?creatorRoleDbpName ?generatedBy ?encoder ?encoderName ?encoderRole ?encoderRoleName ?encoderRoleDbpName ?encoderRoleDbp\n" + 
+						
 						"WHERE {\n" + 
 						"	?collection prov:hadMember <http://dbpedia.org/resource/Cello_Concerto_(Elgar)>.\n" + 
 						"    ?collection rdfs:label ?collectionName.\n" + 
@@ -199,23 +201,26 @@ public class ElgarConcerto {
 						"	 ?part rdfs:label ?partID.\n" + 
 						"	 ?part dc:description ?partName.		  \n" + 
 						"}";
-
+		
+		
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, model)) {
 			ResultSet results = qexec.execSelect() ;
 
 			if(results.getResultVars().size()==0) {
 				result=false;
+				System.err.println("[Check Metadata] Empty resultset");
 			}
 
 			for ( ; results.hasNext() ; )
 			{
+				
 				QuerySolution soln = results.nextSolution() ;
 
 				if(!soln.getLiteral("?scoreTitle").toString().equals("Cellokonzert e-Moll op. 85")) result = false;
 				if(!soln.get("?thumbnail").toString().equals("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg")) result = false;
-				if(!soln.get("?collection").toString().equals("https://url.collection.de")) result = false;
-				if(!soln.getLiteral("?collectionName").toString().equals("Great Composers")) result = false;
-				if(!soln.getLiteral("?issued").toString().equals("1919")) result = false;
+				if(!soln.get("?collection").toString().equals("https://url.collection.de") && !soln.get("?collection").toString().equals("https://sammlungen.ulb.uni-muenster.de")) result = false;
+				if(!soln.getLiteral("?collectionName").toString().equals("Great Composers") && !soln.getLiteral("?collectionName").toString().equals("Digitale Sammlung der Universität und Landesbibliothek Münster")) result = false;
+				if(!soln.getLiteral("?issued").getString().equals("1919")) result = false;
 				if(!soln.getLiteral("?movementTitle").toString().equals("Adagio")) result = false;
 				if(!soln.get("?creator").toString().equals("http://dbpedia.org/resource/Edward_Elgar")) result = false;
 				if(!soln.getLiteral("?creatorName").toString().equals("Sir Edward William Elgar")) result = false;
@@ -232,12 +237,12 @@ public class ElgarConcerto {
 				if(!soln.get("?encoderRoleDbp").toString().equals("http://dbpedia.org/resource/Encoder")) result = false;
 				if(!soln.getLiteral("?encoderRoleDbpName").toString().trim().equals("Encoder")) result = false;
 
-				logger.info("Meta data:\n"+
+				System.out.println("Meta data:\n"+
 						"  Score Title: " + soln.get("?scoreTitle") + 
 						"\n  Thumbnail: " + soln.get("?thumbnail")+
 						"\n  Collection URI: " + soln.get("?collection")+
 						"\n  Collection Name: " + soln.get("?collectionName")+
-						"\n  Date Issued: " + soln.get("?issued")+
+						"\n  Date Issued: " + soln.getLiteral("?issued").getString()+
 						"\n  Movement: " + soln.get("?movementTitle")+
 						"\n  Composer URI: " + soln.get("?creator")+
 						"\n  Composer Name: " + soln.get("?creatorName")+

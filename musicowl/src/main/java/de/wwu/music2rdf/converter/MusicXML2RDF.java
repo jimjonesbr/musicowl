@@ -87,19 +87,21 @@ public class MusicXML2RDF {
 	private String documentTitle = "";
 	private String thumbnail = "";
 	private String outputFormat = "TURTLE";
-	private Collection collection;
+	//private Collection collection;
 	private static Logger logger = Logger.getLogger("Converter");
 	private String dateIssued = "";
 	private ArrayList<Note> accidentalsOverwrite = new ArrayList<Note>();
 	private ArrayList<ScoreResource> resources;
-		
+	private ArrayList<Collection> collections;
+	
 	public MusicXML2RDF() {
 		super();
 		this.clefList = new ArrayList<Clef>();
 		this.currentNotes = new ArrayList<Note>();
 		this.persons = new ArrayList<Person>();
 		this.resources = new ArrayList<ScoreResource>();
-		this.collection = new Collection();		
+		this.collections = new ArrayList<Collection>();
+		//this.collection = new Collection();		
 	}
 
 	public void addPerson(Person person) {
@@ -107,8 +109,9 @@ public class MusicXML2RDF {
 	}
 
 	public void addCollection(Collection collection) {
-		this.collection.setCollectionURI(collection.getCollectionURI());
-		this.collection.setCollectionName(collection.getCollectionName());
+		this.getCollections().add(collection);
+		//this.collection.setCollectionURI(collection.getCollectionURI());
+		//this.collection.setCollectionName(collection.getCollectionName());
 	}
 
 	public void isVerbose (boolean verbose) {
@@ -380,6 +383,7 @@ public class MusicXML2RDF {
 			}
 		} 
 		
+		/*
 		if(collection.getCollectionURI()==null) {
 			logger.warn("No collection provided for ["+score.getURI()+"]");
 			
@@ -396,6 +400,29 @@ public class MusicXML2RDF {
 			model.add(model.createLiteralStatement(resCollection, RDFS.label, collection.getCollectionName()));
 			
 		}
+		**/
+		
+		if(collections.size()==0) {
+			
+			logger.warn("No collection provided for ["+score.getURI()+"]");
+			
+			Resource resCollection = model.createResource("http://unknown.collection.wmss");
+			model.add(model.createStatement(resCollection, ProvO.hadMember, resScore));
+			model.add(model.createStatement(resCollection, RDF.type, ProvO.Collection));
+			model.add(model.createLiteralStatement(resCollection, RDFS.label, "Unknown Collection"));
+			
+		} else {
+			
+			for (int j = 0; j < collections.size(); j++) {
+
+				Resource resCollection = model.createResource(collections.get(j).getCollectionURI());
+				model.add(model.createStatement(resCollection, ProvO.hadMember, resScore));
+				model.add(model.createStatement(resCollection, RDF.type, ProvO.Collection));
+				model.add(model.createLiteralStatement(resCollection, RDFS.label, collections.get(j).getCollectionName()));
+				
+			}
+		}
+				
 
 		if(!this.getDateIssued().equals("")) {
 			Literal issuedLiteral = model.createTypedLiteral(this.getDateIssued().replaceAll("[^\\d]", ""),XSDDatatype.XSDdate);
@@ -2222,4 +2249,10 @@ public class MusicXML2RDF {
 		
 		return result;
 	}
+
+	public ArrayList<Collection> getCollections() {
+		return collections;
+	}
+	
+	
 }
