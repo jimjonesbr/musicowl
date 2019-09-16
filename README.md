@@ -28,9 +28,9 @@ This converter parses MusicXML 3.0 files and converts them to RDF, based on the 
 
 `setThumbnail`&nbsp;   Thumbnail for the converted music score (optional).
 
-`setScoreURI`&nbsp;   URI for the converted score (optional) .
+`setScoreIdentifier`&nbsp;   URI for the converted score (optional) .
 
-`setDocumentTitle`&nbsp;   Music score title.
+`setScoreTitle`&nbsp;   Music score title.
 
 `issued`&nbsp;   Date issued. Formats accepted: `yyyy`, `yyyyMM`, `yyyyMMdd` (optional).
 
@@ -80,7 +80,9 @@ The above mentioned parameters can be used as follows:
 package de.wwu.music2rdf.example;
 
 import java.io.File;
+
 import com.google.common.net.MediaType;
+
 import de.wwu.music2rdf.converter.MusicXML2RDF;
 import de.wwu.music2rdf.core.Collection;
 import de.wwu.music2rdf.core.Person;
@@ -95,22 +97,21 @@ public class Example {
 			
     music2rdf.setInputFile(new File("musicxml/ulb-muenster/elgar_cello_concerto_op.85.xml"));
     music2rdf.setOutputFile("rdf/elgar_cello_concerto_op.85");
-    music2rdf.setThumbnail("https://www.rcm.ac.uk/media/Elgar%20Cello%20Concerto%20maunscript%206x4.jpg");
-    music2rdf.setScoreURI("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
+    music2rdf.setThumbnail("https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Elgar-cello-concerto-manuscript.jpg/220px-Elgar-cello-concerto-manuscript.jpg");
+    music2rdf.setScoreIdentifier("http://dbpedia.org/resource/Cello_Concerto_(Elgar)");
     music2rdf.addCollection(new Collection("https://wwu.greatcomposers.de","Great Composers"));
+    music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlung der Universität und Landesbibliothek Münster"));
     music2rdf.addPerson(new Person("http://dbpedia.org/resource/Edward_Elgar","Sir Edward William Elgar",Role.COMPOSER));
     music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));
     music2rdf.addResource(new ScoreResource("https://musescore.com/score/152011/download/pdf", "Print",MediaType.PDF.toString()));
     music2rdf.addResource(new ScoreResource("https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)", "Wikipedia Article",MediaType.HTML_UTF_8.toString()));
-    music2rdf.setDocumentTitle("Cellokonzert e-Moll op. 85");
+    music2rdf.setScoreTitle("Cellokonzert e-Moll op. 85");
     music2rdf.isVerbose(false);
     music2rdf.setOutputFormat("turtle");
-    music2rdf.setDateIssued("1919"); //Formats accepted: yyyy, yyyyMM, yyyyMMdd.
+    music2rdf.setDateIssued("1919"); //Formats accepted: yyyy, yyyyMM, yyyyMMdd.    	
 		
-    music2rdf.parseMusicXML();
-		
-	}
-
+    music2rdf.parseMusicXML();		
+  }
 }
 
 ```
@@ -124,55 +125,56 @@ If you don't feel like building the Musci2RDF converter from source, visit the [
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <score>
-  <scoreIdentifier>http://dbpedia.org/resource/Cello_Concerto_(Elgar)</scoreIdentifier>
-  <title>Cellokonzert e-Moll op. 85</title>
-  <thumbnail>https://www.rcm.ac.uk/media/Elgar%20Cello%20Concerto%20maunscript%206x4.jpg</thumbnail>
-  <issued>1919</issued>
-  <collections>
-    <collection>
-      <collectionName>Great Composers</collectionName>
-      <collectionURL>https://wwu.greatcomposers.de</collectionURL>
-    </collection>
-  </collections>
-  <persons>
-    <person>
-      <personIdentifier>http://dbpedia.org/resource/Edward_Elgar</personIdentifier>
-      <personName>Sir Edward William Elgar</personName>
-      <personRole>Composer</personRole>
-    </person>
-    <person>
-      <personIdentifier>http://jimjones.de</personIdentifier>
-      <personName>Jim Jones</personName>
-      <personRole>Encoder</personRole>
-    </person>
-  </persons>
-  <resources>
-    <resource>
-      <resourceURL>https://musescore.com/score/152011/download/pdf</resourceURL>
-      <resourceDescription>Print</resourceDescription>
-      <resourceType>application/pdf</resourceType>
-    </resource>
-    <resource>
-      <resourceURL>https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)</resourceURL>
-      <resourceDescription>Wikipedia Article</resourceDescription>
-      <resourceType>text/html</resourceType>
-    </resource>
-  </resources>
+	<scoreIdentifier>http://dbpedia.org/resource/Cello_Concerto_(Elgar)</scoreIdentifier>
+	<scoreTitle>Cellokonzert e-Moll op. 85</scoreTitle>
+	<thumbnail>https://www.rcm.ac.uk/media/Elgar%20Cello%20Concerto%20maunscript%206x4.jpg</thumbnail>
+	<issued>1919</issued>
+	<collections>
+		<collection>
+			<collectionLabel>Great Composers</collectionLabel>
+			<collectionIdentifier>https://wwu.greatcomposers.de</collectionIdentifier>
+		</collection>
+	</collections>
+	<persons>
+		<person>
+			<personIdentifier>http://dbpedia.org/resource/Edward_Elgar</personIdentifier>
+			<personName>Sir Edward William Elgar</personName>
+			<personRole>Composer</personRole>
+		</person>
+		<person>
+			<personIdentifier>http://jimjones.de</personIdentifier>
+			<personName>Jim Jones</personName>
+			<personRole>Encoder</personRole>
+		</person>
+	</persons>
+	<resources>
+		<resource>
+			<resourceURL>https://musescore.com/score/152011/download/pdf</resourceURL>
+			<resourceLabel>Print</resourceLabel>
+			<resourceType>application/pdf</resourceType>
+		</resource>
+		<resource>
+			<resourceURL>https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)</resourceURL>
+			<resourceLabel>Wikipedia Article</resourceLabel>
+			<resourceType>text/html</resourceType>
+		</resource>
+	</resources>
 </score>
 ```
 
 .. or in case you fancy JSON:
 
+
 ```json
 {
    "scoreIdentifier": "http://dbpedia.org/resource/Cello_Concerto_(Elgar)",
-   "title": "Cellokonzert e-Moll op. 85",
+   "scoreTitle": "Cellokonzert e-Moll op. 85",
    "thumbnail": "https://www.rcm.ac.uk/media/Elgar%20Cello%20Concerto%20maunscript%206x4.jpg",
    "issued": "1919",
    "collections": [       
       {
-         "collectionName": "Great Composers",
-         "collectionURL": "https://wwu.greatcomposers.de"
+         "collectionLabel": "Great Composers",
+         "collectionIdentifier": "https://wwu.greatcomposers.de"
       }
    ],
    "persons": [
@@ -190,12 +192,12 @@ If you don't feel like building the Musci2RDF converter from source, visit the [
    "resources": [
       {
          "resourceURL": "https://musescore.com/score/152011/download/pdf",
-         "resourceDescription": "Print",
+         "resourceLabel": "Print",
          "resourceType": "application/pdf"
       },
       {
          "resourceURL": "https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)",
-         "resourceDescription": "Wikipedia Article",
+         "resourceLabel": "Wikipedia Article",
          "resourceType": "text/html"
       }
    ]
