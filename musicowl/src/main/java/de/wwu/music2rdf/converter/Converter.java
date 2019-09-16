@@ -11,8 +11,7 @@ public class Converter {
 		String outputFile = "";
 		String outputFormat = "";
 		boolean verbose = false;
-		
-		
+				
 		System.out.println("\n");
 		for(int i = 0; i < args.length; i++) {
 

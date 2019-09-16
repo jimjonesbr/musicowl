@@ -50,12 +50,12 @@ public class MetadataParser {
 						Element scoreElement = (Element) nNode;
 
 						System.out.println("Score URI       : " + scoreElement.getElementsByTagName("scoreIdentifier").item(0).getTextContent());
-						System.out.println("Title           : " + scoreElement.getElementsByTagName("title").item(0).getTextContent());
+						System.out.println("Score Title     : " + scoreElement.getElementsByTagName("scoreTitle").item(0).getTextContent());
 						System.out.println("Date Issued     : " + scoreElement.getElementsByTagName("issued").item(0).getTextContent());
 						System.out.println("Thumbnail       : " + scoreElement.getElementsByTagName("thumbnail").item(0).getTextContent());
 
-						music2rdf.setScoreURI(scoreElement.getElementsByTagName("scoreIdentifier").item(0).getTextContent());
-						music2rdf.setDocumentTitle(scoreElement.getElementsByTagName("title").item(0).getTextContent());
+						music2rdf.setScoreIdentifier(scoreElement.getElementsByTagName("scoreIdentifier").item(0).getTextContent());
+						music2rdf.setScoreTitle(scoreElement.getElementsByTagName("scoreTitle").item(0).getTextContent());
 						music2rdf.setDateIssued(scoreElement.getElementsByTagName("issued").item(0).getTextContent());
 						music2rdf.setThumbnail(scoreElement.getElementsByTagName("thumbnail").item(0).getTextContent());
 
@@ -98,11 +98,11 @@ public class MetadataParser {
 								Element personElement = (Element) resourceNode;
 
 								System.out.println("Resource URI    : " + personElement.getElementsByTagName("resourceURL").item(0).getTextContent());
-								System.out.println("Resource Desc.  : " + personElement.getElementsByTagName("resourceDescription").item(0).getTextContent());
+								System.out.println("Resource Label  : " + personElement.getElementsByTagName("resourceLabel").item(0).getTextContent());
 								System.out.println("Resource Type   : " + personElement.getElementsByTagName("resourceType").item(0).getTextContent());
 
 								String resourceURI = personElement.getElementsByTagName("resourceURL").item(0).getTextContent();
-								String resourceDescription = personElement.getElementsByTagName("resourceDescription").item(0).getTextContent();
+								String resourceDescription = personElement.getElementsByTagName("resourceLabel").item(0).getTextContent();
 								String resourceType = personElement.getElementsByTagName("resourceType").item(0).getTextContent();
 
 								music2rdf.addResource(new ScoreResource(resourceURI, resourceDescription,resourceType));
@@ -122,12 +122,12 @@ public class MetadataParser {
 
 								Element collectionElement = (Element) collectionNode;
 
-								System.out.println("Collection URI  : " + collectionElement.getElementsByTagName("collectionURL").item(0).getTextContent());
-								System.out.println("Collection Name : " + collectionElement.getElementsByTagName("collectionName").item(0).getTextContent());
+								System.out.println("Collection Identifier  : " + collectionElement.getElementsByTagName("collectionIdentifier").item(0).getTextContent());
+								System.out.println("Collection Label : " + collectionElement.getElementsByTagName("collectionLabel").item(0).getTextContent());
 
 
-								String collectionURL = collectionElement.getElementsByTagName("collectionURL").item(0).getTextContent();
-								String collectionName = collectionElement.getElementsByTagName("collectionName").item(0).getTextContent();
+								String collectionURL = collectionElement.getElementsByTagName("collectionIdentifier").item(0).getTextContent();
+								String collectionName = collectionElement.getElementsByTagName("collectionLabel").item(0).getTextContent();
 
 								music2rdf.addCollection(new Collection(collectionURL,collectionName));
 							}
@@ -158,12 +158,12 @@ public class MetadataParser {
 				JSONObject jsonObject = (JSONObject) obj;
 
 				System.out.println("\nScore URI       : " + jsonObject.get("scoreIdentifier").toString());
-				System.out.println("Title           : " + jsonObject.get("title").toString());
+				System.out.println("Title           : " + jsonObject.get("scoreTitle").toString());
 				System.out.println("Date Issued     : " + jsonObject.get("issued").toString());
 				System.out.println("Thumbnail       : " + jsonObject.get("thumbnail").toString());
 
-				music2rdf.setScoreURI(jsonObject.get("scoreIdentifier").toString());
-				music2rdf.setDocumentTitle(jsonObject.get("title").toString());
+				music2rdf.setScoreIdentifier(jsonObject.get("scoreIdentifier").toString());
+				music2rdf.setScoreTitle(jsonObject.get("scoreTitle").toString());
 				music2rdf.setDateIssued(jsonObject.get("issued").toString());
 				music2rdf.setThumbnail(jsonObject.get("thumbnail").toString());
 
@@ -173,10 +173,10 @@ public class MetadataParser {
 
 					JSONObject collection = (JSONObject) collections.get(j);
 
-					music2rdf.addCollection(new Collection(collection.get("collectionURL").toString(),collection.get("collectionName").toString()));
+					music2rdf.addCollection(new Collection(collection.get("collectionIdentifier").toString(),collection.get("collectionLabel").toString()));
 
-					System.out.println("Collection URI  : " + collection.get("collectionURL").toString());
-					System.out.println("Collection Name : " + collection.get("collectionName").toString());
+					System.out.println("Collection Identifier: " + collection.get("collectionIdentifier").toString());
+					System.out.println("Collection Label 	 : " + collection.get("collectionLabel").toString());
 
 				}
 
@@ -203,11 +203,11 @@ public class MetadataParser {
 					JSONObject resource = (JSONObject) resources.get(j);
 
 					System.out.println("Resource URI    : " + resource.get("resourceURL").toString());
-					System.out.println("Resource Desc.  : " + resource.get("resourceDescription").toString());
+					System.out.println("Resource Label  : " + resource.get("resourceLabel").toString());
 					System.out.println("Resource Type   : " + resource.get("resourceType").toString());
 
 					music2rdf.addResource(new ScoreResource(resource.get("resourceURL").toString(), 
-							resource.get("resourceDescription").toString(), 
+							resource.get("resourceLabel").toString(), 
 							resource.get("resourceType").toString()));
 				}
 

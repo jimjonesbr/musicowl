@@ -83,11 +83,10 @@ public class MusicXML2RDF {
 	private boolean verbose = false;
 	private String outputFile = "";
 	private File inputFile = null;
-	private String scoreURI = "";
-	private String documentTitle = "";
+	private String scoreIdentifier = "";
+	private String scoreTitle = "";
 	private String thumbnail = "";
 	private String outputFormat = "TURTLE";
-	//private Collection collection;
 	private static Logger logger = Logger.getLogger("Converter");
 	private String dateIssued = "";
 	private ArrayList<Note> accidentalsOverwrite = new ArrayList<Note>();
@@ -100,8 +99,7 @@ public class MusicXML2RDF {
 		this.currentNotes = new ArrayList<Note>();
 		this.persons = new ArrayList<Person>();
 		this.resources = new ArrayList<ScoreResource>();
-		this.collections = new ArrayList<Collection>();
-		//this.collection = new Collection();		
+		this.collections = new ArrayList<Collection>();	
 	}
 
 	public void addPerson(Person person) {
@@ -110,8 +108,6 @@ public class MusicXML2RDF {
 
 	public void addCollection(Collection collection) {
 		this.getCollections().add(collection);
-		//this.collection.setCollectionURI(collection.getCollectionURI());
-		//this.collection.setCollectionName(collection.getCollectionName());
 	}
 
 	public void isVerbose (boolean verbose) {
@@ -958,8 +954,8 @@ public class MusicXML2RDF {
 					Resource resBarline = model.createResource(nodeBaseURI+"MOV" + movementCounter + "_" + partID + "_M" +measureID + "_REPEAT");					
 					model.add(model.createLiteralStatement(resMeasure, MusicOWL.hasBarline,resBarline));
 
-					if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("backward")) //ttl.append(barlineObject + rdfTypeURI + musicOWL.replace("OBJECT", "EndRepeat") + " . \n" );
-						if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("forward")) //ttl.append(barlineObject + rdfTypeURI + musicOWL.replace("OBJECT", "BeginRepeat") + " . \n" );
+					if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("backward")) 
+						if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("forward"))
 
 							if(score.getParts().get(i).getMeasures().get(j).getBarline().equals("backward")){
 								model.add(model.createStatement(resBarline,RDF.type, MusicOWL.EndRepeat));
@@ -1472,11 +1468,11 @@ public class MusicXML2RDF {
 			MusicScore score = createMusicScoreDocument(musicXMLString); 
 			score.setFileContent(musicXMLString);
 			score.setOutputFileName(file.getName());
-			score.setURI(this.scoreURI);
+			score.setURI(this.scoreIdentifier);
 
-			if(!documentTitle.equals("")) {
-				score.setTitle(this.documentTitle);	
-				logger.warn("The title \""+this.documentTitle+"\" was provided and will therefore overwrite the title provided in the MusicXML document.");
+			if(!scoreTitle.equals("")) {
+				score.setTitle(this.scoreTitle);	
+				logger.warn("The title \""+this.scoreTitle+"\" was provided and will therefore overwrite the title provided in the MusicXML document.");
 			}
 
 
@@ -2172,25 +2168,25 @@ public class MusicXML2RDF {
 
 	}
 
-	public String getScoreURI(){
+	public String getScoreIdentifier(){
 
-		return this.scoreURI;
+		return this.scoreIdentifier;
 	}
 
-	public void setScoreURI(String uri){
+	public void setScoreIdentifier(String uri){
 
-		this.scoreURI = uri;
+		this.scoreIdentifier = uri;
 	}
 
-	public void setDocumentTitle(String title){
+	public void setScoreTitle(String title){
 
-		this.documentTitle = title;
+		this.scoreTitle = title;
 
 	}
 
-	public String getDocumentTitle(String title){
+	public String getScoreTitle(String title){
 
-		return this.documentTitle;
+		return this.scoreTitle;
 
 	}
 
