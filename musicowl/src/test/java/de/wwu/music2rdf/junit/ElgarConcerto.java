@@ -9,12 +9,14 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.junit.Test;
 
 public class ElgarConcerto {
 
-	private static Logger logger = Logger.getLogger("ElgarConcerto-Test");
+	private static Logger logger = LogManager.getLogger(ElgarConcerto.class);
+	//private static Logger logger = Logger.getLogger("ElgarConcerto-Test");
 	
 	@Test
 	public void melodyWithRests() {

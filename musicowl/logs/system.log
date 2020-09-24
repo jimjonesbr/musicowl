@@ -1,7 +1,0 @@
-[2018-10-30 17:26:08,397] INFO  [Converter]  - Processing elgar_cello_concerto_op.85.xml ...
-[2018-10-30 17:26:08,547] INFO  [Converter]  - Loading XML file: 149 ms
-[2018-10-30 17:26:08,714] INFO  [Converter]  - [Violoncello] Parsing movement > 1 (Adagio) ... 
-[2018-10-30 17:26:09,977] WARN  [Converter]  - The title "Cellokonzert e-Moll op. 85" was provided and will therefore overwrite the title provided in the MusicXML document.
-[2018-10-30 17:26:09,978] INFO  [Converter]  - Creating MusicScore object: 1.430 seconds
-[2018-10-30 17:26:10,078] INFO  [Converter]  - Score serialization: 100 ms
-

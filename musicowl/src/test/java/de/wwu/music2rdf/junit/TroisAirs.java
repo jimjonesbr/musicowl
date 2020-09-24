@@ -1,23 +1,23 @@
 package de.wwu.music2rdf.junit;
 
 import static org.junit.Assert.assertEquals;
-
 import java.io.File;
 import java.net.URL;
-
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.junit.Test;
 
 public class TroisAirs {
 
-	private static Logger logger = Logger.getLogger("TroisAirs-Test");
-
+	//private static Logger logger = Logger.getLogger("TroisAirs-Test");
+	private static Logger logger = LogManager.getLogger(TroisAirs.class);
+	
 	@Test
 	public void melodyWithDoubleDots() {
 

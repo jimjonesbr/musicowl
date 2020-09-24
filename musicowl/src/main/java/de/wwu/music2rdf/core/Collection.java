@@ -13,7 +13,7 @@ public class Collection {
 		this.collectionURI = collectionURI;
 		this.collectionName = collectionName;
 	}
-	public String getCollectionURI() {
+	public String getIdentifier() {
 		return collectionURI;
 	}
 	public void setCollectionURI(String collectionURI) {

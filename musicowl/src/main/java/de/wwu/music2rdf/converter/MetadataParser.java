@@ -7,7 +7,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,8 +24,7 @@ import de.wwu.music2rdf.core.ScoreResource;
 
 public class MetadataParser {
 
-	private static Logger logger = Logger.getLogger("Parser-Util");
-
+	private static final Logger logger = LogManager.getLogger(MetadataParser.class);
 
 	public static MusicXML2RDF parseMetadataFile(File metadataFile) {
 

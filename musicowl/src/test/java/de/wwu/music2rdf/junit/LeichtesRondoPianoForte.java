@@ -9,13 +9,15 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.junit.Test;
 
 public class LeichtesRondoPianoForte {
 
-	private static Logger logger = Logger.getLogger("Leichtes-Rondo-Piano-Forte");
-
+	///private static Logger logger = Logger.getLogger("Leichtes-Rondo-Piano-Forte");
+	private static Logger logger = LogManager.getLogger(LeichtesRondoPianoForte.class);
+	
 	@Test
 	public void melodyWithOverwrittenAccidentalsAndArticulations() {
 

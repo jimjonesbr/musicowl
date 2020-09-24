@@ -39,7 +39,8 @@ import org.apache.jena.vocabulary.DCTerms;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.vocabulary.SKOS;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.w3c.dom.Document;
@@ -87,7 +88,7 @@ public class MusicXML2RDF {
 	private String scoreTitle = "";
 	private String thumbnail = "";
 	private String outputFormat = "TURTLE";
-	private static Logger logger = Logger.getLogger("Converter");
+	private static Logger logger = LogManager.getLogger(MusicXML2RDF.class);
 	private String dateIssued = "";
 	private ArrayList<Note> accidentalsOverwrite = new ArrayList<Note>();
 	private ArrayList<ScoreResource> resources;
@@ -411,7 +412,7 @@ public class MusicXML2RDF {
 			
 			for (int j = 0; j < collections.size(); j++) {
 
-				Resource resCollection = model.createResource(collections.get(j).getCollectionURI());
+				Resource resCollection = model.createResource(collections.get(j).getIdentifier());
 				model.add(model.createStatement(resCollection, ProvO.hadMember, resScore));
 				model.add(model.createStatement(resCollection, RDF.type, ProvO.Collection));
 				model.add(model.createLiteralStatement(resCollection, RDFS.label, collections.get(j).getCollectionName()));

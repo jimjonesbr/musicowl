@@ -9,14 +9,14 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 public class AchtzehnLiederChor {
 
-	private static Logger logger = Logger.getLogger("Achtzehn_Lieder_Gemischten_Chor-Test");
-
-			
+	private static Logger logger = LogManager.getLogger(AchtzehnLiederChor.class);
+		
 	@Test
 	public void melody() {
 

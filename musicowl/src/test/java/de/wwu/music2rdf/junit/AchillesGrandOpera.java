@@ -11,12 +11,13 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 public class AchillesGrandOpera {
 
-	private static Logger logger = Logger.getLogger("AchillesGrandOpera-Test");
+	private static Logger logger = LogManager.getLogger(AchillesGrandOpera.class);
 	
 	@Test
 	public void melodyWithDots() {
