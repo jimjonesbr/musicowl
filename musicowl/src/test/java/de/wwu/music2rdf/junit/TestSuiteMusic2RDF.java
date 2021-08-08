@@ -5,7 +5,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	GenerateRDFTest.class, 
+	GenerateRDFTest.class,
+	AccidTieTest.class,
 	ElgarConcerto.class,
 	Ariettes.class,
 	AchtzehnLiederChor.class,

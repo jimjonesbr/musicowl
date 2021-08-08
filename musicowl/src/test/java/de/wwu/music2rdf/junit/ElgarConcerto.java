@@ -686,6 +686,9 @@ public class ElgarConcerto {
 				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier5} )\n" + 
 				"}";
 					
+		System.out.println("Simple Melody: \n" + sparql);
+
+		
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, model)) {
 			ResultSet results = qexec.execSelect() ;
 			for ( ; results.hasNext() ; )
@@ -851,6 +854,7 @@ public class ElgarConcerto {
 				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier10} )\n" + 
 				"FILTER ( NOT EXISTS {?note5 chord:modifier ?modifier11} )\n" +  
 				"}";
+		
 					
 		try (QueryExecution qexec = QueryExecutionFactory.create(sparql, model)) {
 			ResultSet results = qexec.execSelect() ;
@@ -858,7 +862,7 @@ public class ElgarConcerto {
 			{
 				QuerySolution soln = results.nextSolution() ;
 				result = soln.get("?measure").toString();
-				logger.info("Simple melody: Measure "+soln.get("?measure"));
+				logger.info("Melody Grace Notes Dynamics Multiple Durations Multiple Measures: Measure "+soln.get("?measure"));
 			}
 		}
 

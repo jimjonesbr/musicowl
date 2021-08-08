@@ -90,7 +90,7 @@ public class MusicXML2RDF {
 	private String outputFormat = "TURTLE";
 	private static Logger logger = LogManager.getLogger(MusicXML2RDF.class);
 	private String dateIssued = "";
-	private ArrayList<Note> accidentalsOverwrite = new ArrayList<Note>();
+	private ArrayList<Note> accidentalsOverride = new ArrayList<Note>();
 	private ArrayList<ScoreResource> resources;
 	private ArrayList<Collection> collections;
 	
@@ -255,22 +255,22 @@ public class MusicXML2RDF {
 		 * Updating accidental list with measure specific accidentals
 		 */
 		
-		for (int i = 0; i < this.accidentalsOverwrite.size(); i++) {
+		for (int i = 0; i < this.accidentalsOverride.size(); i++) {
 		
 			boolean accidentalOverwritten = false;
 			
 			for (int j = 0; j < measureAccidentals.size(); j++) {
 				
-				if(measureAccidentals.get(j).getPitch().equals(this.accidentalsOverwrite.get(i).getPitch())) {
+				if(measureAccidentals.get(j).getPitch().equals(this.accidentalsOverride.get(i).getPitch())) {
 					
-					measureAccidentals.get(j).setAccidental(this.accidentalsOverwrite.get(i).getAccidental());										
+					measureAccidentals.get(j).setAccidental(this.accidentalsOverride.get(i).getAccidental());										
 					accidentalOverwritten = true;
 				}
 				
 			}
 			
 			if(!accidentalOverwritten) {
-				measureAccidentals.add(this.accidentalsOverwrite.get(i));
+				measureAccidentals.add(this.accidentalsOverride.get(i));
 			}
 			
 		}
@@ -307,18 +307,18 @@ public class MusicXML2RDF {
 		
 		boolean accidentalExists = false;
 		
-		for (int i = 0; i < this.accidentalsOverwrite.size(); i++) {
+		for (int i = 0; i < this.accidentalsOverride.size(); i++) {
 			
-			if(this.accidentalsOverwrite.get(i).getPitch().equals(note.getPitch())) {
+			if(this.accidentalsOverride.get(i).getPitch().equals(note.getPitch())) {
 
-				this.accidentalsOverwrite.get(i).setAccidental(note.getAccidental()); 
+				this.accidentalsOverride.get(i).setAccidental(note.getAccidental()); 
 				accidentalExists = true;
 				
 			}
 		}
 		
 		if(!accidentalExists) {
-			this.accidentalsOverwrite.add(note);
+			this.accidentalsOverride.add(note);
 		}	
 	}
 	
@@ -379,26 +379,7 @@ public class MusicXML2RDF {
 				
 			}
 		} 
-		
-		/*
-		if(collection.getCollectionURI()==null) {
-			logger.warn("No collection provided for ["+score.getURI()+"]");
 			
-			Resource resCollection = model.createResource("http://unknown.collection.wmss");
-			model.add(model.createStatement(resCollection, ProvO.hadMember, resScore));
-			model.add(model.createStatement(resCollection, RDF.type, ProvO.Collection));
-			model.add(model.createLiteralStatement(resCollection, RDFS.label, "Unknown Collection"));
-			
-		} else {
-			
-			Resource resCollection = model.createResource(collection.getCollectionURI());
-			model.add(model.createStatement(resCollection, ProvO.hadMember, resScore));
-			model.add(model.createStatement(resCollection, RDF.type, ProvO.Collection));
-			model.add(model.createLiteralStatement(resCollection, RDFS.label, collection.getCollectionName()));
-			
-		}
-		**/
-		
 		if(collections.size()==0) {
 			
 			logger.warn("No collection provided for ["+score.getURI()+"]");
@@ -784,7 +765,7 @@ public class MusicXML2RDF {
 
 				String measureID = score.getParts().get(i).getMeasures().get(j).getId();			
 				Resource resMeasure = model.createResource(nodeBaseURI+"MOV"+movementCounter+"_"+partID+"_M"+measureID);
-				this.accidentalsOverwrite.clear();
+				//this.accidentalsOverwrite.clear();
 				
 				Key key = new Key();
 
@@ -970,10 +951,25 @@ public class MusicXML2RDF {
 				String notesetObject = "";
 				String tmpVoice = "";
 				
-				this.accidentalsOverwrite.clear();
+
+				
+				boolean clearedAccidentals = false;
 				
 				for (int k = 0; k < score.getParts().get(i).getMeasures().get(j).getNotes().size(); k++) {
+				
+					if(!clearedAccidentals) {
+						
+						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getSlur()==null) {
+							/**
+							 * Clearing accidentals override in a new measure that if the note
+							 * has not tie to the last note of a previous measure.
+							 */
+							this.accidentalsOverride.clear();
+							clearedAccidentals = true;
+						}
 
+					}
+										
 					if(!score.getParts().get(i).getMeasures().get(j).getNotes().get(k).isChord()){
 
 						notesetCounter++;
@@ -1887,13 +1883,16 @@ public class MusicXML2RDF {
 
 										for (int n = 0; n < listNotationElements.getLength(); n++) {
 
-											if(listNotationElements.item(n).getNodeName().equals("slur")){
+											//System.err.println(">> "+listNotationElements.item(n).getNodeName());
+											
+											if(listNotationElements.item(n).getNodeName().equals("slur") ||
+											   listNotationElements.item(n).getNodeName().equals("tied")){
 
 												if(listNotationElements.item(n).getAttributes().getNamedItem("type").getNodeValue().equals("start")){
 
 													slurCount = slurCount + 1; 
 													slurFlag = true;													
-
+ 
 												}	
 
 												if(listNotationElements.item(n).getAttributes().getNamedItem("type").getNodeValue().equals("stop")){

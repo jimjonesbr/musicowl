@@ -92,6 +92,8 @@ public class AchtzehnLiederChor {
 				"    FILTER ( NOT EXISTS {?note2 chord:modifier ?m2} )\n" + 
 				"    FILTER ( NOT EXISTS {?note3 chord:modifier ?m3} )\n" + 
 				"}"; 
+		
+		logger.debug(sparql);
 					
 		boolean result = false;
 		String measure = "";

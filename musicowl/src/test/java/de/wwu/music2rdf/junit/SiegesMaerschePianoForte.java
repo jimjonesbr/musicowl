@@ -181,6 +181,8 @@ public class SiegesMaerschePianoForte {
 				"    FILTER ( NOT EXISTS {?note13 chord:modifier ?m13} )\n" +  
 				"}\n"; 
 			
+		logger.debug(sparql);
+		
 		boolean result = false;
 		String measure = "";
 		String movement = "";

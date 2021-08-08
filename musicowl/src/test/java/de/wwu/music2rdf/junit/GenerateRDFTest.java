@@ -213,4 +213,29 @@ public class GenerateRDFTest {
 		assertEquals(true, file.exists());
 
 	}
+	
+	
+	@Test
+	public void convertAccidTieTest() {
+	
+		MusicXML2RDF music2rdf = new MusicXML2RDF();		
+		
+		music2rdf.setInputFile(new File("musicxml/test-score/Accid_Tie_Test.xml"));
+		music2rdf.setOutputFile("src/test/resources/rdf/Accid_Tie_Test");
+		music2rdf.setThumbnail("https://sammlungen.ulb.uni-muenster.de/hd/image/largethumb/5393369");
+		music2rdf.setScoreIdentifier("https://test.com/masthom");
+		music2rdf.addCollection(new Collection("https://sammlungen.ulb.uni-muenster.de","Digitale Sammlungen der Universität und Landesbibliothek Münster"));
+		music2rdf.addPerson(new Person("http://dbpedia.org/resource/Eppinger","Eppinger, L.J.",Role.COMPOSER));
+		music2rdf.addPerson(new Person("http://jimjones.de","Jim Jones",Role.ENCODER));		
+		music2rdf.setScoreTitle("Test Score Title");
+		music2rdf.setDateIssued("1850"); 
+		music2rdf.setOutputFormat("TURTLE");
+		music2rdf.isVerbose(false);
+		
+		music2rdf.parseMusicXML();
+		
+		File file = new File("src/test/resources/rdf/test-score.ttl");
+		assertEquals(true, file.exists());
+
+	}
 }

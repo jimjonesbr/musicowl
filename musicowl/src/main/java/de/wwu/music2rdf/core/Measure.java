@@ -12,10 +12,12 @@ public class Measure {
 	private String title;
 	private int beatsPerMinute = 0;
 	private String beatUnit = "";
+	private Clef clef;
 	
 	public Measure() {
 		super();
 		this.key = new Key();
+		this.clef= new Clef();
 		this.time = new TimeSignature();
 		this.notes = new ArrayList<Note>();
 	}
@@ -72,7 +74,13 @@ public class Measure {
 		this.beatUnit = beatUnit;
 	}
 
+	public Clef getClef() {
+		return clef;
+	}
+
+	public void setClef(Clef clef) {
+		this.clef = clef;
+	}
 	
-	
-	
+		
 }
