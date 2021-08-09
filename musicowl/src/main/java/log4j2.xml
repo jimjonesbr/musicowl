@@ -11,7 +11,7 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="de.wwu.music2rdf" level="debug" additivity="false">
+        <Logger name="de.wwu.music2rdf" level="info" additivity="false">
             <AppenderRef ref="LogToFile"/>
             <AppenderRef ref="LogToConsole"/>
         </Logger>

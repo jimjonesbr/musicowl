@@ -959,7 +959,8 @@ public class MusicXML2RDF {
 				
 					if(!clearedAccidentals) {
 						
-						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getSlur()==null) {
+						if(score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getSlur()==null ||
+						   score.getParts().get(i).getMeasures().get(j).getNotes().get(k).getSlurElementType()=="start") {
 							/**
 							 * Clearing accidentals override in a new measure that if the note
 							 * has not tie to the last note of a previous measure.
@@ -1882,26 +1883,29 @@ public class MusicXML2RDF {
 										NodeList listNotationElements = listNoteElements.item(m).getChildNodes();
 
 										for (int n = 0; n < listNotationElements.getLength(); n++) {
-
-											//System.err.println(">> "+listNotationElements.item(n).getNodeName());
 											
 											if(listNotationElements.item(n).getNodeName().equals("slur") ||
 											   listNotationElements.item(n).getNodeName().equals("tied")){
 
+												String slurElementType = "middle";
+												
 												if(listNotationElements.item(n).getAttributes().getNamedItem("type").getNodeValue().equals("start")){
 
 													slurCount = slurCount + 1; 
 													slurFlag = true;													
- 
+													slurElementType="start";
 												}	
 
+												
 												if(listNotationElements.item(n).getAttributes().getNamedItem("type").getNodeValue().equals("stop")){
 
 													slurFlag = false;
+													slurElementType="stop";
 												}
 
 												note.setSlur(Integer.toString(slurCount));
-
+												note.setSlurElementType(slurElementType);
+												
 											}
 
 

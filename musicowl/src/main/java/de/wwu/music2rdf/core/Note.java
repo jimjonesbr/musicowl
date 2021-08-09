@@ -12,6 +12,7 @@ public class Note {
 	private String accidental;
 	private Clef clef;
 	private String slur;
+	private String slurElementType;	
 	private ArrayList<String> dynamics;
 	private ArrayList<String> articulations;
 	private boolean isDot;
@@ -24,6 +25,7 @@ public class Note {
 	public static final String Doubleharp = "doublesharp";
 	public static final String Flat = "flat";
 	public static final String DoubleFlat = "doubleflat";
+	
 	
 	public Note() {
 
@@ -160,6 +162,14 @@ public class Note {
 
 	public void setGrace(boolean isGrace) {
 		this.isGrace = isGrace;
+	}
+
+	public String getSlurElementType() {
+		return slurElementType;
+	}
+
+	public void setSlurElementType(String slurElementType) {
+		this.slurElementType = slurElementType;
 	}
 	
 	
