@@ -27,6 +27,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.jena.atlas.logging.Log;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
@@ -93,7 +94,7 @@ public class MusicXML2RDF {
 	private ArrayList<Note> accidentalsOverride = new ArrayList<Note>();
 	private ArrayList<ScoreResource> resources;
 	private ArrayList<Collection> collections;
-	
+    
 	public MusicXML2RDF() {
 		super();
 		this.clefList = new ArrayList<Clef>();
@@ -101,6 +102,7 @@ public class MusicXML2RDF {
 		this.persons = new ArrayList<Person>();
 		this.resources = new ArrayList<ScoreResource>();
 		this.collections = new ArrayList<Collection>();	
+		
 	}
 
 	public void addPerson(Person person) {
@@ -333,6 +335,7 @@ public class MusicXML2RDF {
 		String nodeBaseURI = "http://linkeddata.uni-muenster.de/node/"+uid+"_";
 		
 		Model model = ModelFactory.createDefaultModel();
+		
 		Resource resScore = model.createResource(score.getURI());
 				
 		model.setNsPrefixes(PrefixMapping.Standard);
