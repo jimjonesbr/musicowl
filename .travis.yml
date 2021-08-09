@@ -1,5 +1,5 @@
-dist: trusty
+dist: focal
 language: java
 jdk:
- - oraclejdk8
+ - oraclejdk11
 before_script: cd musicowl
