@@ -1,5 +1,0 @@
-dist: focal
-language: java
-jdk:
- - oraclejdk11
-before_script: cd musicowl

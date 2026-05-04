@@ -1,0 +1,487 @@
+@prefix chord:    <http://purl.org/ontology/chord/> .
+@prefix dbo:      <http://dbpedia.org/property/> .
+@prefix dbpedia:  <http://dbpedia.org/resource/> .
+@prefix dc:       <http://purl.org/dc/elements/1.1/> .
+@prefix dc-terms: <http://purl.org/dc/terms/> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix gndo:     <http://d-nb.info/standards/elementset/gnd#> .
+@prefix mit:      <http://purl.org/ontology/mo/mit#> .
+@prefix mo:       <http://purl.org/ontology/mo/> .
+@prefix mode:     <http://purl.org/ontology/tonality/mode/> .
+@prefix mso:      <http://linkeddata.uni-muenster.de/ontology/musicscore#> .
+@prefix node:     <http://linkeddata.uni-muenster.de/node/> .
+@prefix note:     <http://purl.org/ontology/chord/note/> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix prov:     <http://www.w3.org/ns/prov#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix ton:      <http://purl.org/ontology/tonality/> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_1_NOTE_0
+        rdf:type        chord:Note ;
+        mso:hasOctave   "4"^^xsd:int ;
+        chord:modifier  chord:sharp ;
+        chord:natural   note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_11_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_5_NOTE_1
+        rdf:type       chord:Note ;
+        mso:hasOctave  "4"^^xsd:int ;
+        chord:natural  note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS8_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_2_NOTE_1
+        rdf:type        chord:Note ;
+        mso:hasOctave   "4"^^xsd:int ;
+        chord:modifier  chord:sharp ;
+        chord:natural   note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_KEY
+        rdf:type   ton:Key ;
+        ton:mode   mode:major ;
+        ton:tonic  note:C .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4
+        rdf:type        mso:Measure ;
+        dbo:order       "4" ;
+        mso:hasKey      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_KEY ;
+        mso:hasNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_14 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_13 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_12 ;
+        mso:hasTime     node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_TIME .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_6_NOTE_2
+        rdf:type       chord:Note ;
+        mso:hasOctave  "4"^^xsd:int ;
+        chord:natural  note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_KEY
+        rdf:type   ton:Key ;
+        ton:mode   mode:major ;
+        ton:tonic  note:C .
+
+<https://test.com/masthom/collection>
+        rdf:type        prov:Collection ;
+        rdfs:label      "Test Collection" ;
+        prov:hadMember  <https://test.com/masthom> .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_12_NOTE_0
+        rdf:type        chord:Note ;
+        mso:hasOctave   "4"^^xsd:int ;
+        chord:modifier  chord:flat ;
+        chord:natural   note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_3_NOTE_2
+        rdf:type        chord:Note ;
+        mso:hasOctave   "4"^^xsd:int ;
+        chord:modifier  chord:sharp ;
+        chord:natural   note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_7_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_7_NOTE_3
+        rdf:type       chord:Note ;
+        mso:hasOctave  "4"^^xsd:int ;
+        chord:natural  note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_6_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+note:F  rdf:type  chord:Natural .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_INSTANT_3
+        rdf:type         mso:Instant ;
+        mso:hasMeasure   node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3 ;
+        mso:nextInstant  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_INSTANT_4 .
+
+dbpedia:Composer  rdfs:label  "Composer" .
+
+<https://test.com/masthom_musicxml2rdf>
+        rdf:type                prov:Activity ;
+        rdfs:comment            "File convertion from MusicXML to RDF based on the MusicOWL Ontology." ;
+        prov:endedAtTime        "2026-05-04T11:02:28Z"^^xsd:dateTime ;
+        prov:generated          <https://test.com/masthom> ;
+        prov:startedAtTime      "2026-05-04T11:02:28Z"^^xsd:dateTime ;
+        prov:wasAssociatedWith  <https://github.com/jimjonesbr/musicowl> , <http://jimjones.de> .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_7
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_7_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS7_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_7_NOTE_3 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_8 .
+
+<http://d-nb.info/gnd/4139395-8>
+        rdf:type  prov:Role ;
+        gndo:preferredNameForTheSubjectHeading
+                "Encoder" .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS2_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS13_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_9
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_9_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS9_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_9_NOTE_1 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_10 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3
+        rdf:type         mso:Measure ;
+        dbo:order        "3" ;
+        mso:hasKey       node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_KEY ;
+        mso:hasNoteSet   node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_11 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_10 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_9 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_8 ;
+        mso:hasTime      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_TIME ;
+        mso:nextMeasure  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_13_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_11
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_11_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS11_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_11_NOTE_3 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_12 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_STAFF_1
+        rdf:type      mso:Staff ;
+        rdfs:label    "1" ;
+        mso:hasVoice  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_VOICE_1 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_VOICE_1
+        rdf:type        mso:Voice ;
+        rdfs:label      "1" ;
+        mso:hasNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_1 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_2 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_13 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_10 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_11 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_12 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_4 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_14 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_6 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_7 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_5 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_3 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_8 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_9 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_12_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_INSTANT_2
+        rdf:type         mso:Instant ;
+        mso:hasMeasure   node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2 ;
+        mso:nextInstant  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_INSTANT_3 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_6
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_6_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS6_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_6_NOTE_2 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_7 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_13_NOTE_1
+        rdf:type       chord:Note ;
+        mso:hasOctave  "4"^^xsd:int ;
+        chord:natural  note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_8
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_8_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS8_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_8_NOTE_0 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_9 .
+
+<http://d-nb.info/gnd/4032009-1>
+        rdf:type  prov:Role ;
+        gndo:preferredNameForTheSubjectHeading
+                "Composer" .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS10_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2
+        rdf:type         mso:Measure ;
+        dbo:order        "2" ;
+        mso:hasKey       node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_KEY ;
+        mso:hasNoteSet   node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_7 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_6 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_5 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_4 ;
+        mso:hasTime      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_TIME ;
+        mso:nextMeasure  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_9_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_14_NOTE_2
+        rdf:type       chord:Note ;
+        mso:hasOctave  "4"^^xsd:int ;
+        chord:natural  note:F .
+
+<https://test.com/masthom>
+        rdf:type             mo:Score ;
+        mso:asMusicXML       "<score-partwise version='3.1'>  <identification>    <encoding>      <software>Finale v26 for Windows</software>      <encoding-date>2021-08-07</encoding-date>      <supports attribute='new-system' element='print' type='yes' value='yes'/>      <supports attribute='new-page' element='print' type='yes' value='yes'/>      <supports element='accidental' type='yes'/>      <supports element='beam' type='yes'/>      <supports element='stem' type='yes'/>    </encoding>  </identification>  <defaults>    <scaling>      <millimeters>7.1967</millimeters>      <tenths>40</tenths>    </scaling>    <page-layout>      <page-height>1651</page-height>      <page-width>1167</page-width>      <page-margins type='both'>        <left-margin>70</left-margin>        <right-margin>70</right-margin>        <top-margin>88</top-margin>        <bottom-margin>88</bottom-margin>      </page-margins>    </page-layout>    <system-layout>      <system-margins>        <left-margin>0</left-margin>        <right-margin>0</right-margin>      </system-margins>      <system-distance>130</system-distance>      <top-system-distance>79</top-system-distance>    </system-layout>    <appearance>      <line-width type='stem'>1.1784</line-width>      <line-width type='beam'>5</line-width>      <line-width type='staff'>1.1784</line-width>      <line-width type='light barline'>1.1784</line-width>      <line-width type='heavy barline'>5</line-width>      <line-width type='leger'>1.6536</line-width>      <line-width type='ending'>0.957</line-width>      <line-width type='wedge'>1.1784</line-width>      <line-width type='enclosure'>1.1784</line-width>      <line-width type='tuplet bracket'>1.1784</line-width>      <note-size type='grace'>60</note-size>      <note-size type='cue'>60</note-size>      <distance type='hyphen'>120</distance>      <distance type='beam'>8</distance>    </appearance>    <music-font font-family='Maestro,engraved' font-size='20.4'/>    <word-font font-family='Times New Roman' font-size='10.2'/>  </defaults>  <part-list>    <score-part id='P1'>      <part-name print-object='no'>MusicXML Part</part-name>      <score-instrument id='P1-I1'>        <instrument-name>ARIA Player</instrument-name>      </score-instrument>      <midi-instrument id='P1-I1'>        <midi-channel>1</midi-channel>        <midi-bank>15489</midi-bank>        <midi-program>1</midi-program>        <volume>80</volume>        <pan>0</pan>      </midi-instrument>    </score-part>  </part-list>  <!--=========================================================-->  <part id='P1'>    <measure number='1' width='286'>      <print>        <system-layout>          <system-margins>            <left-margin>70</left-margin>            <right-margin>0</right-margin>          </system-margins>          <top-system-distance>211</top-system-distance>        </system-layout>        <measure-numbering>system</measure-numbering>      </print>      <attributes>        <divisions>2</divisions>        <key>          <fifths>0</fifths>          <mode>major</mode>        </key>        <time>          <beats>4</beats>          <beat-type>4</beat-type>        </time>        <clef>          <sign>G</sign>          <line>2</line>        </clef>      </attributes>      <sound tempo='120'/>      <note default-x='83'>        <pitch>          <step>F</step>          <alter>1</alter>          <octave>4</octave>        </pitch>        <duration>4</duration>        <tie type='start'/>        <voice>1</voice>        <type>half</type>        <accidental>sharp</accidental>        <stem default-y='0'>up</stem>        <notations>          <tied type='start'/>        </notations>      </note>      <note default-x='185'>        <pitch>          <step>F</step>          <alter>1</alter>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='stop'/>        <voice>1</voice>        <type>quarter</type>        <stem default-y='0'>up</stem>        <notations>          <tied type='stop'/>        </notations>      </note>      <note default-x='236'>        <pitch>          <step>F</step>          <alter>1</alter>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='start'/>        <voice>1</voice>        <type>quarter</type>        <stem default-y='0'>up</stem>        <notations>          <tied type='start'/>        </notations>      </note>    </measure>    <!--=======================================================-->    <measure number='2' width='218'>      <note default-x='14'>        <pitch>          <step>F</step>          <alter>1</alter>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='stop'/>        <voice>1</voice>        <type>quarter</type>        <stem default-y='0'>up</stem>        <notations>          <tied type='stop'/>        </notations>      </note>      <note default-x='64'>        <pitch>          <step>F</step>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='start'/>        <voice>1</voice>        <type>quarter</type>        <accidental>natural</accidental>        <stem default-y='0'>up</stem>        <notations>          <tied type='start'/>        </notations>      </note>      <note default-x='115'>        <pitch>          <step>F</step>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='stop'/>        <voice>1</voice>        <type>quarter</type>        <stem default-y='0'>up</stem>        <notations>          <tied type='stop'/>        </notations>      </note>      <note default-x='166'>        <pitch>          <step>F</step>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='start'/>        <voice>1</voice>        <type>quarter</type>        <stem default-y='0'>up</stem>        <notations>          <tied type='start'/>        </notations>      </note>    </measure>    <!--=======================================================-->    <measure number='3' width='217'>      <note default-x='13'>        <pitch>          <step>F</step>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='stop'/>        <voice>1</voice>        <type>quarter</type>        <stem default-y='0'>up</stem>        <notations>          <tied type='stop'/>        </notations>      </note>      <note default-x='64'>        <pitch>          <step>F</step>          <alter>-1</alter>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='start'/>        <voice>1</voice>        <type>quarter</type>        <accidental>flat</accidental>        <stem default-y='0'>up</stem>        <notations>          <tied type='start'/>        </notations>      </note>      <note default-x='115'>        <pitch>          <step>F</step>          <alter>-1</alter>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='stop'/>        <voice>1</voice>        <type>quarter</type>        <stem default-y='0'>up</stem>        <notations>          <tied type='stop'/>        </notations>      </note>      <note default-x='166'>        <pitch>          <step>F</step>          <alter>-1</alter>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='start'/>        <voice>1</voice>        <type>quarter</type>        <stem default-y='0'>up</stem>        <notations>          <tied type='start'/>        </notations>      </note>    </measure>    <!--=======================================================-->    <measure number='4' width='235'>      <note default-x='13'>        <pitch>          <step>F</step>          <alter>-1</alter>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='stop'/>        <voice>1</voice>        <type>quarter</type>        <stem default-y='0'>up</stem>        <notations>          <tied type='stop'/>        </notations>      </note>      <note default-x='66'>        <pitch>          <step>F</step>          <octave>4</octave>        </pitch>        <duration>2</duration>        <tie type='start'/>        <voice>1</voice>        <type>quarter</type>        <accidental>natural</accidental>        <stem default-y='0'>up</stem>        <notations>          <tied type='start'/>        </notations>      </note>      <note default-x='120'>        <pitch>          <step>F</step>          <octave>4</octave>        </pitch>        <duration>4</duration>        <tie type='stop'/>        <voice>1</voice>        <type>half</type>        <stem default-y='0'>up</stem>        <notations>          <tied type='stop'/>        </notations>      </note>      <barline location='right'>        <bar-style>light-heavy</bar-style>      </barline>    </measure>  </part>  <!--=========================================================--></score-partwise>" ;
+        dc:creator           <http://github.org/masthom> ;
+        dc:title             "Test Score Title" ;
+        dc-terms:issued      "2021"^^xsd:date ;
+        mo:movement          node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1 ;
+        prov:wasGeneratedBy  <https://github.com/jimjonesbr/musicowl> , <https://test.com/masthom_musicxml2rdf> ;
+        foaf:name            "masthom" ;
+        foaf:thumbnail       <https://sammlungen.ulb.uni-muenster.de/hd/image/largethumb/5393369> .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_10
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_10_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS10_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_10_NOTE_2 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_ST1_V1_NOTESET_11 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_14_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS1_DURATION
+        rdf:type  mso:Half .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS12_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_8_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS7_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS4_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_10_NOTE_2
+        rdf:type        chord:Note ;
+        mso:hasOctave   "4"^^xsd:int ;
+        chord:modifier  chord:flat ;
+        chord:natural   note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_INSTANT_1
+        rdf:type         mso:Instant ;
+        mso:hasMeasure   node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1 ;
+        mso:nextInstant  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_INSTANT_2 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS9_DURATION
+        rdf:type  mso:Quarter .
+
+<http://github.org/masthom>
+        rdf:type                     foaf:Person ;
+        gndo:professionOrOccupation  <http://d-nb.info/gnd/4032009-1> ;
+        dbo:occupation               dbpedia:Composer ;
+        prov:hadRole                 <http://d-nb.info/gnd/4032009-1> ;
+        foaf:name                    "masthom" .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_PART_P1
+        rdf:type        mo:Instrument , mso:ScorePart , skos:Concept ;
+        rdfs:label      "P1" ;
+        mso:hasMeasure  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2 ;
+        mso:hasStaff    node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_STAFF_1 ;
+        mso:isEnsemble  false ;
+        mso:isSolo      false ;
+        dc:description  "MusicXML Part" ;
+        skos:altLabel   "unspecidied.unspecified" ;
+        skos:broader    mit:unspecified ;
+        skos:prefLabel  "unspecified" .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_3
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_3_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS3_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_3_NOTE_2 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_4 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_11_NOTE_3
+        rdf:type        chord:Note ;
+        mso:hasOctave   "4"^^xsd:int ;
+        chord:modifier  chord:flat ;
+        chord:natural   note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_5
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_5_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS5_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_5_NOTE_1 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_6 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_14
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_14_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS14_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_14_NOTE_2 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_TIME
+        rdf:type         mso:TimeSignature ;
+        mso:hasBeatType  "4"^^xsd:int ;
+        mso:hasBeats     "4"^^xsd:int .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1
+        rdf:type         mso:Measure ;
+        dbo:order        "1" ;
+        mso:hasKey       node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_KEY ;
+        mso:hasNoteSet   node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_3 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_2 , node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_1 ;
+        mso:hasTime      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_TIME ;
+        mso:nextMeasure  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_TIME
+        rdf:type         mso:TimeSignature ;
+        mso:hasBeatType  "4"^^xsd:int ;
+        mso:hasBeats     "4"^^xsd:int .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_2_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+dbpedia:Encoder  rdfs:label  "Encoder" .
+
+<https://github.com/jimjonesbr/musicowl>
+        rdf:type     prov:SoftwareAgent ;
+        rdfs:label   "MusicXML to RDF Converter" ;
+        dbo:version  "1.3.8" ;
+        foaf:name    "MusicXML2RDF Converter" .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS14_DURATION
+        rdf:type  mso:Half .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_1_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_2
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_2_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS2_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_2_NOTE_1 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_3 .
+
+<http://jimjones.de>  rdf:type       foaf:Person ;
+        gndo:professionOrOccupation  <http://d-nb.info/gnd/4139395-8> ;
+        dbo:occupation               dbpedia:Encoder ;
+        prov:hadRole                 <http://d-nb.info/gnd/4139395-8> ;
+        foaf:name                    "Jim Jones" .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_4
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_4_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS4_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_4_NOTE_0 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_ST1_V1_NOTESET_5 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS6_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_13
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_13_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS13_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_13_NOTE_1 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_14 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_TIME
+        rdf:type         mso:TimeSignature ;
+        mso:hasBeatType  "4"^^xsd:int ;
+        mso:hasBeats     "4"^^xsd:int .
+
+mit:unspecified  mit:inScheme  mit:Musical_instrument ;
+        skos:prefLabel  "unspecified" .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_TIME
+        rdf:type         mso:TimeSignature ;
+        mso:hasBeatType  "4"^^xsd:int ;
+        mso:hasBeats     "4"^^xsd:int .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1
+        rdf:type          mo:Movement ;
+        dbo:order         "1"^^xsd:int ;
+        mso:hasScorePart  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_PART_P1 ;
+        dc:title          "(no title)" .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_10_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_3_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS11_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_1
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_1_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS1_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS_1_NOTE_0 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_ST1_V1_NOTESET_2 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_KEY
+        rdf:type   ton:Key ;
+        ton:mode   mode:major ;
+        ton:tonic  note:C .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_12
+        rdf:type         mso:NoteSet ;
+        mso:hasClef      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_12_CLEF ;
+        mso:hasDuration  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS12_DURATION ;
+        mso:hasNote      node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_NS_12_NOTE_0 ;
+        mso:nextNoteSet  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4_ST1_V1_NOTESET_13 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_8_NOTE_0
+        rdf:type       chord:Note ;
+        mso:hasOctave  "4"^^xsd:int ;
+        chord:natural  note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_5_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M1_NS3_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_NS_9_NOTE_1
+        rdf:type        chord:Note ;
+        mso:hasOctave   "4"^^xsd:int ;
+        chord:modifier  chord:flat ;
+        chord:natural   note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_INSTANT_4
+        rdf:type        mso:Instant ;
+        mso:hasMeasure  node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M4 .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M3_KEY
+        rdf:type   ton:Key ;
+        ton:mode   mode:major ;
+        ton:tonic  note:C .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_4_NOTE_0
+        rdf:type        chord:Note ;
+        mso:hasOctave   "4"^^xsd:int ;
+        chord:modifier  chord:sharp ;
+        chord:natural   note:F .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS5_DURATION
+        rdf:type  mso:Quarter .
+
+node:e718ad95-5570-45f5-863b-fc6134b91102_MOV1_P1_M2_NS_4_CLEF
+        rdf:type  mso:Trebble ;
+        mso:line  "2"^^xsd:int ;
+        mso:sign  note:G .

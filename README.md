@@ -1,9 +1,8 @@
 [![](https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/wwu.svg)](https://www.uni-muenster.de/de/)
 
-[![Build Status](https://travis-ci.com/jimjonesbr/musicowl.svg?branch=master)](https://travis-ci.com/jimjonesbr/musicowl)
+![CI](https://github.com/jimjonesbr/musicowl/actions/workflows/ci.yml/badge.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/de.uni-muenster/music2rdf.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22de.uni-muenster%22%20AND%20a:%22music2rdf%22)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Contribute: Gitpod](https://img.shields.io/badge/contribute-gitpod-9cf)](https://gitpod.io/#https://github.com/jimjonesbr/musicowl)
 
 # Music Score to RDF Converter
 
@@ -28,19 +27,19 @@ This converter parses MusicXML 3.0 files and converts them to RDF, based on the 
 
 `setThumbnail`&nbsp;   Thumbnail for the converted music score (optional).
 
-`setScoreIdentifier`&nbsp;   URI for the converted score (optional) .
+`setScoreIdentifier`&nbsp;   URI for the converted score (optional).
 
 `setScoreTitle`&nbsp;   Music score title.
 
-`issued`&nbsp;   Date issued. Formats accepted: `yyyy`, `yyyyMM`, `yyyyMMdd` (optional).
+`setDateIssued`&nbsp;   Date issued. Formats accepted: `yyyy`, `yyyyMM`, `yyyyMMdd` (optional).
 
-`setCollection`&nbsp;   Collections can be used for classifying music scores into certaing groups, e.g. "18th Century Composers", "Advanced Music Scores", etc.
+`addCollection`&nbsp;   Collections can be used for classifying music scores into certain groups, e.g. "18th Century Composers", "Advanced Music Scores", etc.
 
 `isVerbose`&nbsp;   Setting it to `true` logs in the console the converter progress.
 
-`setOutputFormat`&nbsp;   Sets the RDF notation for the output file. Accepted notations are: `TURLTE`, `NTRIPLES`, `JSON-LD`, `RDF/XML`, `RDF/JSON`.
+`setOutputFormat`&nbsp;   Sets the RDF notation for the output file. Accepted notations are: `TURTLE`, `NTRIPLES`, `JSON-LD`, `RDF/XML`, `RDF/JSON`.
 
-`addPerson`&nbsp;   This method can be used to add persons related to the music score. It consists of an URI, a name and a role, which can have one of the following attributes:
+`addPerson`&nbsp;   This method can be used to add persons related to the music score. It consists of a URI, a name and a role, which can have one of the following attributes:
 
 ```java
 Role.ARRANGER;
@@ -54,7 +53,7 @@ Role.TRANSLATOR;
 Role.UNKNOWN;
 ```
 
-`addResource`&nbsp;   Links existing resources to the converted music score, such as pdf or mp3 files. This method relies on three parameters:
+`addResource`&nbsp;   Links existing resources to the converted music score, such as PDF or MP3 files. This method relies on three parameters:
 
 - **Link**: Link to the resource
 - **Description**: Text describing the resource
@@ -118,9 +117,9 @@ public class Example {
 
 ## Using the converter in the console
 
-If you don't feel like building the Musci2RDF converter from source, visit the [releases area](https://github.com/jimjonesbr/musicowl/releases) to get a prebuilt jar. You can use this jar with following parameters:
+If you don't feel like building the Music2RDF converter from source, visit the [releases area](https://github.com/jimjonesbr/musicowl/releases) to get a prebuilt jar. You can use this jar with the following parameters:
 
-`metadata`&nbsp; In order to keep the full metadata support via console, you have to pass the metadata in separated file. This metadata file can be encoded in XML ...
+`metadata`&nbsp; In order to keep the full metadata support via console, you have to pass the metadata in a separate file. This metadata file can be encoded in XML ...
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -162,7 +161,7 @@ If you don't feel like building the Musci2RDF converter from source, visit the [
 </score>
 ```
 
-.. or in case you fancy JSON:
+...or in case you fancy JSON:
 
 
 ```json
@@ -215,10 +214,11 @@ Further parameters are:
 Example (using the above described metadata file):
 
 ```shell
-$ java -jar music2rdf-[VERSION].jar file=musicxml/metadata-file/elgar_cello_concerto_op.85.xml
-metadata=musicxml/elgar_cello_concerto_op.85-metadata.xml 
-output=rdf/elgar_cello_concerto_op.85 
-outputFormat=turtle
+$ java -jar music2rdf-[VERSION].jar \
+    file=musicxml/metadata-file/elgar_cello_concerto_op.85.xml \
+    metadata=musicxml/metadata-file/metadata.xml \
+    output=rdf/elgar_cello_concerto_op.85 \
+    outputFormat=turtle
 
 File  	        : musicxml/elgar_cello_concerto_op.85.xml
 Score URI       : http://dbpedia.org/resource/Cello_Concerto_(Elgar)

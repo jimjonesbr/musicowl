@@ -234,7 +234,7 @@ public class GenerateRDFTest {
 		
 		music2rdf.parseMusicXML();
 		
-		File file = new File("src/test/resources/rdf/test-score.ttl");
+		File file = new File("src/test/resources/rdf/Accid_Tie_Test.ttl");
 		assertEquals(true, file.exists());
 
 	}
