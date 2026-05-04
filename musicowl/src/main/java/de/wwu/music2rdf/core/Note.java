@@ -12,21 +12,20 @@ public class Note {
 	private String accidental;
 	private Clef clef;
 	private String slur;
-	private String slurElementType;	
+	private String slurElementType;
 	private ArrayList<String> dynamics;
 	private ArrayList<String> articulations;
 	private boolean isDot;
 	private boolean isDoubleDot;
 	private boolean isTripleDot;
-	private boolean isChord;	
+	private boolean isChord;
 	private boolean isGrace;
 	private String signature;
 	public static final String Sharp = "sharp";
 	public static final String Doubleharp = "doublesharp";
 	public static final String Flat = "flat";
 	public static final String DoubleFlat = "doubleflat";
-	
-	
+
 	public Note() {
 
 		super();
@@ -40,7 +39,7 @@ public class Note {
 		isGrace = false;
 
 	}
-	
+
 	public Note(String pitch, String accidental) {
 		super();
 		this.pitch = pitch;
@@ -115,7 +114,6 @@ public class Note {
 		return dynamics;
 	}
 
-	
 	public ArrayList<String> getArticulations() {
 		return articulations;
 	}
@@ -171,9 +169,5 @@ public class Note {
 	public void setSlurElementType(String slurElementType) {
 		this.slurElementType = slurElementType;
 	}
-	
-	
-	
-	
-	
+
 }

@@ -5,7 +5,7 @@ public class Instrument {
 	String performanceMediumId;
 	String performanceMediumTypeId;
 	String performanceMediumDescription;
-	
+
 	public Instrument() {
 		super();
 	}
@@ -33,7 +33,5 @@ public class Instrument {
 	public void setPerformanceMediumDescription(String performanceMediumTypeDescription) {
 		this.performanceMediumDescription = performanceMediumTypeDescription;
 	}
-	
-	
-	
+
 }

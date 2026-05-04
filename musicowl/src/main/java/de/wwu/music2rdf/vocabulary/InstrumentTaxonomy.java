@@ -10,6 +10,6 @@ public class InstrumentTaxonomy {
 	private static Model instrument_model = ModelFactory.createDefaultModel();
 	public static final String NS = "http://purl.org/ontology/mo/mit#";
 
-	public static final Property inScheme  = instrument_model.createProperty(NS+"inScheme");
-	public static final Resource Musical_instruments  = instrument_model.createProperty(NS+"Musical_instrument");
+	public static final Property inScheme = instrument_model.createProperty(NS + "inScheme");
+	public static final Resource Musical_instruments = instrument_model.createProperty(NS + "Musical_instrument");
 }

@@ -11,18 +11,17 @@ public class MusicScore {
 	private String title = "";
 	private String encoder = "";
 	private String encodedAt = "";
-	
+
 	public MusicScore() {
-	
+
 		super();
 		this.parts = new ArrayList<ScorePart>();
-		
+
 	}
 
 	public ArrayList<ScorePart> getParts() {
 		return parts;
 	}
-
 
 	public String getURI() {
 		return uri;
@@ -72,6 +71,4 @@ public class MusicScore {
 		this.encodedAt = encodedAt;
 	}
 
-
-	
 }

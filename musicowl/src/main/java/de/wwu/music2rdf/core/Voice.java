@@ -5,7 +5,7 @@ public class Voice {
 	private String measure;
 	private String id;
 	private ScorePart part;
-	
+
 	public Voice() {
 		super();
 		this.part = new ScorePart();
@@ -30,5 +30,5 @@ public class Voice {
 	public ScorePart getPart() {
 		return part;
 	}
-	
+
 }

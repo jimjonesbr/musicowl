@@ -10,9 +10,9 @@ public class ScorePart {
 	private int movement;
 	private boolean solo;
 	private boolean ensemble;
-	
+
 	private ArrayList<Measure> measures;
-	
+
 	public ScorePart() {
 		super();
 		this.measures = new ArrayList<Measure>();
@@ -69,6 +69,5 @@ public class ScorePart {
 	public void setEnsemble(boolean ensemble) {
 		this.ensemble = ensemble;
 	}
-	
-	
+
 }
