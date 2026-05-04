@@ -1,10 +1,12 @@
 [![](https://www.uni-muenster.de/imperia/md/images/allgemein/farbunabhaengig/wwu.svg)](https://www.uni-muenster.de/de/)
 
-![CI](https://github.com/jimjonesbr/musicowl/actions/workflows/ci.yml/badge.svg)
-
 # MusicXML to RDF Converter
 
-This converter parses MusicXML 3.0 files and converts them to RDF, based on the [MusicOWL Ontology](http://linkeddata.uni-muenster.de/ontology/musicscore/mso.owl) [ˈmjuːzɪkəl]. It fully supports the following concepts:
+This converter parses MusicXML 3.0 files and converts them to RDF, based on the [MusicOWL Ontology](http://linkeddata.uni-muenster.de/ontology/musicscore/mso.owl) [ˈmjuːzɪkəl].
+
+![CI](https://github.com/jimjonesbr/musicowl/actions/workflows/ci.yml/badge.svg)
+
+ It fully supports the following concepts:
  
  * Articulations
  * Clefs
